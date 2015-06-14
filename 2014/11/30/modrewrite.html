@@ -166,12 +166,17 @@
   <section class="post-content"><p>Pretty urls ก็คือการทำให้ url ที่มันจำยากๆ ให้มันสามารถอ่านเข้าใจได้ ซึ่งปกติคนทั่วไป ถ้าดูแล้วอาจจะงงๆ นอกจากคนที่อยู่ในสาย develop ก็คงจะพอเข้าใจ แต่ประโยชน์จริงๆ ของมันก็คือ ให้ Search Engine เข้าใจและจำ url ของเราได้ง่าย และยังเป็นประโยชน์กับการทำ SEO อีกด้วย หลายคนอาจจะยังงงๆ ดูตัวอย่างกันเลยดีกว่า T T&#39;</p>
 
 <h3 id="แบบ-url-ปกติ">แบบ url ปกติ</h3>
-<div class="highlight"><pre><code class="language-html" data-lang="html">http://www.domain.me/index.php?r=site/index
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://www.domain.me/index.php?r=site/index
 </code></pre></div>
-<p>ถ้าดูตาม url เราจะเข้าใจได้ว่า url นี้ รับค่าตัวแปรชื่อ  <code>r</code> ซึ่งเก็บค่า <code>site/index</code></p>
+<p>ถ้าดูตาม url เราจะเข้าใจได้ว่า url นี้ รับค่าตัวแปรชื่อ  <code>r</code> ซึ่งเก็บค่า <code>site/index</code> </p>
+
+<ul>
+<li><code>site</code> คือชื่อ controller</li>
+<li><code>index</code> คือชื่อ action</li>
+</ul>
 
 <h3 id="แบบเปิดใช้งาน-pretty-urls">แบบเปิดใช้งาน Pretty Urls</h3>
-<div class="highlight"><pre><code class="language-html" data-lang="html">http://www.domain.me/site/index
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://www.domain.me/site/index
 </code></pre></div>
 <p>ถ้าสังเกตจะเห็นว่า มีคำว่า <code>index.php</code> และตัวแประ <code>r</code> หายไป เพราะ mod_rewrite ซ่อนไว้ และ url จะดูสั้นขึ้นมากๆ</p>
 
@@ -179,43 +184,37 @@
 
 <p>ก่อนอื่นให้ทำการคอนฟิกเพื่อเปิดการใช้งาน UrlManager ไปที<code>config/web.php</code> ใส่โค้ดนี้เข้าไปภาพใต้ <code>components</code>
 * <code>ShowScriptName</code> คือ ให้แสดง index.php เราเซ็ตเป็น <code>false</code>  เพื่อใม่ให้มันแสดง
-* <code>ennablePrettyUrl</code> คือเปิดการใช้งาน เซ็ตเป็น <code>true</code> เพื่อเปิดการใช้งาน
-<code>php
-&#39;components&#39;=&gt;[
-//.....
-&#39;urlManager&#39; =&gt; [
-       &#39;class&#39; =&gt; &#39;yii\web\UrlManager&#39;,
-       // Disable index.php
-       &#39;showScriptName&#39; =&gt; false,
-       // Disable r= routes
-       &#39;enablePrettyUrl&#39; =&gt; true,
-       &#39;rules&#39; =&gt; array(
-              &#39;&lt;controller:\w+&gt;/&lt;id:\d+&gt;&#39; =&gt; &#39;&lt;controller&gt;/view&#39;,
-                &#39;&lt;controller:\w+&gt;/&lt;action:\w+&gt;/&lt;id:\d+&gt;&#39; =&gt; &#39;&lt;controller&gt;/&lt;action&gt;&#39;,
-                &#39;&lt;controller:\w+&gt;/&lt;action:\w+&gt;&#39; =&gt; &#39;&lt;controller&gt;/&lt;action&gt;&#39;,
-                &#39;module/&lt;module:\w+&gt;/&lt;controller:\w+&gt;/&lt;action:\w+&gt;&#39; =&gt; &#39;&lt;module&gt;/&lt;controller&gt;/&lt;action&gt;&#39;,
-       ),
-],
-//......
-],
-</code></p>
-
+* <code>ennablePrettyUrl</code> คือเปิดการใช้งาน เซ็ตเป็น <code>true</code> เพื่อเปิดการใช้งาน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="s1">&#39;components&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+<span class="c1">//.....</span>
+<span class="s1">&#39;urlManager&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+       <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\web\UrlManager&#39;</span><span class="p">,</span>
+       <span class="c1">// Disable index.php</span>
+       <span class="s1">&#39;showScriptName&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+       <span class="c1">// Disable r= routes</span>
+       <span class="s1">&#39;enablePrettyUrl&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+       <span class="s1">&#39;rules&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+              <span class="s1">&#39;&lt;controller:\w+&gt;/&lt;id:\d+&gt;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;controller&gt;/view&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;&lt;controller:\w+&gt;/&lt;action:\w+&gt;/&lt;id:\d+&gt;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;controller&gt;/&lt;action&gt;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;&lt;controller:\w+&gt;/&lt;action:\w+&gt;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;controller&gt;/&lt;action&gt;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;module/&lt;module:\w+&gt;/&lt;controller:\w+&gt;/&lt;action:\w+&gt;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;module&gt;/&lt;controller&gt;/&lt;action&gt;&#39;</span><span class="p">,</span>
+       <span class="p">),</span>
+<span class="p">],</span>
+<span class="c1">//......</span>
+<span class="p">],</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
 <h2 id="สร้างไฟล์-htaccess">สร้างไฟล์ .htaccess</h2>
 
-<p>สร้างไฟล์ชื่อ <code>.htaccess</code> ไว้ที่ <code>web/.htaccess</code> แล้วใส่โค้ดตามด้านล่างนี้
-```
-RewriteEngine on</p>
-
-<h1 id="if-a-directory-or-a-file-exists-use-it-directly">If a directory or a file exists, use it directly</h1>
-
-<p>RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d</p>
-
-<h1 id="otherwise-forward-it-to-index-php">Otherwise forward it to index.php</h1>
-
-<p>RewriteRule . index.php
-```</p>
-
+<p>สร้างไฟล์ชื่อ <code>.htaccess</code> ไว้ที่ <code>web/.htaccess</code> แล้วใส่โค้ดตามด้านล่างนี้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">RewriteEngine on
+# If a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward it to index.php
+RewriteRule . index.php
+</code></pre></div>
 <p>ทดลองใช้งาน
 <code>
 http://www.domain.me/site/index

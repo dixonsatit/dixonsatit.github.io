@@ -163,7 +163,7 @@
     
     </p>
   </header>
-  <section class="post-content"><p><img src="/images/sort.png" alt="sort"></p>
+  <section class="post-content"><p><img src="/img/sort.png" alt="sort"></p>
 
 <p>ตัวอย่างง่ายๆ ในการสร้าง relation กับ model ตัวอย่างนี้ผมจำลองข้อมูลไว้ 2 ตารางคือ Patient &amp; Hospital 
 โดยที่ตาราง patient จะเก็บรหัสของโรงพยาบาลไว้ คือ hospital_code
@@ -189,33 +189,25 @@ Hospital                  |
 <h2 id="เพิ่มใน-model-patient">เพิ่มใน Model Patient</h2>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">class</span> <span class="nc">Patient</span> <span class="k">extends</span> <span class="nx">\yii\db\ActiveRecord</span><span class="p">{</span>
-
     <span class="c1">//.....</span>
-
     <span class="c1">// relation</span>
     <span class="k">public</span>  <span class="k">function</span> <span class="nf">getHospital</span><span class="p">(){</span>
         <span class="k">return</span> <span class="o">@</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hasOne</span><span class="p">(</span><span class="nx">Hospital</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="p">[</span><span class="s1">&#39;code&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hospital_code&#39;</span><span class="p">]);</span>
     <span class="p">}</span>
-
     <span class="c1">// virtual attribute hospitalName</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">getHospitalName</span><span class="p">(){</span>
         <span class="k">return</span> <span class="o">@</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hospital</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
     <span class="p">}</span>
-
     <span class="c1">// virtual attribute fullName </span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">getFullname</span><span class="p">(){</span>
-
         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">.</span> <span class="s2">&quot; &quot;</span> <span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">surname</span><span class="p">;</span>
     <span class="p">}</span>
-
     <span class="k">public</span> <span class="k">function</span> <span class="nf">attributeLabels</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">return</span> <span class="p">[</span>
             <span class="c1">//..............ฟิวด์อื่นๆ</span>
-
            <span class="s1">&#39;fullName&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ชื่อ-นามสกุล&#39;</span><span class="p">),</span>
            <span class="s1">&#39;hospitalName&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;โรงพยาบาล&#39;</span><span class="p">),</span>
-
             <span class="c1">//..............</span>
         <span class="p">];</span>
     <span class="p">}</span>
@@ -246,33 +238,27 @@ Hospital                  |
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">class</span> <span class="nc">PatientSearch</span> <span class="k">extends</span> <span class="nx">Patient</span> <span class="p">{</span>
 
-    <span class="c1">///.................</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$query</span> <span class="o">=</span> <span class="nx">Patient</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
-
-        <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">joinWith</span><span class="p">([</span><span class="s1">&#39;hospital&#39;</span><span class="p">]);</span>
-
-        <span class="nv">$dataProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveDataProvider</span><span class="p">([</span>
-            <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="nv">$query</span><span class="p">,</span>
-        <span class="p">]);</span>
-
-        <span class="c1">// สำหรับ coluumn hospitalName</span>
-        <span class="nv">$dataProvider</span><span class="o">-&gt;</span><span class="na">sort</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">[</span><span class="s1">&#39;hospitalName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;asc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;lib_hospital.name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">],</span>
-            <span class="s1">&#39;desc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;lib_hospital.name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">],</span>
-        <span class="p">];</span>
-
-        <span class="c1">// สำหรับ coluumn fullName</span>
-         <span class="nv">$dataProvider</span><span class="o">-&gt;</span><span class="na">sort</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">[</span><span class="s1">&#39;fullName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;asc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">,</span> <span class="s1">&#39;surname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">],</span>
-            <span class="s1">&#39;desc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">,</span> <span class="s1">&#39;surname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">],</span>
-            <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ชื่อ - นามสกุล&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span>
-        <span class="p">];</span>
-
-        <span class="c1">//................</span>
-     <span class="p">}</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$query</span> <span class="o">=</span> <span class="nx">Patient</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
+    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">joinWith</span><span class="p">([</span><span class="s1">&#39;hospital&#39;</span><span class="p">]);</span>
+    <span class="nv">$dataProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveDataProvider</span><span class="p">([</span>
+        <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="nv">$query</span><span class="p">,</span>
+    <span class="p">]);</span>
+    <span class="c1">// สำหรับ coluumn hospitalName</span>
+    <span class="nv">$dataProvider</span><span class="o">-&gt;</span><span class="na">sort</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">[</span><span class="s1">&#39;hospitalName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;asc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;lib_hospital.name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">],</span>
+        <span class="s1">&#39;desc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;lib_hospital.name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">],</span>
+    <span class="p">];</span>
+    <span class="c1">// สำหรับ coluumn fullName</span>
+     <span class="nv">$dataProvider</span><span class="o">-&gt;</span><span class="na">sort</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">[</span><span class="s1">&#39;fullName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;asc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">,</span> <span class="s1">&#39;surname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">],</span>
+        <span class="s1">&#39;desc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">,</span> <span class="s1">&#39;surname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">],</span>
+        <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ชื่อ - นามสกุล&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span>
+    <span class="p">];</span>
+    <span class="c1">//................</span>
+ <span class="p">}</span>
 </code></pre></div>
 <p>หลังจากนั้นเราจะทำการคลิก sort ที่หัวคอลัมน์ได้เลย สะดวกมากๆ <sup>^</sup></p>
 
@@ -282,39 +268,35 @@ Hospital                  |
 
 <p>เราจะสามารถใช้ฟิวด์ที่เรากำหนดเองได้</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
-        <span class="k">class</span> <span class="nc">PatientSearch</span> <span class="k">extends</span> <span class="nx">Patient</span>
-        <span class="p">{</span>
-
-            <span class="k">public</span> <span class="nv">$hospitalName</span><span class="p">;</span>
-            <span class="k">public</span> <span class="nv">$fullName</span><span class="p">;</span>   
-
-            <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
-            <span class="p">{</span>
-                <span class="k">return</span> <span class="p">[</span>
-                    <span class="c1">// ..........</span>
-                    <span class="p">[</span><span class="nx">hospitalName</span><span class="s1">&#39;,&#39;</span><span class="nx">fullName</span><span class="s1">&#39;], &#39;</span><span class="nx">safe</span><span class="s1">&#39;],</span>
-<span class="s1">                ];</span>
-<span class="s1">            }</span>
-
-<span class="s1">            public function search($params)</span>
-<span class="s1">            {</span>
-
-
-
-<span class="s1">               //..........</span>
-
-<span class="s1">                $query-&gt;orFilterWhere([&#39;</span><span class="nx">like</span><span class="s1">&#39;, &#39;</span><span class="nx">patient</span><span class="o">.</span><span class="nx">name</span><span class="s1">&#39;, $this-&gt;fullName])</span>
-<span class="s1">                      -&gt;orFilterWhere([&#39;</span><span class="nx">like</span><span class="s1">&#39;, &#39;</span><span class="nx">patient</span><span class="o">.</span><span class="nx">surname</span><span class="s1">&#39;, $this-&gt;fullName])</span>
-<span class="s1">                      -&gt;orFilterWhere([&#39;</span><span class="nx">like</span><span class="s1">&#39;, &#39;</span><span class="nx">lib_hospital</span><span class="o">.</span><span class="nx">name</span><span class="err">&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hospitalName</span><span class="p">]);</span>
-            <span class="p">}</span>
-
-            <span class="c1">//.........</span>
+<span class="k">class</span> <span class="nc">PatientSearch</span> <span class="k">extends</span> <span class="nx">Patient</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$hospitalName</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$fullName</span><span class="p">;</span>   
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="c1">// ..........</span>
+            <span class="p">[</span><span class="s1">&#39;hospitalName&#39;</span><span class="p">,</span><span class="s1">&#39;fullName&#39;</span><span class="p">],</span> <span class="s1">&#39;safe&#39;</span><span class="p">],</span>
+        <span class="p">];</span>
     <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="c1">//..........</span>
+        <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">orFilterWhere</span><span class="p">([</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;patient.name&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullName</span><span class="p">])</span>
+              <span class="o">-&gt;</span><span class="na">orFilterWhere</span><span class="p">([</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;patient.surname&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullName</span><span class="p">])</span>
+              <span class="o">-&gt;</span><span class="na">orFilterWhere</span><span class="p">([</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;lib_hospital.name&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hospitalName</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="c1">//.........</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
 <p>ขอให้สนุกกับการเรียนรู้ครับ ....
-อ่านต่อเพิ่มเติมได้ที่นี่ครับ
-- <a href="http://www.yiiframework.com/wiki/621/filter-sort-by-calculated-related-fields-in-gridview-yii-2-0/">Yii 2.0: Filter &amp; Sort by calculated/related fields in GridView Yii 2.0 </a>
-- <a href="http://www.yiiframework.com/wiki/653/displaying-sorting-and-filtering-model-relations-on-a-gridview/">Yii 2.0: Displaying, Sorting and Filtering Model Relations on a GridView</a></p>
+อ่านต่อเพิ่มเติมได้ที่นี่</p>
+
+<ul>
+<li><a href="http://www.yiiframework.com/wiki/621/filter-sort-by-calculated-related-fields-in-gridview-yii-2-0/">Yii 2.0: Filter &amp; Sort by calculated/related fields in GridView Yii 2.0 </a></li>
+<li><a href="http://www.yiiframework.com/wiki/653/displaying-sorting-and-filtering-model-relations-on-a-gridview/">Yii 2.0: Displaying, Sorting and Filtering Model Relations on a GridView</a></li>
+</ul>
 </section>
 </article>
 

@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 14 Jun 2015 18:03:55 +0700</pubDate>
+    <pubDate>Sun, 14 Jun 2015 22:02:53 +0700</pubDate>
     
       <item>
         <title>Yii2 Learning</title>
@@ -44,13 +44,16 @@
 &lt;li&gt;&lt;a href=&quot;/2014/11/30/action-column.html&quot;&gt;เเปลี่ยน ActionColumn เดิมๆ เป็นสไตล์ ButtonGroup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;สร้างลิ้งเชื่อมกันระหว่าง frontend &amp;amp; backend&lt;/li&gt;
 &lt;li&gt;การสร้าง Theme&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;สร้างระบบ login อย่างง่าย&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;สร้างระบบ login อย่างง่าย&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/2014/11/30/modrewrite.html&quot;&gt;เปิดการใช้งาน Pretty urls (mod_rewrite)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/2014/11/30/relations.html&quot;&gt;Relations &amp;amp; Virtual Attribute&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/2014/11/30/links-backend-to-frontend.html&quot;&gt;สร้างลิ้งเชื่อมกันระหว่าง frontend &amp;amp; backend&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;model&quot;&gt;Model&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;รวมคำสั่งที่ใช้งานบ่อยของ model&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/2014/11/30/query-model.html&quot;&gt;รวมคำสั่งที่ใช้งานบ่อยของ model&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;การใช้งาน Validation แบบต่างๆ&lt;/li&gt;
 &lt;li&gt;Relation&lt;/li&gt;
 &lt;li&gt;Virtual Attribute&lt;/li&gt;
@@ -68,10 +71,11 @@
       </item>
     
       <item>
-        <title>Yii Framework</title>
+        <title>What is Yii Framework</title>
         <link>http://dixonsatit.github.io/2015/06/14/what-is-yii.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/14/what-is-yii.html</guid>
-        <description></description>
+        <description>&lt;p&gt;...&lt;/p&gt;
+</description>
         <pubDate>Sun, 14 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
@@ -1849,7 +1853,7 @@ Content-Type: application/json; charset=UTF-8
         <title>Relations &amp; Virtual Attribute</title>
         <link>http://dixonsatit.github.io/2014/11/30/relations.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2014/11/30/relations.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/sort.png&quot; alt=&quot;sort&quot;&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/img/sort.png&quot; alt=&quot;sort&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;ตัวอย่างง่ายๆ ในการสร้าง relation กับ model ตัวอย่างนี้ผมจำลองข้อมูลไว้ 2 ตารางคือ Patient &amp;amp; Hospital 
 โดยที่ตาราง patient จะเก็บรหัสของโรงพยาบาลไว้ คือ hospital_code
@@ -1875,33 +1879,25 @@ Hospital                  |
 &lt;h2 id=&quot;เพิ่มใน-model-patient&quot;&gt;เพิ่มใน Model Patient&lt;/h2&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Patient&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\yii\db\ActiveRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
     &lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
-
     &lt;span class=&quot;c1&quot;&gt;// relation&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getHospital&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasOne&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Hospital&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;code&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;hospital_code&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
     &lt;span class=&quot;c1&quot;&gt;// virtual attribute hospitalName&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getHospitalName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hospital&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
     &lt;span class=&quot;c1&quot;&gt;// virtual attribute fullName &lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getFullname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;attributeLabels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
             &lt;span class=&quot;c1&quot;&gt;//..............ฟิวด์อื่นๆ&lt;/span&gt;
-
            &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullName&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ชื่อ-นามสกุล&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
            &lt;span class=&quot;s1&quot;&gt;&amp;#39;hospitalName&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;โรงพยาบาล&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-
             &lt;span class=&quot;c1&quot;&gt;//..............&lt;/span&gt;
         &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -1932,33 +1928,27 @@ Hospital                  |
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PatientSearch&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Patient&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-    &lt;span class=&quot;c1&quot;&gt;///.................&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Patient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;joinWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;hospital&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-
-        &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveDataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;query&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// สำหรับ coluumn hospitalName&lt;/span&gt;
-        &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;hospitalName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;asc&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;lib_hospital.name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_ASC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;desc&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;lib_hospital.name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_DESC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// สำหรับ coluumn fullName&lt;/span&gt;
-         &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;fullName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;asc&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_ASC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;surname&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_ASC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;desc&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_DESC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;surname&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_DESC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ชื่อ - นามสกุล&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;default&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_ASC&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;//................&lt;/span&gt;
-     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Patient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;joinWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;hospital&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveDataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;query&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// สำหรับ coluumn hospitalName&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;hospitalName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;asc&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;lib_hospital.name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_ASC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;desc&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;lib_hospital.name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_DESC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// สำหรับ coluumn fullName&lt;/span&gt;
+     &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;fullName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;asc&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_ASC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;surname&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_ASC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;desc&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_DESC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;surname&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_DESC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ชื่อ - นามสกุล&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;default&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SORT_ASC&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//................&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;หลังจากนั้นเราจะทำการคลิก sort ที่หัวคอลัมน์ได้เลย สะดวกมากๆ &lt;sup&gt;^&lt;/sup&gt;&lt;/p&gt;
 
@@ -1968,39 +1958,35 @@ Hospital                  |
 
 &lt;p&gt;เราจะสามารถใช้ฟิวด์ที่เรากำหนดเองได้&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PatientSearch&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Patient&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-            &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$hospitalName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$fullName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
-
-            &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                    &lt;span class=&quot;c1&quot;&gt;// ..........&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hospitalName&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fullName&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;], &amp;#39;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;safe&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;],&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;                ];&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;            }&lt;/span&gt;
-
-&lt;span class=&quot;s1&quot;&gt;            public function search($params)&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;            {&lt;/span&gt;
-
-
-
-&lt;span class=&quot;s1&quot;&gt;               //..........&lt;/span&gt;
-
-&lt;span class=&quot;s1&quot;&gt;                $query-&amp;gt;orFilterWhere([&amp;#39;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;like&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;patient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;, $this-&amp;gt;fullName])&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;                      -&amp;gt;orFilterWhere([&amp;#39;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;like&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;patient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;surname&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;, $this-&amp;gt;fullName])&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;                      -&amp;gt;orFilterWhere([&amp;#39;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;like&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;lib_hospital&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hospitalName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-            &lt;span class=&quot;c1&quot;&gt;//.........&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PatientSearch&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Patient&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$hospitalName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$fullName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// ..........&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;hospitalName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;fullName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;safe&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;c1&quot;&gt;//..........&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orFilterWhere&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;like&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;patient.name&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fullName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+              &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orFilterWhere&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;like&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;patient.surname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fullName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+              &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orFilterWhere&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;like&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;lib_hospital.name&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hospitalName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//.........&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ขอให้สนุกกับการเรียนรู้ครับ ....
-อ่านต่อเพิ่มเติมได้ที่นี่ครับ
-- &lt;a href=&quot;http://www.yiiframework.com/wiki/621/filter-sort-by-calculated-related-fields-in-gridview-yii-2-0/&quot;&gt;Yii 2.0: Filter &amp;amp; Sort by calculated/related fields in GridView Yii 2.0 &lt;/a&gt;
-- &lt;a href=&quot;http://www.yiiframework.com/wiki/653/displaying-sorting-and-filtering-model-relations-on-a-gridview/&quot;&gt;Yii 2.0: Displaying, Sorting and Filtering Model Relations on a GridView&lt;/a&gt;&lt;/p&gt;
+อ่านต่อเพิ่มเติมได้ที่นี่&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.yiiframework.com/wiki/621/filter-sort-by-calculated-related-fields-in-gridview-yii-2-0/&quot;&gt;Yii 2.0: Filter &amp;amp; Sort by calculated/related fields in GridView Yii 2.0 &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.yiiframework.com/wiki/653/displaying-sorting-and-filtering-model-relations-on-a-gridview/&quot;&gt;Yii 2.0: Displaying, Sorting and Filtering Model Relations on a GridView&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
       </item>
@@ -2013,15 +1999,13 @@ Hospital                  |
 
 &lt;p&gt;เป็นคำสั่งค้นข้อมูลและส่งค่ากลับมาทีละแถว โดยใช้ primary key โดยสามารถใส่ค่าเข้าไปที่ parameter ของ &lt;code&gt;find()&lt;/code&gt; ได้เลย หากค้าแล้วไม่เจอจะคืนค่าเป็น &lt;code&gt;null&lt;/code&gt; คล้ายกับ &lt;code&gt;findByPk()&lt;/code&gt; ใน yii1&lt;/p&gt;
 
-&lt;p&gt;ตัวอย่างการใช้งาน
-&lt;code&gt;php
-$model = User::find(45);
-if($model){
-    echo $model-&amp;gt;username;
-    echo $model-&amp;gt;status;
-}
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;ตัวอย่างการใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find(45);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;if($model){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    echo $model-&amp;gt;username;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    echo $model-&amp;gt;status;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;all&quot;&gt;All()&lt;/h2&gt;
 
 &lt;p&gt;เป็นคำสั่งค้นข้อมูลโดยไม่ได้ระบุเงื่อนไขและส่งค่ากับมาทีละหลายๆแถว โดยใช้ &lt;code&gt;method&lt;/code&gt; all()&lt;/p&gt;
@@ -2030,16 +2014,19 @@ if($model){
 &lt;p&gt;ในการใช้งานจริงๆ เราสามารถใช้งานร่วมกับ method อื่นได้ เช่น where(),order() การใช้งานดูในตัวอย่างถัดๆ ไป&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;ตัวอย่างการใช้งาน
-```php
-$model = User::find()-&amp;gt;all();&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## One()
-เป็นคำสั่งค้นข้อมูลโดยไม่ได้ระบุเงื่อนไขและส่งค่ากับมาทีละแถว โดยใช้ `method` one()
-&amp;gt; ในการใช้งานจริงๆ เราสามารถใช้งานร่วมกับ method อื่นได้ เช่น where(),order() การใช้งานดูในตัวอย่างถัดๆ ไป
+&lt;p&gt;ตัวอย่างการใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find()-&amp;gt;all();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;one&quot;&gt;One()&lt;/h2&gt;
 
-ตัวอย่างการใช้งาน
-```php
-$model = User::find()-&amp;gt;one();
+&lt;p&gt;เป็นคำสั่งค้นข้อมูลโดยไม่ได้ระบุเงื่อนไขและส่งค่ากับมาทีละแถว โดยใช้ &lt;code&gt;method&lt;/code&gt; one()&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ในการใช้งานจริงๆ เราสามารถใช้งานร่วมกับ method อื่นได้ เช่น where(),order() การใช้งานดูในตัวอย่างถัดๆ ไป&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ตัวอย่างการใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find()-&amp;gt;one();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;where&quot;&gt;where()&lt;/h2&gt;
 
@@ -2065,20 +2052,16 @@ $model = User::find()-&amp;gt;one();
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;sample-4&quot;&gt;Sample 4:&lt;/h3&gt;
 
-&lt;p&gt;เป็นการเพิ่มหลายๆ เงื่อนไขต่อกันสามารถระบุได้ว่าเงื่อนไขต่อไปเป็น and,หรือ or
-&lt;code&gt;php
-$model = User::find()
-    -&amp;gt;where(&amp;#39;userid &amp;gt; :userid&amp;#39;, [&amp;#39;:userid&amp;#39; =&amp;gt; $userid])
-    -&amp;gt;orWhere(&amp;#39;primary_user = :primary_user&amp;#39;, [&amp;#39;:primary_user&amp;#39; =&amp;gt; $primary_user])
-    -&amp;gt;andWhere(&amp;#39;status = :status&amp;#39;, [&amp;#39;:status&amp;#39; =&amp;gt; $status])
-    -&amp;gt;all();
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;หากดูในรูปแบบ sql จะได้แบบนี้
-&lt;code&gt;sql
-SELECT * FROM `tbl_user` WHERE ((userid &amp;gt; 1) OR (primary_user = 1)) AND (status = 1)
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;เป็นการเพิ่มหลายๆ เงื่อนไขต่อกันสามารถระบุได้ว่าเงื่อนไขต่อไปเป็น and,หรือ or&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find()&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    -&amp;gt;where(&amp;#39;userid &amp;gt; :userid&amp;#39;, [&amp;#39;:userid&amp;#39; =&amp;gt; $userid])&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    -&amp;gt;orWhere(&amp;#39;primary_user = :primary_user&amp;#39;, [&amp;#39;:primary_user&amp;#39; =&amp;gt; $primary_user])&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    -&amp;gt;andWhere(&amp;#39;status = :status&amp;#39;, [&amp;#39;:status&amp;#39; =&amp;gt; $status])&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    -&amp;gt;all();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หากดูในรูปแบบ sql จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;OR&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;primary_user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;orderby&quot;&gt;orderBy()&lt;/h2&gt;
 
 &lt;h3 id=&quot;sample-1&quot;&gt;Sample 1:&lt;/h3&gt;
@@ -2102,11 +2085,9 @@ SELECT * FROM `tbl_user` WHERE ((userid &amp;gt; 1) OR (primary_user = 1)) AND (
 &lt;span class=&quot;x&quot;&gt;    -&amp;gt;limit(10)&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;    -&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ถ้าดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-&lt;code&gt;sql
-SELECT * FROM `tbl_user` ORDER BY `usertype`, `username` DESC LIMIT 10
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;ถ้าดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usertype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DESC&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;count&quot;&gt;count()&lt;/h2&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;    $model = User::find()&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;    -&amp;gt;where([&amp;#39;status&amp;#39; =&amp;gt; 0])&lt;/span&gt;
@@ -2153,55 +2134,50 @@ $model = User::find()
         -&amp;gt;limit(5)
         -&amp;gt;offset(10)
         -&amp;gt;all();
-&lt;/code&gt;
-ดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-&lt;code&gt;sql
-SELECT * FROM `tbl_user` LIMIT 5 OFFSET 10
 &lt;/code&gt;&lt;/p&gt;
 
+&lt;p&gt;ดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;OFFSET&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;limit-with-pagination&quot;&gt;Limit With Pagination()&lt;/h2&gt;
 
-&lt;p&gt;เป็นการใช้งาน model ร่วมกับ pagination สามารถตั้งค่า &lt;code&gt;defaultPateSize&lt;/code&gt; ได้
-```php
-$query = Country::find();
-$pagination = new Pagination([
-            &amp;#39;defaultPageSize&amp;#39; =&amp;gt; 5,
-      &amp;#39;totalCount&amp;#39; =&amp;gt; $query-&amp;gt;count(),
-        ]);&lt;/p&gt;
+&lt;p&gt;เป็นการใช้งาน model ร่วมกับ pagination สามารถตั้งค่า &lt;code&gt;defaultPateSize&lt;/code&gt; ได้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$query = Country::find();&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;$pagination = new Pagination([&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;            &amp;#39;defaultPageSize&amp;#39; =&amp;gt; 5,&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;      &amp;#39;totalCount&amp;#39; =&amp;gt; $query-&amp;gt;count(),&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        ]);&lt;/span&gt;
 
-&lt;p&gt;$countries = $query-&amp;gt;orderBy(&amp;#39;name&amp;#39;)
-    -&amp;gt;offset($pagination-&amp;gt;offset)
-    -&amp;gt;limit($pagination-&amp;gt;limit)
-    -&amp;gt;all();&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## LILE Condition()
-เป็นการใช้งานคำสั่ง like ส่วนใหญ่เราก็ใช้ในกรณีค้นหาข้อมูล สามารถระบุ % หน้า % หลังได้
-
-### Sqmple 1:
-```php
-$model = User::find()
-        -&amp;gt;where([&amp;#39;LIKE&amp;#39;, &amp;#39;username&amp;#39;, &amp;#39;admin&amp;#39;])
-        -&amp;gt;all();
-//OR
-$model = User::find()
-        -&amp;gt;where(&amp;#39;username LIKE :query&amp;#39;)
-        -&amp;gt;addParams([&amp;#39;:query&amp;#39;=&amp;gt;&amp;#39;%admin%&amp;#39;])
-        -&amp;gt;all();
+&lt;span class=&quot;x&quot;&gt;$countries = $query-&amp;gt;orderBy(&amp;#39;name&amp;#39;)&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    -&amp;gt;offset($pagination-&amp;gt;offset)&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    -&amp;gt;limit($pagination-&amp;gt;limit)&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    -&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-&lt;code&gt;sql
-SELECT * FROM `tbl_user` WHERE `username` LIKE &amp;#39;%admin%&amp;#39;
-&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;lile-condition&quot;&gt;LILE Condition()&lt;/h2&gt;
 
+&lt;p&gt;เป็นการใช้งานคำสั่ง like ส่วนใหญ่เราก็ใช้ในกรณีค้นหาข้อมูล สามารถระบุ % หน้า % หลังได้&lt;/p&gt;
+
+&lt;h3 id=&quot;sqmple-1&quot;&gt;Sqmple 1:&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find()&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        -&amp;gt;where([&amp;#39;LIKE&amp;#39;, &amp;#39;username&amp;#39;, &amp;#39;admin&amp;#39;])&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        -&amp;gt;all();&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;//OR&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;$model = User::find()&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        -&amp;gt;where(&amp;#39;username LIKE :query&amp;#39;)&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        -&amp;gt;addParams([&amp;#39;:query&amp;#39;=&amp;gt;&amp;#39;%admin%&amp;#39;])&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        -&amp;gt;all();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIKE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;%admin%&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;sqmple-2&quot;&gt;Sqmple 2:&lt;/h3&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find()&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;where([&amp;#39;NOT LIKE&amp;#39;, &amp;#39;username&amp;#39;, &amp;#39;admin&amp;#39;])&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-&lt;code&gt;sql
-SELECT * FROM `tbl_user` WHERE `username` NOT LIKE &amp;#39;%admin%&amp;#39;
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIKE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;%admin%&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;in-condition&quot;&gt;In Condition()&lt;/h2&gt;
 
 &lt;p&gt;In เราสามารถระบบค่าเป็น array ได้เลย&lt;/p&gt;
@@ -2218,21 +2194,17 @@ SELECT * FROM `tbl_user` WHERE `username` NOT LIKE &amp;#39;%admin%&amp;#39;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;where([&amp;#39;IN&amp;#39;, &amp;#39;userid&amp;#39;, [1001,1002,1003,1004,1005]])&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-&lt;code&gt;sql
-SELECT * FROM `tbl_user` WHERE `userid` IN (1001, 1002, 1003, 1004, 1005)
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1002&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1003&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1004&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1005&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;sqmple-3&quot;&gt;Sqmple 3:&lt;/h3&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find()&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;where([&amp;#39;NOT IN&amp;#39;, &amp;#39;userid&amp;#39;, [1001,1002,1003,1004,1005]])&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-&lt;code&gt;sql
-SELECT * FROM `tbl_user` WHERE `userid` NOT IN (1001, 1002, 1003, 1004, 1005)
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1002&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1003&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1004&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1005&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;between&quot;&gt;between()&lt;/h2&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find()&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;select(&amp;#39;username&amp;#39;)&lt;/span&gt;
@@ -2240,21 +2212,17 @@ SELECT * FROM `tbl_user` WHERE `userid` NOT IN (1001, 1002, 1003, 1004, 1005)
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;where(&amp;#39;userid between 1 and 5&amp;#39;)&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-&lt;code&gt;sql
-SELECT `username` FROM `tbl_user` WHERE userid between 1 and 5
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userid&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;between&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;groupby&quot;&gt;groupBy()&lt;/h2&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$model = User::find()&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;groupBy(&amp;#39;usertype&amp;#39;)&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-&lt;code&gt;sql
-SELECT * FROM `tbl_user` GROUP BY `usertype`
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;หากดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;GROUP&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usertype&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;having&quot;&gt;having()&lt;/h2&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$states=1;&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;$model = User::find()&lt;/span&gt;
@@ -2297,31 +2265,30 @@ SELECT * FROM `tbl_user` GROUP BY `usertype`
 &lt;span class=&quot;x&quot;&gt;            ])&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;        -&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้
-``&lt;code&gt;sql
-SELECT * FROM&lt;/code&gt;tbl_user&lt;code&gt;WHERE (&lt;/code&gt;type&lt;code&gt;=26) AND (&lt;/code&gt;status&lt;code&gt;=1) AND (&lt;/code&gt;userid` IN (1001, 1002, 1003, 1004, 1005))&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Scope()
+&lt;p&gt;ดูในรูปแบบ &lt;code&gt;sql&lt;/code&gt; จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tbl_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1002&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1003&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1004&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1005&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;scope&quot;&gt;Scope()&lt;/h2&gt;
 
-เป็นการสร้างเงื่อนไขที่เราใช้บ่อยๆ ให้สามารถเรียกใช้งานผ่าน functions ได้
+&lt;p&gt;เป็นการสร้างเงื่อนไขที่เราใช้บ่อยๆ ให้สามารถเรียกใช้งานผ่าน functions ได้&lt;/p&gt;
 
-ตามตัวอย่างด้านล่าง เป็นการสร้าง `scope` ชื่อ `olderThen` มีการรับค่า parameter 1 ตัว ชื่อ `$age`และมีการกำหนดค่า default ให้เท่ากับ 5 ในกรณีที่เรียกใช้งานแล้วไม่ได้ใส่ค่ามาด้วย `` paramerter มาด้วย `$age` จะเท่ากับ 5
+&lt;p&gt;ตามตัวอย่างด้านล่าง เป็นการสร้าง &lt;code&gt;scope&lt;/code&gt; ชื่อ &lt;code&gt;olderThen&lt;/code&gt; มีการรับค่า parameter 1 ตัว ชื่อ &lt;code&gt;$age&lt;/code&gt;และมีการกำหนดค่า default ให้เท่ากับ 5 ในกรณีที่เรียกใช้งานแล้วไม่ได้ใส่ค่ามาด้วย `&lt;code&gt;paramerter มาด้วย&lt;/code&gt;$age` จะเท่ากับ 5&lt;/p&gt;
 
-### Sqmple 1:
-```php
-class User extends \yii\db\ActiveRecord
-{
-namespace app\models;
-public static function olderThan($age = 5)
-{
-    $this-&amp;gt;andWhere(&amp;#39;userid &amp;gt; :age&amp;#39;, [&amp;#39;:age&amp;#39; =&amp;gt; $age]);
-                            return $this;
-}
-}
-// เรียกใช้งานและระบุค่า ซึ่งค่า `$age` จะเท่ากับ 7
-$model = User::find()-&amp;gt;olderThan(7)-&amp;gt;all();
+&lt;h3 id=&quot;sqmple-1&quot;&gt;Sqmple 1:&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;class User extends \yii\db\ActiveRecord&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;namespace app\models;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;public static function olderThan($age = 5)&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    $this-&amp;gt;andWhere(&amp;#39;userid &amp;gt; :age&amp;#39;, [&amp;#39;:age&amp;#39; =&amp;gt; $age]);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;                            return $this;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;// เรียกใช้งานและระบุค่า ซึ่งค่า `$age` จะเท่ากับ 7&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;$model = User::find()-&amp;gt;olderThan(7)-&amp;gt;all();&lt;/span&gt;
 
-// เรียกใช้งานแบบไม่ระบุค่า ซึ่ง $age จะเท่ากับ 5
-$model = User::find()-&amp;gt;olderThan()-&amp;gt;all();
+&lt;span class=&quot;x&quot;&gt;// เรียกใช้งานแบบไม่ระบุค่า ซึ่ง $age จะเท่ากับ 5&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;$model = User::find()-&amp;gt;olderThan()-&amp;gt;all();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;sqmple-2&quot;&gt;Sqmple 2:&lt;/h3&gt;
 
@@ -2364,12 +2331,17 @@ $model = User::find()-&amp;gt;olderThan()-&amp;gt;all();
         <description>&lt;p&gt;Pretty urls ก็คือการทำให้ url ที่มันจำยากๆ ให้มันสามารถอ่านเข้าใจได้ ซึ่งปกติคนทั่วไป ถ้าดูแล้วอาจจะงงๆ นอกจากคนที่อยู่ในสาย develop ก็คงจะพอเข้าใจ แต่ประโยชน์จริงๆ ของมันก็คือ ให้ Search Engine เข้าใจและจำ url ของเราได้ง่าย และยังเป็นประโยชน์กับการทำ SEO อีกด้วย หลายคนอาจจะยังงงๆ ดูตัวอย่างกันเลยดีกว่า T T&amp;#39;&lt;/p&gt;
 
 &lt;h3 id=&quot;แบบ-url-ปกติ&quot;&gt;แบบ url ปกติ&lt;/h3&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;http://www.domain.me/index.php?r=site/index
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;http://www.domain.me/index.php?r=site/index
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ถ้าดูตาม url เราจะเข้าใจได้ว่า url นี้ รับค่าตัวแปรชื่อ  &lt;code&gt;r&lt;/code&gt; ซึ่งเก็บค่า &lt;code&gt;site/index&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;ถ้าดูตาม url เราจะเข้าใจได้ว่า url นี้ รับค่าตัวแปรชื่อ  &lt;code&gt;r&lt;/code&gt; ซึ่งเก็บค่า &lt;code&gt;site/index&lt;/code&gt; &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;site&lt;/code&gt; คือชื่อ controller&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;index&lt;/code&gt; คือชื่อ action&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;แบบเปิดใช้งาน-pretty-urls&quot;&gt;แบบเปิดใช้งาน Pretty Urls&lt;/h3&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;http://www.domain.me/site/index
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;http://www.domain.me/site/index
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ถ้าสังเกตจะเห็นว่า มีคำว่า &lt;code&gt;index.php&lt;/code&gt; และตัวแประ &lt;code&gt;r&lt;/code&gt; หายไป เพราะ mod_rewrite ซ่อนไว้ และ url จะดูสั้นขึ้นมากๆ&lt;/p&gt;
 
@@ -2377,43 +2349,37 @@ $model = User::find()-&amp;gt;olderThan()-&amp;gt;all();
 
 &lt;p&gt;ก่อนอื่นให้ทำการคอนฟิกเพื่อเปิดการใช้งาน UrlManager ไปที&lt;code&gt;config/web.php&lt;/code&gt; ใส่โค้ดนี้เข้าไปภาพใต้ &lt;code&gt;components&lt;/code&gt;
 * &lt;code&gt;ShowScriptName&lt;/code&gt; คือ ให้แสดง index.php เราเซ็ตเป็น &lt;code&gt;false&lt;/code&gt;  เพื่อใม่ให้มันแสดง
-* &lt;code&gt;ennablePrettyUrl&lt;/code&gt; คือเปิดการใช้งาน เซ็ตเป็น &lt;code&gt;true&lt;/code&gt; เพื่อเปิดการใช้งาน
-&lt;code&gt;php
-&amp;#39;components&amp;#39;=&amp;gt;[
-//.....
-&amp;#39;urlManager&amp;#39; =&amp;gt; [
-       &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\web\UrlManager&amp;#39;,
-       // Disable index.php
-       &amp;#39;showScriptName&amp;#39; =&amp;gt; false,
-       // Disable r= routes
-       &amp;#39;enablePrettyUrl&amp;#39; =&amp;gt; true,
-       &amp;#39;rules&amp;#39; =&amp;gt; array(
-              &amp;#39;&amp;lt;controller:\w+&amp;gt;/&amp;lt;id:\d+&amp;gt;&amp;#39; =&amp;gt; &amp;#39;&amp;lt;controller&amp;gt;/view&amp;#39;,
-                &amp;#39;&amp;lt;controller:\w+&amp;gt;/&amp;lt;action:\w+&amp;gt;/&amp;lt;id:\d+&amp;gt;&amp;#39; =&amp;gt; &amp;#39;&amp;lt;controller&amp;gt;/&amp;lt;action&amp;gt;&amp;#39;,
-                &amp;#39;&amp;lt;controller:\w+&amp;gt;/&amp;lt;action:\w+&amp;gt;&amp;#39; =&amp;gt; &amp;#39;&amp;lt;controller&amp;gt;/&amp;lt;action&amp;gt;&amp;#39;,
-                &amp;#39;module/&amp;lt;module:\w+&amp;gt;/&amp;lt;controller:\w+&amp;gt;/&amp;lt;action:\w+&amp;gt;&amp;#39; =&amp;gt; &amp;#39;&amp;lt;module&amp;gt;/&amp;lt;controller&amp;gt;/&amp;lt;action&amp;gt;&amp;#39;,
-       ),
-],
-//......
-],
-&lt;/code&gt;&lt;/p&gt;
-
+* &lt;code&gt;ennablePrettyUrl&lt;/code&gt; คือเปิดการใช้งาน เซ็ตเป็น &lt;code&gt;true&lt;/code&gt; เพื่อเปิดการใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; 
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;components&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;urlManager&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\web\UrlManager&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+       &lt;span class=&quot;c1&quot;&gt;// Disable index.php&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;showScriptName&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+       &lt;span class=&quot;c1&quot;&gt;// Disable r= routes&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;enablePrettyUrl&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;rules&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;controller:\w+&amp;gt;/&amp;lt;id:\d+&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;controller&amp;gt;/view&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;controller:\w+&amp;gt;/&amp;lt;action:\w+&amp;gt;/&amp;lt;id:\d+&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;controller&amp;gt;/&amp;lt;action&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;controller:\w+&amp;gt;/&amp;lt;action:\w+&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;controller&amp;gt;/&amp;lt;action&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;module/&amp;lt;module:\w+&amp;gt;/&amp;lt;controller:\w+&amp;gt;/&amp;lt;action:\w+&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;module&amp;gt;/&amp;lt;controller&amp;gt;/&amp;lt;action&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//......&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;สร้างไฟล์-htaccess&quot;&gt;สร้างไฟล์ .htaccess&lt;/h2&gt;
 
-&lt;p&gt;สร้างไฟล์ชื่อ &lt;code&gt;.htaccess&lt;/code&gt; ไว้ที่ &lt;code&gt;web/.htaccess&lt;/code&gt; แล้วใส่โค้ดตามด้านล่างนี้
-```
-RewriteEngine on&lt;/p&gt;
-
-&lt;h1 id=&quot;if-a-directory-or-a-file-exists-use-it-directly&quot;&gt;If a directory or a file exists, use it directly&lt;/h1&gt;
-
-&lt;p&gt;RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d&lt;/p&gt;
-
-&lt;h1 id=&quot;otherwise-forward-it-to-index-php&quot;&gt;Otherwise forward it to index.php&lt;/h1&gt;
-
-&lt;p&gt;RewriteRule . index.php
-```&lt;/p&gt;
-
+&lt;p&gt;สร้างไฟล์ชื่อ &lt;code&gt;.htaccess&lt;/code&gt; ไว้ที่ &lt;code&gt;web/.htaccess&lt;/code&gt; แล้วใส่โค้ดตามด้านล่างนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;RewriteEngine on
+# If a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward it to index.php
+RewriteRule . index.php
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ทดลองใช้งาน
 &lt;code&gt;
 http://www.domain.me/site/index
@@ -2430,65 +2396,69 @@ http://www.domain.me/site/index
         <title>สร้างลิ้งเชื่อมกันระหว่าง frontend &amp; backend</title>
         <link>http://dixonsatit.github.io/2014/11/30/links-backend-to-frontend.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2014/11/30/links-backend-to-frontend.html</guid>
-        <description>&lt;p&gt;เราสามารถสร้าง link เชื่อมกันระหว่าง backend &amp;amp; frontend โดยใช้ &lt;code&gt;urlManager&lt;/code&gt; และตังชื่อใหม่ให้มันเป็น &lt;code&gt;urlManagerBackend&lt;/code&gt;&lt;/p&gt;
+        <description>&lt;p&gt;ในกรณที่เราสร้าง aplication แบบ advance ตัวโปรเจคจะถูกแบ่งออกเป็น 2 ส่วนคือ backend, frontend ซึ่งเราสามารถสร้าง link เชื่อมกันระหว่าง backend &amp;amp; frontend โดยใช้ &lt;code&gt;urlManager&lt;/code&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;frontend-ลิ้งไปที่-backend&quot;&gt;Frontend ลิ้งไปที่ Backend&lt;/h2&gt;
 
-&lt;p&gt;แก้ไปไฟล์ frontend/config/main.php  เพิ่ม &lt;code&gt;urlManagerBackend&lt;/code&gt; เข้าไป
-&lt;code&gt;php
-&amp;#39;component&amp;#39;=&amp;gt;[
-    ...........
-     &amp;#39;urlManager&amp;#39; =&amp;gt; [
-            &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\web\urlManager&amp;#39;,
-            &amp;#39;enablePrettyUrl&amp;#39; =&amp;gt; false,
-            &amp;#39;showScriptName&amp;#39; =&amp;gt; true,
-     ],
-     &amp;#39;urlManagerBackend&amp;#39; =&amp;gt; [
-            &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\web\urlManager&amp;#39;,
-            &amp;#39;baseUrl&amp;#39; =&amp;gt; &amp;#39;/projectName/backend/web&amp;#39;,
-            &amp;#39;scriptUrl&amp;#39;=&amp;gt;&amp;#39;/projectName/backend/web/index.php&amp;#39;,
-            &amp;#39;enablePrettyUrl&amp;#39; =&amp;gt; false,
-            &amp;#39;showScriptName&amp;#39; =&amp;gt; true,
-     ],
-    ...........
- ]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;แก้ไปไฟล์ frontend/config/main.php  เพิ่ม &lt;code&gt;urlManagerBackend&lt;/code&gt; เข้าไป&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; 
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;component&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...........&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;urlManager&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\web\urlManager&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;enablePrettyUrl&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;showScriptName&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;urlManagerBackend&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\web\urlManager&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;baseUrl&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/projectName/backend/web&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;scriptUrl&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/projectName/backend/web/index.php&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;enablePrettyUrl&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;showScriptName&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...........&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;เรียกใช้งาน&quot;&gt;เรียกใช้งาน&lt;/h3&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerBackend-&amp;gt;createAbsoluteUrl([&amp;#39;site/index&amp;#39;,&amp;#39;id&amp;#39;=&amp;gt;4]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerBackend-&amp;gt;createUrl([&amp;#39;site/index&amp;#39;,&amp;#39;id&amp;#39;=&amp;gt;4]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerBackend-&amp;gt;getBaseUrl();&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerBackend-&amp;gt;getHostInfo();&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerBackend-&amp;gt;getScriptUrl();&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerBackend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createAbsoluteUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;site/index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerBackend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;site/index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerBackend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBaseUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerBackend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHostInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerBackend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getScriptUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;backend-ลิ้งไปที่-frontend&quot;&gt;Backend  ลิ้งไปที่ Frontend&lt;/h2&gt;
 
-&lt;p&gt;แก้ไปไฟล์ backend/config/main.php  เพิ่ม &lt;code&gt;urlManagerFrontend&lt;/code&gt; เข้าไป
-&lt;code&gt;php
-&amp;#39;component&amp;#39;=&amp;gt;[
-    ...........
-     &amp;#39;urlManager&amp;#39; =&amp;gt; [
-            &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\web\urlManager&amp;#39;,
-            &amp;#39;enablePrettyUrl&amp;#39; =&amp;gt; false,
-            &amp;#39;showScriptName&amp;#39; =&amp;gt; true,
-     ],
-     &amp;#39;urlManagerFrontend&amp;#39; =&amp;gt; [
-            &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\web\urlManager&amp;#39;,
-            &amp;#39;baseUrl&amp;#39; =&amp;gt; &amp;#39;/projectName/frontend/web&amp;#39;,
-            &amp;#39;scriptUrl&amp;#39;=&amp;gt;&amp;#39;/projectName/frontend/web/index.php&amp;#39;,
-            &amp;#39;enablePrettyUrl&amp;#39; =&amp;gt; false,
-            &amp;#39;showScriptName&amp;#39; =&amp;gt; true,
-     ],
-    ...........
- ]
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;แก้ไปไฟล์ backend/config/main.php  เพิ่ม &lt;code&gt;urlManagerFrontend&lt;/code&gt; เข้าไป&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;component&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...........&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;urlManager&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\web\urlManager&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;enablePrettyUrl&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;showScriptName&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;urlManagerFrontend&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\web\urlManager&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;baseUrl&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/projectName/frontend/web&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;scriptUrl&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/projectName/frontend/web/index.php&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;enablePrettyUrl&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;showScriptName&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...........&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;เรียกใช้งาน&quot;&gt;เรียกใช้งาน&lt;/h3&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerFrontend-&amp;gt;createAbsoluteUrl([&amp;#39;site/index&amp;#39;,&amp;#39;id&amp;#39;=&amp;gt;4]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerFrontend-&amp;gt;createUrl([&amp;#39;site/index&amp;#39;,&amp;#39;id&amp;#39;=&amp;gt;4]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerFrontend-&amp;gt;getBaseUrl();&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerFrontend-&amp;gt;getHostInfo();&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;urlManagerFrontend-&amp;gt;getScriptUrl();&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerFrontend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createAbsoluteUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;site/index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerFrontend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;site/index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerFrontend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBaseUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerFrontend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getHostInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerFrontend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getScriptUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
       </item>

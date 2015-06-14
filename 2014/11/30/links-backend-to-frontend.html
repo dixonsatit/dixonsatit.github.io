@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>สร้างลิ้งเชื่อมกันระหว่าง frontend & backend | DixonSatit</title>
-	<meta name="description" content="เราสามารถสร้าง link เชื่อมกันระหว่าง backend &amp; frontend โดยใช้ urlManager และตังชื่อใหม่ให้มันเป็น urlManagerBackend">
+	<meta name="description" content="ในกรณที่เราสร้าง aplication แบบ advance ตัวโปรเจคจะถูกแบ่งออกเป็น 2 ส่วนคือ backend, frontend ซึ่งเราสามารถสร้าง link เชื่อมกันระหว่าง backend &amp; frontend...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -163,65 +163,69 @@
     
     </p>
   </header>
-  <section class="post-content"><p>เราสามารถสร้าง link เชื่อมกันระหว่าง backend &amp; frontend โดยใช้ <code>urlManager</code> และตังชื่อใหม่ให้มันเป็น <code>urlManagerBackend</code></p>
+  <section class="post-content"><p>ในกรณที่เราสร้าง aplication แบบ advance ตัวโปรเจคจะถูกแบ่งออกเป็น 2 ส่วนคือ backend, frontend ซึ่งเราสามารถสร้าง link เชื่อมกันระหว่าง backend &amp; frontend โดยใช้ <code>urlManager</code></p>
 
 <h2 id="frontend-ลิ้งไปที่-backend">Frontend ลิ้งไปที่ Backend</h2>
 
-<p>แก้ไปไฟล์ frontend/config/main.php  เพิ่ม <code>urlManagerBackend</code> เข้าไป
-<code>php
-&#39;component&#39;=&gt;[
-    ...........
-     &#39;urlManager&#39; =&gt; [
-            &#39;class&#39; =&gt; &#39;yii\web\urlManager&#39;,
-            &#39;enablePrettyUrl&#39; =&gt; false,
-            &#39;showScriptName&#39; =&gt; true,
-     ],
-     &#39;urlManagerBackend&#39; =&gt; [
-            &#39;class&#39; =&gt; &#39;yii\web\urlManager&#39;,
-            &#39;baseUrl&#39; =&gt; &#39;/projectName/backend/web&#39;,
-            &#39;scriptUrl&#39;=&gt;&#39;/projectName/backend/web/index.php&#39;,
-            &#39;enablePrettyUrl&#39; =&gt; false,
-            &#39;showScriptName&#39; =&gt; true,
-     ],
-    ...........
- ]
-</code></p>
-
+<p>แก้ไปไฟล์ frontend/config/main.php  เพิ่ม <code>urlManagerBackend</code> เข้าไป</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="s1">&#39;component&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+    <span class="o">...........</span>
+     <span class="s1">&#39;urlManager&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\web\urlManager&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;enablePrettyUrl&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+            <span class="s1">&#39;showScriptName&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+     <span class="p">],</span>
+     <span class="s1">&#39;urlManagerBackend&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\web\urlManager&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;baseUrl&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/projectName/backend/web&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;scriptUrl&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;/projectName/backend/web/index.php&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;enablePrettyUrl&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+            <span class="s1">&#39;showScriptName&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+     <span class="p">],</span>
+    <span class="o">...........</span>
+ <span class="p">]</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
 <h3 id="เรียกใช้งาน">เรียกใช้งาน</h3>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">echo Yii::$app-&gt;urlManagerBackend-&gt;createAbsoluteUrl([&#39;site/index&#39;,&#39;id&#39;=&gt;4]);</span>
-<span class="x">echo Yii::$app-&gt;urlManagerBackend-&gt;createUrl([&#39;site/index&#39;,&#39;id&#39;=&gt;4]);</span>
-<span class="x">echo Yii::$app-&gt;urlManagerBackend-&gt;getBaseUrl();</span>
-<span class="x">echo Yii::$app-&gt;urlManagerBackend-&gt;getHostInfo();</span>
-<span class="x">echo Yii::$app-&gt;urlManagerBackend-&gt;getScriptUrl();</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerBackend</span><span class="o">-&gt;</span><span class="na">createAbsoluteUrl</span><span class="p">([</span><span class="s1">&#39;site/index&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerBackend</span><span class="o">-&gt;</span><span class="na">createUrl</span><span class="p">([</span><span class="s1">&#39;site/index&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerBackend</span><span class="o">-&gt;</span><span class="na">getBaseUrl</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerBackend</span><span class="o">-&gt;</span><span class="na">getHostInfo</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerBackend</span><span class="o">-&gt;</span><span class="na">getScriptUrl</span><span class="p">();</span>
+<span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
 <h2 id="backend-ลิ้งไปที่-frontend">Backend  ลิ้งไปที่ Frontend</h2>
 
-<p>แก้ไปไฟล์ backend/config/main.php  เพิ่ม <code>urlManagerFrontend</code> เข้าไป
-<code>php
-&#39;component&#39;=&gt;[
-    ...........
-     &#39;urlManager&#39; =&gt; [
-            &#39;class&#39; =&gt; &#39;yii\web\urlManager&#39;,
-            &#39;enablePrettyUrl&#39; =&gt; false,
-            &#39;showScriptName&#39; =&gt; true,
-     ],
-     &#39;urlManagerFrontend&#39; =&gt; [
-            &#39;class&#39; =&gt; &#39;yii\web\urlManager&#39;,
-            &#39;baseUrl&#39; =&gt; &#39;/projectName/frontend/web&#39;,
-            &#39;scriptUrl&#39;=&gt;&#39;/projectName/frontend/web/index.php&#39;,
-            &#39;enablePrettyUrl&#39; =&gt; false,
-            &#39;showScriptName&#39; =&gt; true,
-     ],
-    ...........
- ]
-</code></p>
-
+<p>แก้ไปไฟล์ backend/config/main.php  เพิ่ม <code>urlManagerFrontend</code> เข้าไป</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="s1">&#39;component&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+    <span class="o">...........</span>
+     <span class="s1">&#39;urlManager&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\web\urlManager&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;enablePrettyUrl&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+            <span class="s1">&#39;showScriptName&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+     <span class="p">],</span>
+     <span class="s1">&#39;urlManagerFrontend&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\web\urlManager&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;baseUrl&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;/projectName/frontend/web&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;scriptUrl&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;/projectName/frontend/web/index.php&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;enablePrettyUrl&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+            <span class="s1">&#39;showScriptName&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+     <span class="p">],</span>
+    <span class="o">...........</span>
+ <span class="p">]</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
 <h3 id="เรียกใช้งาน">เรียกใช้งาน</h3>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">echo Yii::$app-&gt;urlManagerFrontend-&gt;createAbsoluteUrl([&#39;site/index&#39;,&#39;id&#39;=&gt;4]);</span>
-<span class="x">echo Yii::$app-&gt;urlManagerFrontend-&gt;createUrl([&#39;site/index&#39;,&#39;id&#39;=&gt;4]);</span>
-<span class="x">echo Yii::$app-&gt;urlManagerFrontend-&gt;getBaseUrl();</span>
-<span class="x">echo Yii::$app-&gt;urlManagerFrontend-&gt;getHostInfo();</span>
-<span class="x">echo Yii::$app-&gt;urlManagerFrontend-&gt;getScriptUrl();</span>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerFrontend</span><span class="o">-&gt;</span><span class="na">createAbsoluteUrl</span><span class="p">([</span><span class="s1">&#39;site/index&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerFrontend</span><span class="o">-&gt;</span><span class="na">createUrl</span><span class="p">([</span><span class="s1">&#39;site/index&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">]);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerFrontend</span><span class="o">-&gt;</span><span class="na">getBaseUrl</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerFrontend</span><span class="o">-&gt;</span><span class="na">getHostInfo</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlManagerFrontend</span><span class="o">-&gt;</span><span class="na">getScriptUrl</span><span class="p">();</span>
+<span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div></section>
 </article>
 
