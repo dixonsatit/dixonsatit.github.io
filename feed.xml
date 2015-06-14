@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 14 Jun 2015 22:02:53 +0700</pubDate>
+    <pubDate>Sun, 14 Jun 2015 22:49:16 +0700</pubDate>
     
       <item>
         <title>Yii2 Learning</title>
@@ -35,6 +35,9 @@
 &lt;li&gt;การสร้าง ItemAlias ใน model เพื่อใช้กับ DropdownList,CheckBoxList, RadioList&lt;/li&gt;
 &lt;li&gt;การใช้งาน CheckBoxList บันทึกข้อมูลโดยใช้ฟิวด์เดียว(คั่นด้วย&amp;#39;,&amp;#39;)&lt;/li&gt;
 &lt;li&gt;การอัพโหลดไฟล์&lt;/li&gt;
+&lt;li&gt;การใช้งาน DetailView&lt;/li&gt;
+&lt;li&gt;การใช้งาน GridView&lt;/li&gt;
+&lt;li&gt;การใช้งาน Boostrap ActiveForm&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;tutorial&quot;&gt;Tutorial&lt;/h1&gt;
@@ -43,6 +46,7 @@
 &lt;li&gt;การใช้งาน FlashMessage&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;/2014/11/30/action-column.html&quot;&gt;เเปลี่ยน ActionColumn เดิมๆ เป็นสไตล์ ButtonGroup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;สร้างลิ้งเชื่อมกันระหว่าง frontend &amp;amp; backend&lt;/li&gt;
+&lt;li&gt;การสร้างและใช้งาน Assets&lt;/li&gt;
 &lt;li&gt;การสร้าง Theme&lt;/li&gt;
 &lt;li&gt;สร้างระบบ login อย่างง่าย&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;/2014/11/30/modrewrite.html&quot;&gt;เปิดการใช้งาน Pretty urls (mod_rewrite)&lt;/a&gt;&lt;/li&gt;
@@ -57,7 +61,7 @@
 &lt;li&gt;การใช้งาน Validation แบบต่างๆ&lt;/li&gt;
 &lt;li&gt;Relation&lt;/li&gt;
 &lt;li&gt;Virtual Attribute&lt;/li&gt;
-&lt;li&gt;การใช้งาน TimestampBehaveor&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/2015/06/14/model-behaviors.html&quot;&gt;การใช้งาน TimestempBehavior ใน model เพื่ออัพเดทข้อมูลวันที่&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;extension&quot;&gt;Extension&lt;/h1&gt;
@@ -84,6 +88,61 @@
         <link>http://dixonsatit.github.io/2015/06/14/running-applications.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/14/running-applications.html</guid>
         <description></description>
+        <pubDate>Sun, 14 Jun 2015 00:00:00 +0700</pubDate>
+      </item>
+    
+      <item>
+        <title>การใช้งาน TimestempBehavior ใน model เพื่ออัพเดทข้อมูลวันที่</title>
+        <link>http://dixonsatit.github.io/2015/06/14/model-behaviors.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/14/model-behaviors.html</guid>
+        <description>&lt;p&gt;ส่วนใหญ่ในการสร้างตารางต่างๆ เราก็มักจะมีฟิวด์ที่เก็บข้อมูลคือ &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;create_date บอกว่าเราสร้าง record นี้เมื่อไหร่&lt;/li&gt;
+&lt;li&gt;update_date บอกว่ามีการแก้ไขข้อมูลเมื่อไหร่&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ในการใช้การจริงๆ เราจะทำการใส่ข้อมูล create_date ในตอน create record และในตอน update เราก็ใส่ข้อมุล update_date ด้วย หรือไม่ก็เปลี่ยนประเภทข้อมูลให้เป็น timestamp แล้วก็ให้มันอัพเดทข้อมูลทุกครั้งที่มีการเปลี่ยนแปลงข้อมูล&lt;/p&gt;
+
+&lt;p&gt;แต่เดี๋ยวก่อน Yii2 มีนวัตกรรมใหม่ที่จะทำให้คุณพ่อบ้านสบายขึ้น (เดี่ยวๆ ก่อน..) มันดียังไง?&lt;/p&gt;
+
+&lt;p&gt;ตามเอกสารเค้าบอกว่ามันสามารถใส่ข้อมูล timestamp ให้อัตโนมัติได้เพียงแค่เราต้งชื่อฟิวด์ create_at,update_at และกำหนด type ใน mysql เป็น Integer หลังจากนั้นเพิ่มการเรียกใช้งาน TimestampBehavior ใน model ดังนี้&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;มันเก็บข้อมูลเป็น time() นะครับ&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\TimestampBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;TimestampBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากเรียกใช้งานแล้วหากมีการ create,update record &lt;code&gt;TimestampBehavior&lt;/code&gt; จะเป็นตัวที่ใส่ข้อมูลให้เองอัตโนมัติ สะดวกมากๆ ครับ อย่าลืม!.. วิธีนี้ต้องกำหนดชื่อฟิวด์เป็น create_at,update_at เท่านั้นครับ&lt;/p&gt;
+
+&lt;p&gt;แต่หากใครไม่ได้กำหนดชื่อฟิวด์ตามนี้ก็สามารถกำหนดให้ TimestampBehavior ให้มันได้รู้จักฟิวด์ create,update ได้ ดูตัวอย่างด้านล่าง&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\db\Expression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\TimestampBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;TimestampBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;createdAtAttribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;create_time&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;updatedAtAttribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;update_time&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Expression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;NOW()&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เราสามารถสั่งให้มันเรียกข้อมูล timestame ให้ฟิวด์นั้นๆ ได้โดยใช้คำสั่งนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$model-&amp;gt;touch(&amp;#39;creation_time&amp;#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         <pubDate>Sun, 14 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
@@ -3097,14 +3156,6 @@ action แรกจะเป็น actionGetAmphur() ตรงนี้จะร
         &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;form-control&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
       &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-        <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>สร้างระบบล็อกอินอย่างง่าย ( Authentication)</title>
-        <link>http://dixonsatit.github.io/2014/11/30/authentication.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2014/11/30/authentication.html</guid>
-        <description></description>
         <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
       </item>
     
