@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Relations & Virtual Attribute | DixonSatit</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/relations.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Relations & Virtual Attribute</h1>
+    <p class="meta">
+    November 30, 2014
+    
+    </p>
+  </header>
+  <section class="post-content"><p><img src="/images/sort.png" alt="sort"></p>
+
+<p>ตัวอย่างง่ายๆ ในการสร้าง relation กับ model ตัวอย่างนี้ผมจำลองข้อมูลไว้ 2 ตารางคือ Patient &amp; Hospital 
+โดยที่ตาราง patient จะเก็บรหัสของโรงพยาบาลไว้ คือ hospital_code
+ลองดูตัวอย่างง่ายๆ นะครับ</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Patient
+ - title
+ - name
+ - surname
+ - hospital_code  --------+
+                          |
+Hospital                  |
+ - code  -----------------+
+ - name
+</code></pre></div>
+<p>เราจะทำการปรับปรุง <code>Model Patient</code> ให้สามารถเชื่อมกับ hospital เพื่อให้แสดงชื่อของโรงพยาบาลได้และสร้าง virtual attribute ชื่อ <code>hospitalName</code> จาก relation Hospital ด้วย เพื่อให้สามารถเรียกด้วยคำสั่งว่า <code>hospitalName</code> ได้ โดยไม่ต้องใช้ Hospital.name (!บางคนอาจสงสัยมันสั้นกว่าตรงใหน ฮา..)</p>
+
+<p>อีกส่วนเราจะสร้าง virtual attribute ชื่อ  <code>$fullName</code> เพื่อแสดงข้อมูลชื่อ - นามสกุล โดยจะรวม โดยจะรวม name,surname ไว้เป็น field ใหม่เลยชื่อว่า fullName</p>
+
+<blockquote>
+<p>ผมใส่เครื่องหมาย <code>@</code> นำหน้าเพื่อให้มันไม่ error เวลาที่ไม่สามารถเชื่อมกับ <code>Hospital</code> เช่น  กรณีไม่ได้บันทึกรหัสโรงพยาบาล เวลาแสดงผลที่ <code>GridView</code> มันจะ error เพราะไม่สามารถเชื่อมได้ </p>
+</blockquote>
+
+<h2 id="เพิ่มใน-model-patient">เพิ่มใน Model Patient</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">Patient</span> <span class="k">extends</span> <span class="nx">\yii\db\ActiveRecord</span><span class="p">{</span>
+
+    <span class="c1">//.....</span>
+
+    <span class="c1">// relation</span>
+    <span class="k">public</span>  <span class="k">function</span> <span class="nf">getHospital</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="o">@</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hasOne</span><span class="p">(</span><span class="nx">Hospital</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="p">[</span><span class="s1">&#39;code&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hospital_code&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// virtual attribute hospitalName</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getHospitalName</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="o">@</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hospital</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// virtual attribute fullName </span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getFullname</span><span class="p">(){</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">.</span> <span class="s2">&quot; &quot;</span> <span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">surname</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">attributeLabels</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="c1">//..............ฟิวด์อื่นๆ</span>
+
+           <span class="s1">&#39;fullName&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ชื่อ-นามสกุล&#39;</span><span class="p">),</span>
+           <span class="s1">&#39;hospitalName&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;โรงพยาบาล&#39;</span><span class="p">),</span>
+
+            <span class="c1">//..............</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="การเรียกใช้ใน-gridview">การเรียกใช้ใน Gridview</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+    <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+    <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\grid\SerialColumn&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;surname&#39;</span><span class="p">,</span>
+        <span class="c1">//เรียกผ่าน relation โดยตรง</span>
+        <span class="s1">&#39;hospital.name&#39;</span><span class="p">,</span>
+        <span class="c1">// เรียกผ่าน virtual attribute hospitalName</span>
+        <span class="s1">&#39;hospitalName&#39;</span><span class="p">,</span>
+        <span class="c1">// เรียกผ่าน virtual attribute fullName</span>
+        <span class="s1">&#39;fullName&#39;</span>
+    <span class="p">],</span>
+<span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h1 id="การ-sort">การ Sort</h1>
+
+<p>ปกติเราสามารถคลิก sort <code>asc,desc</code> ได้จากหัว column ใน <code>GridView</code> ได้ แต่ถ่าหากเป็นฟิวด์ที่เราเพิ่มขึ้นมาเช่น hospitalName, fullName นั้นจะไม่สามารถใช้งานได้เลย เราจะต้องปรับแต่งเพิ่มเติมนิดหน่อย</p>
+
+<p>โดยการสั่งให้มันทำการ sort ตาม column ที่เรากำหนดได้ เราจะทำการเพิ่มในไฟล์ <code>PatientSearch.php</code> ปกติมันจะมีมาพร้อมกับตอน crud อยู่แล้ว ทำการแก้ไขที่<code>function Search()</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">PatientSearch</span> <span class="k">extends</span> <span class="nx">Patient</span> <span class="p">{</span>
+
+    <span class="c1">///.................</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$query</span> <span class="o">=</span> <span class="nx">Patient</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
+
+        <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">joinWith</span><span class="p">([</span><span class="s1">&#39;hospital&#39;</span><span class="p">]);</span>
+
+        <span class="nv">$dataProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveDataProvider</span><span class="p">([</span>
+            <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="nv">$query</span><span class="p">,</span>
+        <span class="p">]);</span>
+
+        <span class="c1">// สำหรับ coluumn hospitalName</span>
+        <span class="nv">$dataProvider</span><span class="o">-&gt;</span><span class="na">sort</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">[</span><span class="s1">&#39;hospitalName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;asc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;lib_hospital.name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">],</span>
+            <span class="s1">&#39;desc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;lib_hospital.name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">],</span>
+        <span class="p">];</span>
+
+        <span class="c1">// สำหรับ coluumn fullName</span>
+         <span class="nv">$dataProvider</span><span class="o">-&gt;</span><span class="na">sort</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">[</span><span class="s1">&#39;fullName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;asc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">,</span> <span class="s1">&#39;surname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">],</span>
+            <span class="s1">&#39;desc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">,</span> <span class="s1">&#39;surname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">],</span>
+            <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ชื่อ - นามสกุล&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span>
+        <span class="p">];</span>
+
+        <span class="c1">//................</span>
+     <span class="p">}</span>
+</code></pre></div>
+<p>หลังจากนั้นเราจะทำการคลิก sort ที่หัวคอลัมน์ได้เลย สะดวกมากๆ <sup>^</sup></p>
+
+<h1 id="การค้นหา">การค้นหา</h1>
+
+<p>เราสามารถปรับแต่งให้คอลัมน์ hospitalName,fullName ที่เราเพิ่มขื้นมาใหม่นันสามารถค้นหาได้ โดยเพิ่มที่ PatientSearch.php ที่ function Search()</p>
+
+<p>เราจะสามารถใช้ฟิวด์ที่เรากำหนดเองได้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+        <span class="k">class</span> <span class="nc">PatientSearch</span> <span class="k">extends</span> <span class="nx">Patient</span>
+        <span class="p">{</span>
+
+            <span class="k">public</span> <span class="nv">$hospitalName</span><span class="p">;</span>
+            <span class="k">public</span> <span class="nv">$fullName</span><span class="p">;</span>   
+
+            <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+            <span class="p">{</span>
+                <span class="k">return</span> <span class="p">[</span>
+                    <span class="c1">// ..........</span>
+                    <span class="p">[</span><span class="nx">hospitalName</span><span class="s1">&#39;,&#39;</span><span class="nx">fullName</span><span class="s1">&#39;], &#39;</span><span class="nx">safe</span><span class="s1">&#39;],</span>
+<span class="s1">                ];</span>
+<span class="s1">            }</span>
+
+<span class="s1">            public function search($params)</span>
+<span class="s1">            {</span>
+
+
+
+<span class="s1">               //..........</span>
+
+<span class="s1">                $query-&gt;orFilterWhere([&#39;</span><span class="nx">like</span><span class="s1">&#39;, &#39;</span><span class="nx">patient</span><span class="o">.</span><span class="nx">name</span><span class="s1">&#39;, $this-&gt;fullName])</span>
+<span class="s1">                      -&gt;orFilterWhere([&#39;</span><span class="nx">like</span><span class="s1">&#39;, &#39;</span><span class="nx">patient</span><span class="o">.</span><span class="nx">surname</span><span class="s1">&#39;, $this-&gt;fullName])</span>
+<span class="s1">                      -&gt;orFilterWhere([&#39;</span><span class="nx">like</span><span class="s1">&#39;, &#39;</span><span class="nx">lib_hospital</span><span class="o">.</span><span class="nx">name</span><span class="err">&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hospitalName</span><span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="c1">//.........</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>ขอให้สนุกกับการเรียนรู้ครับ ....
+อ่านต่อเพิ่มเติมได้ที่นี่ครับ
+- <a href="http://www.yiiframework.com/wiki/621/filter-sort-by-calculated-related-fields-in-gridview-yii-2-0/">Yii 2.0: Filter &amp; Sort by calculated/related fields in GridView Yii 2.0 </a>
+- <a href="http://www.yiiframework.com/wiki/653/displaying-sorting-and-filtering-model-relations-on-a-gridview/">Yii 2.0: Displaying, Sorting and Filtering Model Relations on a GridView</a></p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

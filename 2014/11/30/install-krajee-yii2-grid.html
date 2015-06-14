@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การติดตั้ง GridView + ExportMenu | DixonSatit</title>
+	<meta name="description" content="ในตัวอย่างนี้เป็นการติดตั้งและใช้งาน widget ของ kartik-v/yii2-grid โดยที่ตัว GridView ตัวนี้มีความสามารถเยอะมากๆ แต่หลักๆ ที่ผมชอบเลยก็คือ สามารถ export ข้อม...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/install-krajee-yii2-grid.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การติดตั้ง GridView + ExportMenu</h1>
+    <p class="meta">
+    November 30, 2014
+    
+    </p>
+  </header>
+  <section class="post-content"><p>ในตัวอย่างนี้เป็นการติดตั้งและใช้งาน widget ของ <a href="https://github.com/kartik-v/yii2-grid/blob/master/README.md">kartik-v/yii2-grid</a> โดยที่ตัว GridView ตัวนี้มีความสามารถเยอะมากๆ แต่หลักๆ ที่ผมชอบเลยก็คือ สามารถ export ข้อมูลได้หลายแบบ เช่น .xls, .pdf, .csv, .txt, .html ซึ่งสามารถคลิกเลือกจากตัว GridView ได้โดยตรงเลย</p>
+
+<p>มี 2 แบบคือ
+ * Export from GridView
+ * Export Menu</p>
+
+<h2 id="export-from-gridview">Export from GridView</h2>
+
+<p><img src="/images/index.png" alt="index"></p>
+
+<h3 id="install">Install</h3>
+
+<p>ในการใช้งาน export menu จะต้องติดตั้ง  <code>widget</code>ทั้งหมด 4 ตัว โดยเพิ่มที่ไฟล์ composer.json ในส่วนของ  <code>require</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&quot;kartik-v/yii2-widgets&quot;: &quot;*&quot;,
+&quot;kartik-v/yii2-grid&quot;: &quot;*&quot;,
+&quot;kartik-v/yii2-export&quot;: &quot;*&quot;,
+&quot;kartik-v/yii2-mpdf&quot;: &quot;*&quot;
+</code></pre></div>
+<p>จากนั้นทำการสั่งติดตั้งโดยใช้คำสั่ง
+<code>
+composer update
+</code>
+<img src="/images/install-grid.png" alt="install grid" title="Logo Title Text 1"></p>
+
+<h3 id="config">Config</h3>
+
+<p>ตัวอย่างนี้จะใช้ข้อมูลจากตาราง countries</p>
+
+<blockquote>
+<p>ดูโครงสร้างตาราง <code>countries</code> <a href="https://github.com/raramuridesign/mysql-country-list/blob/master/mysql-country-list.sql">countries.sql</a> ได้ที่นี่</p>
+</blockquote>
+
+<p>หลังจากสร้างตาราง countries ใน mysql แล้วให้ gii countries Model และ gii countries CRUD</p>
+
+<p>จากนั้นเพิ่ม module gridview ใน <code>config\web.php</code> ตามด้านล่าง ตัวนี้เป็น module ที่ใช้ในการ export  (csv, text, html, or xls)
+เพื่อรองรับการ export ที่เราคลิกเลือกจากเมนู
+<code>php
+$config = [
+    &#39;id&#39; =&gt; &#39;basic&#39;,
+    &#39;basePath&#39; =&gt; dirname(__DIR__),
+    &#39;bootstrap&#39; =&gt; [&#39;log&#39;],
+    //...........
+    &#39;modules&#39; =&gt; [
+       &#39;gridview&#39; =&gt;  [
+            &#39;class&#39; =&gt; &#39;\kartik\grid\Module&#39;
+        ]
+    ],
+</code></p>
+
+<p>จากนั้นไปที่ <code>views\countries\index.php</code> ทำการเปลี่ยนการเรียกใช้งานในส่วน <code>use</code> Gridview
+จากเดิม</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">yii\grid\GridView</span><span class="p">;</span>
+</code></pre></div>
+<p>เปลี่ยนเป็น
+<code>php
+&lt;?php
+use kartik\grid\GridView;
+</code></p>
+
+<p>และในส่วนของการเรียกใช้งาน <code>GridView::widget([....])</code> เพิ่มค่าคอนฟิก properties <code>panel</code> เข้าไป และปิด ActionColumn ไว้เพราะเวลา export file เดี่ยวเมนูจะตามไปด้วย
+<code>php
+&lt;?= GridView::widget([
+    &#39;dataProvider&#39; =&gt; $dataProvider,
+    &#39;filterModel&#39; =&gt; $searchModel,
+    //........
+    &#39;panel&#39;=&gt;[
+            &#39;before&#39;=&gt;&#39; &#39;
+    ],
+    //.........
+    &#39;columns&#39; =&gt; [
+        [&#39;class&#39; =&gt; &#39;yii\grid\SerialColumn&#39;],
+        &#39;id&#39;,
+        &#39;country_code&#39;,
+        &#39;country_name&#39;,
+        //[&#39;class&#39; =&gt; &#39;yii\grid\ActionColumn&#39;],
+    ],
+]); ?&gt;
+</code></p>
+
+<p>ทดสอบรันดู จะพบไอคอน ที่ด้านขวาให้เราสามารถคลิกแล้วเลือก   export ตามที่เราต้องการได้โดยมีรายการให้เลือกดังนี้
+- Html
+- CSV
+- Text
+- Excel
+- Pdf
+- Json</p>
+
+<p><img src="/images/grid-export.png" alt="export menu"></p>
+
+<p>ลองทำการทดลอง export เลือก format ที่ต้องการ ระบบจะบอกว่ามันจะ generated file สำหรับดาวน์โหลดให้ คุณต้องการทำหรือปล่าว ให้ตอบ OK</p>
+
+<blockquote>
+<p>หากไม่ขึ้น dialog ลองเช็คว่ามีการปิด popup ใน browser หรือไม่</p>
+</blockquote>
+
+<p><img src="/images/export1.png" alt="export1">
+ระบบจะ export file ให้รอซักครู่
+<img src="/images/export2.png" alt="export2">
+หลังจากเสร็จเราสามารถเปิดดูไฟล์ได้เลย
+<img src="/images/export3.png" alt="export3"></p>
+
+<h2 id="ตัวอย่างไฟล์ที่-export">ตัวอย่างไฟล์ที่ export</h2>
+
+<h3 id="html">Html</h3>
+
+<p><img src="/images/html.png" alt="html"></p>
+
+<h3 id="text">Text</h3>
+
+<p><img src="/images/txt.png" alt="text"></p>
+
+<h3 id="csv">CSV</h3>
+
+<p><img src="/images/csv.png" alt="csv"></p>
+
+<h3 id="pdf">Pdf</h3>
+
+<p><img src="/images/pdf.png" alt="pdf"></p>
+
+<h3 id="excel">Excel</h3>
+
+<p>ผมลองแล้วยัง error! ไม่แนใจเหมือนกันกับ <code>Gridview</code>ตัวนี้ แต่สามารถใช้ตัว export menu ได้</p>
+
+<h3 id="json">Json</h3>
+
+<p><img src="/images/json.png" alt="json"></p>
+
+<p><br>
+<br></p>
+
+<h2 id="export-menu">Export Menu</h2>
+
+<p><img src="/images/exportmenu.png" alt=""></p>
+
+<p>ตัวนี้เราได้ติดตั้งไปแล้วสามารถเรียกใช้ได้เลย export menu จะรับค่า DataProvider เหมือนกับ <code>GridView</code></p>
+
+<p>ไปที่ <code>views\countries\index.php</code> เพิ่ม widgit เข้าไป</p>
+
+<blockquote>
+<p>ตัวนี้สามารถ export excel ได้ทั้ง 2 แบบคือ .xls, .xlsx</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">kartik\export\ExportMenu</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">ExportMenu</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span>
+<span class="p">]);</span><span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>หลังจากนั้นก็สามารถเรียกใช้งานได้เลย ง่ายมากๆ ครับ</p>
+
+<h2 id="การติดตั้งภาษาไทยให้กับ-mpdf">การติดตั้งภาษาไทยให้กับ MPDF</h2>
+
+<blockquote>
+<p>วิธินี้อาจไม่ใช่วิธีที่ถูกเพราะถ้ามีการ <code>update</code> อาจทำให้ไฟล์ที่แก้ไขไว้หายไป  ถ้าใครรู้ก็รู้วิธีอื่นๆ แนะนำมาได้นะครับ</p>
+</blockquote>
+
+<p>ก่อนอื่นเราต้อง ดาวน์โหลดฟอนต์ไทยมาก่อนครับ (<a href="/downloads/thaifont.zip">Download</a>)</p>
+
+<ul>
+<li>แตกซิบไฟล์แล้วนำฟอนต์ทั้งหมดไปไว้ที่ <code>vendor/kartik-v/mpdf/ttfont/</code></li>
+<li>จากนั้นทำการแก้ไขไฟล์ <code>vendor/kartik-v/mpdf/config_fonts.php</code> เพิ่มชื่อฟอนต์เข้าไป
+<code>php
+$this-&gt;fontdata = array(
+&quot;thsaraban&quot; =&gt; array(
+    &#39;R&#39; =&gt; &quot;THSarabunNew.ttf&quot;,
+    &#39;B&#39; =&gt; &quot;THSarabunNew-Bold.ttf&quot;,
+    &#39;I&#39;  =&gt; &quot;THSarabunNew-Italic.ttf&quot;,
+    &#39;BI&#39;   =&gt;  &quot;THSarabunNew-BoldItalic.ttf&quot;
+    ),
+</code></li>
+<li>และเพิ่ม <code>thsaraban</code> เข้าไปที่
+<code>php
+$this-&gt;sans_fonts = array(&#39;thsaraban&#39;,
+</code></li>
+<li>ไปที่ไฟล์ <code>vendor/kartik-v/mpdf/config_lang2fonts.php</code> แล้วค้นหาคำว่า Thai แล้วแก้เป็นดังนี้
+<code>php
+CASE &quot;th&quot;:  CASE &quot;tha&quot;:   // THAI
+$unifont = &quot;thsaraban&quot;;
+break;
+</code></li>
+<li>แก้ไขไฟล์ <code>vendor/kartik-v/yii2-mpdf/Pdf.php</code>  เพิ่ม <code>thsaraban</code> เข้าไป
+<code>php
+public function setApi()
+{
+   $this-&gt;_mpdf = new mPDF(
+       //$this-&gt;mode,
+       &#39;thsaraban&#39;,
+       $this-&gt;format,
+       $this-&gt;defaultFontSize,
+       $this-&gt;defaultFont,
+       $this-&gt;marginLeft,
+       $this-&gt;marginRight,
+       $this-&gt;marginTop,
+       $this-&gt;marginBottom,
+       $this-&gt;marginHeader,
+       $this-&gt;marginFooter,
+       $this-&gt;orientation
+   );
+}
+</code></li>
+<li>แก้ไขไฟล์ css ที่ <code>vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.css</code> เพิ่มฟอนต์ <code>thsaraban</code> เข้าไป
+<code>css
+body {
+font-family: &quot;thsaraban&quot;,&quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.42857143;
+color: #333;
+background-color: #fff;
+}
+</code>
+### ลองเรียกใช้งาน
+<img src="/images/export-pdf-thai.png" alt="thaipdf"></li>
+</ul>
+
+<h3 id="ตัวอย่างไฟล์">ตัวอย่างไฟล์</h3>
+
+<p><img src="/images/pdf-thai.png" alt="thaipdf"></p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

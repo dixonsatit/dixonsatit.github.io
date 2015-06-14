@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>Yii2 Learning | DixonSatit</title>
+	<meta name="description" content="Yii Framework เป็น framework php ที่เรียกได้ว่าน่าจะมีครบแทบทุกอย่าง ที่จำเป็นในการพัฒนา Web Applicaion ซึ่งทำให้เราใช้เวลาในการพัฒนาที่สั้น แต่อาจต้องใช้เวล...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/14/yii2-Learning.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">Yii2 Learning</h1>
+    <p class="meta">
+    June 14, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p>Yii Framework เป็น framework php ที่เรียกได้ว่าน่าจะมีครบแทบทุกอย่าง ที่จำเป็นในการพัฒนา Web Applicaion ซึ่งทำให้เราใช้เวลาในการพัฒนาที่สั้น แต่อาจต้องใช้เวลาในการเรียนรู้สูง (ฮา..) จึงอยากแบ่งปันประสบการณ์การใช้งานและเทคนิคการใช้งานแบบต่างๆ รวมไว้ให้อ่านที่นี่กัน.</p>
+
+<h1 id="getting-started">Getting Started</h1>
+
+<ul>
+<li><a href="/2015/06/14/what-is-yii.html">Yii คืออะไร</a></li>
+<li><a href="/2014/11/30/Installation.html">การติดตั้ง</a></li>
+<li><a href="">โครงสร้างโปรเจค</a></li>
+<li><a href="">การเปิดใช้งานและทดสอบ Hello World</a></li>
+<li><a href="">สร้าง controller, view</a></li>
+<li><a href="">สร้าง model</a></li>
+<li><a href="">ใช้งาน Gii</a></li>
+<li>ใช้งาน GitHub กับ Yii โดยใช้ SourceTree</li>
+</ul>
+
+<h1 id="crud">CRUD</h1>
+
+<ul>
+<li>สร้างฟอร์ม เพิ่ม,ลบ,แก้ไข (CRUD)</li>
+<li>การปรับแต่ง layout Form</li>
+<li>การใช้งาน DropdownList</li>
+<li>การสร้าง ItemAlias ใน model เพื่อใช้กับ DropdownList,CheckBoxList, RadioList</li>
+<li>การใช้งาน CheckBoxList บันทึกข้อมูลโดยใช้ฟิวด์เดียว(คั่นด้วย&#39;,&#39;)</li>
+<li>การอัพโหลดไฟล์</li>
+</ul>
+
+<h1 id="tutorial">Tutorial</h1>
+
+<ul>
+<li>การใช้งาน FlashMessage</li>
+<li><a href="/2014/11/30/action-column.html">เเปลี่ยน ActionColumn เดิมๆ เป็นสไตล์ ButtonGroup</a></li>
+<li>สร้างลิ้งเชื่อมกันระหว่าง frontend &amp; backend</li>
+<li>การสร้าง Theme</li>
+<li><a href="">สร้างระบบ login อย่างง่าย</a></li>
+</ul>
+
+<h1 id="model">Model</h1>
+
+<ul>
+<li>รวมคำสั่งที่ใช้งานบ่อยของ model</li>
+<li>การใช้งาน Validation แบบต่างๆ</li>
+<li>Relation</li>
+<li>Virtual Attribute</li>
+<li>การใช้งาน TimestampBehaveor</li>
+</ul>
+
+<h1 id="extension">Extension</h1>
+
+<ul>
+<li>Eport ข้อมูล pdf,xls,html,text,csv,json ด้วย kartik-v/yii2-grid</li>
+<li>การสร้าง chart ด้วย HeightChart</li>
+</ul>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

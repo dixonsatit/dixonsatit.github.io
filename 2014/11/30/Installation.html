@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การติดตั้ง Yii2 | DixonSatit</title>
+	<meta name="description" content="การติดตั้ง Yii 2 นั้นหลักๆ ทำได้ 2 วิธีครับ คือ">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/Installation.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การติดตั้ง Yii2</h1>
+    <p class="meta">
+    November 30, 2014
+    
+    </p>
+  </header>
+  <section class="post-content"><p>การติดตั้ง Yii 2 นั้นหลักๆ ทำได้ 2 วิธีครับ คือ</p>
+
+<ul>
+<li>ติดตั้งโดยใช้ Composer</li>
+<li>ติดตั้งโดยดาวน์โหลดไฟล์มาติดตั้งเอง จาก <a href="http://www.yiiframework.com/download/">http://www.yiiframework.com/download/</a></li>
+</ul>
+
+<h2 id="ติดตั้ง-composer">ติดตั้ง Composer</h2>
+
+<p>เป็นวิธีที่แนะนำ เราสามารถดูรายละเอียด Composer เพิ่มเติมได้ที่นี่  <a href="https://getcomposer.org/download/">getcomposer.org</a>  การติดตั้งสำหรับ linux และ Mac OS X ให้คุณพิมพ์คำสั่ง</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">curl -s http://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+</code></pre></div>
+<blockquote>
+<p>Note: บรรทัดแรกเป็นการดาวน์โหลดไฟล์ติดตั้ง &quot;composer.phar&quot; บรรทัดที่สองเป็นการก๊อบปี้ไฟล์ &quot;composer.phar&quot; ไปไว้ที่ /usr/local/bin เพื่อให้สามารถเรียกใช้งานได้โดยไม่ต้องระบบุ path</p>
+</blockquote>
+
+<p>ในส่วนของ Windows คุณสามารถดาวน์โหลดไฟล์ไปติดตั้งได้เลย <a href="https://getcomposer.org/Composer-Setup.exe">Composer-Setup.exe</a> และสามารถอ่านรายละเอียดการใช้งานเพิ่มเติมได้ที่นี่ <a href="https://getcomposer.org/doc/">Composer Documentation</a> ไม่ว่าจะเป็นการติดตั้งหรือปัญหาการใช้งานต่างๆ</p>
+
+<p>หลังจากติดตั้ง Composer เสร็จให้คุณรันคำสั่งด้านล่างนี้เพื่อทำการอัพเดทตัว Composer:
+<code>
+composer self-update
+</code>
+ในส่วนของการติดตั้ง Yii มี 2 แบบคือ basic และ advance</p>
+
+<h3 id="แบบ-basic">แบบ Basic</h3>
+
+<p>คุณสามารถติดตั้งแบบ basic โดยใช้คำสั่งนี้:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer global require &quot;fxp/composer-asset-plugin:1.0.0&quot;
+composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+</code></pre></div>
+<p>&quot;basic&quot; บรรทัดสุดท้ายคือชื่อ app</p>
+
+<blockquote>
+<p>Note:ในตัวอย่างนี้ผมติดตั้งไว้ที่ /Applications/MAMP/htdocs/ ในตัวจำลอง server</p>
+</blockquote>
+
+<p>หลังจากติดตั้งเสร็จให้ทดสอบเข้าใช้งาน <a href="http://localhost/basic/web/index.php">http://localhost/basic/web/index.php</a></p>
+
+<h3 id="แบบ-advance">แบบ Advance</h3>
+
+<p>คุณสามารถติดตั้งแบบ advance โดยใช้คำสั่งนี้:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer global require &quot;fxp/composer-asset-plugin:1.0.0&quot;
+composer create-project --prefer-dist yiisoft/yii2-app-advanced yii-application
+</code></pre></div>
+<blockquote>
+<p>Note:ในตัวอย่างนี้ผมติดตั้งไว้ที่ /Applications/MAMP/htdocs/ ในตัวจำลอง server</p>
+</blockquote>
+
+<p>หลังจากสร้างเสร็จจะไม่สามารถใช้งานได้เหมือนแบบ basic จะต้องรันคำสั่ง initialize เพื่อให้สามารถใช้งานได้</p>
+
+<p>1.ให้ cd เข้าไปที่พาทของ application ที่เราได้ทำการสร้างไว้ แล้วรันคำสั่งนี้ :
+<code>
+php /path/to/yii-application/init
+</code></p>
+
+<p>จะพบคำสั่งนี้ ให้เราตอบ 0 เลือกโหมดกำลังพัฒนา
+```
+Yii Application Initialization Tool v1.0</p>
+
+<p>Which environment do you want the application to be initialized in?</p>
+
+<p>[0] Development
+  [1] Production</p>
+
+<p>Your choice [0-1, or &quot;q&quot; to quit] 0
+```
+2.ให้ทำการสร้างดาต้าเบสว่างๆ แล้วคอนฟิกดาต้าเบสที่ไฟล์  common/config/main-local.php</p>
+
+<p>3.หลังจากนั้นให้รันคำสั่ง php yii migrate เพื่อสร้างตารางและระบบจะถาม
+```
+Yii Migration Tool (based on Yii v2.0.2)</p>
+
+<p>Creating migration history table &quot;migration&quot;...Done.
+Total 1 new migration to be applied:
+  m130524_201442_init</p>
+
+<p>Apply the above migration? (yes|no) [no]:
+```
+ให้เราตอบ yes</p>
+
+<p>4.ทดลองเข้าใช้งานที่</p>
+
+<p>frontend : <a href="http://localhost/yii-application/frontend/web/index.php">http://localhost/yii-application/frontend/web/index.php</a></p>
+
+<p>backend : <a href="http://localhost/yii-application/backend/web/index.php">http://localhost/yii-application/backend/web/index.php</a></p>
+
+<h2 id="ติดตั้งโดยดาวโหลดไฟล์มาติดตั้งเอง">ติดตั้งโดยดาวโหลดไฟล์มาติดตั้งเอง</h2>
+
+<ol>
+<li>ดาวน์โหลดไฟล์จาก <a href="http://www.yiiframework.com/download/">http://www.yiiframework.com/download/</a></li>
+<li>แตกซิบไฟล์ออกมาแล้วนำไปวางที่ htdocs ของเรา</li>
+<li>ทำการแก้ไขไฟล์ config/web.php แล้วมองหาบรรทัดที่มีคำว่า cookieValidationKey ให้เราใส่ค่ารหัสลับเข้าไปอะไรก็ได้ เช่น
+<code>
+&#39;cookieValidationKey&#39; =&gt; &#39;enter your secret key here&#39;,
+</code></li>
+<li>จากนั้นทำการทดสอบเข้าใช้งาน</li>
+</ol>
+
+<h2 id="ปัญหาที่พบบ่อยๆ-ในการติดตั้ง">ปัญหาที่พบบ่อยๆ ในการติดตั้ง</h2>
+
+<p>--&#39;</p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

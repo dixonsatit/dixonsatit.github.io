@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>รวมคำสั่ง Query ใน Model ที่ใช้งานบ่อยๆ | DixonSatit</title>
+	<meta name="description" content="Find()เป็นคำสั่งค้นข้อมูลและส่งค่ากลับมาทีละแถว โดยใช้ primary key โดยสามารถใส่ค่าเข้าไปที่ parameter ของ find() ได้เลย หากค้าแล้วไม่เจอจะคืนค่าเป็น null คล้...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/query-model.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">รวมคำสั่ง Query ใน Model ที่ใช้งานบ่อยๆ</h1>
+    <p class="meta">
+    November 30, 2014
+    
+    </p>
+  </header>
+  <section class="post-content"><h2 id="find">Find()</h2>
+
+<p>เป็นคำสั่งค้นข้อมูลและส่งค่ากลับมาทีละแถว โดยใช้ primary key โดยสามารถใส่ค่าเข้าไปที่ parameter ของ <code>find()</code> ได้เลย หากค้าแล้วไม่เจอจะคืนค่าเป็น <code>null</code> คล้ายกับ <code>findByPk()</code> ใน yii1</p>
+
+<p>ตัวอย่างการใช้งาน
+<code>php
+$model = User::find(45);
+if($model){
+    echo $model-&gt;username;
+    echo $model-&gt;status;
+}
+</code></p>
+
+<h2 id="all">All()</h2>
+
+<p>เป็นคำสั่งค้นข้อมูลโดยไม่ได้ระบุเงื่อนไขและส่งค่ากับมาทีละหลายๆแถว โดยใช้ <code>method</code> all()</p>
+
+<blockquote>
+<p>ในการใช้งานจริงๆ เราสามารถใช้งานร่วมกับ method อื่นได้ เช่น where(),order() การใช้งานดูในตัวอย่างถัดๆ ไป</p>
+</blockquote>
+
+<p>ตัวอย่างการใช้งาน
+```php
+$model = User::find()-&gt;all();</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">## One()
+เป็นคำสั่งค้นข้อมูลโดยไม่ได้ระบุเงื่อนไขและส่งค่ากับมาทีละแถว โดยใช้ `method` one()
+&gt; ในการใช้งานจริงๆ เราสามารถใช้งานร่วมกับ method อื่นได้ เช่น where(),order() การใช้งานดูในตัวอย่างถัดๆ ไป
+
+ตัวอย่างการใช้งาน
+```php
+$model = User::find()-&gt;one();
+</code></pre></div>
+<h2 id="where">where()</h2>
+
+<p>เป็นคำสั่งที่ให้เราสามารถเพิ่มเงื่อนไขต่างๆ เข้าไปได้ สามารถใช้ร่วมกัน one() หรือ  all() ได้</p>
+
+<p>ตัวอย่างการใช้งาน where() แบบต่างๆ</p>
+
+<h3 id="sample-1">Sample 1:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$userid=1;</span>
+<span class="x">$model = User::find()</span>
+<span class="x">    -&gt;where(&#39;userid &gt; :userid&#39;, [&#39;:userid&#39; =&gt; $userid])</span>
+<span class="x">    -&gt;one();</span>
+</code></pre></div>
+<h3 id="sample-2">Sample 2:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">    -&gt;where([&#39;reg_date&#39; =&gt; $date, &#39;status&#39; =&gt; 1])</span>
+<span class="x">    -&gt;one();</span>
+</code></pre></div>
+<h3 id="sample-3">Sample 3:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">    -&gt;where(&quot;reg_date &gt; &#39;2014-01-01&#39; and status=1&quot;)</span>
+<span class="x">    -&gt;all();</span>
+</code></pre></div>
+<h3 id="sample-4">Sample 4:</h3>
+
+<p>เป็นการเพิ่มหลายๆ เงื่อนไขต่อกันสามารถระบุได้ว่าเงื่อนไขต่อไปเป็น and,หรือ or
+<code>php
+$model = User::find()
+    -&gt;where(&#39;userid &gt; :userid&#39;, [&#39;:userid&#39; =&gt; $userid])
+    -&gt;orWhere(&#39;primary_user = :primary_user&#39;, [&#39;:primary_user&#39; =&gt; $primary_user])
+    -&gt;andWhere(&#39;status = :status&#39;, [&#39;:status&#39; =&gt; $status])
+    -&gt;all();
+</code></p>
+
+<p>หากดูในรูปแบบ sql จะได้แบบนี้
+<code>sql
+SELECT * FROM `tbl_user` WHERE ((userid &gt; 1) OR (primary_user = 1)) AND (status = 1)
+</code></p>
+
+<h2 id="orderby">orderBy()</h2>
+
+<h3 id="sample-1">Sample 1:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">    -&gt;where([&#39;status&#39; =&gt; 1])</span>
+<span class="x">    -&gt;orderBy(&#39;userid&#39;)</span>
+<span class="x">    -&gt;all();</span>
+</code></pre></div>
+<h3 id="sample-2">Sample 2:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">    -&gt;where([&#39;status&#39; =&gt; 0])</span>
+<span class="x">    -&gt;orderBy(&#39;userid&#39;)</span>
+<span class="x">    -&gt;one();</span>
+</code></pre></div>
+<h3 id="sample-3">Sample 3:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">    $model = User::find()</span>
+<span class="x">    -&gt;orderBy([</span>
+<span class="x">           &#39;usertype&#39;=&gt;SORT_ASC,</span>
+<span class="x">           &#39;username&#39; =&gt; SORT_DESC,</span>
+<span class="x">        ])</span>
+<span class="x">    -&gt;limit(10)</span>
+<span class="x">    -&gt;all();</span>
+</code></pre></div>
+<p>ถ้าดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+<code>sql
+SELECT * FROM `tbl_user` ORDER BY `usertype`, `username` DESC LIMIT 10
+</code></p>
+
+<h2 id="count">count()</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">    $model = User::find()</span>
+<span class="x">    -&gt;where([&#39;status&#39; =&gt; 0])</span>
+<span class="x">    -&gt;orderBy(&#39;userid&#39;)</span>
+<span class="x">    -&gt;count();</span>
+</code></pre></div>
+<h2 id="asarray">asArray()</h2>
+
+<p>รับค่าข้อมูลกลับมาในรูปแบบของ Array ซึ่งปกติเราจะได้ในรูปแบบ Object</p>
+
+<blockquote>
+<p>! หากใช้ asArray() เราจะไม่สามารถเรียกใช้งาน $model-&gt;username แบบนี้ได้ ต้องเป็น $model[&#39;username&#39;]  ต้องเลือกให้เหมาะกันงานที่จะนำมาใช้นะครับ</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">    -&gt;asArray()</span>
+<span class="x">    -&gt;all();</span>
+</code></pre></div><div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">    -&gt;asArray()</span>
+<span class="x">    -&gt;one();</span>
+</code></pre></div>
+<h2 id="indexby">indexBy()</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">-&gt;indexBy(&#39;id&#39;)</span>
+<span class="x">-&gt;one();</span>
+</code></pre></div>
+<h2 id="limit">limit()</h2>
+
+<h3 id="sample-1">Sample 1:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">-&gt;limit(10)</span>
+<span class="x">-&gt;all();</span>
+</code></pre></div>
+<h3 id="sample-2">Sample 2:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">-&gt;where(&#39;userid &gt; 1 and isactive=1&#39;)</span>
+<span class="x">-&gt;limit(2)</span>
+<span class="x">-&gt;all();</span>
+</code></pre></div>
+<h2 id="offset">offset()</h2>
+
+<p>เป็นคำสั่งเรียกข้อมูล 5 แถว โดยเริ่มที่ แถวที่ 10
+<code>php
+$model = User::find()
+        -&gt;limit(5)
+        -&gt;offset(10)
+        -&gt;all();
+</code>
+ดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+<code>sql
+SELECT * FROM `tbl_user` LIMIT 5 OFFSET 10
+</code></p>
+
+<h2 id="limit-with-pagination">Limit With Pagination()</h2>
+
+<p>เป็นการใช้งาน model ร่วมกับ pagination สามารถตั้งค่า <code>defaultPateSize</code> ได้
+```php
+$query = Country::find();
+$pagination = new Pagination([
+            &#39;defaultPageSize&#39; =&gt; 5,
+      &#39;totalCount&#39; =&gt; $query-&gt;count(),
+        ]);</p>
+
+<p>$countries = $query-&gt;orderBy(&#39;name&#39;)
+    -&gt;offset($pagination-&gt;offset)
+    -&gt;limit($pagination-&gt;limit)
+    -&gt;all();</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">## LILE Condition()
+เป็นการใช้งานคำสั่ง like ส่วนใหญ่เราก็ใช้ในกรณีค้นหาข้อมูล สามารถระบุ % หน้า % หลังได้
+
+### Sqmple 1:
+```php
+$model = User::find()
+        -&gt;where([&#39;LIKE&#39;, &#39;username&#39;, &#39;admin&#39;])
+        -&gt;all();
+//OR
+$model = User::find()
+        -&gt;where(&#39;username LIKE :query&#39;)
+        -&gt;addParams([&#39;:query&#39;=&gt;&#39;%admin%&#39;])
+        -&gt;all();
+</code></pre></div>
+<p>หากดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+<code>sql
+SELECT * FROM `tbl_user` WHERE `username` LIKE &#39;%admin%&#39;
+</code></p>
+
+<h3 id="sqmple-2">Sqmple 2:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">        -&gt;where([&#39;NOT LIKE&#39;, &#39;username&#39;, &#39;admin&#39;])</span>
+<span class="x">        -&gt;all();</span>
+</code></pre></div>
+<p>หากดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+<code>sql
+SELECT * FROM `tbl_user` WHERE `username` NOT LIKE &#39;%admin%&#39;
+</code></p>
+
+<h2 id="in-condition">In Condition()</h2>
+
+<p>In เราสามารถระบบค่าเป็น array ได้เลย</p>
+
+<h3 id="sqmple-1">Sqmple 1:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">        -&gt;where([</span>
+<span class="x">            &#39;userid&#39; =&gt; [1001,1002,1003,1004,1005],</span>
+<span class="x">            ])</span>
+<span class="x">        -&gt;all();</span>
+</code></pre></div>
+<h3 id="sqmple-2">Sqmple 2:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">        -&gt;where([&#39;IN&#39;, &#39;userid&#39;, [1001,1002,1003,1004,1005]])</span>
+<span class="x">        -&gt;all();</span>
+</code></pre></div>
+<p>หากดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+<code>sql
+SELECT * FROM `tbl_user` WHERE `userid` IN (1001, 1002, 1003, 1004, 1005)
+</code></p>
+
+<h3 id="sqmple-3">Sqmple 3:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">        -&gt;where([&#39;NOT IN&#39;, &#39;userid&#39;, [1001,1002,1003,1004,1005]])</span>
+<span class="x">        -&gt;all();</span>
+</code></pre></div>
+<p>หากดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+<code>sql
+SELECT * FROM `tbl_user` WHERE `userid` NOT IN (1001, 1002, 1003, 1004, 1005)
+</code></p>
+
+<h2 id="between">between()</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">        -&gt;select(&#39;username&#39;)</span>
+<span class="x">        -&gt;asArray()</span>
+<span class="x">        -&gt;where(&#39;userid between 1 and 5&#39;)</span>
+<span class="x">        -&gt;all();</span>
+</code></pre></div>
+<p>หากดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+<code>sql
+SELECT `username` FROM `tbl_user` WHERE userid between 1 and 5
+</code></p>
+
+<h2 id="groupby">groupBy()</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">        -&gt;groupBy(&#39;usertype&#39;)</span>
+<span class="x">        -&gt;all();</span>
+</code></pre></div>
+<p>หากดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+<code>sql
+SELECT * FROM `tbl_user` GROUP BY `usertype`
+</code></p>
+
+<h2 id="having">having()</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$states=1;</span>
+<span class="x">$model = User::find()</span>
+<span class="x">        -&gt;groupBy(&#39;usertypee&#39;)</span>
+<span class="x">        -&gt;having(&#39;states &gt;:states&#39;)</span>
+<span class="x">        -&gt;addParams([&#39;:states&#39;=&gt;$states])</span>
+<span class="x">        -&gt;all();</span>
+</code></pre></div><div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="o">`</span><span class="n">tbl_user</span><span class="o">`</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="o">`</span><span class="n">usertypee</span><span class="o">`</span> <span class="k">HAVING</span> <span class="n">states</span> <span class="o">&gt;</span><span class="mi">1</span>
+</code></pre></div>
+<h2 id="addparams">addParams()</h2>
+
+<p>เป็นการแทนค่าตัวแปรในเงือนไข where</p>
+
+<h3 id="sqmple-1">Sqmple 1:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$usertype=1;</span>
+<span class="x">$model = User::find()</span>
+<span class="x">    -&gt;where(&#39;usertype = :usertype&#39;)</span>
+<span class="x">    -&gt;addParams([&#39;:usertype&#39; =&gt; $usertype])</span>
+<span class="x">    -&gt;one();</span>
+</code></pre></div>
+<h3 id="sqmple-2">Sqmple 2:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$usertype=1;</span>
+<span class="x">$status=0;</span>
+<span class="x">$model = User::find()</span>
+<span class="x">    -&gt;where(&#39;usertype = :usertype and status=:status&#39;)</span>
+<span class="x">    -&gt;addParams([&#39;:usertype&#39; =&gt; $usertype])</span>
+<span class="x">    -&gt;addParams([&#39;:status&#39; =&gt; $status])</span>
+<span class="x">// OR Multiple Assigns</span>
+<span class="x">// -&gt;addParams([&#39;:usertype&#39; =&gt; $usertype,&#39;:status&#39; =&gt; $status])</span>
+<span class="x">    -&gt;one();</span>
+</code></pre></div>
+<h2 id="multiple-condition">Multiple Condition()</h2>
+
+<p>ในกรณีที่ต้องใช้หลายๆ เงื่อนไข</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$model = User::find()</span>
+<span class="x">        -&gt;where([</span>
+<span class="x">            &#39;type&#39; =&gt; 26,</span>
+<span class="x">            &#39;status&#39; =&gt; 1,</span>
+<span class="x">            &#39;userid&#39; =&gt; [1001,1002,1003,1004,1005],</span>
+<span class="x">            ])</span>
+<span class="x">        -&gt;all();</span>
+</code></pre></div>
+<p>ดูในรูปแบบ <code>sql</code> จะได้แบบนี้
+``<code>sql
+SELECT * FROM</code>tbl_user<code>WHERE (</code>type<code>=26) AND (</code>status<code>=1) AND (</code>userid` IN (1001, 1002, 1003, 1004, 1005))</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Scope()
+
+เป็นการสร้างเงื่อนไขที่เราใช้บ่อยๆ ให้สามารถเรียกใช้งานผ่าน functions ได้
+
+ตามตัวอย่างด้านล่าง เป็นการสร้าง `scope` ชื่อ `olderThen` มีการรับค่า parameter 1 ตัว ชื่อ `$age`และมีการกำหนดค่า default ให้เท่ากับ 5 ในกรณีที่เรียกใช้งานแล้วไม่ได้ใส่ค่ามาด้วย `` paramerter มาด้วย `$age` จะเท่ากับ 5
+
+### Sqmple 1:
+```php
+class User extends \yii\db\ActiveRecord
+{
+namespace app\models;
+public static function olderThan($age = 5)
+{
+    $this-&gt;andWhere(&#39;userid &gt; :age&#39;, [&#39;:age&#39; =&gt; $age]);
+                            return $this;
+}
+}
+// เรียกใช้งานและระบุค่า ซึ่งค่า `$age` จะเท่ากับ 7
+$model = User::find()-&gt;olderThan(7)-&gt;all();
+
+// เรียกใช้งานแบบไม่ระบุค่า ซึ่ง $age จะเท่ากับ 5
+$model = User::find()-&gt;olderThan()-&gt;all();
+</code></pre></div>
+<h3 id="sqmple-2">Sqmple 2:</h3>
+
+<p>ตัวอย่างนี้ไม่้ได้กำหนดค่า default ให้ จะต้องส่งค่ามาเสมอในตอนที่เรียกใช้งาน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">class User extends \yii\db\ActiveRecord</span>
+<span class="x">{</span>
+<span class="x">    // ...</span>
+<span class="x">    public static function active($status)</span>
+<span class="x">    {</span>
+<span class="x">            $this-&gt;andWhere(&#39;status = &#39;.$status);</span>
+<span class="x">            return $this;</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+<span class="x">// call the scope function</span>
+<span class="x">$model = User::find()</span>
+<span class="x">-&gt;active(1)</span>
+<span class="x">-&gt;all();</span>
+</code></pre></div>
+<h2 id="findbysql">findBySql()</h2>
+
+<p>เป็นการเรียกคำสั่ง sql โดยตรงผ่าน model</p>
+
+<h3 id="sqmple-1">Sqmple 1:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$sql = &#39;SELECT * FROM tbl_user&#39;;</span>
+<span class="x">$model = User::findBySql($sql)-&gt;all();</span>
+</code></pre></div>
+<h3 id="sqmple-2">Sqmple 2:</h3>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$sql = &#39;SELECT * FROM tbl_user&#39;;</span>
+<span class="x">$model = User::findBySql($sql)-&gt;all();</span>
+</code></pre></div>
+<p><a href="http://www.bsourcecode.com/yiiframework2/select-query-model/#where">ที่มา</a></p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
