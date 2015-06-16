@@ -5,7 +5,43 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 14 Jun 2015 22:52:03 +0700</pubDate>
+    <pubDate>Mon, 15 Jun 2015 22:01:30 +0700</pubDate>
+    
+      <item>
+        <title>การใช้งาน SluggbleBehavior เพื่อแปลงคำไทยเป็นอังกฤษเพื่อใช้กับ Url</title>
+        <link>http://dixonsatit.github.io/2015/06/15/sluggble-behavior.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/15/sluggble-behavior.html</guid>
+        <description>&lt;p&gt;SluggbleBehavior เป็น class ที่ใช้สำหรับแปลงข้อความจากภาษาอื่นๆ ให้เป็นภาษาอังกฤษเพื่อใช้กับ url ลองเล่นกันดู
+ตัวนี้เป็น Behaviors ซึ่งแน่นอนมันจะทำงานให้อย่างอัตโนมัติ เพียงแค่เราทำการตั้งค่าที่ model ที่เราต้องการ อย่างเช่น&lt;/p&gt;
+
+&lt;p&gt;ผมต้องการใช้คำว่า &amp;quot;ข่าวประชาสัมพันธ์&amp;quot;  เพื่อใช้เป็น url ในการเลือกข้อมูลที่มีเฉพาะข่าวประชาสัมพันธ์ มันก็จะทำการแปลงคำ จาก  &amp;quot;ข่าวประชาสัมพันธ์&amp;quot; ให้เป็น &amp;quot;khaw-prachasamphanth&amp;quot; ซึ่งอาจจะไม่ตรงนัก แต่คิดว่าได้แค่นี้ก็แจ่มแระ ฮ่าๆ &lt;/p&gt;
+
+&lt;p&gt;เป้าหมายของเราคือ ให้ทำการแปลงข้อมูลจากฟิวด์ title แล้วนำข้อมูลที่แปลงแล้วมาเก็บที่ฟิวด์ slug&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ถ้าหากตั้งชื่อฟิวด์ ที่จะรับข้อมูลเป็น slug ก็สามารถใช้งานได้เลยไม่ต้องตั้งค่าใดๆ เพิ่ม แต่ถ้าหากตั้งเป็นชื่ออื่น   เราก็สามารถกำหนดค่าให้มันได้ที่ slugAttribute ว่าชื่อฟิวด์ slug ของเราชื่ออะไร &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\SluggableBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SluggableBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// &amp;#39;slugAttribute&amp;#39; =&amp;gt; &amp;#39;slug&amp;#39;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากนั้นเมื่อมีการ save หรือ update ข้อมูลมันจะทำการ แปลงข้อมูลให้อัตโนมัติ&lt;/p&gt;
+</description>
+        <pubDate>Mon, 15 Jun 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>Yii2 Learning</title>
@@ -38,6 +74,15 @@
 &lt;li&gt;การใช้งาน DetailView&lt;/li&gt;
 &lt;li&gt;การใช้งาน GridView&lt;/li&gt;
 &lt;li&gt;การใช้งาน Boostrap ActiveForm&lt;/li&gt;
+&lt;li&gt;เปิดใช้งาน Ajax From Validateion&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;pjax&quot;&gt;Pjax&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;สร้างฟอร์ม submit ajax&lt;/li&gt;
+&lt;li&gt;สร้าง Toggle Button Ajax&lt;/li&gt;
+&lt;li&gt;สร้างฟอร์มค้นหา Ajax&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;tutorial&quot;&gt;Tutorial&lt;/h1&gt;
@@ -52,6 +97,10 @@
 &lt;li&gt;&lt;a href=&quot;/2014/11/30/modrewrite.html&quot;&gt;เปิดการใช้งาน Pretty urls (mod_rewrite)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;/2014/11/30/relations.html&quot;&gt;Relations &amp;amp; Virtual Attribute&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;/2014/11/30/links-backend-to-frontend.html&quot;&gt;สร้างลิ้งเชื่อมกันระหว่าง frontend &amp;amp; backend&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Register css file, js file&lt;/li&gt;
+&lt;li&gt;การใช้งาน Data Formatter&lt;/li&gt;
+&lt;li&gt;การใช้งาน mailer stmp google&lt;/li&gt;
+&lt;li&gt;การใช้งาน mailer stmp mandrillapp &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;model&quot;&gt;Model&lt;/h1&gt;
@@ -62,6 +111,7 @@
 &lt;li&gt;Relation&lt;/li&gt;
 &lt;li&gt;Virtual Attribute&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;/2015/06/14/model-behaviors.html&quot;&gt;การใช้งาน TimestempBehavior ใน model เพื่ออัพเดทข้อมูลวันที่&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;&quot;&gt;การใช้งาน SluggableBehavior ในการแปลงคำไทยเป็นภาษาทังกฤษเพื่อใช้กับ url &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;extension&quot;&gt;Extension&lt;/h1&gt;
@@ -69,6 +119,7 @@
 &lt;ul&gt;
 &lt;li&gt;Eport ข้อมูล pdf,xls,html,text,csv,json ด้วย kartik-v/yii2-grid&lt;/li&gt;
 &lt;li&gt;การสร้าง chart ด้วย HeightChart&lt;/li&gt;
+&lt;li&gt;ติดตั้ง Yii-User&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 14 Jun 2015 00:00:00 +0700</pubDate>
@@ -150,7 +201,7 @@
         <title>สร้างฟอร์ม Upload File และเก็บข้อมูลเป็น json</title>
         <link>http://dixonsatit.github.io/2014/11/30/upload-json.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2014/11/30/upload-json.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/images/upload-file-ajax.png&quot; alt=&quot;upload file&quot;&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/img/upload-file-ajax.png&quot; alt=&quot;upload file&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;เราจะทำการสร้างฟอร์มอัพโหลดข้อมูลและเก็บข้อมูลชื่อไฟล์ให้อยู่ในรูปแบบ json เพื่อประหยัดฟิวด์ และเราจะใช้ widget &lt;a href=&quot;http://demos.krajee.com/widgets#fileinput&quot;&gt;fileinput&lt;/a&gt; เป็น Widget ของ krajee เจ้าเก่า ซึ่งรวมอยู่ในแพ็คเก็จ &lt;a href=&quot;http://demos.krajee.com/widgets&quot;&gt;Yii2 Widget&lt;/a&gt; อยู่แล้ว ติดตั้งทีเดียวได้ครบเลย &lt;sup&gt;^&lt;/sup&gt;&lt;/p&gt;
 
@@ -166,15 +217,13 @@
 
 &lt;h2 id=&quot;การติดตั้ง-widget&quot;&gt;การติดตั้ง Widget&lt;/h2&gt;
 
-&lt;p&gt;รันคำสั่งเพื่อทำการติดตั้ง
-&lt;code&gt;
-composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
-&lt;/code&gt;
-หรือเพิ่ม
-&lt;code&gt;
-&amp;quot;kartik-v/yii2-widgets&amp;quot;: &amp;quot;*&amp;quot;
-&lt;/code&gt;
-ที่แท็ค require ในไฟล์ composer.json จากนั้น &lt;code&gt;composer update&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;รันคำสั่งเพื่อทำการติดตั้ง&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หรือเพิ่ม&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;kartik-v/yii2-widgets&amp;quot;: &amp;quot;*&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ที่แท็ค require ในไฟล์ composer.json จากนั้น &lt;code&gt;composer update&lt;/code&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;create-model&quot;&gt;Create Model&lt;/h2&gt;
 
@@ -190,47 +239,41 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 
 &lt;p&gt;เปิดไฟล์ /models/Freelance.php&lt;/p&gt;
 
-&lt;p&gt;เพิ่มฟิวด์ &lt;code&gt;covenant&lt;/code&gt; ที่จะเก็บข้อมูลไฟล์สัญญาจ้าง และ &lt;code&gt;docs&lt;/code&gt; เก็บไฟล์เอกสารที่เกี่ยวข้องทั้งหมด กำหนด type validate เป็น &lt;code&gt;file&lt;/code&gt;
-```php
-&amp;lt;?php
-//.......&lt;/p&gt;
+&lt;p&gt;เพิ่มฟิวด์ &lt;code&gt;covenant&lt;/code&gt; ที่จะเก็บข้อมูลไฟล์สัญญาจ้าง และ &lt;code&gt;docs&lt;/code&gt; เก็บไฟล์เอกสารที่เกี่ยวข้องทั้งหมด กำหนด type validate เป็น &lt;code&gt;file&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//.......&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;required&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;description&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;string&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;start_date&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;end_date&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;succes_date&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;create_date&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;safe&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ref&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;string&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;max&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;string&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;max&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;covenant&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;file&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;maxFiles&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;---&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;docs&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;file&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;maxFiles&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;---&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//.......&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;create-form&quot;&gt;Create Form&lt;/h2&gt;
 
-&lt;p&gt;public function rules()
-{
-    return [
-        [[&amp;#39;title&amp;#39;],&amp;#39;required&amp;#39;],
-        [[&amp;#39;description&amp;#39;], &amp;#39;string&amp;#39;],
-        [[&amp;#39;start_date&amp;#39;, &amp;#39;end_date&amp;#39;, &amp;#39;succes_date&amp;#39;, &amp;#39;create_date&amp;#39;], &amp;#39;safe&amp;#39;],
-        [[&amp;#39;ref&amp;#39;], &amp;#39;string&amp;#39;, &amp;#39;max&amp;#39; =&amp;gt; 20],
-        [[&amp;#39;title&amp;#39;], &amp;#39;string&amp;#39;, &amp;#39;max&amp;#39; =&amp;gt; 255],
-        [[&amp;#39;covenant&amp;#39;],&amp;#39;file&amp;#39;,&amp;#39;maxFiles&amp;#39;=&amp;gt;1], //&amp;lt;---
-        [[&amp;#39;docs&amp;#39;],&amp;#39;file&amp;#39;,&amp;#39;maxFiles&amp;#39;=&amp;gt;10] //&amp;lt;---
-    ];
-}&lt;/p&gt;
+&lt;p&gt;ในส่วนของ form เราต้องเพิ่ม attribute &lt;code&gt;enctype=&amp;quot;multipart/form-data&amp;quot;&lt;/code&gt; ส่วนใหญ่หลายๆ คนอาจลืมผมก็เคยลืม ฮา..&lt;/p&gt;
 
-&lt;p&gt;//.......&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Create Form
-
-ในส่วนของ form เราต้องเพิ่ม attribute `enctype=&amp;quot;multipart/form-data&amp;quot;` ส่วนใหญ่หลายๆ คนอาจลืมผมก็เคยลืม ฮา..
-
-ไปที่ไฟล์ /views/freelance/_form.php แก้ไข `ActiveForm` ให้เป็นดังนี้
-
-```php
-&amp;lt;?php $form = ActiveForm::begin([&amp;#39;options&amp;#39; =&amp;gt; [&amp;#39;enctype&amp;#39; =&amp;gt; &amp;#39;multipart/form-data&amp;#39;]]) ?&amp;gt;
+&lt;p&gt;ไปที่ไฟล์ /views/freelance/_form.php แก้ไข &lt;code&gt;ActiveForm&lt;/code&gt; ให้เป็นดังนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;enctype&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;multipart/form-data&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;จากนั้นก็ปรับ layout from ตามใจชอบ &lt;a href=&quot;/tutorial/create-form.md&quot;&gt;ดูรายละเอียดการปรับ layout form ได้ที่นี่&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/form-upload-layout.png&quot; alt=&quot;form-upload-layout.&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/form-upload-layout.png&quot; alt=&quot;form-upload-layout.&quot;&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-
 &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\ActiveForm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
 &lt;span class=&quot;cm&quot;&gt;/* @var $this yii\web\View */&lt;/span&gt;
 &lt;span class=&quot;cm&quot;&gt;/* @var $model app\models\Freelance */&lt;/span&gt;
 &lt;span class=&quot;cm&quot;&gt;/* @var $form yii\widgets\ActiveForm */&lt;/span&gt;
 &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
 &lt;span class=&quot;x&quot;&gt;&amp;lt;div class=&amp;quot;freelance-form&amp;quot;&amp;gt;&lt;/span&gt;
 
 &lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
@@ -257,6 +300,7 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 &lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 
 &lt;span class=&quot;x&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;?&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;จากนั้นเราจะทำการเปลี่ยนจาก input เป็น file โดยใช้ &lt;a href=&quot;http://demos.krajee.com/widgets#fileinput&quot;&gt;File Input Widget&lt;/a&gt; ทำการเรียก File Input Widget เข้ามาก่อน&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;use kartik\widgets\FileInput;&lt;/span&gt;
@@ -264,58 +308,59 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 &lt;p&gt;จากนั้นเปลี่ยน &lt;code&gt;textInput&lt;/code&gt; จากของเดิมแบบนี้&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;covenant&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;textInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;maxlength&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;และทำการเรียกใช้งาน &lt;code&gt;FileInput&lt;/code&gt; และกำหนดค่าต่างๆ
-```php&lt;/p&gt;
+&lt;p&gt;และทำการเรียกใช้งาน &lt;code&gt;FileInput&lt;/code&gt; และกำหนดค่าต่างๆ&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;covenant&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;FileInput&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//&amp;#39;options&amp;#39; =&amp;gt; [&amp;#39;accept&amp;#39; =&amp;gt; &amp;#39;image/*&amp;#39;],&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;initialPreview&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;allowedFileExtensions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;pdf&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;showPreview&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;showRemove&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;showUpload&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;#39;options&amp;#39; =&amp;gt; [&amp;#39;accept&amp;#39; =&amp;gt; &amp;#39;image/*&amp;#39;]&lt;/code&gt; ถ้าเราใช้ upload รูปภาพอย่างเดียว&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;initialPreview&lt;/code&gt; เป็นการนำข้อมูลที่เคยบันทึกไปแล้วมาแสดงที่ thumbnail&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;allowedFileExtensions&lt;/code&gt; กำหนดให้เราสามารถอัพโหลดไฟล์ format ใหนบ้าง&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;showRemove&lt;/code&gt; ให้มีปุ่มยกเลิกในกรณีที่เราต้องการเลือกไฟล์ใหม่&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;showUpload&lt;/code&gt; เป็นปุ่ม upload file แบบ ajax ซึ่งตอนนี้เรายังไม่ใช้กับฟิวด์นี้&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;covenant&amp;#39;)-&amp;gt;widget(FileInput::classname(), [
-    //&amp;#39;options&amp;#39; =&amp;gt; [&amp;#39;accept&amp;#39; =&amp;gt; &amp;#39;image/*&amp;#39;],
-    &amp;#39;pluginOptions&amp;#39; =&amp;gt; [
-        &amp;#39;initialPreview&amp;#39;=&amp;gt;[],
-        &amp;#39;allowedFileExtensions&amp;#39;=&amp;gt;[&amp;#39;pdf&amp;#39;],
-        &amp;#39;showPreview&amp;#39; =&amp;gt; false,
-        &amp;#39;showRemove&amp;#39; =&amp;gt; true,
-        &amp;#39;showUpload&amp;#39; =&amp;gt; false
-     ]
-]); ?&amp;gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- `&amp;#39;options&amp;#39; =&amp;gt; [&amp;#39;accept&amp;#39; =&amp;gt; &amp;#39;image/*&amp;#39;]` ถ้าเราใช้ upload รูปภาพอย่างเดียว
-- `initialPreview` เป็นการนำข้อมูลที่เคยบันทึกไปแล้วมาแสดงที่ thumbnail
-- `allowedFileExtensions` กำหนดให้เราสามารถอัพโหลดไฟล์ format ใหนบ้าง
-- `showRemove` ให้มีปุ่มยกเลิกในกรณีที่เราต้องการเลือกไฟล์ใหม่
-- `showUpload` เป็นปุ่ม upload file แบบ ajax ซึ่งตอนนี้เรายังไม่ใช้กับฟิวด์นี้
+&lt;p&gt;&lt;a href=&quot;http://plugins.krajee.com/file-input&quot;&gt;อ่านรายละเอียดเพิ่มเติม&lt;/a&gt;&lt;/p&gt;
 
- [อ่านรายละเอียดเพิ่มเติม](http://plugins.krajee.com/file-input)
+&lt;blockquote&gt;
+&lt;p&gt;สำหรับฟิวด์ &lt;code&gt;covenang&lt;/code&gt; ผมกำหนดให้สามารถอัพโหลดได้ทีละไฟล์&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&amp;gt; สำหรับฟิวด์ `covenang` ผมกำหนดให้สามารถอัพโหลดได้ทีละไฟล์
+&lt;p&gt;ส่วนฟิวด์ &lt;code&gt;docs&lt;/code&gt; ผมจะให้สามารถอัพโหลดได้มากกว่า 1 ไฟล์ สังเกตุตรงชื่อผมจะใส่ &lt;code&gt;docs[]&lt;/code&gt; เพื่อให้ส่งไฟล์ไปอัพโหลดได้ทีละหลายๆ ไฟล์ และเซ็ตค่า widget &lt;code&gt;multiple=true&lt;/code&gt;&lt;/p&gt;
 
-
-ส่วนฟิวด์ `docs` ผมจะให้สามารถอัพโหลดได้มากกว่า 1 ไฟล์ สังเกตุตรงชื่อผมจะใส่ `docs[]` เพื่อให้ส่งไฟล์ไปอัพโหลดได้ทีละหลายๆ ไฟล์ และเซ็ตค่า widget `multiple=true`
-
-&amp;gt; อย่าลืมเช็ค `Server Environment` php.ini กำหนดค่าเท่าไหร่แล้วแต่ความเหมาะสมของเรานะครับ
+&lt;blockquote&gt;
+&lt;p&gt;อย่าลืมเช็ค &lt;code&gt;Server Environment&lt;/code&gt; php.ini กำหนดค่าเท่าไหร่แล้วแต่ความเหมาะสมของเรานะครับ
 - file_uploads = On
 - max_file_uploads = 10
 - upload_max_filesize = 50M
-- post_max_size = 50M
-
-```php
-
-&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;docs[]&amp;#39;)-&amp;gt;widget(FileInput::classname(), [
-&amp;#39;options&amp;#39; =&amp;gt; [
-    //&amp;#39;accept&amp;#39; =&amp;gt; &amp;#39;image/*&amp;#39;,
-    &amp;#39;multiple&amp;#39; =&amp;gt; true
-],
-&amp;#39;pluginOptions&amp;#39; =&amp;gt; [
-    &amp;#39;initialPreview&amp;#39;=&amp;gt;[],
-    //&amp;#39;allowedFileExtensions&amp;#39;=&amp;gt;[&amp;#39;pdf&amp;#39;],
-    &amp;#39;showPreview&amp;#39; =&amp;gt; false,
-    &amp;#39;showCaption&amp;#39; =&amp;gt; true,
-    &amp;#39;showRemove&amp;#39; =&amp;gt; true,
-    &amp;#39;showUpload&amp;#39; =&amp;gt; false
- ]
-]); ?&amp;gt;
+- post_max_size = 50M&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;docs[]&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;FileInput&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//&amp;#39;accept&amp;#39; =&amp;gt; &amp;#39;image/*&amp;#39;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;multiple&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;initialPreview&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//&amp;#39;allowedFileExtensions&amp;#39;=&amp;gt;[&amp;#39;pdf&amp;#39;],&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;showPreview&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;showCaption&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;showRemove&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;showUpload&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;หลังจากนั้นลองดูฟอร์มที่เราได้ปรับแต่งแล้ว ก็จะได้ฟอร์มอัพโหลดที่ค่อนข้างดูดีทีเดียว ไม่ใช่แค่สวย แต่มันยังทำให้เราใช้งานได้ง่ายขึ้นอีกด้วย แจ่มๆ &lt;sup&gt;^&lt;/sup&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/add-widget.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/add-widget.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;ทดลองการ-validate-ไฟล์&quot;&gt;ทดลองการ Validate ไฟล์&lt;/h2&gt;
 
@@ -323,11 +368,11 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 
 &lt;p&gt;ทดลองเลือกไฟล์ที่ไม่ใช่ pdf ก็จะได้ error แบบนี้ และสามารถเลือกได้แค่ไฟล์เดียวเพราะเรากำหนดไว้ที่ &lt;code&gt;Rules()&lt;/code&gt; ใน model ไว้แล้ว&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/single-error.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/single-error.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;ถ้าเลือกไฟล์ถูกต้อง ก็จะแสดงแบบนี้ เห้ย! สวยใช้ได้เลย&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/single-success.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/single-success.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;ฟิวด์ที่สอง-docs&quot;&gt;ฟิวด์ที่สอง &lt;code&gt;docs&lt;/code&gt;&lt;/h3&gt;
 
@@ -339,15 +384,15 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 &lt;p&gt;ต้องกดปุ่ม Ctl หรือ command ถ้าเป็น mac ค้างไว้แล้วเลือกไฟล์&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/multiple-success.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/multiple-success.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;ลองเลือกเกินที่กำหนดไว้&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/multiple-error-max.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/multiple-error-max.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;ลองเลือกนามสกุลไฟล์ที่ไม่ได้ระบุไว้&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/multiple-error.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/multiple-error.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;จริงๆ แล้ว UploadFile ของเดิมๆ ที่มากับ yii 2 ก็ใช้ได้นะครับเพียงแค่หน้าตาอาจไม่สวย&lt;/p&gt;
@@ -359,7 +404,7 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 &lt;/code&gt;
 จะแสดงรายการที่เราได้เลือกไว้ แบบนี้ ! โอ้วพระสงฆ์&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/show-thumbnail.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/show-thumbnail.png&quot; alt=&quot;upload&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;เสร็จสิ้นในการเตรียมในส่วนของ front end เดี่ยวไปสร้าง controller และ model กัน&lt;/p&gt;
 
@@ -402,105 +447,113 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 &lt;span class=&quot;x&quot;&gt;use yii\helpers\ArrayHelper;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;สร้าง function&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;private function uploadSingleFile($model,$tempFile=null){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $file = [];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $json = &amp;#39;&amp;#39;;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        try {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             $UploadedFile = UploadedFile::getInstance($model,&amp;#39;covenant&amp;#39;);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             if($UploadedFile !== null){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                 $oldFileName = $UploadedFile-&amp;gt;basename.&amp;#39;.&amp;#39;.$UploadedFile-&amp;gt;extension;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                 $newFileName = md5($UploadedFile-&amp;gt;basename.time()).&amp;#39;.&amp;#39;.$UploadedFile-&amp;gt;extension;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                 $UploadedFile-&amp;gt;saveAs(Freelance::UPLOAD_FOLDER.&amp;#39;/&amp;#39;.$model-&amp;gt;ref.&amp;#39;/&amp;#39;.$newFileName);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                 $file[$newFileName] = $oldFileName;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                 $json = Json::encode($file);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             }else{&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                $json=$tempFile;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        } catch (Exception $e) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            $json=$tempFile;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        return $json ;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    }&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uploadSingleFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+             &lt;span class=&quot;nv&quot;&gt;$UploadedFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;UploadedFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;covenant&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+             &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UploadedFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                 &lt;span class=&quot;nv&quot;&gt;$oldFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$UploadedFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;basename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UploadedFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                 &lt;span class=&quot;nv&quot;&gt;$newFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;md5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UploadedFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;basename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UploadedFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                 &lt;span class=&quot;nv&quot;&gt;$UploadedFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;saveAs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Freelance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UPLOAD_FOLDER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$newFileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                 &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$newFileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$oldFileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                 &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;สร้างฟังก์ชั่นอัพโหลดทีละหลายๆ-ไฟล์&quot;&gt;สร้างฟังก์ชั่นอัพโหลดทีละหลายๆ ไฟล์&lt;/h3&gt;
 
 &lt;p&gt;ฟังก์ชันนี้ก็จะคล้ายๆ กับ &lt;code&gt;uploadSingleFile()&lt;/code&gt; แต่ต่างกันที่สามารถอัพโหลดได้ทีละหลายๆ ไฟล์
 และก็จะรับค่า parameter  เหมือนกันคือ $model,$tempFile&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;private function uploadMultipleFile($model,$tempFile=null){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            $files = [];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            $json = &amp;#39;&amp;#39;;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            $tempFile = Json::decode($tempFile);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            $UploadedFiles = UploadedFile::getInstances($model,&amp;#39;docs&amp;#39;);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            if($UploadedFiles!==null){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;               foreach ($UploadedFiles as $file) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                   try {   $oldFileName = $file-&amp;gt;basename.&amp;#39;.&amp;#39;.$file-&amp;gt;extension;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                           $newFileName = md5($file-&amp;gt;basename.time()).&amp;#39;.&amp;#39;.$file-&amp;gt;extension;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                           $file-&amp;gt;saveAs(Freelance::UPLOAD_FOLDER.&amp;#39;/&amp;#39;.$model-&amp;gt;ref.&amp;#39;/&amp;#39;.$newFileName);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                           $files[$newFileName] = $oldFileName ;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                   } catch (Exception $e) {&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uploadMultipleFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;$tempFile&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;$UploadedFiles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;UploadedFile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInstances&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;docs&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UploadedFiles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+               &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$UploadedFiles&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                   &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;nv&quot;&gt;$oldFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;basename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                           &lt;span class=&quot;nv&quot;&gt;$newFileName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;md5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;basename&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extension&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                           &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;saveAs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Freelance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UPLOAD_FOLDER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$newFileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                           &lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$newFileName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$oldFileName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;                   }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;               }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;               $json = json::encode(ArrayHelper::merge($tempFile,$files));&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            }else{&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;               $json = $tempFile;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;           return $json;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;   }&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+               &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+               &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+               &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$tempFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+           &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+   &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;สร้างฟังก์ชันเพื่อสร้างโฟลเดอร์สำหรับเก็บไฟล์&quot;&gt;สร้างฟังก์ชันเพื่อสร้างโฟลเดอร์สำหรับเก็บไฟล์&lt;/h3&gt;
 
 &lt;p&gt;ฟังชั่นนี้ก็ง่ายๆ เอาไว้สำหรับสร้าง folder ไว้เก็บไฟล์ในแต่ละ id เพื่อให้แยกไฟล์ได้เป็นระเบียบและเพื่อการค้นหาด้วย&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;private function CreateDir($folderName){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    if($folderName != NULL){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $basePath = Freelance::getUploadPath();&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        if(BaseFileHelper::createDirectory($basePath.$folderName,0777)){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            BaseFileHelper::createDirectory($basePath.$folderName.&amp;#39;/thumbnail&amp;#39;,0777);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    return;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CreateDir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$folderName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$folderName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$basePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Freelance&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUploadPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;BaseFileHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$basePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$folderName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;0777&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;BaseFileHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$basePath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$folderName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/thumbnail&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;0777&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;เรียกใช้งานตอน-create&quot;&gt;เรียกใช้งานตอน Create&lt;/h3&gt;
 
 &lt;p&gt;เราจะเรียกใช้งานที่ actionCreate เพื่ออัพโหลดไฟล์ โดยของเดิมจะเป็นแบบนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionCreate()&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;      $model = new Freelance();&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionCreate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Freelance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;      if ($model-&amp;gt;load(Yii::$app-&amp;gt;request-&amp;gt;post()) &amp;amp;&amp;amp; $model-&amp;gt;save()) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;              return $this-&amp;gt;redirect([&amp;#39;view&amp;#39;, &amp;#39;id&amp;#39; =&amp;gt; $model-&amp;gt;id]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;      } else {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;          return $this-&amp;gt;render(&amp;#39;create&amp;#39;, [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;              &amp;#39;model&amp;#39; =&amp;gt; $model,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;          ]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;      }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;create&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;จากนั้นเพิ่มอัพโหลดไฟล์และเรียใช้งาน &lt;code&gt;CreateDir&lt;/code&gt; เข้าไป ตามด้านล่าง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionCreate()&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    $model = new Freelance();&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionCreate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Freelance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;    if ($model-&amp;gt;load(Yii::$app-&amp;gt;request-&amp;gt;post()) ) {&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;        $this-&amp;gt;CreateDir($model-&amp;gt;ref);&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;CreateDir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;        $model-&amp;gt;covenant = $this-&amp;gt;uploadSingleFile($model);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $model-&amp;gt;docs = $this-&amp;gt;uploadMultipleFile($model);&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;covenant&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uploadSingleFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;docs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uploadMultipleFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;        if($model-&amp;gt;save()){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             return $this-&amp;gt;redirect([&amp;#39;view&amp;#39;, &amp;#39;id&amp;#39; =&amp;gt; $model-&amp;gt;id]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()){&lt;/span&gt;
+             &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;    } else {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         $model-&amp;gt;ref = substr(Yii::$app-&amp;gt;getSecurity()-&amp;gt;generateRandomString(),10);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    }&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;substr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSecurity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;generateRandomString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;    return $this-&amp;gt;render(&amp;#39;create&amp;#39;, [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        &amp;#39;model&amp;#39; =&amp;gt; $model,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    ]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;create&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;หลักการทำงานของฟังก์ชันคือ&lt;/p&gt;
 
@@ -516,47 +569,51 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 &lt;h3 id=&quot;เรียกใช้งานตอน-update&quot;&gt;เรียกใช้งานตอน Update&lt;/h3&gt;
 
 &lt;p&gt;ทำการแก้ไขไฟล์ &lt;code&gt;controller/Freelance.php&lt;/code&gt; actionUpdate ซึ่งจะคล้ายกับ create ต่างกันนิดหน่อยตรงที่ต้องเก็บค่าไฟล์เดิมไว้ก่อน เพื่อใช้ในกรณีไม่ได้มีการอัพโหลดไฟล์&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionUpdate($id)&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    $model = $this-&amp;gt;findModel($id);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    $tempCovenant = $model-&amp;gt;covenant;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    $tempDocs     = $model-&amp;gt;docs;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    if ($model-&amp;gt;load(Yii::$app-&amp;gt;request-&amp;gt;post())) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $model-&amp;gt;covenant = $this-&amp;gt;uploadSingleFile($model,$tempCovenant);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $model-&amp;gt;docs = $this-&amp;gt;uploadMultipleFile($model,$tempDocs);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        if($model-&amp;gt;save()){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            return $this-&amp;gt;redirect([&amp;#39;view&amp;#39;, &amp;#39;id&amp;#39; =&amp;gt; $model-&amp;gt;id]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    }&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionUpdate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$tempCovenant&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;covenant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$tempDocs&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;covenant&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uploadSingleFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempCovenant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;docs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uploadMultipleFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$tempDocs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;    return $this-&amp;gt;render(&amp;#39;update&amp;#39;, [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        &amp;#39;model&amp;#39; =&amp;gt; $model,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    ]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;update&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;และสร้างฟังก์ชันในการดึงไฟล์มาแสดง thumbnail ในตอนแก้ไขข้อมูลที่ฟอร์ม ที่ตัว widget upload file เพิ่มที่ไฟล์ modeles/Freelance.php&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function initialPreview($data,$field,$type=&amp;#39;file&amp;#39;){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $initial = [];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $files = Json::decode($data);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        if(is_array($files)){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             foreach ($files as $key =&amp;gt; $value) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                if($type==&amp;#39;file&amp;#39;){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    $initial[] = &amp;quot;&amp;lt;div class=&amp;#39;file-preview-other&amp;#39;&amp;gt;&amp;lt;h2&amp;gt;&amp;lt;i class=&amp;#39;glyphicon glyphicon-file&amp;#39;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/h2&amp;gt;&amp;lt;/div&amp;gt;&amp;quot;;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                }elseif($type==&amp;#39;config&amp;#39;){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    $initial[] = [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                        &amp;#39;caption&amp;#39;=&amp;gt; $value,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                        &amp;#39;width&amp;#39;  =&amp;gt; &amp;#39;120px&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                        &amp;#39;url&amp;#39;    =&amp;gt; Url::to([&amp;#39;/freelance/deletefile&amp;#39;,&amp;#39;id&amp;#39;=&amp;gt;$this-&amp;gt;id,&amp;#39;fileName&amp;#39;=&amp;gt;$key,&amp;#39;field&amp;#39;=&amp;gt;$field]),&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                        &amp;#39;key&amp;#39;    =&amp;gt; $key&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    ];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                else{&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    $initial[] = Html::img(self::getUploadUrl().$this-&amp;gt;ref.&amp;#39;/&amp;#39;.$value,[&amp;#39;class&amp;#39;=&amp;gt;&amp;#39;file-preview-image&amp;#39;, &amp;#39;alt&amp;#39;=&amp;gt;$model-&amp;gt;file_name, &amp;#39;title&amp;#39;=&amp;gt;$model-&amp;gt;file_name]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    return $initial;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialPreview&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;file&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$initial&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;is_array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+             &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;file&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                    &lt;span class=&quot;nv&quot;&gt;$initial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;div class=&amp;#39;file-preview-other&amp;#39;&amp;gt;&amp;lt;h2&amp;gt;&amp;lt;i class=&amp;#39;glyphicon glyphicon-file&amp;#39;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/h2&amp;gt;&amp;lt;/div&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;elseif&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;config&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                    &lt;span class=&quot;nv&quot;&gt;$initial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;caption&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;width&amp;#39;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;120px&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/freelance/deletefile&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;fileName&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;field&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;
+                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;key&amp;#39;&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;nv&quot;&gt;$initial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUploadUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;file-preview-image&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;alt&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$initial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ทำการแก้ไขไฟล์ views/freelance/_form.php เพิ่มการเรียกใช้งานเพื่อแสดง thumbnail ไฟล์ในตอนแก้ไข&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;docs[]&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;FileInput&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
@@ -580,28 +637,30 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 
 &lt;p&gt;เมื่ออัพโหลดไฟล์เสร็จ เราจะได้ข้อมูล json ออกมาแบบนี้&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/view-upload.png&quot; alt=&quot;view-upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/view-upload.png&quot; alt=&quot;view-upload&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;โดยข้อมูลจะเก็บเป็น key กับ value ซึ่ง key จะเป็นชื่อไฟล์จริงๆ ใน server และ value จะเป็นชื่อไฟล์ก่อนอัพโหลดไฟล์&lt;/p&gt;
 
 &lt;p&gt;เราจะทำการเปลี่ยนข้อมูลจาก json เป็น link เพื่อให้สามารถคลิก download ได้โดยเพิ่ม function &lt;code&gt;listDownloadFiles()&lt;/code&gt; ใน Model Freelance ฟังก์ชันนี้จะใช้ได้ทั้ง 2 ฟิวด์ docs,covenant&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function listDownloadFiles($type){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt; $docs_file = &amp;#39;&amp;#39;;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt; if(in_array($type, [&amp;#39;docs&amp;#39;,&amp;#39;covenant&amp;#39;])){&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;listDownloadFiles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$docs_file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;in_array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;docs&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;covenant&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])){&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt;         $data = $type===&amp;#39;docs&amp;#39;?$this-&amp;gt;docs:$this-&amp;gt;covenant;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         $files = Json::decode($data);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        if(is_array($files)){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             $docs_file =&amp;#39;&amp;lt;ul&amp;gt;&amp;#39;;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             foreach ($files as $key =&amp;gt; $value) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                $docs_file .= &amp;#39;&amp;lt;li&amp;gt;&amp;#39;.Html::a($value,[&amp;#39;/freelance/download&amp;#39;,&amp;#39;id&amp;#39;=&amp;gt;$this-&amp;gt;id,&amp;#39;file&amp;#39;=&amp;gt;$key,&amp;#39;file_name&amp;#39;=&amp;gt;$value]).&amp;#39;&amp;lt;/li&amp;gt;&amp;#39;;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             $docs_file .=&amp;#39;&amp;lt;/ul&amp;gt;&amp;#39;;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt; }&lt;/span&gt;
+         &lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;===&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;docs&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;docs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;covenant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+         &lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;is_array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+             &lt;span class=&quot;nv&quot;&gt;$docs_file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;ul&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+             &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$files&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nv&quot;&gt;$docs_file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;li&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/freelance/download&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;file&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;file_name&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;/li&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+             &lt;span class=&quot;nv&quot;&gt;$docs_file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;/ul&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;x&quot;&gt; return $docs_file;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$docs_file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;เรียกใช้งานที่ &lt;code&gt;views/freelance/view.php&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DetailView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
@@ -620,25 +679,27 @@ composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;จะแสดงผลแบบนี้&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/view-upload2.png&quot; alt=&quot;view-upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/view-upload2.png&quot; alt=&quot;view-upload&quot;&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;สร้าง-function-สำหรับ-download-file&quot;&gt;สร้าง function สำหรับ download file&lt;/h3&gt;
 
 &lt;p&gt;ในการแสดงผลในหน้า view นั้นจะยังคลิกดาวน์โหลดไฟล์ไม่ได้เราต้องสร้าง function สำหรับ download ไฟล์ เพื่อไม่ให้เป็นการ link ไฟล์โดยตรง&lt;/p&gt;
 
 &lt;p&gt;เพิ่ม actionDownload ที่ controllers/Freelance.php&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionDownload($id,$file,$file_name){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    $model = $this-&amp;gt;findModel($id);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     if(!empty($model-&amp;gt;ref) &amp;amp;&amp;amp; !empty($model-&amp;gt;covenant)){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            Yii::$app-&amp;gt;response-&amp;gt;sendFile($model-&amp;gt;getUploadPath().&amp;#39;/&amp;#39;.$model-&amp;gt;ref.&amp;#39;/&amp;#39;.$file,$file_name);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    }else{&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        $this-&amp;gt;redirect([&amp;#39;/freelance/view&amp;#39;,&amp;#39;id&amp;#39;=&amp;gt;$id]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionDownload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;covenant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sendFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUploadPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$file_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/freelance/view&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;เราจะได้ไฟล์ตามชื่อไฟล์จริง ที่เคยอัพโหลดไว้ และ actionDownload จะส่งไฟล์ให้ client โดยไม่ได้ link ไฟล์ตรงๆ&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/upload-file/view-upload3.png&quot; alt=&quot;view-upload&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file/view-upload3.png&quot; alt=&quot;view-upload&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;จากตัวอย่างเราจะเห็นว่าเราสามารถเก็บข้อมูลการอัพโหลดไฟล์ในรูปแบบ json ได้ซึ่งทำให้เราไม่ต้องสร้างฟิวด์หลายๆ ฟิวด์&lt;/p&gt;
 </description>
@@ -3028,134 +3089,6 @@ action แรกจะเป็น actionGetAmphur() ตรงนี้จะร
 &lt;p&gt;ลองใช้กันดูนะครับ
 ดาวน์โหลด source code &lt;a href=&quot;https://github.com/dimpled/Yii2-Learning-Source/releases&quot;&gt; ได้ทีนี่&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การใช้งานฟอร์มแบบต่างๆ</title>
-        <link>http://dixonsatit.github.io/2014/11/30/create-form.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2014/11/30/create-form.html</guid>
-        <description>&lt;p&gt;ในตัวอย่างนี้ได้สร้างฟอร์มบันทึกข้อมูลพนักงาน ดูโครงสร้าง ตารางได้ที่&lt;/p&gt;
-
-&lt;p&gt;ทำการ gii model, gii crud ให้กับ ตาราง employee จากนั้นปรับแต่งฟอร์มตามรูปแบบต่อไปนี้&lt;/p&gt;
-
-&lt;p&gt;ไปที่ไฟล์ &lt;code&gt;/views/employee/_form.php&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;เปลี่ยนไปใช้งาน-activeform-ของ-bootstrap&quot;&gt;เปลี่ยนไปใช้งาน ActiveForm ของ Bootstrap&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;use yii\widgets\ActiveForm;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เปลี่ยนเป็น&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;use yii\bootstrap\ActiveForm;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;จัดฟอร์มให้เป็นแนวนอน&quot;&gt;จัดฟอร์มให้เป็นแนวนอน&lt;/h2&gt;
-
-&lt;p&gt;ปกติฟอร์มที่ crud มานั้นจะเป็นแนวตั้ง เราสามารถเปลี่ยนเป็นแนวนอนได้ดังนี้
-&lt;code&gt;php
-&amp;lt;?php $form = ActiveForm::begin([&amp;#39;layout&amp;#39; =&amp;gt; &amp;#39;horizontal&amp;#39;]); ?&amp;gt;
-&lt;/code&gt;
-จากเดิม&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/vertical.png&quot; alt=&quot;vertical&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;จะได้แบบนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/horizontal.png&quot; alt=&quot;vertical&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;การแบ่งให้คอลัมน์ให้-field&quot;&gt;การแบ่งให้คอลัมน์ให้ Field&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ตัวอย่างนี้จะไม่ได้ใช้ฟอร์มแบบแนวนอน (horizontal) ลองแบบแนวนอนแล้วยาก.. ฮา เอาแบบนี้ก่อนละกัน ถ้าทำได้จะมาบอกใหม่นะ&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;เปลี่ยนเป็นแบบเดิมก่อน..
-&lt;code&gt;php
-&amp;lt;?php $form = ActiveForm::begin(); ?&amp;gt;
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;เราสามารถแสดงผลข้อมูลของฟิวด์ให้อยู่ในแถวเดียวกันได้ ตัวอย่างจะใช้ คำนำหน้า,ชื่อ,นามกลุมมาไว้แถวเดียวกัน&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/form-inline.png&quot; alt=&quot;แถวเดียวกัน&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ก่อนอื่นต้องทำความเข้าใจ &lt;a href=&quot;http://getbootstrap.com/css/#grid&quot;&gt;Grid system&lt;/a&gt; ของ Bootstrap ก่อน&lt;/p&gt;
-
-&lt;p&gt;โดย Grid system จะมี 4 ขนาดคือ
-- Phones  ใช้ class &lt;code&gt;col-xs-&lt;/code&gt; คือหน้าจอที่มีขนาดกว้างน้อยกว่า 768 px ส่วนใหญ่ก็จะเป็นพวกมือถือ
-- Tablets  ใช้ class &lt;code&gt;col-sm-&lt;/code&gt; หน้าจอที่มีขนาดกว้างมากกว่า 768px ส่วนใหญ่ก็จะเป็นพวก tablets
-- Desktops  ใช้ class &lt;code&gt;col-md-&lt;/code&gt; หน้าจอที่มีขนาดกว้างมากกว่า 992px  ส่วนใหญ่ก็โน้ดบุ้คหรือเดสก์ท๊อป
-- Large Desktops  ใช้ class &lt;code&gt;col-lg-&lt;/code&gt;  หน้าจอที่มีขนาดกว้างมากกว่า 1200 px ส่วนใหญ่ก็จะเป็นเดสก์ท๊อปหรือที่ใช้จอใหญ่ๆ&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ในการใช้งานเราจะแบ่งคอลัมน์สูงสุดได้เพียง 12 คอลัมน์&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;แบ่ง-2-คอลัมน์-สำหรับหน้าจอ-mobile-และ-tablets&quot;&gt;แบ่ง 2 คอลัมน์ สำหรับหน้าจอ  Mobile และ Tablets&lt;/h3&gt;
-
-&lt;p&gt;แบ่งเป็น 2 คอลัมน์ และในตัวอย่างจะมี 2 เงื่อนไขคือ
--  &lt;code&gt;col-sm-&lt;/code&gt; Tablets ถ้าความกว้างหน้าจอมากกว่า 768px และไม่เกิน 992px จะแสดงเป็น 3 คอลัมน์
-- &lt;code&gt;col-md-&lt;/code&gt; Desktops ถ้าความกว้างหน้าจอมากกว่า 992px ขึั้นไปก็จะแบ่งเป็น 3 คอลัมน์ แต่คอลัมน์จะกว้างกว่า&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;row&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;col-sm-6 col-md-6&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-       &lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;position_id&amp;#39;)-&amp;gt;textInput() ?&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;col-sm-6 col-md-6&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-       &lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;mobile_phone&amp;#39;)-&amp;gt;textInput([&amp;#39;maxlength&amp;#39; =&amp;gt; 20]) ?&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&quot;แบ่ง-3-คอลัมน์-สำหรับหน้าจอ-mobile-tablets-และ-desktop&quot;&gt;แบ่ง 3 คอลัมน์ สำหรับหน้าจอ Mobile, Tablets และ Desktop&lt;/h3&gt;
-
-&lt;p&gt;เราสามารถกำหนดขนาดหน้าจอได้มากกว่า 1 อัน ตัวอย่างนี้กำหนด 3 ขนาด&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;row&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;col-xs-6 col-sm-4 col-md-4&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-       &lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;email&amp;#39;)-&amp;gt;textInput([&amp;#39;maxlength&amp;#39; =&amp;gt; 100]) ?&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;col-xs-6 col-sm-4 col-md-4&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-       &lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;birthday&amp;#39;)-&amp;gt;textInput() ?&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;col-xs-12 col-sm-4 col-md-4&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;salary&amp;#39;)-&amp;gt;textInput() ?&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ตัวอย่าง&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;col-xs-&lt;/code&gt;  Browser มันเช็คว่าเป็นหน้าจอที่ขนาดน้อยกว่า 768px จะแบ่งเป็น 2 คอลัมน์เท่าๆ กันด้านละ 6 แต่คอลัมน์ที่ 3 ตั้งค่าไว้ที่ 12 จะตกไปอยู่แถวถัดไป
-แต่ถ้าน้อยกว่า&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/3-1.png&quot; alt=&quot;3 column&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;col-sm-&lt;/code&gt; browser มันเช็คว่าเป็นหน้าจอที่ขนาดมากกว่า 768px จะแบ่งเป็น 3 คอลัมน์เท่าๆ กัน&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/3.png&quot; alt=&quot;3 column&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;col-md-&lt;/code&gt; browser มันเช็คว่าเป็นหน้าจอที่ขนาดมากกว่า 992px จะแบ่งเป็น 3 คอลัมน์เท่าๆ กัน&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/3-full.png&quot; alt=&quot;3 column&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;## การใช้งาน DateField&lt;/p&gt;
-
-&lt;p&gt;ต้องทำการติดตั้ง yii2-jui ก่อน&lt;/p&gt;
-
-&lt;p&gt;รันคำสั่ง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require --prefer-dist yiisoft/yii2-jui
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หรือ&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;yiisoft/yii2-jui&amp;quot;: &amp;quot;~2.0.0&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เพิ่มที่ไฟล์ &lt;code&gt;composer.json&lt;/code&gt; แล้วรันคำสั่งคอมมาน &lt;code&gt;composer update&lt;/code&gt;
-- &lt;code&gt;dateFormat&lt;/code&gt; จัด format date ที่จะทำการบันทึก
-- &lt;code&gt;changeMonth&lt;/code&gt; ให้มีตัวเลือกเดือน
-- &lt;code&gt;changeYear&lt;/code&gt; ให้มีตัวเลือกปี&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;birthday&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DatePicker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;language&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;th&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;dateFormat&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yyyy-MM-dd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;clientOptions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-          &lt;span class=&quot;s1&quot;&gt;&amp;#39;changeMonth&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-          &lt;span class=&quot;s1&quot;&gt;&amp;#39;changeYear&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;form-control&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
       </item>
     
