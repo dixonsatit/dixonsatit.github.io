@@ -5,7 +5,51 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Mon, 15 Jun 2015 22:01:30 +0700</pubDate>
+    <pubDate>Wed, 17 Jun 2015 14:23:00 +0700</pubDate>
+    
+      <item>
+        <title>BlameableBehavior บันทึกข้อมูลรหัสผู้ใช้งานอัตโนมัติ</title>
+        <link>http://dixonsatit.github.io/2015/06/17/blameable-behavior.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/17/blameable-behavior.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/bleamable-behavior.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ปกติเวลาที่เราสร้างตารางส่วนใหญ่ก็จะมีฟิวด์ &lt;code&gt;user_id&lt;/code&gt; เพื่อบันทึกข้อมูลผู้ใช้งานที่ &lt;code&gt;Create&lt;/code&gt; หรือ &lt;code&gt;Update&lt;/code&gt; ข้อมูล ซึ่งเราต้องกำหนดค่ารหัสผู้ใช้งานทีล็อกอินเอง &lt;/p&gt;
+
+&lt;p&gt;yii2 ได้แก้ปัญหานี โดยใช้ &lt;code&gt;BlameableBehavior&lt;/code&gt; เพื่อใช้งานกับ Model ที่เราต้องการได้ โดย &lt;code&gt;BlameableBehavior&lt;/code&gt; มีค่าฟิวด์  &lt;code&gt;default&lt;/code&gt; กำหนดไว้คือ &lt;code&gt;created_by&lt;/code&gt;,&lt;code&gt;updated_by&lt;/code&gt;  ถ้าหากเราตั้งชื่อตามนี้สามารถเรียกใช้งานตามโค้ดด้านล่างได้เลย&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\BlameableBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;BlameableBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;แต่ถ้าหากเรากำหนดชื่อฟิดว์เป็นชื่ออื่นๆ ก็สามารถระบุได้เช่นกัน โดย defautl มันสามารถกำหนดได้ 2 ฟิวด์คือ createdByAttribute,updatedByAttribute ตามตัวอย่างผมเก็บแค่ ฟิวด์เดียวก็คือ &lt;code&gt;user_id&lt;/code&gt; เลยเซ็ตค่าให้ตรงกันทั้ง 2 อัน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\BlameableBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BlameableBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;createdByAttribute&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;user_id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;updatedByAttribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;user_id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากนั้นข้อมูลในส่วน user_id มันจะทำการเติมให้อัตโนมัติทุกครั้งที่มีการ create หรือ update ข้อมูล&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Jun 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การใช้งาน SluggbleBehavior เพื่อแปลงคำไทยเป็นอังกฤษเพื่อใช้กับ Url</title>
@@ -41,88 +85,6 @@
 &lt;p&gt;หลังจากนั้นเมื่อมีการ save หรือ update ข้อมูลมันจะทำการ แปลงข้อมูลให้อัตโนมัติ&lt;/p&gt;
 </description>
         <pubDate>Mon, 15 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>Yii2 Learning</title>
-        <link>http://dixonsatit.github.io/2015/06/14/yii2-Learning.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/14/yii2-Learning.html</guid>
-        <description>&lt;p&gt;Yii Framework เป็น framework php ที่เรียกได้ว่าน่าจะมีครบแทบทุกอย่าง ที่จำเป็นในการพัฒนา Web Applicaion ซึ่งทำให้เราใช้เวลาในการพัฒนาที่สั้น แต่อาจต้องใช้เวลาในการเรียนรู้สูง (ฮา..) จึงอยากแบ่งปันประสบการณ์การใช้งานและเทคนิคการใช้งานแบบต่างๆ รวมไว้ให้อ่านที่นี่กัน.&lt;/p&gt;
-
-&lt;h1 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/2015/06/14/what-is-yii.html&quot;&gt;Yii คืออะไร&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/2014/11/30/Installation.html&quot;&gt;การติดตั้ง&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;โครงสร้างโปรเจค&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;การเปิดใช้งานและทดสอบ Hello World&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;สร้าง controller, view&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;สร้าง model&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;ใช้งาน Gii&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;ใช้งาน GitHub กับ Yii โดยใช้ SourceTree&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;crud&quot;&gt;CRUD&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;สร้างฟอร์ม เพิ่ม,ลบ,แก้ไข (CRUD)&lt;/li&gt;
-&lt;li&gt;การปรับแต่ง layout Form&lt;/li&gt;
-&lt;li&gt;การใช้งาน DropdownList&lt;/li&gt;
-&lt;li&gt;การสร้าง ItemAlias ใน model เพื่อใช้กับ DropdownList,CheckBoxList, RadioList&lt;/li&gt;
-&lt;li&gt;การใช้งาน CheckBoxList บันทึกข้อมูลโดยใช้ฟิวด์เดียว(คั่นด้วย&amp;#39;,&amp;#39;)&lt;/li&gt;
-&lt;li&gt;การอัพโหลดไฟล์&lt;/li&gt;
-&lt;li&gt;การใช้งาน DetailView&lt;/li&gt;
-&lt;li&gt;การใช้งาน GridView&lt;/li&gt;
-&lt;li&gt;การใช้งาน Boostrap ActiveForm&lt;/li&gt;
-&lt;li&gt;เปิดใช้งาน Ajax From Validateion&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;pjax&quot;&gt;Pjax&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;สร้างฟอร์ม submit ajax&lt;/li&gt;
-&lt;li&gt;สร้าง Toggle Button Ajax&lt;/li&gt;
-&lt;li&gt;สร้างฟอร์มค้นหา Ajax&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;tutorial&quot;&gt;Tutorial&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;การใช้งาน FlashMessage&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/2014/11/30/action-column.html&quot;&gt;เเปลี่ยน ActionColumn เดิมๆ เป็นสไตล์ ButtonGroup&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;สร้างลิ้งเชื่อมกันระหว่าง frontend &amp;amp; backend&lt;/li&gt;
-&lt;li&gt;การสร้างและใช้งาน Assets&lt;/li&gt;
-&lt;li&gt;การสร้าง Theme&lt;/li&gt;
-&lt;li&gt;สร้างระบบ login อย่างง่าย&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/2014/11/30/modrewrite.html&quot;&gt;เปิดการใช้งาน Pretty urls (mod_rewrite)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/2014/11/30/relations.html&quot;&gt;Relations &amp;amp; Virtual Attribute&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/2014/11/30/links-backend-to-frontend.html&quot;&gt;สร้างลิ้งเชื่อมกันระหว่าง frontend &amp;amp; backend&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Register css file, js file&lt;/li&gt;
-&lt;li&gt;การใช้งาน Data Formatter&lt;/li&gt;
-&lt;li&gt;การใช้งาน mailer stmp google&lt;/li&gt;
-&lt;li&gt;การใช้งาน mailer stmp mandrillapp &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;model&quot;&gt;Model&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;/2014/11/30/query-model.html&quot;&gt;รวมคำสั่งที่ใช้งานบ่อยของ model&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;การใช้งาน Validation แบบต่างๆ&lt;/li&gt;
-&lt;li&gt;Relation&lt;/li&gt;
-&lt;li&gt;Virtual Attribute&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;/2015/06/14/model-behaviors.html&quot;&gt;การใช้งาน TimestempBehavior ใน model เพื่ออัพเดทข้อมูลวันที่&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;&quot;&gt;การใช้งาน SluggableBehavior ในการแปลงคำไทยเป็นภาษาทังกฤษเพื่อใช้กับ url &lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;extension&quot;&gt;Extension&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Eport ข้อมูล pdf,xls,html,text,csv,json ด้วย kartik-v/yii2-grid&lt;/li&gt;
-&lt;li&gt;การสร้าง chart ด้วย HeightChart&lt;/li&gt;
-&lt;li&gt;ติดตั้ง Yii-User&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sun, 14 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
       <item>
