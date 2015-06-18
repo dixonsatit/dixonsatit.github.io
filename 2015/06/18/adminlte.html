@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การติดตั้งและใช้งาน AdminLTE | DixonSatit</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/18/adminlte.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การติดตั้งและใช้งาน AdminLTE</h1>
+    <p class="meta">
+    June 18, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p><img src="/img/adminlte.png" alt=""></p>
+
+<p><a href="https://almsaeedstudio.com/">AdminLte</a> เป็นธีมที่สวยงามน่าใช้งาน มีเลเอาท์ต่างๆ พร้อมใช้งาน และที่สำคัญฟรี ด้วย และตอนนี้ก็มีคนสร้าง <a href="https://github.com/dmstr/yii2-adminlte-asset">AdminLTE Asset</a> สำหรับใช้กับ yii2 เท่าที่ลองใช้งาน พบว่าสะดวกมากๆ ไปลองใช้กัน ^ ^</p>
+
+<h2 id="การติดตั้ง">การติดตั้ง</h2>
+
+<p>ง่ายมากๆ ก่อนอืนติดตั้งตัว extension ก่อน</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer require dmstr/yii2-adminlte-asset &quot;2.*&quot;
+</code></pre></div>
+<p>หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ ชื่อว่า themes/adminlte </p>
+
+<ul>
+<li>แบบ basic ที่ /themes/adminlte</li>
+<li>แบบ advance ที่ /backend/themes/adminlte หรือไว้ที่ /frontend/themes/adminlte  แล้วแต่ว่าเราจะใช้ที่ใหน</li>
+</ul>
+
+<p>หลังจากนั้น ให้ทำการ copy ไฟล์ view จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
+
+<p>จากนั้นทำการกำหนดค่า view ถ้าเป็น basic ไปที่ config/main.php  </p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
+    <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
+         <span class="s1">&#39;theme&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
+             <span class="s1">&#39;pathMap&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
+                <span class="s1">&#39;@app/views&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;@app/themes/adminlte&#39;</span>
+             <span class="o">],</span>
+         <span class="o">],</span>
+    <span class="o">],</span>
+<span class="o">],</span>
+</code></pre></div>
+<p>ถ้าเป็น advance ก็ไปที่ backend/config/web.php </p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
+    <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
+         <span class="s1">&#39;theme&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
+             <span class="s1">&#39;pathMap&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
+                 <span class="s1">&#39;@backend/views&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;@backend/themes/adminlte&#39;</span>
+             <span class="o">],</span>
+         <span class="o">],</span>
+    <span class="o">],</span>
+<span class="o">],</span>
+</code></pre></div>
+<p>จากนั้นก็ทดลองใช้งานได้เลยง่าย สะดวกมากๆ </p>
+
+<h2 id="เปลี่ยน-skin-adminlte">เปลี่ยน skin AdminLTE</h2>
+
+<p>AdminLTE มี skin มาใช้ใช้หลายแบบมากๆ เราสามารถเปลี่ยน skin ได้ง่ายๆ โดยเปิดไฟล์ <code>themes/adminlte/layouts/main.php</code> และทำการค้นหาแท็ก <code>body</code> จะพบ skin default คือ <code>skin-blue</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"> &lt;body class=&quot;skin-blue sidebar-mini&quot;&gt;
+</code></pre></div>
+<p>สามารถเปลี่ยนเป็นแบบต่างๆ ได้ดังนี้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&quot;skin-blue&quot;,
+&quot;skin-black&quot;,
+&quot;skin-red&quot;,
+&quot;skin-yellow&quot;,
+&quot;skin-purple&quot;,
+&quot;skin-green&quot;,
+&quot;skin-blue-light&quot;,
+&quot;skin-black-light&quot;,
+&quot;skin-red-light&quot;,
+&quot;skin-yellow-light&quot;,
+&quot;skin-purple-light&quot;,
+&quot;skin-green-light&quot;
+</code></pre></div></section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
