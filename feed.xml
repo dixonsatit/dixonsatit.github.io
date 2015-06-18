@@ -5,7 +5,155 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Wed, 17 Jun 2015 14:23:00 +0700</pubDate>
+    <pubDate>Thu, 18 Jun 2015 09:59:50 +0700</pubDate>
+    
+      <item>
+        <title>การใช้งาน FlashMessage + Growl Widget</title>
+        <link>http://dixonsatit.github.io/2015/06/17/flash-message-growl-widget.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/17/flash-message-growl-widget.html</guid>
+        <description>&lt;p&gt;หากคุณเคยใช้ flashMessage มาบ้างแล้ว หากยังไม่เคยใช้ &lt;a href=&quot;/2015/06/17/flash-message.html&quot;&gt;ลองอ่านที่นี่&lt;/a&gt; คุณอาจจะรูสึกว่ามันไม่ค่อยสวยเลย วันนี้ผมมี &lt;code&gt;yii2-widget-growl&lt;/code&gt; มาแนะนำ ซึ่งตัวนี้สวยงามและน่าใช้เลยทีเดียว&lt;/p&gt;
+
+&lt;p&gt;ก่อนอื่นไปติดตั้งกันก่อน &lt;a href=&quot;https://github.com/kartik-v/yii2-widget-growl&quot;&gt;yii2-widget-growl&lt;/a&gt; &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer  require kartik-v/yii2-widget-growl &amp;quot;*&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;กำหนดค่า&quot;&gt;กำหนดค่า&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; 
+    &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;duration&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;icon&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;fa fa-users&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Submission&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;message&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;บันทึกข้อมูลเสร็จเรียบร้อย&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;positonY&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;top&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;positonX&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;right&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+     &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert2&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;warning&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;duration&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;icon&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;fa fa-users&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Submission&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;message&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;นำเข้าข้อมูลเร็จเรียบร้อย..&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;positonY&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;top&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;positonX&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;right&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;การแสดงผล&quot;&gt;การแสดงผล&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//Get all flash messages and loop through them&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAllFlashes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\kartik\widgets\Growl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;danger&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Title Not Set!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;icon&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;icon&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;icon&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;fa fa-info&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Message Not Set!&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;showSeparator&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;delay&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//This delay is how long before the message shows&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;delay&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;duration&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;duration&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//This delay is how long the message shows for&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;placement&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;from&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;positonY&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;positonY&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;top&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;align&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;empty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;positonX&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;positonX&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;right&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endforeach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/img/flashmessage-glow.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Jun 2015 00:00:00 +0700</pubDate>
+      </item>
+    
+      <item>
+        <title>การใช้งาน Flash Message</title>
+        <link>http://dixonsatit.github.io/2015/06/17/flash-message.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/17/flash-message.html</guid>
+        <description>&lt;p&gt;FlashMessage เป็นตัวแจ้งสถานะต่างๆ ตามที่ต้องการ เช่น แจ้งบันทึกข้อมูลหรือแก้ไขข้อมูล โดยหลักการก็ใช้ข้อมูลเก็บไว้ใน session การทำงานจะแบ่งเป็น 2 ส่วนคือ &lt;code&gt;กำหนดค่า&lt;/code&gt;,&lt;code&gt;แสดงผล&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;กำหนดค่า&quot;&gt;กำหนดค่า&lt;/h2&gt;
+
+&lt;p&gt;เราสามารถกำหนดค่าในส่วนที่ต้องการได้ เช่น เมื่อมีการบันทึกข้อมูลเสร็จเราต้องการแจ้งเตือนไปยังผู้ใช้ว่า &amp;quot;บันทึกข้อมูลเสร็จเรียบร้อย&amp;quot; ก็ทำการกำหนดค่าลงไปดังนี้ &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ลงทะเบียนงานวิจัยเสร็จเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับไปเร็วที่สุด..&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert-success&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;หากต้องการแจ้งเตือนแบบต่างๆ สามารถกำหนดได้ ดังนี้ &lt;code&gt;alert-success&lt;/code&gt;,&lt;code&gt;alert-info&lt;/code&gt;,&lt;code&gt;alert-warning&lt;/code&gt;,&lt;code&gt;alert-danger&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;ตัวอย่างการใช้งานกับ &lt;code&gt;actionCreate&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionCreate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Research&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+            &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ลงทะเบียนงานวิจัยเสร็จเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับไปเร็วที่สุด..&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert-success&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;create&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;การแสดงผล&quot;&gt;การแสดงผล&lt;/h2&gt;
+
+&lt;p&gt;เราจะใช้ &lt;code&gt;\yii\bootstrap\Alert&lt;/code&gt; เป็น widget ของ Bootstrap ซึ่งมีมากับ yii2 อยู่แล้ว เราสามารถนำโค้ดนี้ไปไว้ที่ใหนก็ได้ที่เราต้องการแสดงผลของ alert ขึ้นมา&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\ArrayHelper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:?&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;?=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\yii\bootstrap\Alert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endif&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;แสดงผลทีละหลายๆ-ค่า&quot;&gt;แสดงผลทีละหลายๆ ค่า&lt;/h2&gt;
+
+&lt;p&gt;ในการกำหนดค่าเราสามารถกำหนดกี่ตัวก็ได้ แต่อย่าให้ key ซ้ำกัน ตามตัวอย่างผมตั้ง alert1,alert2&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ลงทะเบียนงานวิจัยเสร็จเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับไปเร็วที่สุด..&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert-success&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+     &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert2&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ลงทะเบียนงานวิจัยเสร็จเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับไปเร็วที่สุด..&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert-info&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;ส่วนแสดงผล&quot;&gt;ส่วนแสดงผล&lt;/h2&gt;
+
+&lt;p&gt;ส่วนนี้มันจะมี funciton &lt;code&gt;getAllFlashes()&lt;/code&gt; เพื่อดึงข้อมูล flashMessage ทั้งหมด จากนั้นเราก็ทำการวนลูปโดยใช้ foreach เพื่อมาแสดงผล&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAllFlashes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\yii\bootstrap\Alert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endforeach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/img/flash-message.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 17 Jun 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>BlameableBehavior บันทึกข้อมูลรหัสผู้ใช้งานอัตโนมัติ</title>
@@ -669,18 +817,12 @@
       </item>
     
       <item>
-        <title>Upload Ajax</title>
+        <title>สร้างฟอร์ม Upload Files ด้วย AJAX</title>
         <link>http://dixonsatit.github.io/2014/11/30/upload-ajax.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2014/11/30/upload-ajax.html</guid>
         <description>&lt;hr&gt;
 
-&lt;p&gt;layout: post&lt;/p&gt;
-
-&lt;h2 id=&quot;title-สร้างฟอร์ม-upload-files-ด้วย-ajax&quot;&gt;title: สร้างฟอร์ม Upload Files ด้วย AJAX&lt;/h2&gt;
-
-&lt;hr&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/upload-file-ajax.png&quot; alt=&quot;upload file&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/upload-file-ajax.png&quot; alt=&quot;upload file&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;เชื่อว่าหลายๆ คนคงเคยปวดหัวกับการสร้างฟอร์มเพื่อทำการอัพโหลดไฟล์ต่างๆ หรือไฟล์รูปภาพเองก็ตาม ถ้าเป็นฟอร์มอัพโหลดแบบธรรมดาก็คงไม่เท่าไหร่ แต่ถ้าเป็นแบบ ajax ก็คงจะปวดหัวไม่ใช่น้อย.. T_T&amp;#39; เดี่ยววันเราจะมาลองทำฟอร์ม Upload แบบ ajax กันซึ่งพระเอกของเราวันนี้คือ &lt;a href=&quot;http://demos.krajee.com/widgets#fileinput&quot;&gt;fileinput&lt;/a&gt; เป็น Widget ของ krajee เจ้าเก่า ซึ่งรวมอยู่ในแพ็คเก็จ &lt;a href=&quot;http://demos.krajee.com/widgets&quot;&gt;Yii2 Widget&lt;/a&gt; อยู่แล้ว ติดตั้งทีเดียวได้ครบเลย &lt;sup&gt;^&lt;/sup&gt;&lt;/p&gt;
 
@@ -726,56 +868,51 @@
 &lt;p&gt;เปิดไฟล์ &lt;code&gt;views\photo-library\_form.php&lt;/code&gt; เพิ่มแท็ก  &lt;code&gt;enctype&lt;/code&gt; เข้าไป&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;enctype&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;multipart/form-data&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;แก้ไขฟิวด์ ref ให้เป็น hidenInput และเซ็ตค่า label เป็น false
-&lt;code&gt;php
-&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;ref&amp;#39;)-&amp;gt;hiddenInput([&amp;#39;maxlength&amp;#39; =&amp;gt; 50])-&amp;gt;label(false); ?&amp;gt;
-&lt;/code&gt;
-ทำการเรียกใช้งาน Select2 widget เพื่อแสดงรายชื่อจังหวัดจาก model &lt;code&gt;Province&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;แก้ไขฟิวด์ ref ให้เป็น hidenInput และเซ็ตค่า label เป็น false&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ref&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hiddenInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;maxlength&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ทำการเรียกใช้งาน Select2 widget เพื่อแสดงรายชื่อจังหวัดจาก model &lt;code&gt;Province&lt;/code&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;โครงสร้างตาราง province &lt;a href=&quot;https://github.com/dimpled/Yii2-Learning-Source/blob/master/yii2-learning-source.sql&quot;&gt;ดูได้ที่นี่&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;เรียกใช้งาน
-&lt;code&gt;php
-&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;province_id&amp;#39;)-&amp;gt;widget(Select2::classname(), [
-    &amp;#39;data&amp;#39; =&amp;gt; ArrayHelper::map(province::find()-&amp;gt;all(),&amp;#39;PROVINCE_ID&amp;#39;,&amp;#39;PROVINCE_NAME&amp;#39;),
-    &amp;#39;options&amp;#39; =&amp;gt; [&amp;#39;placeholder&amp;#39; =&amp;gt; &amp;#39;เลือกจังหวัด ...&amp;#39;],
-    &amp;#39;pluginOptions&amp;#39; =&amp;gt; [
-        &amp;#39;allowClear&amp;#39; =&amp;gt; true
-    ],
-]);
-?&amp;gt;
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;เรียกใช้งาน DatePicker ของ kartik
-&lt;code&gt;php
-&amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;
-         &amp;lt;div class=&amp;quot;col-sm-6 col-md-6&amp;quot;&amp;gt;
-          &amp;lt;?= $form-&amp;gt;field($model, &amp;#39;start_date&amp;#39;)-&amp;gt;widget(
-         DatePicker::className(), [
-             &amp;#39;language&amp;#39; =&amp;gt; &amp;#39;th&amp;#39;,
-              &amp;#39;options&amp;#39; =&amp;gt; [&amp;#39;placeholder&amp;#39; =&amp;gt; &amp;#39;Select issue date ...&amp;#39;],
-             &amp;#39;pluginOptions&amp;#39; =&amp;gt; [
-                 &amp;#39;format&amp;#39; =&amp;gt; &amp;#39;yyyy-mm-dd&amp;#39;,
-                 &amp;#39;todayHighlight&amp;#39; =&amp;gt; true
-             ]
-     ]);?&amp;gt;
-         &amp;lt;/div&amp;gt;
-         &amp;lt;div class=&amp;quot;col-sm-6 col-md-6&amp;quot;&amp;gt;
-          &amp;lt;?= $form-&amp;gt;field($model, &amp;#39;end_date&amp;#39;)-&amp;gt;widget(
-         DatePicker::className(), [
-             &amp;#39;language&amp;#39; =&amp;gt; &amp;#39;th&amp;#39;,
-              &amp;#39;options&amp;#39; =&amp;gt; [&amp;#39;placeholder&amp;#39; =&amp;gt; &amp;#39;Select issue date ...&amp;#39;],
-             &amp;#39;pluginOptions&amp;#39; =&amp;gt; [
-                 &amp;#39;format&amp;#39; =&amp;gt; &amp;#39;yyyy-mm-dd&amp;#39;,
-                 &amp;#39;todayHighlight&amp;#39; =&amp;gt; true
-             ]
-     ]);?&amp;gt;
-         &amp;lt;/div&amp;gt;
- &amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;เรียกใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;province_id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Select2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;data&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;province&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;PROVINCE_ID&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;PROVINCE_NAME&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;placeholder&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;เลือกจังหวัด ...&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;allowClear&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เรียกใช้งาน DatePicker ของ kartik&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;div class=&amp;quot;row&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;         &amp;lt;div class=&amp;quot;col-sm-6 col-md-6&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;start_date&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+         &lt;span class=&quot;nx&quot;&gt;DatePicker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+             &lt;span class=&quot;s1&quot;&gt;&amp;#39;language&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;th&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;placeholder&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Select issue date ...&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+             &lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                 &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yyyy-mm-dd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                 &lt;span class=&quot;s1&quot;&gt;&amp;#39;todayHighlight&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;         &amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;         &amp;lt;div class=&amp;quot;col-sm-6 col-md-6&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;          &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;end_date&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+         &lt;span class=&quot;nx&quot;&gt;DatePicker&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+             &lt;span class=&quot;s1&quot;&gt;&amp;#39;language&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;th&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;placeholder&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Select issue date ...&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+             &lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                 &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yyyy-mm-dd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                 &lt;span class=&quot;s1&quot;&gt;&amp;#39;todayHighlight&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;
+             &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;         &amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt; &amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;เรียกใช้งาน FileUpload เพื่อสร้างฟอร์ม upload ajax โดยตัวอย่างนี้จะใช้เฉพาะกับรูปภาพ ซึ่งจริงๆ แล้วเราสามารถกำหนดให้อัพโหลดเป็นไฟล์อะไรก็ได้
 &lt;code&gt;FileInput::widget()&lt;/code&gt; มี property ที่จำเป็นดังนี้
 - &lt;code&gt;overwriteInitial&lt;/code&gt;  กำหนดให้สามารถเพิ่มไฟล์อัพโหลดใหม่เข้าไปได้โดยที่ไม่ลบรายการเก่าออกไป
@@ -911,58 +1048,53 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;แก้ไขไฟล์ &lt;code&gt;views/photo-library/create.php&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;เราจะทำการส่งค่า &lt;code&gt;initialPreview&lt;/code&gt; และ &lt;code&gt;initialPreviewConfig&lt;/code&gt; เป็น array ว่างๆ ไปเพราะในตอน create ยังไม่มีข้อมูลที่จะแสดง เราจึงจำเป็นต้องส่ง array ว่างๆ ไปก่อน
-```php
-&amp;lt;?php&lt;/p&gt;
+&lt;p&gt;เราจะทำการส่งค่า &lt;code&gt;initialPreview&lt;/code&gt; และ &lt;code&gt;initialPreviewConfig&lt;/code&gt; เป็น array ว่างๆ ไปเพราะในตอน create ยังไม่มีข้อมูลที่จะแสดง เราจึงจำเป็นต้องส่ง array ว่างๆ ไปก่อน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* @var $this yii\web\View */&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* @var $model app\models\PhotoLibrary */&lt;/span&gt;
 
-&lt;p&gt;use yii\helpers\Html;&lt;/p&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Create Photo Library&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;breadcrumbs&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Photo Libraries&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;breadcrumbs&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;div class=&amp;quot;photo-library-create&amp;quot;&amp;gt;&lt;/span&gt;
 
-&lt;p&gt;/* @var $this yii\web\View &lt;em&gt;/
-/&lt;/em&gt; @var $model app\models\PhotoLibrary */&lt;/p&gt;
+&lt;span class=&quot;x&quot;&gt;    &amp;lt;h1&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
 
-&lt;p&gt;$this-&amp;gt;title = &amp;#39;Create Photo Library&amp;#39;;
-$this-&amp;gt;params[&amp;#39;breadcrumbs&amp;#39;][] = [&amp;#39;label&amp;#39; =&amp;gt; &amp;#39;Photo Libraries&amp;#39;, &amp;#39;url&amp;#39; =&amp;gt; [&amp;#39;index&amp;#39;]];
-$this-&amp;gt;params[&amp;#39;breadcrumbs&amp;#39;][] = $this-&amp;gt;title;
-?&amp;gt;
-&lt;div class=&quot;photo-library-create&quot;&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;h1&amp;gt;&amp;lt;?= Html::encode($this-&amp;gt;title) ?&amp;gt;&amp;lt;/h1&amp;gt;
+&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;_form&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;initialPreview&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;initialPreviewConfig&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 
-&amp;lt;?= $this-&amp;gt;render(&amp;#39;_form&amp;#39;, [
-    &amp;#39;model&amp;#39; =&amp;gt; $model,
-    &amp;#39;initialPreview&amp;#39;=&amp;gt;[],
-    &amp;#39;initialPreviewConfig&amp;#39;=&amp;gt;[]
-]) ?&amp;gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;/div&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;แก้ไขไฟล์ `views/photo-library/update.php` ใน actionUpdate เราจะทำการส่งค่า `initialPreview` และ `initialPreviewConfig`  ไปเพื่อให้ widget แสดง thumbnail รูปภาพที่เคยอัพโหลดไปแล้ว แต่ในตอนนี้เรายังไม่ได้สร้างฟังชันเราจะส่ง array ว่างๆ  ไปก่อน
+&lt;p&gt;แก้ไขไฟล์ &lt;code&gt;views/photo-library/update.php&lt;/code&gt; ใน actionUpdate เราจะทำการส่งค่า &lt;code&gt;initialPreview&lt;/code&gt; และ &lt;code&gt;initialPreviewConfig&lt;/code&gt;  ไปเพื่อให้ widget แสดง thumbnail รูปภาพที่เคยอัพโหลดไปแล้ว แต่ในตอนนี้เรายังไม่ได้สร้างฟังชันเราจะส่ง array ว่างๆ  ไปก่อน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* @var $this yii\web\View */&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* @var $model app\models\PhotoLibrary */&lt;/span&gt;
 
-```php
-&amp;lt;?php
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Update Photo Library: &amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;breadcrumbs&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Photo Libraries&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;breadcrumbs&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;breadcrumbs&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Update&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;div class=&amp;quot;photo-library-update&amp;quot;&amp;gt;&lt;/span&gt;
 
-use yii\helpers\Html;
+&lt;span class=&quot;x&quot;&gt;    &amp;lt;h1&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\PhotoLibrary */
+&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;_form&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;initialPreview&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;initialPreviewConfig&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 
-$this-&amp;gt;title = &amp;#39;Update Photo Library: &amp;#39; . &amp;#39; &amp;#39; . $model-&amp;gt;id;
-$this-&amp;gt;params[&amp;#39;breadcrumbs&amp;#39;][] = [&amp;#39;label&amp;#39; =&amp;gt; &amp;#39;Photo Libraries&amp;#39;, &amp;#39;url&amp;#39; =&amp;gt; [&amp;#39;index&amp;#39;]];
-$this-&amp;gt;params[&amp;#39;breadcrumbs&amp;#39;][] = [&amp;#39;label&amp;#39; =&amp;gt; $model-&amp;gt;id, &amp;#39;url&amp;#39; =&amp;gt; [&amp;#39;view&amp;#39;, &amp;#39;id&amp;#39; =&amp;gt; $model-&amp;gt;id]];
-$this-&amp;gt;params[&amp;#39;breadcrumbs&amp;#39;][] = &amp;#39;Update&amp;#39;;
-?&amp;gt;
-&amp;lt;div class=&amp;quot;photo-library-update&amp;quot;&amp;gt;
-
-    &amp;lt;h1&amp;gt;&amp;lt;?= Html::encode($this-&amp;gt;title) ?&amp;gt;&amp;lt;/h1&amp;gt;
-
-    &amp;lt;?= $this-&amp;gt;render(&amp;#39;_form&amp;#39;, [
-        &amp;#39;model&amp;#39; =&amp;gt; $model,
-        &amp;#39;initialPreview&amp;#39;=&amp;gt;[],
-        &amp;#39;initialPreviewConfig&amp;#39;=&amp;gt;[]
-    ]) ?&amp;gt;
-
-&amp;lt;/div&amp;gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ลองทดสอบรันจะได้ฟอร์มตามตัวอย่างนี้
-&lt;img src=&quot;/images/upload-file/upload-ajax-form.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/upload-file/upload-ajax-form.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;เพิ่ม-function-ใน-model-photolibrary&quot;&gt;เพิ่ม function ใน Model PhotoLibrary&lt;/h2&gt;
 
@@ -1070,65 +1202,59 @@ $this-&amp;gt;params[&amp;#39;breadcrumbs&amp;#39;][] = &amp;#39;Update&amp;#39;
 &lt;span class=&quot;x&quot;&gt;        return  [$initialPreview,$initialPreviewConfig];&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;isImage()&lt;/code&gt; ฟังก์ชันนี้เอาไว้แยกแยะระหว่างไฟล์และรูปภาพ
-&lt;code&gt;php
-public function isImage($filePath){
-        return @is_array(getimagesize($filePath)) ? true : false;
-}
-&lt;/code&gt;
-&lt;code&gt;getTemplatePreview()&lt;/code&gt; เอาไว้เลือก template ที่จะแสดงผลว่าเป็น image หรือไฟล์อื่นๆ
-&lt;code&gt;php
-private function getTemplatePreview(Uploads $model){
-        $filePath = Freelance::getUploadUrl().$model-&amp;gt;ref.&amp;#39;/thumbnail/&amp;#39;.$model-&amp;gt;real_filename;
-        $isImage  = $this-&amp;gt;isImage($filePath);
-        if($isImage){
-            $file = Html::img($filePath,[&amp;#39;class&amp;#39;=&amp;gt;&amp;#39;file-preview-image&amp;#39;, &amp;#39;alt&amp;#39;=&amp;gt;$model-&amp;gt;file_name, &amp;#39;title&amp;#39;=&amp;gt;$model-&amp;gt;file_name]);
-        }else{
-            $file =  &amp;quot;&amp;lt;div class=&amp;#39;file-preview-other&amp;#39;&amp;gt; &amp;quot; .
-                     &amp;quot;&amp;lt;h2&amp;gt;&amp;lt;i class=&amp;#39;glyphicon glyphicon-file&amp;#39;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/h2&amp;gt;&amp;quot; .
-                     &amp;quot;&amp;lt;/div&amp;gt;&amp;quot;;
-        }
-        return $file;
-}
-&lt;/code&gt;
-&lt;code&gt;createThumbnail()&lt;/code&gt; เป็น function ที่เอาไว้สร้าง thumbnail เล็กๆ เพื่อให้สามารถแสดงผลได้เร็ว
-&lt;code&gt;php
-private function createThumbnail($folderName,$fileName,$width=250){
-  $uploadPath   = Freelance::getUploadPath().&amp;#39;/&amp;#39;.$folderName.&amp;#39;/&amp;#39;;
-  $file         = $uploadPath.$fileName;
-  $image        = Yii::$app-&amp;gt;image-&amp;gt;load($file);
-  $image-&amp;gt;resize($width);
-  $image-&amp;gt;save($uploadPath.&amp;#39;thumbnail/&amp;#39;.$fileName);
-  return;
-}
-&lt;/code&gt;
-&lt;code&gt;actionDeletefileAjax()&lt;/code&gt; เป็น action ที่เอาไว้ลบไฟล์ในกรณีที่คลิกลบไฟล์ จาก thumbnail ในตัวอัพโหลด ajax
-```php
-public function actionDeletefileAjax(){&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$model = Uploads::findOne(Yii::$app-&amp;gt;request-&amp;gt;post(&amp;#39;key&amp;#39;));
-if($model!==NULL){
-    $filename  = Freelance::getUploadPath().$model-&amp;gt;ref.&amp;#39;/&amp;#39;.$model-&amp;gt;real_filename;
-    $thumbnail = Freelance::getUploadPath().$model-&amp;gt;ref.&amp;#39;/thumbnail/&amp;#39;.$model-&amp;gt;real_filename;
-    if($model-&amp;gt;delete()){
-        @unlink($filename);
-        @unlink($thumbnail);
-        echo json_encode([&amp;#39;success&amp;#39;=&amp;gt;true]);
-    }else{
-        echo json_encode([&amp;#39;success&amp;#39;=&amp;gt;false]);
-    }
-}else{
-  echo json_encode([&amp;#39;success&amp;#39;=&amp;gt;false]);  
-}
+&lt;p&gt;&lt;code&gt;isImage()&lt;/code&gt; ฟังก์ชันนี้เอาไว้แยกแยะระหว่างไฟล์และรูปภาพ&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function isImage($filePath){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        return @is_array(getimagesize($filePath)) ? true : false;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;}
-&lt;code&gt;
-เป็นฟังก์ชันลบ folder ที่ใช้เก็บไฟล์ เราจะใช้ในกรณีหากมีการลบ record ก็ให้ตามไปลบไฟล์ทั้งหมดด้วย
-&lt;/code&gt;php
-private function removeUploadDir($dir){
-    BaseFileHelper::removeDirectory(Freelance::getUploadPath().$dir);
-}
-```&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;getTemplatePreview()&lt;/code&gt; เอาไว้เลือก template ที่จะแสดงผลว่าเป็น image หรือไฟล์อื่นๆ&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;private function getTemplatePreview(Uploads $model){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        $filePath = Freelance::getUploadUrl().$model-&amp;gt;ref.&amp;#39;/thumbnail/&amp;#39;.$model-&amp;gt;real_filename;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        $isImage  = $this-&amp;gt;isImage($filePath);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        if($isImage){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;            $file = Html::img($filePath,[&amp;#39;class&amp;#39;=&amp;gt;&amp;#39;file-preview-image&amp;#39;, &amp;#39;alt&amp;#39;=&amp;gt;$model-&amp;gt;file_name, &amp;#39;title&amp;#39;=&amp;gt;$model-&amp;gt;file_name]);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        }else{&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;            $file =  &amp;quot;&amp;lt;div class=&amp;#39;file-preview-other&amp;#39;&amp;gt; &amp;quot; .&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;                     &amp;quot;&amp;lt;h2&amp;gt;&amp;lt;i class=&amp;#39;glyphicon glyphicon-file&amp;#39;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/h2&amp;gt;&amp;quot; .&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;                     &amp;quot;&amp;lt;/div&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        return $file;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;createThumbnail()&lt;/code&gt; เป็น function ที่เอาไว้สร้าง thumbnail เล็กๆ เพื่อให้สามารถแสดงผลได้เร็ว&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;private function createThumbnail($folderName,$fileName,$width=250){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  $uploadPath   = Freelance::getUploadPath().&amp;#39;/&amp;#39;.$folderName.&amp;#39;/&amp;#39;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  $file         = $uploadPath.$fileName;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  $image        = Yii::$app-&amp;gt;image-&amp;gt;load($file);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  $image-&amp;gt;resize($width);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  $image-&amp;gt;save($uploadPath.&amp;#39;thumbnail/&amp;#39;.$fileName);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  return;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;actionDeletefileAjax()&lt;/code&gt; เป็น action ที่เอาไว้ลบไฟล์ในกรณีที่คลิกลบไฟล์ จาก thumbnail ในตัวอัพโหลด ajax&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionDeletefileAjax(){&lt;/span&gt;
 
+&lt;span class=&quot;x&quot;&gt;    $model = Uploads::findOne(Yii::$app-&amp;gt;request-&amp;gt;post(&amp;#39;key&amp;#39;));&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    if($model!==NULL){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        $filename  = Freelance::getUploadPath().$model-&amp;gt;ref.&amp;#39;/&amp;#39;.$model-&amp;gt;real_filename;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        $thumbnail = Freelance::getUploadPath().$model-&amp;gt;ref.&amp;#39;/thumbnail/&amp;#39;.$model-&amp;gt;real_filename;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        if($model-&amp;gt;delete()){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;            @unlink($filename);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;            @unlink($thumbnail);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;            echo json_encode([&amp;#39;success&amp;#39;=&amp;gt;true]);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        }else{&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;            echo json_encode([&amp;#39;success&amp;#39;=&amp;gt;false]);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    }else{&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;      echo json_encode([&amp;#39;success&amp;#39;=&amp;gt;false]);  &lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    }&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เป็นฟังก์ชันลบ folder ที่ใช้เก็บไฟล์ เราจะใช้ในกรณีหากมีการลบ record ก็ให้ตามไปลบไฟล์ทั้งหมดด้วย&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;private function removeUploadDir($dir){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    BaseFileHelper::removeDirectory(Freelance::getUploadPath().$dir);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;สุดท้ายทำการปรับปรุง actionDelete() ซักเล็กน้อย โดยหากมีการลบ record ก็ให้ทำการลบโฟล์เดอร์ที่เก็บไฟล์นั้นด้วย โดยใช้ &lt;code&gt;removeUploadDir()&lt;/code&gt; ที่เราสร้างไว้แล้วก่อนหน้านี้&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionDelete($id)&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
@@ -1155,69 +1281,67 @@ public function actionUploadAjax(){
 
 &lt;p&gt;ปรับปรุงให้ action เดิมๆ สามารถรองรับการอัพโหลดจากฟอร์ม ajax ได้ เพราะหากเค้าไม่คลิกปุ่มอัพโหลด ajax แล้วข้อมูลจะยังไม่ถูกอัพโหลด เราจะแก้ไขโดยการเรียกใช้งาน function Upload() ที่เราได้สร้างไว้และใช้กับ actionUploadAjax() ซึ่งสามารถนำมาใช้กับ acionCreate และ  actionUpdate ได้&lt;/p&gt;
 
-&lt;p&gt;โดยเพิ่ม &lt;code&gt;this-&amp;gt;Uploads(false);&lt;/code&gt;เข้าไป
-```php
-public function actionCreate()
-{
-    $model = new PhotoLibrary();&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;if ($model-&amp;gt;load(Yii::$app-&amp;gt;request-&amp;gt;post()) ) {
+&lt;p&gt;โดยเพิ่ม &lt;code&gt;this-&amp;gt;Uploads(false);&lt;/code&gt;เข้าไป&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionCreate()&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    $model = new PhotoLibrary();&lt;/span&gt;
 
-    $this-&amp;gt;Uploads(false);
+&lt;span class=&quot;x&quot;&gt;    if ($model-&amp;gt;load(Yii::$app-&amp;gt;request-&amp;gt;post()) ) {&lt;/span&gt;
 
-    if($model-&amp;gt;save()){
-         return $this-&amp;gt;redirect([&amp;#39;view&amp;#39;, &amp;#39;id&amp;#39; =&amp;gt; $model-&amp;gt;id]);
-    }
+&lt;span class=&quot;x&quot;&gt;        $this-&amp;gt;Uploads(false);&lt;/span&gt;
 
-} else {
-     $model-&amp;gt;ref = substr(Yii::$app-&amp;gt;getSecurity()-&amp;gt;generateRandomString(),10);
-}
+&lt;span class=&quot;x&quot;&gt;        if($model-&amp;gt;save()){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;             return $this-&amp;gt;redirect([&amp;#39;view&amp;#39;, &amp;#39;id&amp;#39; =&amp;gt; $model-&amp;gt;id]);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
 
-return $this-&amp;gt;render(&amp;#39;create&amp;#39;, [
-    &amp;#39;model&amp;#39; =&amp;gt; $model,
-]);
+&lt;span class=&quot;x&quot;&gt;    } else {&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;         $model-&amp;gt;ref = substr(Yii::$app-&amp;gt;getSecurity()-&amp;gt;generateRandomString(),10);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    }&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;    return $this-&amp;gt;render(&amp;#39;create&amp;#39;, [&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        &amp;#39;model&amp;#39; =&amp;gt; $model,&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    ]);&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;}
-```&lt;/p&gt;
+&lt;p&gt;ส่วน actionUpdate() เพิ่ม getInitialPreview() เข้ามาด้วยเพื่อใช้แสดง thumbnail ในตัว ajax upload&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionUpdate($id)&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt; {&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;     $model = $this-&amp;gt;findModel($id);&lt;/span&gt;
 
-&lt;p&gt;ส่วน actionUpdate() เพิ่ม getInitialPreview() เข้ามาด้วยเพื่อใช้แสดง thumbnail ในตัว ajax upload
-```php
-public function actionUpdate($id)
- {
-     $model = $this-&amp;gt;findModel($id);&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; list($initialPreview,$initialPreviewConfig) = $this-&amp;gt;getInitialPreview($model-&amp;gt;ref);
+&lt;span class=&quot;x&quot;&gt;     list($initialPreview,$initialPreviewConfig) = $this-&amp;gt;getInitialPreview($model-&amp;gt;ref);&lt;/span&gt;
 
- if ($model-&amp;gt;load(Yii::$app-&amp;gt;request-&amp;gt;post())) {
-     $this-&amp;gt;Uploads(false);
+&lt;span class=&quot;x&quot;&gt;     if ($model-&amp;gt;load(Yii::$app-&amp;gt;request-&amp;gt;post())) {&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;         $this-&amp;gt;Uploads(false);&lt;/span&gt;
 
-     if($model-&amp;gt;save()){
-          return $this-&amp;gt;redirect([&amp;#39;view&amp;#39;, &amp;#39;id&amp;#39; =&amp;gt; $model-&amp;gt;id]);
-     }
- }
+&lt;span class=&quot;x&quot;&gt;         if($model-&amp;gt;save()){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;              return $this-&amp;gt;redirect([&amp;#39;view&amp;#39;, &amp;#39;id&amp;#39; =&amp;gt; $model-&amp;gt;id]);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;         }&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;     }&lt;/span&gt;
 
- return $this-&amp;gt;render(&amp;#39;update&amp;#39;, [
-     &amp;#39;model&amp;#39; =&amp;gt; $model,
-      &amp;#39;initialPreview&amp;#39;=&amp;gt;$initialPreview,
-      &amp;#39;initialPreviewConfig&amp;#39;=&amp;gt;$initialPreviewConfig
- ]);
+&lt;span class=&quot;x&quot;&gt;     return $this-&amp;gt;render(&amp;#39;update&amp;#39;, [&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;         &amp;#39;model&amp;#39; =&amp;gt; $model,&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;          &amp;#39;initialPreview&amp;#39;=&amp;gt;$initialPreview,&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;          &amp;#39;initialPreviewConfig&amp;#39;=&amp;gt;$initialPreviewConfig&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;     ]);&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt; }&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;}
-&lt;code&gt;
-และแก้ไขไฟล์เพิ่มเติม views/freelance/create.php
-&lt;/code&gt;php
-&amp;lt;?= $this-&amp;gt;render(&amp;#39;&lt;em&gt;form&amp;#39;, [
-       &amp;#39;model&amp;#39; =&amp;gt; $model,
-       &amp;#39;initialPreview&amp;#39;=&amp;gt; [],
-       &amp;#39;initialPreviewConfig&amp;#39;=&amp;gt; [],
-   ]) ?&amp;gt;
-&lt;code&gt;
-และแก้ไขไฟล์ views/freelance/update.php
-&lt;/code&gt;php
-&amp;lt;?= $this-&amp;gt;render(&amp;#39;&lt;/em&gt;form&amp;#39;, [
+&lt;p&gt;และแก้ไขไฟล์เพิ่มเติม views/freelance/create.php&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;_form&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;initialPreview&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;initialPreviewConfig&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;และแก้ไขไฟล์ views/freelance/update.php
+&lt;code&gt;php
+&amp;lt;?= $this-&amp;gt;render(&amp;#39;_form&amp;#39;, [
     &amp;#39;model&amp;#39; =&amp;gt; $model,
     &amp;#39;initialPreview&amp;#39;=&amp;gt;$initialPreview,
     &amp;#39;initialPreviewConfig&amp;#39;=&amp;gt;$initialPreviewConfig
 ]) ?&amp;gt;
-```&lt;/p&gt;
+&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;โค้ดทั้งหมด ใน PhotolibraryController()&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
@@ -1504,28 +1628,32 @@ public function actionUpdate($id)
 
 &lt;p&gt;เพื่อให้สามารถดูรูปภาพที่เราได้อัพโหลดไปแล้ว เราจะทำการเรียกใช้งาน widget Gallery&lt;/p&gt;
 
-&lt;p&gt;โดยเพิ่มที่ไฟล์ &lt;code&gt;views\photo-library\view.php&lt;/code&gt;เพิ่มการเรียกใช้งานเข้าไปด้านล่างสุด ซึ่งเราจะเรียกใช้งาน &lt;code&gt;getThumbnails()&lt;/code&gt; ที่เราได้สร้างไว้แล้วตอนแก้ไข Model PhotoLibrary
-&lt;code&gt;php
-&amp;lt;div class=&amp;quot;panel panel-default&amp;quot;&amp;gt;
-  &amp;lt;div class=&amp;quot;panel-body&amp;quot;&amp;gt;
-     &amp;lt;?= dosamigos\gallery\Gallery::widget([&amp;#39;items&amp;#39; =&amp;gt; $model-&amp;gt;getThumbnails($model-&amp;gt;ref,$model-&amp;gt;event_name)]);?&amp;gt;
-  &amp;lt;/div&amp;gt;
-&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/p&gt;
-
+&lt;p&gt;โดยเพิ่มที่ไฟล์ &lt;code&gt;views\photo-library\view.php&lt;/code&gt;เพิ่มการเรียกใช้งานเข้าไปด้านล่างสุด ซึ่งเราจะเรียกใช้งาน &lt;code&gt;getThumbnails()&lt;/code&gt; ที่เราได้สร้างไว้แล้วตอนแก้ไข Model PhotoLibrary&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;div class=&amp;quot;panel panel-default&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  &amp;lt;div class=&amp;quot;panel-body&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dosamigos\gallery\Gallery&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;items&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getThumbnails&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ref&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;event_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]);&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  &amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;ลองใช้งาน&quot;&gt;ลองใช้งาน&lt;/h2&gt;
 
 &lt;p&gt;หน้าหลัก
-&lt;img src=&quot;/images/upload-file/form-1.png&quot; alt=&quot;update&quot;&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/upload-file/form-1.png&quot; alt=&quot;update&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;การสร้างและแก้ไขข้อมูล
-&lt;img src=&quot;/images/upload-file/form-2.png&quot; alt=&quot;update&quot;&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/upload-file/form-2.png&quot; alt=&quot;update&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;หน้า preview
-&lt;img src=&quot;/images/upload-file/form-3.png&quot; alt=&quot;update&quot;&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/upload-file/form-3.png&quot; alt=&quot;update&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;เมื่อคลิกที่รูปภาพจะแสดงเป็น gallry
-&lt;img src=&quot;/images/upload-file/form-4.png&quot; alt=&quot;update&quot;&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/upload-file/form-4.png&quot; alt=&quot;update&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/dimpled/Yii2-Learning-Source&quot;&gt;ดาวน์โหลด soucrecode ได้ที่นี่&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ตัวอย่างอยู่ที่ PhotoLibraryController &lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
       </item>
@@ -2542,515 +2670,6 @@ http://www.domain.me/site/index
 &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;urlManagerFrontend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getScriptUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-        <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การติดตั้ง GridView + ExportMenu</title>
-        <link>http://dixonsatit.github.io/2014/11/30/install-krajee-yii2-grid.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2014/11/30/install-krajee-yii2-grid.html</guid>
-        <description>&lt;p&gt;ในตัวอย่างนี้เป็นการติดตั้งและใช้งาน widget ของ &lt;a href=&quot;https://github.com/kartik-v/yii2-grid/blob/master/README.md&quot;&gt;kartik-v/yii2-grid&lt;/a&gt; โดยที่ตัว GridView ตัวนี้มีความสามารถเยอะมากๆ แต่หลักๆ ที่ผมชอบเลยก็คือ สามารถ export ข้อมูลได้หลายแบบ เช่น .xls, .pdf, .csv, .txt, .html ซึ่งสามารถคลิกเลือกจากตัว GridView ได้โดยตรงเลย&lt;/p&gt;
-
-&lt;p&gt;มี 2 แบบคือ
- * Export from GridView
- * Export Menu&lt;/p&gt;
-
-&lt;h2 id=&quot;export-from-gridview&quot;&gt;Export from GridView&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/index.png&quot; alt=&quot;index&quot;&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;install&quot;&gt;Install&lt;/h3&gt;
-
-&lt;p&gt;ในการใช้งาน export menu จะต้องติดตั้ง  &lt;code&gt;widget&lt;/code&gt;ทั้งหมด 4 ตัว โดยเพิ่มที่ไฟล์ composer.json ในส่วนของ  &lt;code&gt;require&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;kartik-v/yii2-widgets&amp;quot;: &amp;quot;*&amp;quot;,
-&amp;quot;kartik-v/yii2-grid&amp;quot;: &amp;quot;*&amp;quot;,
-&amp;quot;kartik-v/yii2-export&amp;quot;: &amp;quot;*&amp;quot;,
-&amp;quot;kartik-v/yii2-mpdf&amp;quot;: &amp;quot;*&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นทำการสั่งติดตั้งโดยใช้คำสั่ง
-&lt;code&gt;
-composer update
-&lt;/code&gt;
-&lt;img src=&quot;/images/install-grid.png&quot; alt=&quot;install grid&quot; title=&quot;Logo Title Text 1&quot;&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;config&quot;&gt;Config&lt;/h3&gt;
-
-&lt;p&gt;ตัวอย่างนี้จะใช้ข้อมูลจากตาราง countries&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ดูโครงสร้างตาราง &lt;code&gt;countries&lt;/code&gt; &lt;a href=&quot;https://github.com/raramuridesign/mysql-country-list/blob/master/mysql-country-list.sql&quot;&gt;countries.sql&lt;/a&gt; ได้ที่นี่&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;หลังจากสร้างตาราง countries ใน mysql แล้วให้ gii countries Model และ gii countries CRUD&lt;/p&gt;
-
-&lt;p&gt;จากนั้นเพิ่ม module gridview ใน &lt;code&gt;config\web.php&lt;/code&gt; ตามด้านล่าง ตัวนี้เป็น module ที่ใช้ในการ export  (csv, text, html, or xls)
-เพื่อรองรับการ export ที่เราคลิกเลือกจากเมนู
-&lt;code&gt;php
-$config = [
-    &amp;#39;id&amp;#39; =&amp;gt; &amp;#39;basic&amp;#39;,
-    &amp;#39;basePath&amp;#39; =&amp;gt; dirname(__DIR__),
-    &amp;#39;bootstrap&amp;#39; =&amp;gt; [&amp;#39;log&amp;#39;],
-    //...........
-    &amp;#39;modules&amp;#39; =&amp;gt; [
-       &amp;#39;gridview&amp;#39; =&amp;gt;  [
-            &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;\kartik\grid\Module&amp;#39;
-        ]
-    ],
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;จากนั้นไปที่ &lt;code&gt;views\countries\index.php&lt;/code&gt; ทำการเปลี่ยนการเรียกใช้งานในส่วน &lt;code&gt;use&lt;/code&gt; Gridview
-จากเดิม&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\grid\GridView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เปลี่ยนเป็น
-&lt;code&gt;php
-&amp;lt;?php
-use kartik\grid\GridView;
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;และในส่วนของการเรียกใช้งาน &lt;code&gt;GridView::widget([....])&lt;/code&gt; เพิ่มค่าคอนฟิก properties &lt;code&gt;panel&lt;/code&gt; เข้าไป และปิด ActionColumn ไว้เพราะเวลา export file เดี่ยวเมนูจะตามไปด้วย
-&lt;code&gt;php
-&amp;lt;?= GridView::widget([
-    &amp;#39;dataProvider&amp;#39; =&amp;gt; $dataProvider,
-    &amp;#39;filterModel&amp;#39; =&amp;gt; $searchModel,
-    //........
-    &amp;#39;panel&amp;#39;=&amp;gt;[
-            &amp;#39;before&amp;#39;=&amp;gt;&amp;#39; &amp;#39;
-    ],
-    //.........
-    &amp;#39;columns&amp;#39; =&amp;gt; [
-        [&amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\SerialColumn&amp;#39;],
-        &amp;#39;id&amp;#39;,
-        &amp;#39;country_code&amp;#39;,
-        &amp;#39;country_name&amp;#39;,
-        //[&amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;],
-    ],
-]); ?&amp;gt;
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;ทดสอบรันดู จะพบไอคอน ที่ด้านขวาให้เราสามารถคลิกแล้วเลือก   export ตามที่เราต้องการได้โดยมีรายการให้เลือกดังนี้
-- Html
-- CSV
-- Text
-- Excel
-- Pdf
-- Json&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/grid-export.png&quot; alt=&quot;export menu&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ลองทำการทดลอง export เลือก format ที่ต้องการ ระบบจะบอกว่ามันจะ generated file สำหรับดาวน์โหลดให้ คุณต้องการทำหรือปล่าว ให้ตอบ OK&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;หากไม่ขึ้น dialog ลองเช็คว่ามีการปิด popup ใน browser หรือไม่&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/export1.png&quot; alt=&quot;export1&quot;&gt;
-ระบบจะ export file ให้รอซักครู่
-&lt;img src=&quot;/images/export2.png&quot; alt=&quot;export2&quot;&gt;
-หลังจากเสร็จเราสามารถเปิดดูไฟล์ได้เลย
-&lt;img src=&quot;/images/export3.png&quot; alt=&quot;export3&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ตัวอย่างไฟล์ที่-export&quot;&gt;ตัวอย่างไฟล์ที่ export&lt;/h2&gt;
-
-&lt;h3 id=&quot;html&quot;&gt;Html&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/html.png&quot; alt=&quot;html&quot;&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;text&quot;&gt;Text&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/txt.png&quot; alt=&quot;text&quot;&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;csv&quot;&gt;CSV&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/csv.png&quot; alt=&quot;csv&quot;&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;pdf&quot;&gt;Pdf&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pdf.png&quot; alt=&quot;pdf&quot;&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;excel&quot;&gt;Excel&lt;/h3&gt;
-
-&lt;p&gt;ผมลองแล้วยัง error! ไม่แนใจเหมือนกันกับ &lt;code&gt;Gridview&lt;/code&gt;ตัวนี้ แต่สามารถใช้ตัว export menu ได้&lt;/p&gt;
-
-&lt;h3 id=&quot;json&quot;&gt;Json&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/json.png&quot; alt=&quot;json&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br&gt;
-&lt;br&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;export-menu&quot;&gt;Export Menu&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/exportmenu.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ตัวนี้เราได้ติดตั้งไปแล้วสามารถเรียกใช้ได้เลย export menu จะรับค่า DataProvider เหมือนกับ &lt;code&gt;GridView&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;ไปที่ &lt;code&gt;views\countries\index.php&lt;/code&gt; เพิ่ม widgit เข้าไป&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ตัวนี้สามารถ export excel ได้ทั้ง 2 แบบคือ .xls, .xlsx&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;kartik\export\ExportMenu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ExportMenu&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากนั้นก็สามารถเรียกใช้งานได้เลย ง่ายมากๆ ครับ&lt;/p&gt;
-
-&lt;h2 id=&quot;การติดตั้งภาษาไทยให้กับ-mpdf&quot;&gt;การติดตั้งภาษาไทยให้กับ MPDF&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;วิธินี้อาจไม่ใช่วิธีที่ถูกเพราะถ้ามีการ &lt;code&gt;update&lt;/code&gt; อาจทำให้ไฟล์ที่แก้ไขไว้หายไป  ถ้าใครรู้ก็รู้วิธีอื่นๆ แนะนำมาได้นะครับ&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;ก่อนอื่นเราต้อง ดาวน์โหลดฟอนต์ไทยมาก่อนครับ (&lt;a href=&quot;/downloads/thaifont.zip&quot;&gt;Download&lt;/a&gt;)&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;แตกซิบไฟล์แล้วนำฟอนต์ทั้งหมดไปไว้ที่ &lt;code&gt;vendor/kartik-v/mpdf/ttfont/&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;จากนั้นทำการแก้ไขไฟล์ &lt;code&gt;vendor/kartik-v/mpdf/config_fonts.php&lt;/code&gt; เพิ่มชื่อฟอนต์เข้าไป
-&lt;code&gt;php
-$this-&amp;gt;fontdata = array(
-&amp;quot;thsaraban&amp;quot; =&amp;gt; array(
-    &amp;#39;R&amp;#39; =&amp;gt; &amp;quot;THSarabunNew.ttf&amp;quot;,
-    &amp;#39;B&amp;#39; =&amp;gt; &amp;quot;THSarabunNew-Bold.ttf&amp;quot;,
-    &amp;#39;I&amp;#39;  =&amp;gt; &amp;quot;THSarabunNew-Italic.ttf&amp;quot;,
-    &amp;#39;BI&amp;#39;   =&amp;gt;  &amp;quot;THSarabunNew-BoldItalic.ttf&amp;quot;
-    ),
-&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;และเพิ่ม &lt;code&gt;thsaraban&lt;/code&gt; เข้าไปที่
-&lt;code&gt;php
-$this-&amp;gt;sans_fonts = array(&amp;#39;thsaraban&amp;#39;,
-&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;ไปที่ไฟล์ &lt;code&gt;vendor/kartik-v/mpdf/config_lang2fonts.php&lt;/code&gt; แล้วค้นหาคำว่า Thai แล้วแก้เป็นดังนี้
-&lt;code&gt;php
-CASE &amp;quot;th&amp;quot;:  CASE &amp;quot;tha&amp;quot;:   // THAI
-$unifont = &amp;quot;thsaraban&amp;quot;;
-break;
-&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;แก้ไขไฟล์ &lt;code&gt;vendor/kartik-v/yii2-mpdf/Pdf.php&lt;/code&gt;  เพิ่ม &lt;code&gt;thsaraban&lt;/code&gt; เข้าไป
-&lt;code&gt;php
-public function setApi()
-{
-   $this-&amp;gt;_mpdf = new mPDF(
-       //$this-&amp;gt;mode,
-       &amp;#39;thsaraban&amp;#39;,
-       $this-&amp;gt;format,
-       $this-&amp;gt;defaultFontSize,
-       $this-&amp;gt;defaultFont,
-       $this-&amp;gt;marginLeft,
-       $this-&amp;gt;marginRight,
-       $this-&amp;gt;marginTop,
-       $this-&amp;gt;marginBottom,
-       $this-&amp;gt;marginHeader,
-       $this-&amp;gt;marginFooter,
-       $this-&amp;gt;orientation
-   );
-}
-&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;แก้ไขไฟล์ css ที่ &lt;code&gt;vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.css&lt;/code&gt; เพิ่มฟอนต์ &lt;code&gt;thsaraban&lt;/code&gt; เข้าไป
-&lt;code&gt;css
-body {
-font-family: &amp;quot;thsaraban&amp;quot;,&amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.42857143;
-color: #333;
-background-color: #fff;
-}
-&lt;/code&gt;
-### ลองเรียกใช้งาน
-&lt;img src=&quot;/images/export-pdf-thai.png&quot; alt=&quot;thaipdf&quot;&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;ตัวอย่างไฟล์&quot;&gt;ตัวอย่างไฟล์&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pdf-thai.png&quot; alt=&quot;thaipdf&quot;&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การใช้งาน Dropdown เพื่อสร้างตัวเลือก จังหวัด, อำเภอ, ตำบล</title>
-        <link>http://dixonsatit.github.io/2014/11/30/dependent-dropdown.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2014/11/30/dependent-dropdown.html</guid>
-        <description>&lt;p&gt;ในตัวอย่างนี้จะเป็นใช้ widget &lt;a href=&quot;http://demos.krajee.com/widgets#depdrop&quot;&gt;Dependent Dropdown Widget&lt;/a&gt; ของ krajee&lt;/p&gt;
-
-&lt;p&gt;ถามว่าตัวนี้มันดียังไง? อย่างแรกเพราะมันสามารถใช้งานได้ง่ายๆ สามารถสร้างให้เป็นตัวเลือกสับย่อยๆ เข้าไปได้หลายๆ ตัว&lt;/p&gt;
-
-&lt;p&gt;อย่างที่สองก็คือ เพียงแค่เราสร้าง action ตามที่ Widget กำหนดโดยที่ไม่ต้องไปยุ่งกับ javascript มากมายเพราะ Widget ทำไว้ให้หมดแล้ว เรามีหน้าที่ &lt;code&gt;config&lt;/code&gt; ให้มันรู้ว่า action ใหนที่จะไปดึงข้อมูลอำเภอ action ใหนจะไปดึงข้อมูลตำบล&lt;/p&gt;
-
-&lt;p&gt;ถ้าง่ายขนาดนั้น งั้นเรามาลองกัน!&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/depdrop.png&quot; alt=&quot;dependent&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;หลักการทำงาน&quot;&gt;หลักการทำงาน&lt;/h2&gt;
-
-&lt;p&gt;เราจะทำการสร้าง DropdownList ไวัทั้งหมด 3 ตัว ตัวแรก จังหวัดจะเป็น DropdownList ธรรมดา และดึงข้อมูลจังหวัดมาแสดง ส่วนอีก 2 ตัวที่เหลือ จะทำการเรียกข้อมูลผ่าน Request ajax เมื่อมีการคลิกเลือกอำเภอ และตำบลตามลำดับ&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/dropdown-flow.png&quot; alt=&quot;deropdown&quot;&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;ขั้นตอนแรก ตัวเลือกจังหวัด เราจะทำการใช้ dropdownList แบบธรรมดาและคิวรีข้อมูลขึ้นมาเพื่อกำหนดค่าให้กับ dropdownList จังหวัดเพื่อแสดงผล
-&lt;img src=&quot;/images/province.png&quot; alt=&quot;deropdown&quot;&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;เมื่อมีการคลิกเลือกจังหวัด ก็จะทำการส่งข้อมูลรหัสจังหวัด ที่เลือกไปที่ &lt;code&gt;actionGetAmphur()&lt;/code&gt; เพื่อทำการค้นหาอำเภอ
-และจะส่งข้อมูลกลับมาในรูปแบบ &lt;code&gt;json&lt;/code&gt; ไปให้ widget และนำไปแสดงผลที่ DropdownList อำเภอ
-&lt;img src=&quot;/images/amphur.png&quot; alt=&quot;deropdown&quot;&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;เมื่อทำการเลือกอำเภอ ก็จะทำการส่งข้อมูลรหัสอำเภอที่เลือก ไปที่ &lt;code&gt;actionGetDistrict()&lt;/code&gt; เพื่อทำการค้นหาข้อมูลตำบล และส่งข้อมูลกลับให้ widget ในรูปแบบของ &lt;code&gt;json&lt;/code&gt;เพื่อนำไปแสดงผลต่อที่ dropdownList ตำบล
-&lt;img src=&quot;/images/district.png&quot; alt=&quot;deropdown&quot;&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ตัว Widget สามารถสร้างตัวเลือกสับย่อยๆ เข้าไปอีกได้ อาจจะมากกว่า 3 ก็ได้ ก็แล้วแต่กรณีที่เราจะสามารถนำไปใช้ เช่น ข้อมูลหมวดหมู่ประเภทสินค้า&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;การติดตั้ง-widget&quot;&gt;การติดตั้ง Widget&lt;/h2&gt;
-
-&lt;p&gt;ในตัวอย่างนี้เราใช้ Widget &lt;a href=&quot;Dependent%20Dropdown%20Widget&quot;&gt;Dependent Dropdown Widget&lt;/a&gt; ซึ่งจะเป็นเพ็คเก็จที่รวมอยุ่ใน &lt;a href=&quot;http://demos.krajee.com/widgets&quot;&gt;Yii2 Widgets&lt;/a&gt; ซึ่งจะมี widget อื่นๆ อีกหลายตัว&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;widget นี้ใช้งานร่วมกับ  &lt;a href=&quot;https://github.com/yiisoft/yii2/tree/master/extensions/bootstrap&quot;&gt;yiisoft/yii2-bootstrap&lt;/a&gt; แต่ส่วนใหญ่ก็ติดตั้งมาพร้อมอยู่แล้ว&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;รันคำสั่งเพื่อทำการติดตั้ง
-&lt;code&gt;
-composer require kartik-v/yii2-widgets &amp;quot;*&amp;quot;
-&lt;/code&gt;
-หรือเพิ่ม
-&lt;code&gt;
-&amp;quot;kartik-v/yii2-widgets&amp;quot;: &amp;quot;*&amp;quot;
-&lt;/code&gt;
-ที่แท็ค require ในไฟล์ composer.json จากนั้น &lt;code&gt;composer update&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;สร้าง-model&quot;&gt;สร้าง Model&lt;/h2&gt;
-
-&lt;p&gt;ทำการสร้าง gii Model ให้ครบทั้ง 3 ตารางคือ province, amphur, district&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ข้อมูล จังหวัด,อำเภอ,ตำบล &lt;a href=&quot;https://github.com/dimpled/Yii2-Learning-Source/blob/master/yii2-learning-source.sql&quot;&gt;ดูได้ที่นี่&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;เรียกใช้งานใน-form&quot;&gt;เรียกใช้งานใน Form&lt;/h2&gt;
-
-&lt;p&gt;ทำการเรียกใช้งาน model ทั้งหมด เรียก ArrayHelper และ DepDrop
-```php
-&amp;lt;?php
-use app\models\Province;
-use app\models\Amphur;
-use app\models\District;&lt;/p&gt;
-
-&lt;p&gt;use yii\helpers\ArrayHelper;&lt;/p&gt;
-
-&lt;p&gt;use kartik\widgets\DepDrop;
-```&lt;/p&gt;
-
-&lt;h2 id=&quot;สร้าง-dropdownlist-จังหวัด&quot;&gt;สร้าง DropdownList จังหวัด&lt;/h2&gt;
-
-&lt;p&gt;ในการเรียกข้อมูลเพื่อมาใช้กับ DropdownList โดยเรียกผ่าน model นั้นเราจะเป็นจะต้องใช้ &lt;code&gt;ArrayHelper&lt;/code&gt; เพื่อสร้าง array ที่สามารถใช้กับ dropdownList ได้ โดยใช้ &lt;code&gt;ArrayHelper::map(&amp;quot;model&amp;quot;,&amp;quot;ชื่อฟิวด์รหัส&amp;quot;,&amp;quot;ชื่อฟิวด์ที่เป็นข้อความ&amp;quot;)&lt;/code&gt;
-&lt;code&gt;php
-ArrayHelper::map(Province::find()-&amp;gt;all(),
-&amp;#39;PROVINCE_ID&amp;#39;,
-&amp;#39;PROVINCE_NAME&amp;#39;)
-&lt;/code&gt;
-จากนั้นเราจะได้ Array กลับมาในรูปแบบ
-&lt;code&gt;php
-array(
-  &amp;#39;28&amp;#39;=&amp;gt;&amp;#39;ขอนแก่น&amp;#39;,
-  &amp;#39;29&amp;#39;=&amp;gt;&amp;#39;มาหาสารคาม&amp;#39;,
-  .......
-  )
-&lt;/code&gt;
-เมื่อได้ข้อมูลแล้วเราก็เรียกใช้งานและทำการตั้งชื่อให้กับ DropdownList จังหวัดชื่อ &lt;code&gt;ddl-province&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;province&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dropdownList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-            &lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Province&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;PROVINCE_ID&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;PROVINCE_NAME&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ddl-province&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;prompt&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;เลือกจังหวัด&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ซึ่งก็จะเห็นว่าเราสามารถเลือกจังหวัดได้แล้ว&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/province-view.png&quot; alt=&quot;deropdown&quot;&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ตอนนี้เราตั้ง id dropdownlist &lt;code&gt;ddl-province&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;สร้าง-dropdownlist-อำเภอ&quot;&gt;สร้าง DropdownList อำเภอ&lt;/h2&gt;
-
-&lt;p&gt;เราจะใช้ widget &lt;code&gt;DepDrop&lt;/code&gt; เพื่อทำการสร้าง dropdownlist และกำหนดชื่อเป็น &lt;code&gt;ddl-amphur&lt;/code&gt;  ซึ่งจะเป็นอำเภอว่างๆ ไว้เพื่อรอให้มีการส่งข้อมูลมา ซึ่งตัว dropdownList อำเภอจะมีการกำหนดค่า 3 ตัวคือ
-- &lt;code&gt;data&lt;/code&gt; ตรงนี้เอาไว้ใช้รับมูลมาแสดงในกรณี &lt;code&gt;update&lt;/code&gt; เพื่อให้แสดงค่าว่าเราได้เลือกอำเภอใหนแต่ตอนนี้ใส่เป็น array ว่างๆ ไว้ก่อน
-- &lt;code&gt;depends&lt;/code&gt; เป็นการระบุชื่อ dropdownlist จังหวัดเพื่อจับ event เมื่อมีการคลิกเลือกจังหวัด
-- &lt;code&gt;url&lt;/code&gt; เป็นการระบุชื่อ action ที่จะให้ dropdownlist ไปเรียกข้อมูลอำเภอ&lt;/p&gt;
-
-&lt;p&gt;โดยกำหนดค่าดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;amphur&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DepDrop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ddl-amphur&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;depends&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ddl-province&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;placeholder&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;เลือกอำเภอ...&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/employee/get-amphur&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;สร้าง-dropdownlist-ตำบล&quot;&gt;สร้าง DropdownList ตำบล&lt;/h2&gt;
-
-&lt;p&gt;การกำหนดค่าจะคล้ายกับ อำเภอ แต่ต่างกันที่ &lt;code&gt;depends&lt;/code&gt; จะมีการกำหนดค่าชื่อไว้สองตัวคือ ชือ dropdownlist จังหวัดและ dropdownlist อำเภอ
-&lt;code&gt;php
-&amp;lt;?= $form-&amp;gt;field($model, &amp;#39;district&amp;#39;)-&amp;gt;widget(DepDrop::classname(), [
-           &amp;#39;data&amp;#39; =&amp;gt;[],
-           &amp;#39;pluginOptions&amp;#39;=&amp;gt;[
-               &amp;#39;depends&amp;#39;=&amp;gt;[&amp;#39;ddl-province&amp;#39;, &amp;#39;ddl-amphur&amp;#39;],
-               &amp;#39;placeholder&amp;#39;=&amp;gt;&amp;#39;เลือกตำบล...&amp;#39;,
-               &amp;#39;url&amp;#39;=&amp;gt;Url::to([&amp;#39;/employee/get-district&amp;#39;])
-           ]
-]); ?&amp;gt;
-&lt;/code&gt;
-เราจะได้ form แบบนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/depdrop-all.png&quot; alt=&quot;deropdown&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;แต่ตอนนี้จะยังใช้งานไม่ได้เพราะเรายังไม่ได้สร้าง action เพื่อรองรับการค้นข้อมูลและส่งข้อมูลให้กับ dropdownlist&lt;/p&gt;
-
-&lt;h2 id=&quot;สร้าง-action-เพื่อรองรับการคลิกเลือกจังหวัดและอำเภอ&quot;&gt;สร้าง Action เพื่อรองรับการคลิกเลือกจังหวัดและอำเภอ&lt;/h2&gt;
-
-&lt;p&gt;เราจะทำการสร้าง action ไว้ที่ controllers/EmployeeController.php
-action แรกจะเป็น actionGetAmphur() ตรงนี้จะรองรับการคลิกเลือกจังหวัดและส่งค่าอำเภอกลับไปให้กับ dropdownlist อำเภอเป็น json&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function actionGetAmphur() {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     $out = [];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     if (isset($_POST[&amp;#39;depdrop_parents&amp;#39;])) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         $parents = $_POST[&amp;#39;depdrop_parents&amp;#39;];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         if ($parents != null) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             $province_id = $parents[0];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             $out = $this-&amp;gt;getAmphur($province_id);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             echo Json::encode([&amp;#39;output&amp;#39;=&amp;gt;$out, &amp;#39;selected&amp;#39;=&amp;gt;&amp;#39;&amp;#39;]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;             return;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     echo Json::encode([&amp;#39;output&amp;#39;=&amp;gt;&amp;#39;&amp;#39;, &amp;#39;selected&amp;#39;=&amp;gt;&amp;#39;&amp;#39;]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt; }&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;action ที่สองจะเป็น actionGetDistrict() ตรงนี้จะรองรับการคลิกเลือกอำเภอและ ส่งค่าตำบลกลับไปให้กับ dropdownlist ตำบลเป็น json&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; public function actionGetDistrict() {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     $out = [];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     if (isset($_POST[&amp;#39;depdrop_parents&amp;#39;])) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         $ids = $_POST[&amp;#39;depdrop_parents&amp;#39;];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         $province_id = empty($ids[0]) ? null : $ids[0];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         $amphur_id = empty($ids[1]) ? null : $ids[1];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         if ($province_id != null) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            $data = $this-&amp;gt;getDistrict($amphur_id);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            echo Json::encode([&amp;#39;output&amp;#39;=&amp;gt;$data, &amp;#39;selected&amp;#39;=&amp;gt;&amp;#39;&amp;#39;]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            return;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;         }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;     echo Json::encode([&amp;#39;output&amp;#39;=&amp;gt;&amp;#39;&amp;#39;, &amp;#39;selected&amp;#39;=&amp;gt;&amp;#39;&amp;#39;]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt; }&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;action actionGetAmphur() ข้างใน function จะมีการเรียกใช้งาน getAmphur($id) และส่งค่ารหัส จังหวัดมาให้ เพื่อนำไปค้นที่ model Amphur
-&lt;code&gt;php
- protected function getAmphur($id){
-     $datas = Amphur::find()-&amp;gt;where([&amp;#39;PROVINCE_ID&amp;#39;=&amp;gt;$id])-&amp;gt;all();
-     return $this-&amp;gt;MapData($datas,&amp;#39;AMPHUR_ID&amp;#39;,&amp;#39;AMPHUR_NAME&amp;#39;);
- }
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;action actionGetDistrict() ข้างใน function จะมีการเรียกใช้งาน getDistrict($id) และส่งค่ารหัส อำเภอมาให้ เพื่อนำไปค้นที่ model District
- &lt;code&gt;php
- protected function getDistrict($id){
-     $datas = District::find()-&amp;gt;where([&amp;#39;AMPHUR_ID&amp;#39;=&amp;gt;$id])-&amp;gt;all();
-     return $this-&amp;gt;MapData($datas,&amp;#39;DISTRICT_ID&amp;#39;,&amp;#39;DISTRICT_NAME&amp;#39;);
- }
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;และ function &lt;code&gt;getAmphur()&lt;/code&gt; และ &lt;code&gt;getDistrict()&lt;/code&gt; จะทำการเรียก  &lt;code&gt;MapData&lt;/code&gt; เพื่อทำการนำค่าที่ได้สร้าง array ในรูปแบบ &lt;code&gt;[&amp;#39;id&amp;#39;=&amp;gt;&amp;#39;&amp;#39;,&amp;#39;name&amp;#39;=&amp;gt;&amp;#39;&amp;#39;]&lt;/code&gt; เพราะตัว widget DepDrop ได้ระบบให้สร้างตาม format นี้
- &lt;code&gt;php
- protected function MapData($datas,$fieldId,$fieldName){
-     $obj = [];
-     foreach ($datas as $key =&amp;gt; $value) {
-         array_push($obj, [&amp;#39;id&amp;#39;=&amp;gt;$value-&amp;gt;{$fieldId},&amp;#39;name&amp;#39;=&amp;gt;$value-&amp;gt;{$fieldName}]);
-     }
-     return $obj;
- }
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ทดลองใช้งาน&quot;&gt;ทดลองใช้งาน&lt;/h2&gt;
-
-&lt;p&gt;เลือกจังหวัด
-&lt;img src=&quot;/images/select-province.png&quot; alt=&quot;select-province&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;เลือกอำเภอ&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/select-amphur.png&quot; alt=&quot;select-province&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;เลือกตำบล&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/select-district.png&quot; alt=&quot;select-province&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;กรณี-update&quot;&gt;กรณี Update&lt;/h2&gt;
-
-&lt;p&gt;ในกรณีอัพเดท เราจำเป็นจะต้องนำค่าอำเภอและค่าตำบล ที่ได้บันทึกไว้ไปค้นข้อมูล เพื่อนำมาแสดงผล ว่าเคยเลือกอะไรไปแล้ว&lt;/p&gt;
-
-&lt;p&gt;ไปที่ actionUpdate() ทำการเรียกฟังชั่น getAmphur(), getDistrict() เพื่อดึงข้อมูลไปแสดงที่ dropdownlist อำเภอและตำบล และให้มันเลือกที่รายการที่เราเคยเลือกไว้ก่อนหน้านี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;  public function actionUpdate($id)&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;      $model          = $this-&amp;gt;findModel($id);&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;      $amphur         = ArrayHelper::map($this-&amp;gt;getAmphur($model-&amp;gt;province),&amp;#39;id&amp;#39;,&amp;#39;name&amp;#39;);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;      $district       = ArrayHelper::map($this-&amp;gt;getDistrict($model-&amp;gt;amphur),&amp;#39;id&amp;#39;,&amp;#39;name&amp;#39;);&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    //..........&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    return $this-&amp;gt;render(&amp;#39;update&amp;#39;, [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;           &amp;#39;model&amp;#39; =&amp;gt; $model,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;           &amp;#39;amphur&amp;#39;=&amp;gt; $amphur,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;           &amp;#39;district&amp;#39; =&amp;gt;$district&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    ]);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  }&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;และที่ ไฟล์ views/employee/update.php อย่างลืมส่งค่าไปให้ฟอร์มด้วย
-&lt;code&gt;php
-&amp;lt;?= $this-&amp;gt;render(&amp;#39;_form&amp;#39;, [
-        &amp;#39;model&amp;#39; =&amp;gt; $model,
-         &amp;#39;amphur&amp;#39;=&amp;gt; $amphur,
-         &amp;#39;district&amp;#39; =&amp;gt;$district
-  ]) ?&amp;gt;
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;จากนั้นเปลี่ยนค่า &lt;code&gt;data&lt;/code&gt; ใน dropdownlist อำเภอและตำบลเป็นค่าที่ส่งมาซึ่งในตอนแรกเรากำหนดค่าเป็น array ว่างๆ ไว้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;amphur&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DepDrop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ddl-amphur&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$amphur&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;---------&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;depends&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ddl-province&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;placeholder&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;เลือกอำเภอ...&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/employee/get-amphur&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;district&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;DepDrop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;classname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;data&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$district&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;---------&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;pluginOptions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;depends&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ddl-province&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ddl-amphur&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;placeholder&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;เลือกตำบล...&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/employee/get-district&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เหลืออีกอย่าง อย่าลืมสร้างตัวแปร array ว่างๆ ให้กับ /views/employee/create.php เพื่อในตอน create จะได้ไม่ error ตัวแปรไม่ได้ถูกสร้าง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;_form&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;amphur&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;district&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ลองใช้กันดูนะครับ
-ดาวน์โหลด source code &lt;a href=&quot;https://github.com/dimpled/Yii2-Learning-Source/releases&quot;&gt; ได้ทีนี่&lt;/a&gt;&lt;/p&gt;
-</description>
         <pubDate>Sun, 30 Nov 2014 00:00:00 +0700</pubDate>
       </item>
     

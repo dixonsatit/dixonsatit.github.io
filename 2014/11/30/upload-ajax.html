@@ -1,12 +1,189 @@
-<hr>
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>สร้างฟอร์ม Upload Files ด้วย AJAX | DixonSatit</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
-<p>layout: post</p>
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
 
-<h2 id="title-สร้างฟอร์ม-upload-files-ด้วย-ajax">title: สร้างฟอร์ม Upload Files ด้วย AJAX</h2>
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-<hr>
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/upload-ajax.html">
 
-<p><img src="/images/upload-file-ajax.png" alt="upload file"></p>
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">สร้างฟอร์ม Upload Files ด้วย AJAX</h1>
+    <p class="meta">
+    November 30, 2014
+    
+    </p>
+  </header>
+  <section class="post-content"><hr>
+
+<p><img src="/img/upload-file-ajax.png" alt="upload file"></p>
 
 <p>เชื่อว่าหลายๆ คนคงเคยปวดหัวกับการสร้างฟอร์มเพื่อทำการอัพโหลดไฟล์ต่างๆ หรือไฟล์รูปภาพเองก็ตาม ถ้าเป็นฟอร์มอัพโหลดแบบธรรมดาก็คงไม่เท่าไหร่ แต่ถ้าเป็นแบบ ajax ก็คงจะปวดหัวไม่ใช่น้อย.. T_T&#39; เดี่ยววันเราจะมาลองทำฟอร์ม Upload แบบ ajax กันซึ่งพระเอกของเราวันนี้คือ <a href="http://demos.krajee.com/widgets#fileinput">fileinput</a> เป็น Widget ของ krajee เจ้าเก่า ซึ่งรวมอยู่ในแพ็คเก็จ <a href="http://demos.krajee.com/widgets">Yii2 Widget</a> อยู่แล้ว ติดตั้งทีเดียวได้ครบเลย <sup>^</sup></p>
 
@@ -52,56 +229,51 @@
 <p>เปิดไฟล์ <code>views\photo-library\_form.php</code> เพิ่มแท็ก  <code>enctype</code> เข้าไป</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="nv">$form</span> <span class="o">=</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">begin</span><span class="p">([</span><span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;enctype&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;multipart/form-data&#39;</span><span class="p">]]);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>แก้ไขฟิวด์ ref ให้เป็น hidenInput และเซ็ตค่า label เป็น false
-<code>php
-&lt;?= $form-&gt;field($model, &#39;ref&#39;)-&gt;hiddenInput([&#39;maxlength&#39; =&gt; 50])-&gt;label(false); ?&gt;
-</code>
-ทำการเรียกใช้งาน Select2 widget เพื่อแสดงรายชื่อจังหวัดจาก model <code>Province</code></p>
+<p>แก้ไขฟิวด์ ref ให้เป็น hidenInput และเซ็ตค่า label เป็น false</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">hiddenInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="mi">50</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="k">false</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>ทำการเรียกใช้งาน Select2 widget เพื่อแสดงรายชื่อจังหวัดจาก model <code>Province</code></p>
 
 <blockquote>
 <p>โครงสร้างตาราง province <a href="https://github.com/dimpled/Yii2-Learning-Source/blob/master/yii2-learning-source.sql">ดูได้ที่นี่</a></p>
 </blockquote>
 
-<p>เรียกใช้งาน
-<code>php
-&lt;?= $form-&gt;field($model, &#39;province_id&#39;)-&gt;widget(Select2::classname(), [
-    &#39;data&#39; =&gt; ArrayHelper::map(province::find()-&gt;all(),&#39;PROVINCE_ID&#39;,&#39;PROVINCE_NAME&#39;),
-    &#39;options&#39; =&gt; [&#39;placeholder&#39; =&gt; &#39;เลือกจังหวัด ...&#39;],
-    &#39;pluginOptions&#39; =&gt; [
-        &#39;allowClear&#39; =&gt; true
-    ],
-]);
-?&gt;
-</code></p>
-
-<p>เรียกใช้งาน DatePicker ของ kartik
-<code>php
-&lt;div class=&quot;row&quot;&gt;
-         &lt;div class=&quot;col-sm-6 col-md-6&quot;&gt;
-          &lt;?= $form-&gt;field($model, &#39;start_date&#39;)-&gt;widget(
-         DatePicker::className(), [
-             &#39;language&#39; =&gt; &#39;th&#39;,
-              &#39;options&#39; =&gt; [&#39;placeholder&#39; =&gt; &#39;Select issue date ...&#39;],
-             &#39;pluginOptions&#39; =&gt; [
-                 &#39;format&#39; =&gt; &#39;yyyy-mm-dd&#39;,
-                 &#39;todayHighlight&#39; =&gt; true
-             ]
-     ]);?&gt;
-         &lt;/div&gt;
-         &lt;div class=&quot;col-sm-6 col-md-6&quot;&gt;
-          &lt;?= $form-&gt;field($model, &#39;end_date&#39;)-&gt;widget(
-         DatePicker::className(), [
-             &#39;language&#39; =&gt; &#39;th&#39;,
-              &#39;options&#39; =&gt; [&#39;placeholder&#39; =&gt; &#39;Select issue date ...&#39;],
-             &#39;pluginOptions&#39; =&gt; [
-                 &#39;format&#39; =&gt; &#39;yyyy-mm-dd&#39;,
-                 &#39;todayHighlight&#39; =&gt; true
-             ]
-     ]);?&gt;
-         &lt;/div&gt;
- &lt;/div&gt;
-</code></p>
-
+<p>เรียกใช้งาน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;province_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="nx">Select2</span><span class="o">::</span><span class="na">classname</span><span class="p">(),</span> <span class="p">[</span>
+    <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">map</span><span class="p">(</span><span class="nx">province</span><span class="o">::</span><span class="na">find</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span><span class="s1">&#39;PROVINCE_ID&#39;</span><span class="p">,</span><span class="s1">&#39;PROVINCE_NAME&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;เลือกจังหวัด ...&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;pluginOptions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;allowClear&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+    <span class="p">],</span>
+<span class="p">]);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>เรียกใช้งาน DatePicker ของ kartik</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">&lt;div class=&quot;row&quot;&gt;</span>
+<span class="x">         &lt;div class=&quot;col-sm-6 col-md-6&quot;&gt;</span>
+<span class="x">          </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;start_date&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span>
+         <span class="nx">DatePicker</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="p">[</span>
+             <span class="s1">&#39;language&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;th&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Select issue date ...&#39;</span><span class="p">],</span>
+             <span class="s1">&#39;pluginOptions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                 <span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yyyy-mm-dd&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;todayHighlight&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+             <span class="p">]</span>
+     <span class="p">]);</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">         &lt;/div&gt;</span>
+<span class="x">         &lt;div class=&quot;col-sm-6 col-md-6&quot;&gt;</span>
+<span class="x">          </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;end_date&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span>
+         <span class="nx">DatePicker</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span> <span class="p">[</span>
+             <span class="s1">&#39;language&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;th&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;placeholder&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Select issue date ...&#39;</span><span class="p">],</span>
+             <span class="s1">&#39;pluginOptions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                 <span class="s1">&#39;format&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yyyy-mm-dd&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;todayHighlight&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+             <span class="p">]</span>
+     <span class="p">]);</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">         &lt;/div&gt;</span>
+<span class="x"> &lt;/div&gt;</span>
+</code></pre></div>
 <p>เรียกใช้งาน FileUpload เพื่อสร้างฟอร์ม upload ajax โดยตัวอย่างนี้จะใช้เฉพาะกับรูปภาพ ซึ่งจริงๆ แล้วเราสามารถกำหนดให้อัพโหลดเป็นไฟล์อะไรก็ได้
 <code>FileInput::widget()</code> มี property ที่จำเป็นดังนี้
 - <code>overwriteInitial</code>  กำหนดให้สามารถเพิ่มไฟล์อัพโหลดใหม่เข้าไปได้โดยที่ไม่ลบรายการเก่าออกไป
@@ -237,58 +409,53 @@
 </code></pre></div>
 <p>แก้ไขไฟล์ <code>views/photo-library/create.php</code></p>
 
-<p>เราจะทำการส่งค่า <code>initialPreview</code> และ <code>initialPreviewConfig</code> เป็น array ว่างๆ ไปเพราะในตอน create ยังไม่มีข้อมูลที่จะแสดง เราจึงจำเป็นต้องส่ง array ว่างๆ ไปก่อน
-```php
-&lt;?php</p>
+<p>เราจะทำการส่งค่า <code>initialPreview</code> และ <code>initialPreviewConfig</code> เป็น array ว่างๆ ไปเพราะในตอน create ยังไม่มีข้อมูลที่จะแสดง เราจึงจำเป็นต้องส่ง array ว่างๆ ไปก่อน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="cm">/* @var $this yii\web\View */</span>
+<span class="cm">/* @var $model app\models\PhotoLibrary */</span>
 
-<p>use yii\helpers\Html;</p>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="s1">&#39;Create Photo Library&#39;</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;breadcrumbs&#39;</span><span class="p">][]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Photo Libraries&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]];</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;breadcrumbs&#39;</span><span class="p">][]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;div class=&quot;photo-library-create&quot;&gt;</span>
 
-<p>/* @var $this yii\web\View <em>/
-/</em> @var $model app\models\PhotoLibrary */</p>
+<span class="x">    &lt;h1&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">Html</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/h1&gt;</span>
 
-<p>$this-&gt;title = &#39;Create Photo Library&#39;;
-$this-&gt;params[&#39;breadcrumbs&#39;][] = [&#39;label&#39; =&gt; &#39;Photo Libraries&#39;, &#39;url&#39; =&gt; [&#39;index&#39;]];
-$this-&gt;params[&#39;breadcrumbs&#39;][] = $this-&gt;title;
-?&gt;
-<div class="photo-library-create"></p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;h1&gt;&lt;?= Html::encode($this-&gt;title) ?&gt;&lt;/h1&gt;
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;_form&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+        <span class="s1">&#39;initialPreview&#39;</span><span class="o">=&gt;</span><span class="p">[],</span>
+        <span class="s1">&#39;initialPreviewConfig&#39;</span><span class="o">=&gt;</span><span class="p">[]</span>
+    <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
 
-&lt;?= $this-&gt;render(&#39;_form&#39;, [
-    &#39;model&#39; =&gt; $model,
-    &#39;initialPreview&#39;=&gt;[],
-    &#39;initialPreviewConfig&#39;=&gt;[]
-]) ?&gt;
+<span class="x">&lt;/div&gt;</span>
 </code></pre></div>
-<p></div></p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">แก้ไขไฟล์ `views/photo-library/update.php` ใน actionUpdate เราจะทำการส่งค่า `initialPreview` และ `initialPreviewConfig`  ไปเพื่อให้ widget แสดง thumbnail รูปภาพที่เคยอัพโหลดไปแล้ว แต่ในตอนนี้เรายังไม่ได้สร้างฟังชันเราจะส่ง array ว่างๆ  ไปก่อน
+<p>แก้ไขไฟล์ <code>views/photo-library/update.php</code> ใน actionUpdate เราจะทำการส่งค่า <code>initialPreview</code> และ <code>initialPreviewConfig</code>  ไปเพื่อให้ widget แสดง thumbnail รูปภาพที่เคยอัพโหลดไปแล้ว แต่ในตอนนี้เรายังไม่ได้สร้างฟังชันเราจะส่ง array ว่างๆ  ไปก่อน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="cm">/* @var $this yii\web\View */</span>
+<span class="cm">/* @var $model app\models\PhotoLibrary */</span>
 
-```php
-&lt;?php
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="s1">&#39;Update Photo Library: &#39;</span> <span class="o">.</span> <span class="s1">&#39; &#39;</span> <span class="o">.</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;breadcrumbs&#39;</span><span class="p">][]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Photo Libraries&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">]];</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;breadcrumbs&#39;</span><span class="p">][]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">]];</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;breadcrumbs&#39;</span><span class="p">][]</span> <span class="o">=</span> <span class="s1">&#39;Update&#39;</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;div class=&quot;photo-library-update&quot;&gt;</span>
 
-use yii\helpers\Html;
+<span class="x">    &lt;h1&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">Html</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/h1&gt;</span>
 
-/* @var $this yii\web\View */
-/* @var $model app\models\PhotoLibrary */
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;_form&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+        <span class="s1">&#39;initialPreview&#39;</span><span class="o">=&gt;</span><span class="p">[],</span>
+        <span class="s1">&#39;initialPreviewConfig&#39;</span><span class="o">=&gt;</span><span class="p">[]</span>
+    <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
 
-$this-&gt;title = &#39;Update Photo Library: &#39; . &#39; &#39; . $model-&gt;id;
-$this-&gt;params[&#39;breadcrumbs&#39;][] = [&#39;label&#39; =&gt; &#39;Photo Libraries&#39;, &#39;url&#39; =&gt; [&#39;index&#39;]];
-$this-&gt;params[&#39;breadcrumbs&#39;][] = [&#39;label&#39; =&gt; $model-&gt;id, &#39;url&#39; =&gt; [&#39;view&#39;, &#39;id&#39; =&gt; $model-&gt;id]];
-$this-&gt;params[&#39;breadcrumbs&#39;][] = &#39;Update&#39;;
-?&gt;
-&lt;div class=&quot;photo-library-update&quot;&gt;
-
-    &lt;h1&gt;&lt;?= Html::encode($this-&gt;title) ?&gt;&lt;/h1&gt;
-
-    &lt;?= $this-&gt;render(&#39;_form&#39;, [
-        &#39;model&#39; =&gt; $model,
-        &#39;initialPreview&#39;=&gt;[],
-        &#39;initialPreviewConfig&#39;=&gt;[]
-    ]) ?&gt;
-
-&lt;/div&gt;
+<span class="x">&lt;/div&gt;</span>
 </code></pre></div>
 <p>ลองทดสอบรันจะได้ฟอร์มตามตัวอย่างนี้
-<img src="/images/upload-file/upload-ajax-form.png" alt=""></p>
+<img src="/img/upload-file/upload-ajax-form.png" alt=""></p>
 
 <h2 id="เพิ่ม-function-ใน-model-photolibrary">เพิ่ม function ใน Model PhotoLibrary</h2>
 
@@ -396,65 +563,59 @@ $this-&gt;params[&#39;breadcrumbs&#39;][] = &#39;Update&#39;;
 <span class="x">        return  [$initialPreview,$initialPreviewConfig];</span>
 <span class="x">}</span>
 </code></pre></div>
-<p><code>isImage()</code> ฟังก์ชันนี้เอาไว้แยกแยะระหว่างไฟล์และรูปภาพ
-<code>php
-public function isImage($filePath){
-        return @is_array(getimagesize($filePath)) ? true : false;
-}
-</code>
-<code>getTemplatePreview()</code> เอาไว้เลือก template ที่จะแสดงผลว่าเป็น image หรือไฟล์อื่นๆ
-<code>php
-private function getTemplatePreview(Uploads $model){
-        $filePath = Freelance::getUploadUrl().$model-&gt;ref.&#39;/thumbnail/&#39;.$model-&gt;real_filename;
-        $isImage  = $this-&gt;isImage($filePath);
-        if($isImage){
-            $file = Html::img($filePath,[&#39;class&#39;=&gt;&#39;file-preview-image&#39;, &#39;alt&#39;=&gt;$model-&gt;file_name, &#39;title&#39;=&gt;$model-&gt;file_name]);
-        }else{
-            $file =  &quot;&lt;div class=&#39;file-preview-other&#39;&gt; &quot; .
-                     &quot;&lt;h2&gt;&lt;i class=&#39;glyphicon glyphicon-file&#39;&gt;&lt;/i&gt;&lt;/h2&gt;&quot; .
-                     &quot;&lt;/div&gt;&quot;;
-        }
-        return $file;
-}
-</code>
-<code>createThumbnail()</code> เป็น function ที่เอาไว้สร้าง thumbnail เล็กๆ เพื่อให้สามารถแสดงผลได้เร็ว
-<code>php
-private function createThumbnail($folderName,$fileName,$width=250){
-  $uploadPath   = Freelance::getUploadPath().&#39;/&#39;.$folderName.&#39;/&#39;;
-  $file         = $uploadPath.$fileName;
-  $image        = Yii::$app-&gt;image-&gt;load($file);
-  $image-&gt;resize($width);
-  $image-&gt;save($uploadPath.&#39;thumbnail/&#39;.$fileName);
-  return;
-}
-</code>
-<code>actionDeletefileAjax()</code> เป็น action ที่เอาไว้ลบไฟล์ในกรณีที่คลิกลบไฟล์ จาก thumbnail ในตัวอัพโหลด ajax
-```php
-public function actionDeletefileAjax(){</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$model = Uploads::findOne(Yii::$app-&gt;request-&gt;post(&#39;key&#39;));
-if($model!==NULL){
-    $filename  = Freelance::getUploadPath().$model-&gt;ref.&#39;/&#39;.$model-&gt;real_filename;
-    $thumbnail = Freelance::getUploadPath().$model-&gt;ref.&#39;/thumbnail/&#39;.$model-&gt;real_filename;
-    if($model-&gt;delete()){
-        @unlink($filename);
-        @unlink($thumbnail);
-        echo json_encode([&#39;success&#39;=&gt;true]);
-    }else{
-        echo json_encode([&#39;success&#39;=&gt;false]);
-    }
-}else{
-  echo json_encode([&#39;success&#39;=&gt;false]);  
-}
+<p><code>isImage()</code> ฟังก์ชันนี้เอาไว้แยกแยะระหว่างไฟล์และรูปภาพ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">public function isImage($filePath){</span>
+<span class="x">        return @is_array(getimagesize($filePath)) ? true : false;</span>
+<span class="x">}</span>
 </code></pre></div>
-<p>}
-<code>
-เป็นฟังก์ชันลบ folder ที่ใช้เก็บไฟล์ เราจะใช้ในกรณีหากมีการลบ record ก็ให้ตามไปลบไฟล์ทั้งหมดด้วย
-</code>php
-private function removeUploadDir($dir){
-    BaseFileHelper::removeDirectory(Freelance::getUploadPath().$dir);
-}
-```</p>
+<p><code>getTemplatePreview()</code> เอาไว้เลือก template ที่จะแสดงผลว่าเป็น image หรือไฟล์อื่นๆ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">private function getTemplatePreview(Uploads $model){</span>
+<span class="x">        $filePath = Freelance::getUploadUrl().$model-&gt;ref.&#39;/thumbnail/&#39;.$model-&gt;real_filename;</span>
+<span class="x">        $isImage  = $this-&gt;isImage($filePath);</span>
+<span class="x">        if($isImage){</span>
+<span class="x">            $file = Html::img($filePath,[&#39;class&#39;=&gt;&#39;file-preview-image&#39;, &#39;alt&#39;=&gt;$model-&gt;file_name, &#39;title&#39;=&gt;$model-&gt;file_name]);</span>
+<span class="x">        }else{</span>
+<span class="x">            $file =  &quot;&lt;div class=&#39;file-preview-other&#39;&gt; &quot; .</span>
+<span class="x">                     &quot;&lt;h2&gt;&lt;i class=&#39;glyphicon glyphicon-file&#39;&gt;&lt;/i&gt;&lt;/h2&gt;&quot; .</span>
+<span class="x">                     &quot;&lt;/div&gt;&quot;;</span>
+<span class="x">        }</span>
+<span class="x">        return $file;</span>
+<span class="x">}</span>
+</code></pre></div>
+<p><code>createThumbnail()</code> เป็น function ที่เอาไว้สร้าง thumbnail เล็กๆ เพื่อให้สามารถแสดงผลได้เร็ว</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">private function createThumbnail($folderName,$fileName,$width=250){</span>
+<span class="x">  $uploadPath   = Freelance::getUploadPath().&#39;/&#39;.$folderName.&#39;/&#39;;</span>
+<span class="x">  $file         = $uploadPath.$fileName;</span>
+<span class="x">  $image        = Yii::$app-&gt;image-&gt;load($file);</span>
+<span class="x">  $image-&gt;resize($width);</span>
+<span class="x">  $image-&gt;save($uploadPath.&#39;thumbnail/&#39;.$fileName);</span>
+<span class="x">  return;</span>
+<span class="x">}</span>
+</code></pre></div>
+<p><code>actionDeletefileAjax()</code> เป็น action ที่เอาไว้ลบไฟล์ในกรณีที่คลิกลบไฟล์ จาก thumbnail ในตัวอัพโหลด ajax</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">public function actionDeletefileAjax(){</span>
 
+<span class="x">    $model = Uploads::findOne(Yii::$app-&gt;request-&gt;post(&#39;key&#39;));</span>
+<span class="x">    if($model!==NULL){</span>
+<span class="x">        $filename  = Freelance::getUploadPath().$model-&gt;ref.&#39;/&#39;.$model-&gt;real_filename;</span>
+<span class="x">        $thumbnail = Freelance::getUploadPath().$model-&gt;ref.&#39;/thumbnail/&#39;.$model-&gt;real_filename;</span>
+<span class="x">        if($model-&gt;delete()){</span>
+<span class="x">            @unlink($filename);</span>
+<span class="x">            @unlink($thumbnail);</span>
+<span class="x">            echo json_encode([&#39;success&#39;=&gt;true]);</span>
+<span class="x">        }else{</span>
+<span class="x">            echo json_encode([&#39;success&#39;=&gt;false]);</span>
+<span class="x">        }</span>
+<span class="x">    }else{</span>
+<span class="x">      echo json_encode([&#39;success&#39;=&gt;false]);  </span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+<p>เป็นฟังก์ชันลบ folder ที่ใช้เก็บไฟล์ เราจะใช้ในกรณีหากมีการลบ record ก็ให้ตามไปลบไฟล์ทั้งหมดด้วย</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">private function removeUploadDir($dir){</span>
+<span class="x">    BaseFileHelper::removeDirectory(Freelance::getUploadPath().$dir);</span>
+<span class="x">}</span>
+</code></pre></div>
 <p>สุดท้ายทำการปรับปรุง actionDelete() ซักเล็กน้อย โดยหากมีการลบ record ก็ให้ทำการลบโฟล์เดอร์ที่เก็บไฟล์นั้นด้วย โดยใช้ <code>removeUploadDir()</code> ที่เราสร้างไว้แล้วก่อนหน้านี้</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">public function actionDelete($id)</span>
 <span class="x">{</span>
@@ -481,69 +642,67 @@ public function actionUploadAjax(){
 
 <p>ปรับปรุงให้ action เดิมๆ สามารถรองรับการอัพโหลดจากฟอร์ม ajax ได้ เพราะหากเค้าไม่คลิกปุ่มอัพโหลด ajax แล้วข้อมูลจะยังไม่ถูกอัพโหลด เราจะแก้ไขโดยการเรียกใช้งาน function Upload() ที่เราได้สร้างไว้และใช้กับ actionUploadAjax() ซึ่งสามารถนำมาใช้กับ acionCreate และ  actionUpdate ได้</p>
 
-<p>โดยเพิ่ม <code>this-&gt;Uploads(false);</code>เข้าไป
-```php
-public function actionCreate()
-{
-    $model = new PhotoLibrary();</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">if ($model-&gt;load(Yii::$app-&gt;request-&gt;post()) ) {
+<p>โดยเพิ่ม <code>this-&gt;Uploads(false);</code>เข้าไป</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">public function actionCreate()</span>
+<span class="x">{</span>
+<span class="x">    $model = new PhotoLibrary();</span>
 
-    $this-&gt;Uploads(false);
+<span class="x">    if ($model-&gt;load(Yii::$app-&gt;request-&gt;post()) ) {</span>
 
-    if($model-&gt;save()){
-         return $this-&gt;redirect([&#39;view&#39;, &#39;id&#39; =&gt; $model-&gt;id]);
-    }
+<span class="x">        $this-&gt;Uploads(false);</span>
 
-} else {
-     $model-&gt;ref = substr(Yii::$app-&gt;getSecurity()-&gt;generateRandomString(),10);
-}
+<span class="x">        if($model-&gt;save()){</span>
+<span class="x">             return $this-&gt;redirect([&#39;view&#39;, &#39;id&#39; =&gt; $model-&gt;id]);</span>
+<span class="x">        }</span>
 
-return $this-&gt;render(&#39;create&#39;, [
-    &#39;model&#39; =&gt; $model,
-]);
+<span class="x">    } else {</span>
+<span class="x">         $model-&gt;ref = substr(Yii::$app-&gt;getSecurity()-&gt;generateRandomString(),10);</span>
+<span class="x">    }</span>
+
+<span class="x">    return $this-&gt;render(&#39;create&#39;, [</span>
+<span class="x">        &#39;model&#39; =&gt; $model,</span>
+<span class="x">    ]);</span>
+
+<span class="x">}</span>
 </code></pre></div>
-<p>}
-```</p>
+<p>ส่วน actionUpdate() เพิ่ม getInitialPreview() เข้ามาด้วยเพื่อใช้แสดง thumbnail ในตัว ajax upload</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">public function actionUpdate($id)</span>
+<span class="x"> {</span>
+<span class="x">     $model = $this-&gt;findModel($id);</span>
 
-<p>ส่วน actionUpdate() เพิ่ม getInitialPreview() เข้ามาด้วยเพื่อใช้แสดง thumbnail ในตัว ajax upload
-```php
-public function actionUpdate($id)
- {
-     $model = $this-&gt;findModel($id);</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text"> list($initialPreview,$initialPreviewConfig) = $this-&gt;getInitialPreview($model-&gt;ref);
+<span class="x">     list($initialPreview,$initialPreviewConfig) = $this-&gt;getInitialPreview($model-&gt;ref);</span>
 
- if ($model-&gt;load(Yii::$app-&gt;request-&gt;post())) {
-     $this-&gt;Uploads(false);
+<span class="x">     if ($model-&gt;load(Yii::$app-&gt;request-&gt;post())) {</span>
+<span class="x">         $this-&gt;Uploads(false);</span>
 
-     if($model-&gt;save()){
-          return $this-&gt;redirect([&#39;view&#39;, &#39;id&#39; =&gt; $model-&gt;id]);
-     }
- }
+<span class="x">         if($model-&gt;save()){</span>
+<span class="x">              return $this-&gt;redirect([&#39;view&#39;, &#39;id&#39; =&gt; $model-&gt;id]);</span>
+<span class="x">         }</span>
+<span class="x">     }</span>
 
- return $this-&gt;render(&#39;update&#39;, [
-     &#39;model&#39; =&gt; $model,
-      &#39;initialPreview&#39;=&gt;$initialPreview,
-      &#39;initialPreviewConfig&#39;=&gt;$initialPreviewConfig
- ]);
+<span class="x">     return $this-&gt;render(&#39;update&#39;, [</span>
+<span class="x">         &#39;model&#39; =&gt; $model,</span>
+<span class="x">          &#39;initialPreview&#39;=&gt;$initialPreview,</span>
+<span class="x">          &#39;initialPreviewConfig&#39;=&gt;$initialPreviewConfig</span>
+<span class="x">     ]);</span>
+
+<span class="x"> }</span>
 </code></pre></div>
-<p>}
-<code>
-และแก้ไขไฟล์เพิ่มเติม views/freelance/create.php
-</code>php
-&lt;?= $this-&gt;render(&#39;<em>form&#39;, [
-       &#39;model&#39; =&gt; $model,
-       &#39;initialPreview&#39;=&gt; [],
-       &#39;initialPreviewConfig&#39;=&gt; [],
-   ]) ?&gt;
-<code>
-และแก้ไขไฟล์ views/freelance/update.php
-</code>php
-&lt;?= $this-&gt;render(&#39;</em>form&#39;, [
+<p>และแก้ไขไฟล์เพิ่มเติม views/freelance/create.php</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;_form&#39;</span><span class="p">,</span> <span class="p">[</span>
+       <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+       <span class="s1">&#39;initialPreview&#39;</span><span class="o">=&gt;</span> <span class="p">[],</span>
+       <span class="s1">&#39;initialPreviewConfig&#39;</span><span class="o">=&gt;</span> <span class="p">[],</span>
+   <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>และแก้ไขไฟล์ views/freelance/update.php
+<code>php
+&lt;?= $this-&gt;render(&#39;_form&#39;, [
     &#39;model&#39; =&gt; $model,
     &#39;initialPreview&#39;=&gt;$initialPreview,
     &#39;initialPreviewConfig&#39;=&gt;$initialPreviewConfig
 ]) ?&gt;
-```</p>
+</code></p>
 
 <p>โค้ดทั้งหมด ใน PhotolibraryController()</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
@@ -830,25 +989,50 @@ public function actionUpdate($id)
 
 <p>เพื่อให้สามารถดูรูปภาพที่เราได้อัพโหลดไปแล้ว เราจะทำการเรียกใช้งาน widget Gallery</p>
 
-<p>โดยเพิ่มที่ไฟล์ <code>views\photo-library\view.php</code>เพิ่มการเรียกใช้งานเข้าไปด้านล่างสุด ซึ่งเราจะเรียกใช้งาน <code>getThumbnails()</code> ที่เราได้สร้างไว้แล้วตอนแก้ไข Model PhotoLibrary
-<code>php
-&lt;div class=&quot;panel panel-default&quot;&gt;
-  &lt;div class=&quot;panel-body&quot;&gt;
-     &lt;?= dosamigos\gallery\Gallery::widget([&#39;items&#39; =&gt; $model-&gt;getThumbnails($model-&gt;ref,$model-&gt;event_name)]);?&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></p>
-
+<p>โดยเพิ่มที่ไฟล์ <code>views\photo-library\view.php</code>เพิ่มการเรียกใช้งานเข้าไปด้านล่างสุด ซึ่งเราจะเรียกใช้งาน <code>getThumbnails()</code> ที่เราได้สร้างไว้แล้วตอนแก้ไข Model PhotoLibrary</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">&lt;div class=&quot;panel panel-default&quot;&gt;</span>
+<span class="x">  &lt;div class=&quot;panel-body&quot;&gt;</span>
+<span class="x">     </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">dosamigos\gallery\Gallery</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span><span class="s1">&#39;items&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getThumbnails</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">ref</span><span class="p">,</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">event_name</span><span class="p">)]);</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">  &lt;/div&gt;</span>
+<span class="x">&lt;/div&gt;</span>
+</code></pre></div>
 <h2 id="ลองใช้งาน">ลองใช้งาน</h2>
 
 <p>หน้าหลัก
-<img src="/images/upload-file/form-1.png" alt="update"></p>
+<img src="/img/upload-file/form-1.png" alt="update"></p>
 
 <p>การสร้างและแก้ไขข้อมูล
-<img src="/images/upload-file/form-2.png" alt="update"></p>
+<img src="/img/upload-file/form-2.png" alt="update"></p>
 
 <p>หน้า preview
-<img src="/images/upload-file/form-3.png" alt="update"></p>
+<img src="/img/upload-file/form-3.png" alt="update"></p>
 
 <p>เมื่อคลิกที่รูปภาพจะแสดงเป็น gallry
-<img src="/images/upload-file/form-4.png" alt="update"></p>
+<img src="/img/upload-file/form-4.png" alt="update"></p>
+
+<p><a href="https://github.com/dimpled/Yii2-Learning-Source">ดาวน์โหลด soucrecode ได้ที่นี่</a></p>
+
+<blockquote>
+<p>ตัวอย่างอยู่ที่ PhotoLibraryController </p>
+</blockquote>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

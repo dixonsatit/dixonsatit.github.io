@@ -88,6 +88,14 @@
 			
 			
 			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
 			
 			
 			
@@ -181,22 +189,22 @@
 
 <p>ถ้าง่ายขนาดนั้น งั้นเรามาลองกัน!</p>
 
-<p><img src="/images/depdrop.png" alt="dependent"></p>
+<p><img src="/img/depdrop.png" alt="dependent"></p>
 
 <h2 id="หลักการทำงาน">หลักการทำงาน</h2>
 
 <p>เราจะทำการสร้าง DropdownList ไวัทั้งหมด 3 ตัว ตัวแรก จังหวัดจะเป็น DropdownList ธรรมดา และดึงข้อมูลจังหวัดมาแสดง ส่วนอีก 2 ตัวที่เหลือ จะทำการเรียกข้อมูลผ่าน Request ajax เมื่อมีการคลิกเลือกอำเภอ และตำบลตามลำดับ</p>
 
-<p><img src="/images/dropdown-flow.png" alt="deropdown"></p>
+<p><img src="/img/dropdown-flow.png" alt="deropdown"></p>
 
 <ul>
 <li><p>ขั้นตอนแรก ตัวเลือกจังหวัด เราจะทำการใช้ dropdownList แบบธรรมดาและคิวรีข้อมูลขึ้นมาเพื่อกำหนดค่าให้กับ dropdownList จังหวัดเพื่อแสดงผล
-<img src="/images/province.png" alt="deropdown"></p></li>
+<img src="/img/province.png" alt="deropdown"></p></li>
 <li><p>เมื่อมีการคลิกเลือกจังหวัด ก็จะทำการส่งข้อมูลรหัสจังหวัด ที่เลือกไปที่ <code>actionGetAmphur()</code> เพื่อทำการค้นหาอำเภอ
 และจะส่งข้อมูลกลับมาในรูปแบบ <code>json</code> ไปให้ widget และนำไปแสดงผลที่ DropdownList อำเภอ
-<img src="/images/amphur.png" alt="deropdown"></p></li>
+<img src="/img/amphur.png" alt="deropdown"></p></li>
 <li><p>เมื่อทำการเลือกอำเภอ ก็จะทำการส่งข้อมูลรหัสอำเภอที่เลือก ไปที่ <code>actionGetDistrict()</code> เพื่อทำการค้นหาข้อมูลตำบล และส่งข้อมูลกลับให้ widget ในรูปแบบของ <code>json</code>เพื่อนำไปแสดงผลต่อที่ dropdownList ตำบล
-<img src="/images/district.png" alt="deropdown"></p></li>
+<img src="/img/district.png" alt="deropdown"></p></li>
 </ul>
 
 <blockquote>
@@ -211,15 +219,13 @@
 <p>widget นี้ใช้งานร่วมกับ  <a href="https://github.com/yiisoft/yii2/tree/master/extensions/bootstrap">yiisoft/yii2-bootstrap</a> แต่ส่วนใหญ่ก็ติดตั้งมาพร้อมอยู่แล้ว</p>
 </blockquote>
 
-<p>รันคำสั่งเพื่อทำการติดตั้ง
-<code>
-composer require kartik-v/yii2-widgets &quot;*&quot;
-</code>
-หรือเพิ่ม
-<code>
-&quot;kartik-v/yii2-widgets&quot;: &quot;*&quot;
-</code>
-ที่แท็ค require ในไฟล์ composer.json จากนั้น <code>composer update</code></p>
+<p>รันคำสั่งเพื่อทำการติดตั้ง</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer require kartik-v/yii2-widgets &quot;*&quot;
+</code></pre></div>
+<p>หรือเพิ่ม</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&quot;kartik-v/yii2-widgets&quot;: &quot;*&quot;
+</code></pre></div>
+<p>ที่แท็ค require ในไฟล์ composer.json จากนั้น <code>composer update</code></p>
 
 <h2 id="สร้าง-model">สร้าง Model</h2>
 
@@ -231,35 +237,31 @@ composer require kartik-v/yii2-widgets &quot;*&quot;
 
 <h2 id="เรียกใช้งานใน-form">เรียกใช้งานใน Form</h2>
 
-<p>ทำการเรียกใช้งาน model ทั้งหมด เรียก ArrayHelper และ DepDrop
-```php
-&lt;?php
-use app\models\Province;
-use app\models\Amphur;
-use app\models\District;</p>
+<p>ทำการเรียกใช้งาน model ทั้งหมด เรียก ArrayHelper และ DepDrop</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">app\models\Province</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">app\models\Amphur</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">app\models\District</span><span class="p">;</span>
 
-<p>use yii\helpers\ArrayHelper;</p>
+<span class="k">use</span> <span class="nx">yii\helpers\ArrayHelper</span><span class="p">;</span>
 
-<p>use kartik\widgets\DepDrop;
-```</p>
-
+<span class="k">use</span> <span class="nx">kartik\widgets\DepDrop</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="สร้าง-dropdownlist-จังหวัด">สร้าง DropdownList จังหวัด</h2>
 
-<p>ในการเรียกข้อมูลเพื่อมาใช้กับ DropdownList โดยเรียกผ่าน model นั้นเราจะเป็นจะต้องใช้ <code>ArrayHelper</code> เพื่อสร้าง array ที่สามารถใช้กับ dropdownList ได้ โดยใช้ <code>ArrayHelper::map(&quot;model&quot;,&quot;ชื่อฟิวด์รหัส&quot;,&quot;ชื่อฟิวด์ที่เป็นข้อความ&quot;)</code>
-<code>php
-ArrayHelper::map(Province::find()-&gt;all(),
-&#39;PROVINCE_ID&#39;,
-&#39;PROVINCE_NAME&#39;)
-</code>
-จากนั้นเราจะได้ Array กลับมาในรูปแบบ
-<code>php
-array(
-  &#39;28&#39;=&gt;&#39;ขอนแก่น&#39;,
-  &#39;29&#39;=&gt;&#39;มาหาสารคาม&#39;,
-  .......
-  )
-</code>
-เมื่อได้ข้อมูลแล้วเราก็เรียกใช้งานและทำการตั้งชื่อให้กับ DropdownList จังหวัดชื่อ <code>ddl-province</code></p>
+<p>ในการเรียกข้อมูลเพื่อมาใช้กับ DropdownList โดยเรียกผ่าน model นั้นเราจะเป็นจะต้องใช้ <code>ArrayHelper</code> เพื่อสร้าง array ที่สามารถใช้กับ dropdownList ได้ โดยใช้ <code>ArrayHelper::map(&quot;model&quot;,&quot;ชื่อฟิวด์รหัส&quot;,&quot;ชื่อฟิวด์ที่เป็นข้อความ&quot;)</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">ArrayHelper::map(Province::find()-&gt;all(),</span>
+<span class="x">&#39;PROVINCE_ID&#39;,</span>
+<span class="x">&#39;PROVINCE_NAME&#39;)</span>
+</code></pre></div>
+<p>จากนั้นเราจะได้ Array กลับมาในรูปแบบ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">array(</span>
+<span class="x">  &#39;28&#39;=&gt;&#39;ขอนแก่น&#39;,</span>
+<span class="x">  &#39;29&#39;=&gt;&#39;มาหาสารคาม&#39;,</span>
+<span class="x">  .......</span>
+<span class="x">  )</span>
+</code></pre></div>
+<p>เมื่อได้ข้อมูลแล้วเราก็เรียกใช้งานและทำการตั้งชื่อให้กับ DropdownList จังหวัดชื่อ <code>ddl-province</code></p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;province&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">dropdownList</span><span class="p">(</span>
             <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">map</span><span class="p">(</span><span class="nx">Province</span><span class="o">::</span><span class="na">find</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">(),</span>
             <span class="s1">&#39;PROVINCE_ID&#39;</span><span class="p">,</span>
@@ -271,7 +273,7 @@ array(
 </code></pre></div>
 <p>ซึ่งก็จะเห็นว่าเราสามารถเลือกจังหวัดได้แล้ว</p>
 
-<p><img src="/images/province-view.png" alt="deropdown"></p>
+<p><img src="/img/province-view.png" alt="deropdown"></p>
 
 <blockquote>
 <p>ตอนนี้เราตั้ง id dropdownlist <code>ddl-province</code></p>
@@ -297,20 +299,19 @@ array(
 </code></pre></div>
 <h2 id="สร้าง-dropdownlist-ตำบล">สร้าง DropdownList ตำบล</h2>
 
-<p>การกำหนดค่าจะคล้ายกับ อำเภอ แต่ต่างกันที่ <code>depends</code> จะมีการกำหนดค่าชื่อไว้สองตัวคือ ชือ dropdownlist จังหวัดและ dropdownlist อำเภอ
-<code>php
-&lt;?= $form-&gt;field($model, &#39;district&#39;)-&gt;widget(DepDrop::classname(), [
-           &#39;data&#39; =&gt;[],
-           &#39;pluginOptions&#39;=&gt;[
-               &#39;depends&#39;=&gt;[&#39;ddl-province&#39;, &#39;ddl-amphur&#39;],
-               &#39;placeholder&#39;=&gt;&#39;เลือกตำบล...&#39;,
-               &#39;url&#39;=&gt;Url::to([&#39;/employee/get-district&#39;])
-           ]
-]); ?&gt;
-</code>
-เราจะได้ form แบบนี้</p>
+<p>การกำหนดค่าจะคล้ายกับ อำเภอ แต่ต่างกันที่ <code>depends</code> จะมีการกำหนดค่าชื่อไว้สองตัวคือ ชือ dropdownlist จังหวัดและ dropdownlist อำเภอ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;district&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="nx">DepDrop</span><span class="o">::</span><span class="na">classname</span><span class="p">(),</span> <span class="p">[</span>
+           <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span><span class="p">[],</span>
+           <span class="s1">&#39;pluginOptions&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+               <span class="s1">&#39;depends&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;ddl-province&#39;</span><span class="p">,</span> <span class="s1">&#39;ddl-amphur&#39;</span><span class="p">],</span>
+               <span class="s1">&#39;placeholder&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;เลือกตำบล...&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;url&#39;</span><span class="o">=&gt;</span><span class="nx">Url</span><span class="o">::</span><span class="na">to</span><span class="p">([</span><span class="s1">&#39;/employee/get-district&#39;</span><span class="p">])</span>
+           <span class="p">]</span>
+<span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>เราจะได้ form แบบนี้</p>
 
-<p><img src="/images/depdrop-all.png" alt="deropdown"></p>
+<p><img src="/img/depdrop-all.png" alt="deropdown"></p>
 
 <p>แต่ตอนนี้จะยังใช้งานไม่ได้เพราะเรายังไม่ได้สร้าง action เพื่อรองรับการค้นข้อมูลและส่งข้อมูลให้กับ dropdownlist</p>
 
@@ -348,45 +349,39 @@ action แรกจะเป็น actionGetAmphur() ตรงนี้จะร
 <span class="x">     echo Json::encode([&#39;output&#39;=&gt;&#39;&#39;, &#39;selected&#39;=&gt;&#39;&#39;]);</span>
 <span class="x"> }</span>
 </code></pre></div>
-<p>action actionGetAmphur() ข้างใน function จะมีการเรียกใช้งาน getAmphur($id) และส่งค่ารหัส จังหวัดมาให้ เพื่อนำไปค้นที่ model Amphur
-<code>php
- protected function getAmphur($id){
-     $datas = Amphur::find()-&gt;where([&#39;PROVINCE_ID&#39;=&gt;$id])-&gt;all();
-     return $this-&gt;MapData($datas,&#39;AMPHUR_ID&#39;,&#39;AMPHUR_NAME&#39;);
- }
-</code></p>
-
-<p>action actionGetDistrict() ข้างใน function จะมีการเรียกใช้งาน getDistrict($id) และส่งค่ารหัส อำเภอมาให้ เพื่อนำไปค้นที่ model District
- <code>php
- protected function getDistrict($id){
-     $datas = District::find()-&gt;where([&#39;AMPHUR_ID&#39;=&gt;$id])-&gt;all();
-     return $this-&gt;MapData($datas,&#39;DISTRICT_ID&#39;,&#39;DISTRICT_NAME&#39;);
- }
-</code></p>
-
-<p>และ function <code>getAmphur()</code> และ <code>getDistrict()</code> จะทำการเรียก  <code>MapData</code> เพื่อทำการนำค่าที่ได้สร้าง array ในรูปแบบ <code>[&#39;id&#39;=&gt;&#39;&#39;,&#39;name&#39;=&gt;&#39;&#39;]</code> เพราะตัว widget DepDrop ได้ระบบให้สร้างตาม format นี้
- <code>php
- protected function MapData($datas,$fieldId,$fieldName){
-     $obj = [];
-     foreach ($datas as $key =&gt; $value) {
-         array_push($obj, [&#39;id&#39;=&gt;$value-&gt;{$fieldId},&#39;name&#39;=&gt;$value-&gt;{$fieldName}]);
-     }
-     return $obj;
- }
-</code></p>
-
+<p>action actionGetAmphur() ข้างใน function จะมีการเรียกใช้งาน getAmphur($id) และส่งค่ารหัส จังหวัดมาให้ เพื่อนำไปค้นที่ model Amphur</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> protected function getAmphur($id){</span>
+<span class="x">     $datas = Amphur::find()-&gt;where([&#39;PROVINCE_ID&#39;=&gt;$id])-&gt;all();</span>
+<span class="x">     return $this-&gt;MapData($datas,&#39;AMPHUR_ID&#39;,&#39;AMPHUR_NAME&#39;);</span>
+<span class="x"> }</span>
+</code></pre></div>
+<p>action actionGetDistrict() ข้างใน function จะมีการเรียกใช้งาน getDistrict($id) และส่งค่ารหัส อำเภอมาให้ เพื่อนำไปค้นที่ model District</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> protected function getDistrict($id){</span>
+<span class="x">     $datas = District::find()-&gt;where([&#39;AMPHUR_ID&#39;=&gt;$id])-&gt;all();</span>
+<span class="x">     return $this-&gt;MapData($datas,&#39;DISTRICT_ID&#39;,&#39;DISTRICT_NAME&#39;);</span>
+<span class="x"> }</span>
+</code></pre></div>
+<p>และ function <code>getAmphur()</code> และ <code>getDistrict()</code> จะทำการเรียก  <code>MapData</code> เพื่อทำการนำค่าที่ได้สร้าง array ในรูปแบบ <code>[&#39;id&#39;=&gt;&#39;&#39;,&#39;name&#39;=&gt;&#39;&#39;]</code> เพราะตัว widget DepDrop ได้ระบบให้สร้างตาม format นี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> protected function MapData($datas,$fieldId,$fieldName){</span>
+<span class="x">     $obj = [];</span>
+<span class="x">     foreach ($datas as $key =&gt; $value) {</span>
+<span class="x">         array_push($obj, [&#39;id&#39;=&gt;$value-&gt;{$fieldId},&#39;name&#39;=&gt;$value-&gt;{$fieldName}]);</span>
+<span class="x">     }</span>
+<span class="x">     return $obj;</span>
+<span class="x"> }</span>
+</code></pre></div>
 <h2 id="ทดลองใช้งาน">ทดลองใช้งาน</h2>
 
 <p>เลือกจังหวัด
-<img src="/images/select-province.png" alt="select-province"></p>
+<img src="/img/select-province.png" alt="select-province"></p>
 
 <p>เลือกอำเภอ</p>
 
-<p><img src="/images/select-amphur.png" alt="select-province"></p>
+<p><img src="/img/select-amphur.png" alt="select-province"></p>
 
 <p>เลือกตำบล</p>
 
-<p><img src="/images/select-district.png" alt="select-province"></p>
+<p><img src="/img/select-district.png" alt="select-province"></p>
 
 <h2 id="กรณี-update">กรณี Update</h2>
 
