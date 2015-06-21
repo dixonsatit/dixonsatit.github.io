@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การใช้งาน TimestempBehavior ใน model เพื่ออัพเดทข้อมูลวันที่ | DixonSatit</title>
+	<meta name="description" content="ส่วนใหญ่ในการสร้างตารางต่างๆ เราก็มักจะมีฟิวด์ที่เก็บข้อมูลคือ ">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/14/model-behaviors.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การใช้งาน TimestempBehavior ใน model เพื่ออัพเดทข้อมูลวันที่</h1>
+    <p class="meta">
+    June 14, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p>ส่วนใหญ่ในการสร้างตารางต่างๆ เราก็มักจะมีฟิวด์ที่เก็บข้อมูลคือ </p>
+
+<ul>
+<li>create_date บอกว่าเราสร้าง record นี้เมื่อไหร่</li>
+<li>update_date บอกว่ามีการแก้ไขข้อมูลเมื่อไหร่</li>
+</ul>
+
+<p>ในการใช้การจริงๆ เราจะทำการใส่ข้อมูล create_date ในตอน create record และในตอน update เราก็ใส่ข้อมุล update_date ด้วย หรือไม่ก็เปลี่ยนประเภทข้อมูลให้เป็น timestamp แล้วก็ให้มันอัพเดทข้อมูลทุกครั้งที่มีการเปลี่ยนแปลงข้อมูล</p>
+
+<p>แต่เดี๋ยวก่อน Yii2 มีนวัตกรรมใหม่ที่จะทำให้คุณพ่อบ้านสบายขึ้น (เดี่ยวๆ ก่อน..) มันดียังไง?</p>
+
+<p>ตามเอกสารเค้าบอกว่ามันสามารถใส่ข้อมูล timestamp ให้อัตโนมัติได้เพียงแค่เราต้งชื่อฟิวด์ create_at,update_at และกำหนด type ใน mysql เป็น Integer หลังจากนั้นเพิ่มการเรียกใช้งาน TimestampBehavior ใน model ดังนี้</p>
+
+<blockquote>
+<p>มันเก็บข้อมูลเป็น time() นะครับ</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">yii\behaviors\TimestampBehavior</span><span class="p">;</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="nx">TimestampBehavior</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>หลังจากเรียกใช้งานแล้วหากมีการ create,update record <code>TimestampBehavior</code> จะเป็นตัวที่ใส่ข้อมูลให้เองอัตโนมัติ สะดวกมากๆ ครับ อย่าลืม!.. วิธีนี้ต้องกำหนดชื่อฟิวด์เป็น create_at,update_at เท่านั้นครับ</p>
+
+<p>แต่หากใครไม่ได้กำหนดชื่อฟิวด์ตามนี้ก็สามารถกำหนดให้ TimestampBehavior ให้มันได้รู้จักฟิวด์ create,update ได้ ดูตัวอย่างด้านล่าง</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">yii\db\Expression</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\behaviors\TimestampBehavior</span><span class="p">;</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">TimestampBehavior</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+            <span class="s1">&#39;createdAtAttribute&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;create_time&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;updatedAtAttribute&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;update_time&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="k">new</span> <span class="nx">Expression</span><span class="p">(</span><span class="s1">&#39;NOW()&#39;</span><span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>เราสามารถสั่งให้มันเรียกข้อมูล timestame ให้ฟิวด์นั้นๆ ได้โดยใช้คำสั่งนี้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$model-&gt;touch(&#39;creation_time&#39;);
+</code></pre></div></section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>สร้างฟอร์ม Upload File และเก็บข้อมูลเป็น json | DixonSatit</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/upload-json.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">สร้างฟอร์ม Upload File และเก็บข้อมูลเป็น json</h1>
+    <p class="meta">
+    November 30, 2014
+    
+    </p>
+  </header>
+  <section class="post-content"><p><img src="/img/upload-file-ajax.png" alt="upload file"></p>
+
+<p>เราจะทำการสร้างฟอร์มอัพโหลดข้อมูลและเก็บข้อมูลชื่อไฟล์ให้อยู่ในรูปแบบ json เพื่อประหยัดฟิวด์ และเราจะใช้ widget <a href="http://demos.krajee.com/widgets#fileinput">fileinput</a> เป็น Widget ของ krajee เจ้าเก่า ซึ่งรวมอยู่ในแพ็คเก็จ <a href="http://demos.krajee.com/widgets">Yii2 Widget</a> อยู่แล้ว ติดตั้งทีเดียวได้ครบเลย <sup>^</sup></p>
+
+<p>ในตัวอย่างนี้มี 3 แบบ
+- Upload ทีละไฟล์เก็บข้อมูลเป็น json ใช้ฟิวด์เดียว
+- Upload ทีละหลายๆ ไฟล์ เก็บข้อมูลเป็น json ใช้ฟิวด์เดียว</p>
+
+<blockquote>
+<p>เก็บเป็น json ก็เพราะสามารถเก็บข้อมูลได้เยอะขึ้น และไม่จำเป็นต้องเพิ่มฟิวด์</p>
+</blockquote>
+
+<p>ในตัวอย่างนี้จะสร้างฟอร์มไว้เก็บข้อมูล freelance ข้อมูลไฟล์สัญญา ไฟล์ข้อมูลต่างๆ ไฟล์ข้อมูลรูปภาพ</p>
+
+<h2 id="การติดตั้ง-widget">การติดตั้ง Widget</h2>
+
+<p>รันคำสั่งเพื่อทำการติดตั้ง</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer require kartik-v/yii2-widgets &quot;*&quot;
+</code></pre></div>
+<p>หรือเพิ่ม</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&quot;kartik-v/yii2-widgets&quot;: &quot;*&quot;
+</code></pre></div>
+<p>ที่แท็ค require ในไฟล์ composer.json จากนั้น <code>composer update</code></p>
+
+<h2 id="create-model">Create Model</h2>
+
+<p>ทำการสร้าง gii Model <code>Freelance</code>, และทำการสร้าง gii CRUD <code>Freelance</code></p>
+
+<h3 id="validating-input">Validating Input</h3>
+
+<p>หลังจากสร้าง Model เสร็จเราจะทำการปรับแต่ง <code>Rules()</code> เพื่อเป็นการ <code>Validating Input</code> ของเรา ซึ่ง Yii 2 มีให้มาครบเลย เช่น email, date, url ฯลฯ ในฟอร์มนี้เราจะใช้ <code>file</code> เพราะเราจะทำการ upload file</p>
+
+<blockquote>
+<p><a href="http://www.yiiframework.com/doc-2.0/yii-validators-validator.html">รายการ validate ทั้งหมดดูได้ที่นี่</a></p>
+</blockquote>
+
+<p>เปิดไฟล์ /models/Freelance.php</p>
+
+<p>เพิ่มฟิวด์ <code>covenant</code> ที่จะเก็บข้อมูลไฟล์สัญญาจ้าง และ <code>docs</code> เก็บไฟล์เอกสารที่เกี่ยวข้องทั้งหมด กำหนด type validate เป็น <code>file</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">//.......</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">[[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span><span class="s1">&#39;required&#39;</span><span class="p">],</span>
+        <span class="p">[[</span><span class="s1">&#39;description&#39;</span><span class="p">],</span> <span class="s1">&#39;string&#39;</span><span class="p">],</span>
+        <span class="p">[[</span><span class="s1">&#39;start_date&#39;</span><span class="p">,</span> <span class="s1">&#39;end_date&#39;</span><span class="p">,</span> <span class="s1">&#39;succes_date&#39;</span><span class="p">,</span> <span class="s1">&#39;create_date&#39;</span><span class="p">],</span> <span class="s1">&#39;safe&#39;</span><span class="p">],</span>
+        <span class="p">[[</span><span class="s1">&#39;ref&#39;</span><span class="p">],</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">],</span>
+        <span class="p">[[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">],</span>
+        <span class="p">[[</span><span class="s1">&#39;covenant&#39;</span><span class="p">],</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="s1">&#39;maxFiles&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">],</span> <span class="c1">//&lt;---</span>
+        <span class="p">[[</span><span class="s1">&#39;docs&#39;</span><span class="p">],</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="s1">&#39;maxFiles&#39;</span><span class="o">=&gt;</span><span class="mi">10</span><span class="p">]</span> <span class="c1">//&lt;---</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+<span class="c1">//.......</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h2 id="create-form">Create Form</h2>
+
+<p>ในส่วนของ form เราต้องเพิ่ม attribute <code>enctype=&quot;multipart/form-data&quot;</code> ส่วนใหญ่หลายๆ คนอาจลืมผมก็เคยลืม ฮา..</p>
+
+<p>ไปที่ไฟล์ /views/freelance/_form.php แก้ไข <code>ActiveForm</code> ให้เป็นดังนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="nv">$form</span> <span class="o">=</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">begin</span><span class="p">([</span><span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;enctype&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;multipart/form-data&#39;</span><span class="p">]])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>จากนั้นก็ปรับ layout from ตามใจชอบ <a href="/tutorial/create-form.md">ดูรายละเอียดการปรับ layout form ได้ที่นี่</a></p>
+
+<p><img src="/img/upload-file/form-upload-layout.png" alt="form-upload-layout."></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\widgets\ActiveForm</span><span class="p">;</span>
+<span class="cm">/* @var $this yii\web\View */</span>
+<span class="cm">/* @var $model app\models\Freelance */</span>
+<span class="cm">/* @var $form yii\widgets\ActiveForm */</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;div class=&quot;freelance-form&quot;&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nv">$form</span> <span class="o">=</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">begin</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">     </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">hiddenInput</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">label</span><span class="p">(</span><span class="k">false</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textarea</span><span class="p">([</span><span class="s1">&#39;rows&#39;</span> <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;covenant&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;docs&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textarea</span><span class="p">([</span><span class="s1">&#39;rows&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;div class=&quot;row&quot;&gt;</span>
+<span class="x">        &lt;div class=&quot;col-sm-4 col-md-4&quot;&gt; </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;start_date&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x">&lt;/div&gt;</span>
+<span class="x">        &lt;div class=&quot;col-sm-4 col-md-4&quot;&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;end_date&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x">&lt;/div&gt;</span>
+<span class="x">        &lt;div class=&quot;col-sm-4 col-md-4&quot;&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;succes_date&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x">&lt;/div&gt;</span>
+<span class="x">    &lt;/div&gt;</span>
+
+<span class="x">    &lt;div class=&quot;form-group&quot;&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">Html</span><span class="o">::</span><span class="na">submitButton</span><span class="p">(</span><span class="s1">&#39;&lt;i class=&quot;glyphicon glyphicon-plus&quot;&gt;&lt;/i&gt; &#39;</span><span class="o">.</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">isNewRecord</span> <span class="o">?</span> <span class="s1">&#39;Create&#39;</span> <span class="o">:</span> <span class="s1">&#39;Update&#39;</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">isNewRecord</span> <span class="o">?</span> <span class="s1">&#39;btn btn-success&#39;</span> <span class="o">:</span> <span class="s1">&#39;btn btn-primary&#39;</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39; btn-lg btn-block&#39;</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/div&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">end</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;/div&gt;</span>
+<span class="x">?&gt;</span>
+</code></pre></div>
+<p>จากนั้นเราจะทำการเปลี่ยนจาก input เป็น file โดยใช้ <a href="http://demos.krajee.com/widgets#fileinput">File Input Widget</a> ทำการเรียก File Input Widget เข้ามาก่อน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">use kartik\widgets\FileInput;</span>
+</code></pre></div>
+<p>จากนั้นเปลี่ยน <code>textInput</code> จากของเดิมแบบนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;covenant&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="mi">100</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>และทำการเรียกใช้งาน <code>FileInput</code> และกำหนดค่าต่างๆ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;covenant&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="nx">FileInput</span><span class="o">::</span><span class="na">classname</span><span class="p">(),</span> <span class="p">[</span>
+    <span class="c1">//&#39;options&#39; =&gt; [&#39;accept&#39; =&gt; &#39;image/*&#39;],</span>
+    <span class="s1">&#39;pluginOptions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;initialPreview&#39;</span><span class="o">=&gt;</span><span class="p">[],</span>
+        <span class="s1">&#39;allowedFileExtensions&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;pdf&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;showPreview&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+        <span class="s1">&#39;showRemove&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+        <span class="s1">&#39;showUpload&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+     <span class="p">]</span>
+<span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<ul>
+<li><code>&#39;options&#39; =&gt; [&#39;accept&#39; =&gt; &#39;image/*&#39;]</code> ถ้าเราใช้ upload รูปภาพอย่างเดียว</li>
+<li><code>initialPreview</code> เป็นการนำข้อมูลที่เคยบันทึกไปแล้วมาแสดงที่ thumbnail</li>
+<li><code>allowedFileExtensions</code> กำหนดให้เราสามารถอัพโหลดไฟล์ format ใหนบ้าง</li>
+<li><code>showRemove</code> ให้มีปุ่มยกเลิกในกรณีที่เราต้องการเลือกไฟล์ใหม่</li>
+<li><code>showUpload</code> เป็นปุ่ม upload file แบบ ajax ซึ่งตอนนี้เรายังไม่ใช้กับฟิวด์นี้</li>
+</ul>
+
+<p><a href="http://plugins.krajee.com/file-input">อ่านรายละเอียดเพิ่มเติม</a></p>
+
+<blockquote>
+<p>สำหรับฟิวด์ <code>covenang</code> ผมกำหนดให้สามารถอัพโหลดได้ทีละไฟล์</p>
+</blockquote>
+
+<p>ส่วนฟิวด์ <code>docs</code> ผมจะให้สามารถอัพโหลดได้มากกว่า 1 ไฟล์ สังเกตุตรงชื่อผมจะใส่ <code>docs[]</code> เพื่อให้ส่งไฟล์ไปอัพโหลดได้ทีละหลายๆ ไฟล์ และเซ็ตค่า widget <code>multiple=true</code></p>
+
+<blockquote>
+<p>อย่าลืมเช็ค <code>Server Environment</code> php.ini กำหนดค่าเท่าไหร่แล้วแต่ความเหมาะสมของเรานะครับ
+- file_uploads = On
+- max_file_uploads = 10
+- upload_max_filesize = 50M
+- post_max_size = 50M</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;docs[]&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="nx">FileInput</span><span class="o">::</span><span class="na">classname</span><span class="p">(),</span> <span class="p">[</span>
+<span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="c1">//&#39;accept&#39; =&gt; &#39;image/*&#39;,</span>
+    <span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+<span class="p">],</span>
+<span class="s1">&#39;pluginOptions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="s1">&#39;initialPreview&#39;</span><span class="o">=&gt;</span><span class="p">[],</span>
+    <span class="c1">//&#39;allowedFileExtensions&#39;=&gt;[&#39;pdf&#39;],</span>
+    <span class="s1">&#39;showPreview&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+    <span class="s1">&#39;showCaption&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">&#39;showRemove&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+    <span class="s1">&#39;showUpload&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+ <span class="p">]</span>
+<span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>หลังจากนั้นลองดูฟอร์มที่เราได้ปรับแต่งแล้ว ก็จะได้ฟอร์มอัพโหลดที่ค่อนข้างดูดีทีเดียว ไม่ใช่แค่สวย แต่มันยังทำให้เราใช้งานได้ง่ายขึ้นอีกด้วย แจ่มๆ <sup>^</sup></p>
+
+<p><img src="/img/upload-file/add-widget.png" alt="upload"></p>
+
+<h2 id="ทดลองการ-validate-ไฟล์">ทดลองการ Validate ไฟล์</h2>
+
+<h3 id="ฟิวด์แรก-covenant">ฟิวด์แรก <code>covenant</code></h3>
+
+<p>ทดลองเลือกไฟล์ที่ไม่ใช่ pdf ก็จะได้ error แบบนี้ และสามารถเลือกได้แค่ไฟล์เดียวเพราะเรากำหนดไว้ที่ <code>Rules()</code> ใน model ไว้แล้ว</p>
+
+<p><img src="/img/upload-file/single-error.png" alt="upload"></p>
+
+<p>ถ้าเลือกไฟล์ถูกต้อง ก็จะแสดงแบบนี้ เห้ย! สวยใช้ได้เลย</p>
+
+<p><img src="/img/upload-file/single-success.png" alt="upload"></p>
+
+<h3 id="ฟิวด์ที่สอง-docs">ฟิวด์ที่สอง <code>docs</code></h3>
+
+<p>ฟิวด์นี้เรากำหนดไว้ว่าให้สามารถอัพโหลดได้ทีละหลายๆ ไฟล์ และเลือกได้หลายๆ นามสกุลไฟล์ <code>&#39;pdf&#39;,&#39;doc&#39;,&#39;docx&#39;,&#39;xls&#39;,&#39;xlsx&#39;</code></p>
+
+<p>ลองเลือกหลายๆ ไฟล์</p>
+
+<blockquote>
+<p>ต้องกดปุ่ม Ctl หรือ command ถ้าเป็น mac ค้างไว้แล้วเลือกไฟล์</p>
+</blockquote>
+
+<p><img src="/img/upload-file/multiple-success.png" alt="upload"></p>
+
+<p>ลองเลือกเกินที่กำหนดไว้</p>
+
+<p><img src="/img/upload-file/multiple-error-max.png" alt="upload"></p>
+
+<p>ลองเลือกนามสกุลไฟล์ที่ไม่ได้ระบุไว้</p>
+
+<p><img src="/img/upload-file/multiple-error.png" alt="upload"></p>
+
+<blockquote>
+<p>จริงๆ แล้ว UploadFile ของเดิมๆ ที่มากับ yii 2 ก็ใช้ได้นะครับเพียงแค่หน้าตาอาจไม่สวย</p>
+</blockquote>
+
+<p>อีกนิดเราสามารถให้ Widget โชว์ thumbnail ไฟล์ที่เราได้เลือกไว้ได้โดยปรับการตั้งค่าใหม่เป็น
+<code>php
+&#39;showPreview&#39; =&gt; true,
+</code>
+จะแสดงรายการที่เราได้เลือกไว้ แบบนี้ ! โอ้วพระสงฆ์</p>
+
+<p><img src="/img/upload-file/show-thumbnail.png" alt="upload"></p>
+
+<p>เสร็จสิ้นในการเตรียมในส่วนของ front end เดี่ยวไปสร้าง controller และ model กัน</p>
+
+<h2 id="ปรับปรุง-model-freelance">ปรับปรุง Model Freelance</h2>
+
+<p>เพื่อให้สามารถเรียก path ที่เก็บไฟล์และ url ที่เก็บไฟล์ได้โดยเราจะสร้างฟังก์ชั่นชึ้นมา 2 ตัวคือ <code>getUploadPath()</code>,<code>getUploadUrl()</code></p>
+
+<p>โดยเป็น static  function เพื่อให้สามารถเรียกใช้งานได้ง่ายๆ โดยไม่ต้อง new Object
+และประการตัวแปร UPLOAD_FOLDER เป็น static เหมือนกันเพื่อกำหนดค่า folder ที่อัพโหลดได้เวลาเปลี่ยนชื่อจะได้เปลี่ยนที่เดียว</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">const UPLOAD_FOLDER = &#39;freelances&#39;;</span>
+
+<span class="x">//...........</span>
+
+<span class="x">public static function getUploadPath(){</span>
+<span class="x">    return Yii::getAlias(&#39;@webroot&#39;).&#39;/&#39;.self::UPLOAD_FOLDER.&#39;/&#39;;</span>
+<span class="x">}</span>
+
+<span class="x">public static function getUploadUrl(){</span>
+<span class="x">    return Url::base(true).&#39;/&#39;.self::UPLOAD_FOLDER.&#39;/&#39;;</span>
+<span class="x">}</span>
+</code></pre></div>
+<h2 id="create-controller">Create Controller</h2>
+
+<p>เราจะทำการแก้ไข Controller <code>Freelance</code> โดยหลักๆ เราจะสร้าง function สำหรับ upload  file ขี้นมา 2 ตัว แบบอัพโหลดทีละไฟล์ และแบบอัพโหลดทีละหลายๆ ไฟล์</p>
+
+<h3 id="สร้างฟังก์ชั่นอัพโหลดทีละ-1-ไฟล์">สร้างฟังก์ชั่นอัพโหลดทีละ 1 ไฟล์</h3>
+
+<p>เราจะเก็บข้อมูลในฟิวด์ <code>covenant</code> เป็น json เพื่อให้สามารถทำการเปลี่ยนชื่อไฟล์เพื่อเก็บบน server โดยไม่มีโอกาสซ้ำชื่อกันและเมื่อดาวน์โหลดไฟล์ก็จะส่งเป็นชื่อไฟล์เดิมลงมา</p>
+
+<p>ฟังก์ชั่นนี้จะรับค่า 2 ค่าคือ $model,$tempFile</p>
+
+<p><code>$tempFile</code> มีไว้เพื่อเก็บชื่อไฟล์เดิม เพื่อเอาไว้ใช้ในกรณีแก้ไขข้อมูล หากการแก้ไขข้อมูลนั้นไม่ได้มีการอัพโหลดไฟล์ใหม่ ก็จะใช้ค่าเดิมจาก <code>$tempFile</code> เพราะเวลาที่ submit form แล้วไม่ได้อัพโหลดไฟล์ใหม่ ค่าจะเป็น null ทำให้ค่าเดิมที่เก็บไว้ก่อนหน้านี้จะถูก update เป็น null ตามไปด้วย เราจึงใช้ค่าจาก $tempFile มาใช้เพื่อให้ข้อมูลเหมือนเดิม</p>
+
+<p>จากนั้นจะทำการเก็บชื่อไฟล์เดิมและชื่อไฟล์ใหม่ไว้เป็น array และนำมาแปลงค่าให้เป็น json แล้วส่งค่ากลับออกไปเป็น string ในรูปแบบ json เพื่อนำไปบันทึกข้อมูล</p>
+
+<p>use file เพิ่มเติม</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">use yii\web\UploadedFile;</span>
+<span class="x">use yii\helpers\BaseFileHelper;</span>
+<span class="x">use yii\helpers\Json;</span>
+<span class="x">use yii\helpers\ArrayHelper;</span>
+</code></pre></div>
+<p>สร้าง function</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">private</span> <span class="k">function</span> <span class="nf">uploadSingleFile</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="nv">$tempFile</span><span class="o">=</span><span class="k">null</span><span class="p">){</span>
+        <span class="nv">$file</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="nv">$json</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+             <span class="nv">$UploadedFile</span> <span class="o">=</span> <span class="nx">UploadedFile</span><span class="o">::</span><span class="na">getInstance</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="s1">&#39;covenant&#39;</span><span class="p">);</span>
+             <span class="k">if</span><span class="p">(</span><span class="nv">$UploadedFile</span> <span class="o">!==</span> <span class="k">null</span><span class="p">){</span>
+                 <span class="nv">$oldFileName</span> <span class="o">=</span> <span class="nv">$UploadedFile</span><span class="o">-&gt;</span><span class="na">basename</span><span class="o">.</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="nv">$UploadedFile</span><span class="o">-&gt;</span><span class="na">extension</span><span class="p">;</span>
+                 <span class="nv">$newFileName</span> <span class="o">=</span> <span class="nb">md5</span><span class="p">(</span><span class="nv">$UploadedFile</span><span class="o">-&gt;</span><span class="na">basename</span><span class="o">.</span><span class="nb">time</span><span class="p">())</span><span class="o">.</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="nv">$UploadedFile</span><span class="o">-&gt;</span><span class="na">extension</span><span class="p">;</span>
+                 <span class="nv">$UploadedFile</span><span class="o">-&gt;</span><span class="na">saveAs</span><span class="p">(</span><span class="nx">Freelance</span><span class="o">::</span><span class="na">UPLOAD_FOLDER</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">ref</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="nv">$newFileName</span><span class="p">);</span>
+                 <span class="nv">$file</span><span class="p">[</span><span class="nv">$newFileName</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$oldFileName</span><span class="p">;</span>
+                 <span class="nv">$json</span> <span class="o">=</span> <span class="nx">Json</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>
+             <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="nv">$json</span><span class="o">=</span><span class="nv">$tempFile</span><span class="p">;</span>
+             <span class="p">}</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$json</span><span class="o">=</span><span class="nv">$tempFile</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nv">$json</span> <span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h3 id="สร้างฟังก์ชั่นอัพโหลดทีละหลายๆ-ไฟล์">สร้างฟังก์ชั่นอัพโหลดทีละหลายๆ ไฟล์</h3>
+
+<p>ฟังก์ชันนี้ก็จะคล้ายๆ กับ <code>uploadSingleFile()</code> แต่ต่างกันที่สามารถอัพโหลดได้ทีละหลายๆ ไฟล์
+และก็จะรับค่า parameter  เหมือนกันคือ $model,$tempFile</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">private</span> <span class="k">function</span> <span class="nf">uploadMultipleFile</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="nv">$tempFile</span><span class="o">=</span><span class="k">null</span><span class="p">){</span>
+            <span class="nv">$files</span> <span class="o">=</span> <span class="p">[];</span>
+            <span class="nv">$json</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+            <span class="nv">$tempFile</span> <span class="o">=</span> <span class="nx">Json</span><span class="o">::</span><span class="na">decode</span><span class="p">(</span><span class="nv">$tempFile</span><span class="p">);</span>
+            <span class="nv">$UploadedFiles</span> <span class="o">=</span> <span class="nx">UploadedFile</span><span class="o">::</span><span class="na">getInstances</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="s1">&#39;docs&#39;</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="nv">$UploadedFiles</span><span class="o">!==</span><span class="k">null</span><span class="p">){</span>
+               <span class="k">foreach</span> <span class="p">(</span><span class="nv">$UploadedFiles</span> <span class="k">as</span> <span class="nv">$file</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">try</span> <span class="p">{</span>   <span class="nv">$oldFileName</span> <span class="o">=</span> <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">basename</span><span class="o">.</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="nv">$file</span><span class="o">-&gt;</span><span class="na">extension</span><span class="p">;</span>
+                           <span class="nv">$newFileName</span> <span class="o">=</span> <span class="nb">md5</span><span class="p">(</span><span class="nv">$file</span><span class="o">-&gt;</span><span class="na">basename</span><span class="o">.</span><span class="nb">time</span><span class="p">())</span><span class="o">.</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="nv">$file</span><span class="o">-&gt;</span><span class="na">extension</span><span class="p">;</span>
+                           <span class="nv">$file</span><span class="o">-&gt;</span><span class="na">saveAs</span><span class="p">(</span><span class="nx">Freelance</span><span class="o">::</span><span class="na">UPLOAD_FOLDER</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">ref</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="nv">$newFileName</span><span class="p">);</span>
+                           <span class="nv">$files</span><span class="p">[</span><span class="nv">$newFileName</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$oldFileName</span> <span class="p">;</span>
+                   <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+
+                   <span class="p">}</span>
+               <span class="p">}</span>
+               <span class="nv">$json</span> <span class="o">=</span> <span class="nx">json</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">merge</span><span class="p">(</span><span class="nv">$tempFile</span><span class="p">,</span><span class="nv">$files</span><span class="p">));</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+               <span class="nv">$json</span> <span class="o">=</span> <span class="nv">$tempFile</span><span class="p">;</span>
+            <span class="p">}</span>
+           <span class="k">return</span> <span class="nv">$json</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h3 id="สร้างฟังก์ชันเพื่อสร้างโฟลเดอร์สำหรับเก็บไฟล์">สร้างฟังก์ชันเพื่อสร้างโฟลเดอร์สำหรับเก็บไฟล์</h3>
+
+<p>ฟังชั่นนี้ก็ง่ายๆ เอาไว้สำหรับสร้าง folder ไว้เก็บไฟล์ในแต่ละ id เพื่อให้แยกไฟล์ได้เป็นระเบียบและเพื่อการค้นหาด้วย</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">private</span> <span class="k">function</span> <span class="nf">CreateDir</span><span class="p">(</span><span class="nv">$folderName</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$folderName</span> <span class="o">!=</span> <span class="k">NULL</span><span class="p">){</span>
+        <span class="nv">$basePath</span> <span class="o">=</span> <span class="nx">Freelance</span><span class="o">::</span><span class="na">getUploadPath</span><span class="p">();</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">BaseFileHelper</span><span class="o">::</span><span class="na">createDirectory</span><span class="p">(</span><span class="nv">$basePath</span><span class="o">.</span><span class="nv">$folderName</span><span class="p">,</span><span class="mo">0777</span><span class="p">)){</span>
+            <span class="nx">BaseFileHelper</span><span class="o">::</span><span class="na">createDirectory</span><span class="p">(</span><span class="nv">$basePath</span><span class="o">.</span><span class="nv">$folderName</span><span class="o">.</span><span class="s1">&#39;/thumbnail&#39;</span><span class="p">,</span><span class="mo">0777</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h3 id="เรียกใช้งานตอน-create">เรียกใช้งานตอน Create</h3>
+
+<p>เราจะเรียกใช้งานที่ actionCreate เพื่ออัพโหลดไฟล์ โดยของเดิมจะเป็นแบบนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">actionCreate</span><span class="p">()</span>
+<span class="p">{</span>
+      <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Freelance</span><span class="p">();</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">())</span> <span class="p">{</span>
+              <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">]);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="p">[</span>
+              <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+          <span class="p">]);</span>
+      <span class="p">}</span>
+<span class="p">}</span><span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>จากนั้นเพิ่มอัพโหลดไฟล์และเรียใช้งาน <code>CreateDir</code> เข้าไป ตามด้านล่าง</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">actionCreate</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Freelance</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">())</span> <span class="p">)</span> <span class="p">{</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">CreateDir</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">ref</span><span class="p">);</span>
+
+        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">covenant</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">uploadSingleFile</span><span class="p">(</span><span class="nv">$model</span><span class="p">);</span>
+        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">docs</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">uploadMultipleFile</span><span class="p">(</span><span class="nv">$model</span><span class="p">);</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">()){</span>
+             <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+         <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">ref</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getSecurity</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">generateRandomString</span><span class="p">(),</span><span class="mi">10</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+    <span class="p">]);</span>
+<span class="p">}</span><span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>หลักการทำงานของฟังก์ชันคือ</p>
+
+<p>ในครั้งแรก
+- เช็คว่ามีการ submit form มาหรือไม่
+- ถ้าไม่มีก็จะทำการสร้างรหัส random string มาเก็บไว้ที่ฟิวด์ ref เพื่อใช้ในกรณีอัพโหลดแบบ ajax เพื่อให้อัพโหลดไฟล์ได้ก่อนที่จะมีการ submit เพื่อบันทึกข้อมูล หากไม่มีเราจะต้องใช้ pk ซึ่งมันต้องรอบันทึกก่อน เราจึงทำการสร้างรหัสนี้ขึ้นมาใช้
+- จากนั้นก็ render form ปกติ</p>
+
+<p>เมื่อมีการ submit
+- ทำการสร้าง folder เพื่อเก็บไฟล์โดยใช้ ref
+- เมื่อมีการ submit ก็จะมีการเรียกใช้งาน <code>uploadSingleFile</code>,<code>uploadMultipleFile</code> และเมื่ออัพโหลดไฟล์เสร็จจะคืนค่ากลับมาเป็น string json ถ้าไม่มีไฟล์ก็จะคืนค่าเป็น null</p>
+
+<h3 id="เรียกใช้งานตอน-update">เรียกใช้งานตอน Update</h3>
+
+<p>ทำการแก้ไขไฟล์ <code>controller/Freelance.php</code> actionUpdate ซึ่งจะคล้ายกับ create ต่างกันนิดหน่อยตรงที่ต้องเก็บค่าไฟล์เดิมไว้ก่อน เพื่อใช้ในกรณีไม่ได้มีการอัพโหลดไฟล์</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">actionUpdate</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findModel</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="nv">$tempCovenant</span> <span class="o">=</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">covenant</span><span class="p">;</span>
+    <span class="nv">$tempDocs</span>     <span class="o">=</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">docs</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">()))</span> <span class="p">{</span>
+        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">covenant</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">uploadSingleFile</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="nv">$tempCovenant</span><span class="p">);</span>
+        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">docs</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">uploadMultipleFile</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="nv">$tempDocs</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">()){</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+    <span class="p">]);</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>และสร้างฟังก์ชันในการดึงไฟล์มาแสดง thumbnail ในตอนแก้ไขข้อมูลที่ฟอร์ม ที่ตัว widget upload file เพิ่มที่ไฟล์ modeles/Freelance.php</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">initialPreview</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span><span class="nv">$field</span><span class="p">,</span><span class="nv">$type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">){</span>
+        <span class="nv">$initial</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="nv">$files</span> <span class="o">=</span> <span class="nx">Json</span><span class="o">::</span><span class="na">decode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$files</span><span class="p">)){</span>
+             <span class="k">foreach</span> <span class="p">(</span><span class="nv">$files</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="nv">$type</span><span class="o">==</span><span class="s1">&#39;file&#39;</span><span class="p">){</span>
+                    <span class="nv">$initial</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">&quot;&lt;div class=&#39;file-preview-other&#39;&gt;&lt;h2&gt;&lt;i class=&#39;glyphicon glyphicon-file&#39;&gt;&lt;/i&gt;&lt;/h2&gt;&lt;/div&gt;&quot;</span><span class="p">;</span>
+                <span class="p">}</span><span class="k">elseif</span><span class="p">(</span><span class="nv">$type</span><span class="o">==</span><span class="s1">&#39;config&#39;</span><span class="p">){</span>
+                    <span class="nv">$initial</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="s1">&#39;caption&#39;</span><span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">,</span>
+                        <span class="s1">&#39;width&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;120px&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;url&#39;</span>    <span class="o">=&gt;</span> <span class="nx">Url</span><span class="o">::</span><span class="na">to</span><span class="p">([</span><span class="s1">&#39;/freelance/deletefile&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span><span class="s1">&#39;fileName&#39;</span><span class="o">=&gt;</span><span class="nv">$key</span><span class="p">,</span><span class="s1">&#39;field&#39;</span><span class="o">=&gt;</span><span class="nv">$field</span><span class="p">]),</span>
+                        <span class="s1">&#39;key&#39;</span>    <span class="o">=&gt;</span> <span class="nv">$key</span>
+                    <span class="p">];</span>
+                <span class="p">}</span>
+                <span class="k">else</span><span class="p">{</span>
+                    <span class="nv">$initial</span><span class="p">[]</span> <span class="o">=</span> <span class="nx">Html</span><span class="o">::</span><span class="na">img</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">getUploadUrl</span><span class="p">()</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ref</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="nv">$value</span><span class="p">,[</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;file-preview-image&#39;</span><span class="p">,</span> <span class="s1">&#39;alt&#39;</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">file_name</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">file_name</span><span class="p">]);</span>
+                <span class="p">}</span>
+             <span class="p">}</span>
+     <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$initial</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>ทำการแก้ไขไฟล์ views/freelance/_form.php เพิ่มการเรียกใช้งานเพื่อแสดง thumbnail ไฟล์ในตอนแก้ไข</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;docs[]&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="nx">FileInput</span><span class="o">::</span><span class="na">classname</span><span class="p">(),</span> <span class="p">[</span>
+   <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+       <span class="c1">//&#39;accept&#39; =&gt; &#39;image/*&#39;,</span>
+       <span class="s1">&#39;multiple&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span>
+   <span class="p">],</span>
+   <span class="s1">&#39;pluginOptions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+       <span class="s1">&#39;initialPreview&#39;</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">initialPreview</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">docs</span><span class="p">,</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span><span class="s1">&#39;file&#39;</span><span class="p">),</span> <span class="c1">//&lt;-----</span>
+       <span class="s1">&#39;initialPreviewConfig&#39;</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">initialPreview</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">docs</span><span class="p">,</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span><span class="s1">&#39;config&#39;</span><span class="p">),</span><span class="c1">//&lt;-----</span>
+       <span class="s1">&#39;allowedFileExtensions&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span><span class="s1">&#39;doc&#39;</span><span class="p">,</span><span class="s1">&#39;docx&#39;</span><span class="p">,</span><span class="s1">&#39;xls&#39;</span><span class="p">,</span><span class="s1">&#39;xlsx&#39;</span><span class="p">],</span>
+       <span class="s1">&#39;showPreview&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+       <span class="s1">&#39;showCaption&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+       <span class="s1">&#39;showRemove&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+       <span class="s1">&#39;showUpload&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+       <span class="s1">&#39;overwriteInitial&#39;</span><span class="o">=&gt;</span><span class="k">false</span>
+    <span class="p">]</span>
+   <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h3 id="ทดลองอัพโหลดไฟล์">ทดลองอัพโหลดไฟล์</h3>
+
+<p>เมื่ออัพโหลดไฟล์เสร็จ เราจะได้ข้อมูล json ออกมาแบบนี้</p>
+
+<p><img src="/img/upload-file/view-upload.png" alt="view-upload"></p>
+
+<p>โดยข้อมูลจะเก็บเป็น key กับ value ซึ่ง key จะเป็นชื่อไฟล์จริงๆ ใน server และ value จะเป็นชื่อไฟล์ก่อนอัพโหลดไฟล์</p>
+
+<p>เราจะทำการเปลี่ยนข้อมูลจาก json เป็น link เพื่อให้สามารถคลิก download ได้โดยเพิ่ม function <code>listDownloadFiles()</code> ใน Model Freelance ฟังก์ชันนี้จะใช้ได้ทั้ง 2 ฟิวด์ docs,covenant</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">listDownloadFiles</span><span class="p">(</span><span class="nv">$type</span><span class="p">){</span>
+ <span class="nv">$docs_file</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+ <span class="k">if</span><span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$type</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span><span class="s1">&#39;covenant&#39;</span><span class="p">])){</span>
+
+         <span class="nv">$data</span> <span class="o">=</span> <span class="nv">$type</span><span class="o">===</span><span class="s1">&#39;docs&#39;</span><span class="o">?</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">docs</span><span class="o">:</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">covenant</span><span class="p">;</span>
+         <span class="nv">$files</span> <span class="o">=</span> <span class="nx">Json</span><span class="o">::</span><span class="na">decode</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$files</span><span class="p">)){</span>
+             <span class="nv">$docs_file</span> <span class="o">=</span><span class="s1">&#39;&lt;ul&gt;&#39;</span><span class="p">;</span>
+             <span class="k">foreach</span> <span class="p">(</span><span class="nv">$files</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nv">$docs_file</span> <span class="o">.=</span> <span class="s1">&#39;&lt;li&gt;&#39;</span><span class="o">.</span><span class="nx">Html</span><span class="o">::</span><span class="na">a</span><span class="p">(</span><span class="nv">$value</span><span class="p">,[</span><span class="s1">&#39;/freelance/download&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span><span class="s1">&#39;file&#39;</span><span class="o">=&gt;</span><span class="nv">$key</span><span class="p">,</span><span class="s1">&#39;file_name&#39;</span><span class="o">=&gt;</span><span class="nv">$value</span><span class="p">])</span><span class="o">.</span><span class="s1">&#39;&lt;/li&gt;&#39;</span><span class="p">;</span>
+             <span class="p">}</span>
+             <span class="nv">$docs_file</span> <span class="o">.=</span><span class="s1">&#39;&lt;/ul&gt;&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="k">return</span> <span class="nv">$docs_file</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>เรียกใช้งานที่ <code>views/freelance/view.php</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">DetailView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+        <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description:ntext&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;covenant&#39;</span><span class="p">,</span><span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">listDownloadFiles</span><span class="p">(</span><span class="s1">&#39;covenant&#39;</span><span class="p">),</span><span class="s1">&#39;format&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;html&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;docs&#39;</span><span class="p">,</span><span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">listDownloadFiles</span><span class="p">(</span><span class="s1">&#39;docs&#39;</span><span class="p">),</span><span class="s1">&#39;format&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;html&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;start_date&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;end_date&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;success_date&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;create_date&#39;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>จะแสดงผลแบบนี้</p>
+
+<p><img src="/img/upload-file/view-upload2.png" alt="view-upload"></p>
+
+<h3 id="สร้าง-function-สำหรับ-download-file">สร้าง function สำหรับ download file</h3>
+
+<p>ในการแสดงผลในหน้า view นั้นจะยังคลิกดาวน์โหลดไฟล์ไม่ได้เราต้องสร้าง function สำหรับ download ไฟล์ เพื่อไม่ให้เป็นการ link ไฟล์โดยตรง</p>
+
+<p>เพิ่ม actionDownload ที่ controllers/Freelance.php</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">actionDownload</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span><span class="nv">$file</span><span class="p">,</span><span class="nv">$file_name</span><span class="p">){</span>
+    <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findModel</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">ref</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">covenant</span><span class="p">)){</span>
+            <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">sendFile</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getUploadPath</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">ref</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="nv">$file</span><span class="p">,</span><span class="nv">$file_name</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">&#39;/freelance/view&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="o">=&gt;</span><span class="nv">$id</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>เราจะได้ไฟล์ตามชื่อไฟล์จริง ที่เคยอัพโหลดไว้ และ actionDownload จะส่งไฟล์ให้ client โดยไม่ได้ link ไฟล์ตรงๆ</p>
+
+<p><img src="/img/upload-file/view-upload3.png" alt="view-upload"></p>
+
+<p>จากตัวอย่างเราจะเห็นว่าเราสามารถเก็บข้อมูลการอัพโหลดไฟล์ในรูปแบบ json ได้ซึ่งทำให้เราไม่ต้องสร้างฟิวด์หลายๆ ฟิวด์</p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

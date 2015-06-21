@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>RESTful Web Service | DixonSatit</title>
+	<meta name="description" content="ใน Yii 2 สามารถทำ RESTful ได้ง่ายๆ เลย โดยไม่ต้องติดตั้งเพิ่ม เพราะมีใน v.2 อยู่แล้ว- สามารถใช้กับ Active Record ได้เลยไม่ต้องเพิ่มเติมอะไร- ส่งออกได้ทั้ง JS...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/restful-webservice.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">RESTful Web Service</h1>
+    <p class="meta">
+    November 30, 2014
+    
+    </p>
+  </header>
+  <section class="post-content"><p>ใน Yii 2 สามารถทำ RESTful ได้ง่ายๆ เลย โดยไม่ต้องติดตั้งเพิ่ม เพราะมีใน v.2 อยู่แล้ว
+- สามารถใช้กับ Active Record ได้เลยไม่ต้องเพิ่มเติมอะไร
+- ส่งออกได้ทั้ง JSON,XML
+- รองรับมาตรฐาน <a href="http://en.wikipedia.org/wiki/HATEOAS">ATEOAS;</a> ด้วยนะ ไม่ต้องงง! เพราะผมก็งงเหมือนกัน เดี่ยวอธิบายด้านล่าง</p>
+
+<p>ในตัวอย่างนี้ใช้ข้อมูล location พร้อมพิกัด <a href="https://raw.githubusercontent.com/bahar/WorldCityLocations/master/World_Cities_Location_table.sql">ดาวโหลดที่นี่</a> นำข้อมูลที่ได้ import เข้า mysql ครับ จากนั้นทำการ gii</p>
+
+<p>ต้นฉบับ <a href="http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html">Guide REST Quick Start</a> ผมไม่ได้แปลนะ ผมเขียนตามความเข้าใจของผม (ถ้าจะพูดง่ายๆ ผมก็แปลไม่ออกนั่นแหละ T T&#39;)</p>
+
+<h2 id="create-model">Create Model</h2>
+
+<ul>
+<li>นำเข้าข้อมูล location  <a href="https://raw.githubusercontent.com/bahar/WorldCityLocations/master/World_Cities_Location_table.sql">ดาวโหลดที่นี่</a></li>
+<li>gii สร้าง Model ชื่อ Location</li>
+</ul>
+
+<blockquote>
+<p>หากยังไม่รู้ว่า gii ทำยังไง <a href="http://www.yiiframework.com/doc-2.0/guide-start-gii.html">ดูได้ที่นี่</a></p>
+</blockquote>
+
+<h2 id="create-controller">Create Controller</h2>
+
+<p>ทำการสร้าง <code>LocationController.php</code> ไว้ที่ <code>controllers\</code> โดยที่ตัว controller จะต้อง extends ด้วย ActiveController ซึ่งเป็น class ที่จะทำให้ LocationController เดิมๆ ของเราสามารถใช้งาน RESTful ได้ จากนั้นเราจะต้องเซ็ต overwrite property
+- <code>$modelClass</code> เพื่อบอกว่า model ที่จะใช้ชื่อว่าอะไร อยู่ที่ใหน อย่าลืม use ด้วยล่ะ ซึ่งตอนนี้เราใช้ <code>app\models\Locations</code>
+- <code>serializer</code>ให้ web service ส่งข้อมูล link หน้าปัจจุบัน,หน้าต่อไป,และหน้าสุดท้ายมาด้วย สะดวกมากๆ
+- <code>collectionEnvelope</code> เป็นการตั้งชื่อ collection ครอบตัวข้อมูล location ของเราในที่นี้ตั้งชื่อว่า items</p>
+
+<blockquote>
+<p>ตอนนี้อาจจะยังไม่เห็นภาพเดี่ยวพอเห็นข้อมูล Json น่าจะเข้าใจ</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">app\controllers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">yii\rest\ActiveController</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\models\Location</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">LocationController</span> <span class="k">extends</span> <span class="nx">ActiveController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$modelClass</span> <span class="o">=</span> <span class="s1">&#39;app\models\Locations&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$serializer</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\rest\Serializer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;collectionEnvelope&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;items&#39;</span><span class="p">,</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="configuring-url-rule">Configuring URL Rule</h2>
+
+<p>เป็นการเปิดการใช้งาน ให้เราสามารถใช้งาน url ในแบบ RESTful ได้ โดยเพิ่มเข้าไปที่ <code>config\main.php</code>
+ในส่วน components โดยเพิ่มส่วนนี้เข้าไป</p>
+
+<blockquote>
+<p>ในส่วนนี้เราต้องเปิดการใช้งาน PrettyUrl ให้ได้เสียก่อน <a href="https://github.com/dimpled/Yii2-Learning/blob/master/tutorial/modrewrite.md">ดูการติดตั้งได้ที่นี่</a></p>
+</blockquote>
+
+<p>ให้เพิ่มคำสั่งนี้เข้าไปที่ <code>rules</code> ซึ่งจะเป็นการระบุให้ LocationController  ใช้งาน <code>url</code> แบบ RESTful  ได้
+<code>php
+[&#39;class&#39; =&gt; &#39;yii\rest\UrlRule&#39;, &#39;controller&#39; =&gt; &#39;location&#39;],
+</code>
+จะได้แบบนี้
+<code>php
+&#39;urlManager&#39; =&gt; [
+    &#39;enablePrettyUrl&#39; =&gt; true,
+    &#39;enableStrictParsing&#39; =&gt; true,
+    &#39;showScriptName&#39; =&gt; false,
+    &#39;rules&#39; =&gt; [
+        [&#39;class&#39; =&gt; &#39;yii\rest\UrlRule&#39;, &#39;controller&#39; =&gt; &#39;location&#39;,  &#39;pluralize&#39;=&gt;false],
+    ],
+]
+</code></p>
+
+<p>หากใครเปิดการใช้งาน PrettyUrl อยู่แล้วก็เพิ่มเข้าไปแบบนี้
+```php
+&#39;urlManager&#39; =&gt; [
+  &#39;class&#39; =&gt; &#39;yii\web\UrlManager&#39;,
+  &#39;showScriptName&#39; =&gt; false,
+  &#39;enablePrettyUrl&#39; =&gt; true,
+  &#39;rules&#39; =&gt; [
+        &#39;<a href="controller:w+">controller:w+</a>/<a href="id:d+">id:d+</a>&#39; =&gt; &#39;<controller>/view&#39;,
+        &#39;<a href="controller:w+">controller:w+</a>/<a href="action:w+">action:w+</a>/<a href="id:d+">id:d+</a>&#39; =&gt; &#39;<controller>/<action>&#39;,
+        &#39;<a href="controller:w+">controller:w+</a>/<a href="action:w+">action:w+</a>&#39; =&gt; &#39;<controller>/<action>&#39;,
+        [&#39;class&#39; =&gt; &#39;yii\rest\UrlRule&#39;, &#39;controller&#39; =&gt; &#39;location&#39;],
+  ],
+],</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Enabling JSON Input
+เปิดการเปิดการใช้งาน ให้สามารถรับค่าที่อยู่ในรูปแบบของ Json ได้ เพราะเวลาที่เราเรียกใช้งานหรือทำการส่งค่าอะไรมามันจะต้องอยู่ในรูปแบบของ Json โดยเพิ่มเข้าไปที่ application components ของ config/main.php  ใส่โค้ดเข้าไปดังนี้
+
+ของเดิมจะเป็นแบบนี้และส่วนของ `cookieValidationKey` ค่าจะไม่เหมือนกัน
+```php
+&#39;request&#39; =&gt; [
+    &#39;cookieValidationKey&#39; =&gt; &#39;xxxxx......&#39;,
+],
+</code></pre></div>
+<p>โดยเพิ่มเข้าไป
+<code>php
+&#39;request&#39; =&gt; [
+    &#39;cookieValidationKey&#39; =&gt; &#39;xxxxx......&#39;,
+    &#39;parsers&#39; =&gt; [
+        &#39;application/json&#39; =&gt; &#39;yii\web\JsonParser&#39;,
+    ]
+]
+</code></p>
+
+<h2 id="trying-it-out">Trying it Out</h2>
+
+<p>การใช้งาน เราจะต้องเข้าใจนิยามของการเรียกใช้งาน RESTful ก่อน ซึ่งส่วนใหญ่ก็จะใช้มาตรฐานแบบนี้</p>
+
+<table><thead>
+<tr>
+<th>Method</th>
+<th style="text-align: center">Url</th>
+<th style="text-align: right">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>GET</td>
+<td style="text-align: center">/location</td>
+<td style="text-align: right">แสดงข้อมูล location ทั้งหมด (page by page)</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td style="text-align: center">/location</td>
+<td style="text-align: right">แสดงข้อมูล location เฉพาะ header (page by page)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td style="text-align: center">/location</td>
+<td style="text-align: right">เพิ่ม location ใหม่ จะต้องแนบข้อมูลมาด้วย</td>
+</tr>
+<tr>
+<td>GET</td>
+<td style="text-align: center">/location/5</td>
+<td style="text-align: right">แสดงข้อมูล location ที่ pk เท่ากับ 5</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td style="text-align: center">/location/5</td>
+<td style="text-align: right">แสดงข้อมูล location เฉพาะ header ที่ pk เท่ากับ 5</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td style="text-align: center">/location/5</td>
+<td style="text-align: right">แก้ไขข้อมูล location ที่ pk = 5</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td style="text-align: center">/location</td>
+<td style="text-align: right">ลบข้อมูล locaiont ที่ pk = 5</td>
+</tr>
+</tbody></table>
+
+<p>ทดสอบลองเรียกใช้งานผ่าน <code>curl</code> ดู mac,linux เปิด Terminal แล้วพิมพ์คำสั่งนี้ ส่วน windows ต้องติดต้ง curl เพิ่มหากต้องการทดสอบผ่าน curl <a href="http://curl.haxx.se/download.html">ดาวน์โหลดได้ที่นี่</a> ขอดีของการทดสอบผ่าน curl คือมันสามารถเรียกได้ ทุก method ถ้ารันผ่าน url บน browser มันจะได้แค่ Method <code>GET</code></p>
+
+<blockquote>
+<p>โปรเจคของผมอยู่ที่ <code>/yii2/yii2-Leanning-Source</code> ซึ่ง path ของคุณจะไม่ตรงกับของผมซึ่งก็ขึ้นอยู่กับว่าเราตั้งชื่อว่าอะไร</p>
+</blockquote>
+
+<h3 id="find-all-method-get">FIND All : Method GET</h3>
+
+<p>Url
+<code>
+http://127.0.0.1/yii2/yii2-Leanning-Source/web/location
+</code>
+เป็นการเรียกข้อมูล location โดยใช้ method GET ซึ่งจะเป็นการแสดงข้อมูลของ location ทีละ page เทียบได้กับ sql <code>select * from location limit 20 offset 0</code></p>
+
+<p>เรียกใช้งาน
+<code>
+curl -i -H &quot;Accept:application/json&quot; &quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location&quot;
+</code></p>
+
+<blockquote>
+<p>ลองสังเกตตรง header จะมี header link,X-Pagination ขึ้นมา ซึ่งตรงนี้มีค่า url หน้าปัจจุบัน, หน้าต่อไป, หน้าสุดท้าย ผมเข้าใจว่านี้คือ <a href="http://en.wikipedia.org/wiki/HATEOAS">ATEOAS;</a> ซื่ง web service ส่วนใหญ่จะมีแค่ data ออกมาเท่านั้นจะไม่มี ATEOAS; ซึ่ง Yii 2 มี  ฮา...ใครมีรายละเอียดก็ช่วยเพิ่มเติมหน่อยละกันครับ</p>
+</blockquote>
+
+<p>Result</p>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="err">HTTP/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="err">OK</span>
+<span class="err">Date:</span> <span class="err">Fri,</span> <span class="mi">13</span> <span class="err">Mar</span> <span class="mi">2015</span> <span class="mi">05</span><span class="err">:</span><span class="mi">40</span><span class="err">:</span><span class="mi">59</span> <span class="err">GMT</span>
+<span class="err">Server:</span> <span class="err">Apache/</span><span class="mf">2.4</span><span class="err">.</span><span class="mi">9</span> <span class="err">(Unix)</span> <span class="err">PHP/</span><span class="mf">5.6</span><span class="err">.</span><span class="mi">4</span>
+<span class="err">X-Powered-By:</span> <span class="err">PHP/</span><span class="mf">5.6</span><span class="err">.</span><span class="mi">4</span>
+<span class="err">X-Pagination-Total-Count:</span> <span class="mi">10567</span>
+<span class="err">X-Pagination-Page-Count:</span> <span class="mi">529</span>
+<span class="err">X-Pagination-Current-Page:</span> <span class="mi">1</span>
+<span class="err">X-Pagination-Per-Page:</span> <span class="mi">20</span>
+<span class="err">Link:</span> <span class="err">&lt;http://</span><span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span><span class="err">/yii</span><span class="mi">2</span><span class="err">/yii</span><span class="mi">2</span><span class="err">-Leanning-Source/web/location/index?page=</span><span class="mi">1</span><span class="err">&gt;;</span> <span class="err">rel=self,</span> <span class="err">&lt;http://</span><span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span><span class="err">/yii</span><span class="mi">2</span><span class="err">/yii</span><span class="mi">2</span><span class="err">-Leanning-Source/web/location/index?page=</span><span class="mi">2</span><span class="err">&gt;;</span> <span class="err">rel=next,</span> <span class="err">&lt;http://</span><span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span><span class="err">/yii</span><span class="mi">2</span><span class="err">/yii</span><span class="mi">2</span><span class="err">-Leanning-Source/web/location/index?page=</span><span class="mi">529</span><span class="err">&gt;;</span> <span class="err">rel=last</span>
+<span class="err">Content-Length:</span> <span class="mi">2554</span>
+<span class="err">Content-Type:</span> <span class="err">application/json;</span> <span class="err">charset=UTF</span><span class="mi">-8</span>
+
+<span class="p">{</span><span class="nt">&quot;items&quot;</span><span class="p">:[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Kabul&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">34.5166667</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">69.1833344</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">1808</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Kandahar&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">31.61</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">65.6999969</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">1015</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Mazar-e Sharif&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.7069444</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">67.1122208</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">369</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Herat&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">34.34</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">62.1899986</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">927</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Jalalabad&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">34.42</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">70.4499969</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">573</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Konduz&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.72</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">68.8600006</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">394</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Ghazni&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">33.5535554</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">68.4268875</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">2175</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Balkh&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.7586111</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">66.8961105</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">328</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Baghlan&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.12</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">68.6999969</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">565</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Gardez&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">33.59</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">69.2200012</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">2279</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Khost&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">33.3380556</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">69.9202805</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">1178</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Khanabad&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.68</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">69.1100006</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">490</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Tashqorghan&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.6952778</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">67.6980591</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">460</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">14</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Taloqan&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.7360511</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">69.5345078</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">788</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Cool urhajo&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">34.2654452</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">67.3451614</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">2733</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Pol-e Khomri&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">35.9425</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">68.7191696</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">832</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Sheberghan&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.6672222</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">65.7536087</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">362</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Charikar&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">35.013611</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">69.1713867</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">1534</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">19</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Sar-e Pol&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">36.2155556</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">65.9363861</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">629</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;Afghanistan&quot;</span><span class="p">,</span><span class="nt">&quot;city&quot;</span><span class="p">:</span><span class="s2">&quot;Paghman&quot;</span><span class="p">,</span><span class="nt">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">34.5875</span><span class="p">,</span><span class="nt">&quot;longitude&quot;</span><span class="p">:</span><span class="mf">68.953331</span><span class="p">,</span><span class="nt">&quot;altitude&quot;</span><span class="p">:</span><span class="mi">2276</span><span class="p">}],</span><span class="nt">&quot;_links&quot;</span><span class="p">:{</span><span class="nt">&quot;self&quot;</span><span class="p">:{</span><span class="nt">&quot;href&quot;</span><span class="p">:</span><span class="s2">&quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=1&quot;</span><span class="p">},</span><span class="nt">&quot;next&quot;</span><span class="p">:{</span><span class="nt">&quot;href&quot;</span><span class="p">:</span><span class="s2">&quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=2&quot;</span><span class="p">},</span><span class="nt">&quot;last&quot;</span><span class="p">:{</span><span class="nt">&quot;href&quot;</span><span class="p">:</span><span class="s2">&quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=529&quot;</span><span class="p">}},</span><span class="nt">&quot;_meta&quot;</span><span class="p">:{</span><span class="nt">&quot;totalCount&quot;</span><span class="p">:</span><span class="mi">10567</span><span class="p">,</span><span class="nt">&quot;pageCount&quot;</span><span class="p">:</span><span class="mi">529</span><span class="p">,</span><span class="nt">&quot;currentPage&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;perPage&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">}}</span><span class="err">%</span>  
+</code></pre></div>
+<p>เราสามารถเปลี่ยนเป็น xml ได้ <code>application/xml</code> action อื่นๆ ก็เหมือนกันนะครับ
+<code>
+curl -i -H &quot;Accept:application/xml&quot; &quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location&quot;
+</code>
+Result
+```xml
+HTTP/1.1 200 OK
+Date: Fri, 13 Mar 2015 05:36:17 GMT
+Server: Apache/2.4.9 (Unix) PHP/5.6.4
+X-Powered-By: PHP/5.6.4
+X-Pagination-Total-Count: 10567
+X-Pagination-Page-Count: 529
+X-Pagination-Current-Page: 1
+X-Pagination-Per-Page: 20
+Link: <a href="http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=1">http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=1</a>; rel=self, <a href="http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=2">http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=2</a>; rel=next, <a href="http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=529">http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=529</a>; rel=last
+Content-Length: 3712
+Content-Type: application/xml; charset=UTF-8</p>
+
+<p>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<response><items><item><id>1</id><country>Afghanistan</country><city>Kabul</city><latitude>34.5166667</latitude><longitude>69.1833344</longitude><altitude>1808</altitude></item><item><id>2</id><country>Afghanistan</country><city>Kandahar</city><latitude>31.61</latitude><longitude>65.6999969</longitude><altitude>1015</altitude></item><item><id>3</id><country>Afghanistan</country><city>Mazar-e Sharif</city><latitude>36.7069444</latitude><longitude>67.1122208</longitude><altitude>369</altitude></item><item><id>4</id><country>Afghanistan</country><city>Herat</city><latitude>34.34</latitude><longitude>62.1899986</longitude><altitude>927</altitude></item><item><id>5</id><country>Afghanistan</country><city>Jalalabad</city><latitude>34.42</latitude><longitude>70.4499969</longitude><altitude>573</altitude></item><item><id>6</id><country>Afghanistan</country><city>Konduz</city><latitude>36.72</latitude><longitude>68.8600006</longitude><altitude>394</altitude></item><item><id>7</id><country>Afghanistan</country><city>Ghazni</city><latitude>33.5535554</latitude><longitude>68.4268875</longitude><altitude>2175</altitude></item><item><id>8</id><country>Afghanistan</country><city>Balkh</city><latitude>36.7586111</latitude><longitude>66.8961105</longitude><altitude>328</altitude></item><item><id>9</id><country>Afghanistan</country><city>Baghlan</city><latitude>36.12</latitude><longitude>68.6999969</longitude><altitude>565</altitude></item><item><id>10</id><country>Afghanistan</country><city>Gardez</city><latitude>33.59</latitude><longitude>69.2200012</longitude><altitude>2279</altitude></item><item><id>11</id><country>Afghanistan</country><city>Khost</city><latitude>33.3380556</latitude><longitude>69.9202805</longitude><altitude>1178</altitude></item><item><id>12</id><country>Afghanistan</country><city>Khanabad</city><latitude>36.68</latitude><longitude>69.1100006</longitude><altitude>490</altitude></item><item><id>13</id><country>Afghanistan</country><city>Tashqorghan</city><latitude>36.6952778</latitude><longitude>67.6980591</longitude><altitude>460</altitude></item><item><id>14</id><country>Afghanistan</country><city>Taloqan</city><latitude>36.7360511</latitude><longitude>69.5345078</longitude><altitude>788</altitude></item><item><id>15</id><country>Afghanistan</country><city>Cool urhajo</city><latitude>34.2654452</latitude><longitude>67.3451614</longitude><altitude>2733</altitude></item><item><id>16</id><country>Afghanistan</country><city>Pol-e Khomri</city><latitude>35.9425</latitude><longitude>68.7191696</longitude><altitude>832</altitude></item><item><id>17</id><country>Afghanistan</country><city>Sheberghan</city><latitude>36.6672222</latitude><longitude>65.7536087</longitude><altitude>362</altitude></item><item><id>18</id><country>Afghanistan</country><city>Charikar</city><latitude>35.013611</latitude><longitude>69.1713867</longitude><altitude>1534</altitude></item><item><id>19</id><country>Afghanistan</country><city>Sar-e Pol</city><latitude>36.2155556</latitude><longitude>65.9363861</longitude><altitude>629</altitude></item><item><id>20</id><country>Afghanistan</country><city>Paghman</city><latitude>34.5875</latitude><longitude>68.953331</longitude><altitude>2276</altitude></item></items>&lt;<em>links&gt;<self><href><a href="http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=1">http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=1</a></href></self><next><href><a href="http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=2">http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=2</a></href></next><last><href><a href="http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=529">http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=529</a></href></last>&lt;/</em>links&gt;&lt;<em>meta&gt;<totalCount>10567</totalCount><pageCount>529</pageCount><currentPage>1</currentPage><perPage>20</perPage>&lt;/</em>meta&gt;</response>
+```</p>
+
+<h2 id="find-by-pk-method-get">FIND BY PK : Method GET</h2>
+
+<h4 id="url">url</h4>
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/5
+</code></pre></div>
+<p>ค้นหาข้อมูล <code>location</code> ที่ primary key = 5 โดยใช้ method GET
+เทียบได้กับ sql <code>select * from location where id =5</code></p>
+
+<p>เรียกใช้งาน
+<code>
+curl -i -H &quot;Accept:application/json&quot; &quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/5&quot;
+</code>
+Result
+```json
+HTTP/1.1 200 OK
+Date: Thu, 12 Mar 2015 17:54:52 GMT
+Server: Apache/2.4.9 (Unix) PHP/5.6.4
+X-Powered-By: PHP/5.6.4
+Content-Length: 106
+Content-Type: application/json; charset=UTF-8</p>
+
+<p>{&quot;id&quot;:5,&quot;country&quot;:&quot;Afghanistan&quot;,&quot;city&quot;:&quot;Jalalabad&quot;,&quot;latitude&quot;:34.42,&quot;longitude&quot;:70.4499969,&quot;altitude&quot;:573}%
+```</p>
+
+<h2 id="create-method-post">CREATE : Method POST</h2>
+
+<p>url
+<code>
+http://127.0.0.1/yii2/yii2-Leanning-Source/web/location
+</code>
+เป็นการเพิ่มข้อมูล โดยใช้ method POST และต้องแนบข้อมูลที่จะทำการเพิ่มไปด้วย</p>
+
+<p>เรียกใช้งาน
+<code>
+curl -i -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; -XPOST &quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location&quot; -d &#39;{&quot;id&quot;:null,&quot;country&quot;:&quot;Thailand&quot;,&quot;city&quot;:&quot;Jalalabad&quot;,&quot;latitude&quot;:34.42,&quot;longitude&quot;:70.4499969,&quot;altitude&quot;:573}&#39;
+</code>
+result
+```json
+HTTP/1.1 201 Created
+Date: Sun, 15 Mar 2015 01:50:40 GMT
+Server: Apache/2.4.9 (Unix) PHP/5.6.4
+X-Powered-By: PHP/5.6.4
+Location: <a href="http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/10570">http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/10570</a>
+Content-Length: 107
+Content-Type: application/json; charset=UTF-8</p>
+
+<p>{&quot;country&quot;:&quot;Thailand&quot;,&quot;city&quot;:&quot;Jalalabad&quot;,&quot;latitude&quot;:34.42,&quot;longitude&quot;:70.4499969,&quot;altitude&quot;:573,&quot;id&quot;:10570}%<br>
+```</p>
+
+<h1 id="update-method-patct-put">UPDATE : Method PATCT,PUT</h1>
+
+<p>url
+<code>
+http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/update/10574
+</code>
+เป็นการแก้ไขข้อมูลที่ primary key = 10570 และส่งข้อมูลที่จะแก้ไขไปด้วย</p>
+
+<p>เรียกใช้งาน
+<code>
+curl -i -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; -XPATCH &quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/update/10574&quot; -d &#39;{&quot;country&quot;:&quot;Thailand&quot;,&quot;city&quot;:&quot;Jalalabad&quot;,&quot;latitude&quot;:34.42,&quot;longitude&quot;:70.4499969,&quot;altitude&quot;:573}&#39;
+</code>
+Result
+```
+HTTP/1.1 200 OK
+Date: Sun, 15 Mar 2015 07:04:34 GMT
+Server: Apache/2.4.9 (Unix) PHP/5.6.4
+X-Powered-By: PHP/5.6.4
+Content-Length: 111
+Content-Type: application/json; charset=UTF-8</p>
+
+<p>{&quot;id&quot;:10574,&quot;country&quot;:&quot;Thailand&quot;,&quot;city&quot;:&quot;Jalalabad&quot;,&quot;latitude&quot;:34.42,&quot;longitude&quot;:70.4499969,&quot;altitude&quot;:573}%
+```</p>
+
+<h1 id="deletd-method-delete">DELETD : Method DELETE</h1>
+
+<p>url
+<code>
+http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/delete/10570
+</code>
+เป็นการลบข้อมูลโดยอ้างไปที่ primary key = 10570</p>
+
+<p>เรียกใช้งาน
+<code>
+curl -i -H &quot;Accept:application/json&quot; -H &quot;Content-Type:application/json&quot; -XDELETE &quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/delete/10570&quot;
+</code>
+Result
+<code>json
+HTTP/1.1 204 No Content
+Date: Sun, 15 Mar 2015 06:55:55 GMT
+Server: Apache/2.4.9 (Unix) PHP/5.6.4
+X-Powered-By: PHP/5.6.4
+Content-Length: 0
+Content-Type: application/json; charset=UTF-8
+</code></p>
+
+<h1 id="method-head">METHOD : HEAD</h1>
+
+<p>ตรงนี้ยังไม่แน่ใจนะครับว่าเอาไว้ทำอะไรเพราะมันจะแสดงข้อมูลแค่ Header</p>
+
+<h2 id="find-by-pk-method-head">FIND BY PK : Method HEAD</h2>
+
+<p>Url
+<code>
+http://127.0.0.1/yii2/yii2-Leanning-Source/web/location
+</code>
+เป็นการเรียกดูข้อมูล <code>location</code> ทีละ page โดยใช้ method HEAD ซึ่งจะเป็นการแสดงข้อมูลของ location ทีละ page แต่แสดงแค่ header  เทียบได้กับ sql <code>select * from location limit 20 offset 0</code></p>
+
+<p>เรียกใช้งาน
+<code>
+curl -i -H &quot;Accept:application/json&quot; -XHEAD &quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location&quot;
+</code>
+Result
+สังเกตดูจะไม่มีข้อมูลนะครับ จะมีแค่ header
+<code>json
+HTTP/1.1 200 OK
+Date: Fri, 13 Mar 2015 04:40:46 GMT
+Server: Apache/2.4.9 (Unix) PHP/5.6.4
+X-Powered-By: PHP/5.6.4
+X-Pagination-Total-Count: 10567
+X-Pagination-Page-Count: 529
+X-Pagination-Current-Page: 1
+X-Pagination-Per-Page: 20
+Link: &lt;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=1&gt;; rel=self, &lt;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=2&gt;; rel=next, &lt;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/index?page=529&gt;; rel=last
+Content-Type: application/json; charset=UTF-8
+</code></p>
+
+<h2 id="find-by-pk-method-head">FIND BY PK : Method HEAD</h2>
+
+<p>url
+<code>
+http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/5
+</code>
+ค้นหาข้อมูล <code>location</code> ที่ primary key =  5 โดยใช้ method HEAD และแสดงข้อมูลเฉพาะ header
+เทียบได้กับ sql <code>select * from location where id =5</code> แต่จะไม่ได้ถูกนำมาแสดง</p>
+
+<p>เรียกใช้งาน
+<code>
+curl -i -H &quot;Accept:application/json&quot; -XHEAD  &quot;http://127.0.0.1/yii2/yii2-Leanning-Source/web/location/5&quot;
+</code>
+Result
+<code>json
+HTTP/1.1 200 OK
+Date: Fri, 13 Mar 2015 10:15:20 GMT
+Server: Apache/2.4.9 (Unix) PHP/5.6.4
+X-Powered-By: PHP/5.6.4
+Content-Type: application/json; charset=UTF-8
+</code></p>
+
+<blockquote>
+<p>สำหรับคนที่ไม่ชอบ geek ก็ใช้แบบ Gui ได้ครับเป็น extension ของ Chrome Browser <a href="https://chrome.google.com/webstore/detail/postman-rest-client/fdmmgilgnpjigdojojpjoooidkmcomcm">ดาวน์โหลด</a> <sup>^</sup> หลายคนอาจจะนึกในใจว่า ทำไมไม่บอกตั้งแต่แรก....! เอ่อผมอยากให้ททุกคน geek ครับ ฮา สวัสดีครับ...</p>
+</blockquote>
+
+<p>ดูสิใช้งานง่ายมากเลย ...
+<img src="/images/postman.png" alt="postman"></p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

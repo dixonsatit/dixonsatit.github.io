@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การใช้งาน Flash Message | DixonSatit</title>
+	<meta name="description" content="FlashMessage เป็นตัวแจ้งสถานะต่างๆ ตามที่ต้องการ เช่น แจ้งบันทึกข้อมูลหรือแก้ไขข้อมูล โดยหลักการก็ใช้ข้อมูลเก็บไว้ใน session การทำงานจะแบ่งเป็น 2 ส่วนคือ กำห...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/17/flash-message.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การใช้งาน Flash Message</h1>
+    <p class="meta">
+    June 17, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p>FlashMessage เป็นตัวแจ้งสถานะต่างๆ ตามที่ต้องการ เช่น แจ้งบันทึกข้อมูลหรือแก้ไขข้อมูล โดยหลักการก็ใช้ข้อมูลเก็บไว้ใน session การทำงานจะแบ่งเป็น 2 ส่วนคือ <code>กำหนดค่า</code>,<code>แสดงผล</code></p>
+
+<h2 id="กำหนดค่า">กำหนดค่า</h2>
+
+<p>เราสามารถกำหนดค่าในส่วนที่ต้องการได้ เช่น เมื่อมีการบันทึกข้อมูลเสร็จเราต้องการแจ้งเตือนไปยังผู้ใช้ว่า &quot;บันทึกข้อมูลเสร็จเรียบร้อย&quot; ก็ทำการกำหนดค่าลงไปดังนี้ </p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">,[</span>
+    <span class="s1">&#39;body&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;ลงทะเบียนงานวิจัยเสร็จเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับไปเร็วที่สุด..&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;options&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;alert-success&#39;</span><span class="p">]</span>
+<span class="p">]);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<blockquote>
+<p>หากต้องการแจ้งเตือนแบบต่างๆ สามารถกำหนดได้ ดังนี้ <code>alert-success</code>,<code>alert-info</code>,<code>alert-warning</code>,<code>alert-danger</code></p>
+</blockquote>
+
+<p>ตัวอย่างการใช้งานกับ <code>actionCreate</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">actionCreate</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Research</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">())</span> <span class="p">{</span>
+
+            <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">,[</span>
+                <span class="s1">&#39;body&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;ลงทะเบียนงานวิจัยเสร็จเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับไปเร็วที่สุด..&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;options&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;alert-success&#39;</span><span class="p">]</span>
+            <span class="p">]);</span>
+
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">]);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+            <span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h2 id="การแสดงผล">การแสดงผล</h2>
+
+<p>เราจะใช้ <code>\yii\bootstrap\Alert</code> เป็น widget ของ Bootstrap ซึ่งมีมากับ yii2 อยู่แล้ว เราสามารถนำโค้ดนี้ไปไว้ที่ใหนก็ได้ที่เราต้องการแสดงผลของ alert ขึ้นมา</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="k">use</span> <span class="nx">yii\helpers\ArrayHelper</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="cp">&lt;?php</span> <span class="k">if</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">hasFlash</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">))</span><span class="o">:?&gt;</span>
+    <span class="o">&lt;?=</span> <span class="nx">\yii\bootstrap\Alert</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;body&#39;</span><span class="o">=&gt;</span><span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">getFlash</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">),</span> <span class="s1">&#39;body&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;options&#39;</span><span class="o">=&gt;</span><span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">getFlash</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">),</span> <span class="s1">&#39;options&#39;</span><span class="p">),</span>
+    <span class="p">])</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?php</span> <span class="k">endif</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h2 id="แสดงผลทีละหลายๆ-ค่า">แสดงผลทีละหลายๆ ค่า</h2>
+
+<p>ในการกำหนดค่าเราสามารถกำหนดกี่ตัวก็ได้ แต่อย่าให้ key ซ้ำกัน ตามตัวอย่างผมตั้ง alert1,alert2</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+     <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;alert1&#39;</span><span class="p">,[</span>
+        <span class="s1">&#39;body&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;ลงทะเบียนงานวิจัยเสร็จเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับไปเร็วที่สุด..&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;options&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;alert-success&#39;</span><span class="p">]</span>
+     <span class="p">]);</span>
+
+     <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;alert2&#39;</span><span class="p">,[</span>
+        <span class="s1">&#39;body&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;ลงทะเบียนงานวิจัยเสร็จเรียบร้อย! เจ้าหน้าที่จะติดต่อกลับไปเร็วที่สุด..&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;options&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;alert-info&#39;</span><span class="p">]</span>
+     <span class="p">]);</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h2 id="ส่วนแสดงผล">ส่วนแสดงผล</h2>
+
+<p>ส่วนนี้มันจะมี funciton <code>getAllFlashes()</code> เพื่อดึงข้อมูล flashMessage ทั้งหมด จากนั้นเราก็ทำการวนลูปโดยใช้ foreach เพื่อมาแสดงผล</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="k">foreach</span> <span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">session</span><span class="o">-&gt;</span><span class="na">getAllFlashes</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$message</span><span class="p">)</span><span class="o">:</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">\yii\bootstrap\Alert</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+        <span class="s1">&#39;body&#39;</span><span class="o">=&gt;</span><span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$message</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;options&#39;</span><span class="o">=&gt;</span><span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$message</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">),</span>
+    <span class="p">])</span><span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?php</span> <span class="k">endforeach</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><img src="/img/flash-message.png" alt=""></p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

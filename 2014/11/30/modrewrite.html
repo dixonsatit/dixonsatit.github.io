@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>เปิดการใช้งาน Pretty urls (mod_rewrite) | DixonSatit</title>
+	<meta name="description" content="Pretty urls ก็คือการทำให้ url ที่มันจำยากๆ ให้มันสามารถอ่านเข้าใจได้ ซึ่งปกติคนทั่วไป ถ้าดูแล้วอาจจะงงๆ นอกจากคนที่อยู่ในสาย develop ก็คงจะพอเข้าใจ แต่ประโยช...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/modrewrite.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">เปิดการใช้งาน Pretty urls (mod_rewrite)</h1>
+    <p class="meta">
+    November 30, 2014
+    
+    </p>
+  </header>
+  <section class="post-content"><p>Pretty urls ก็คือการทำให้ url ที่มันจำยากๆ ให้มันสามารถอ่านเข้าใจได้ ซึ่งปกติคนทั่วไป ถ้าดูแล้วอาจจะงงๆ นอกจากคนที่อยู่ในสาย develop ก็คงจะพอเข้าใจ แต่ประโยชน์จริงๆ ของมันก็คือ ให้ Search Engine เข้าใจและจำ url ของเราได้ง่าย และยังเป็นประโยชน์กับการทำ SEO อีกด้วย หลายคนอาจจะยังงงๆ ดูตัวอย่างกันเลยดีกว่า T T&#39;</p>
+
+<h3 id="แบบ-url-ปกติ">แบบ url ปกติ</h3>
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://www.domain.me/index.php?r=site/index
+</code></pre></div>
+<p>ถ้าดูตาม url เราจะเข้าใจได้ว่า url นี้ รับค่าตัวแปรชื่อ  <code>r</code> ซึ่งเก็บค่า <code>site/index</code> </p>
+
+<ul>
+<li><code>site</code> คือชื่อ controller</li>
+<li><code>index</code> คือชื่อ action</li>
+</ul>
+
+<h3 id="แบบเปิดใช้งาน-pretty-urls">แบบเปิดใช้งาน Pretty Urls</h3>
+<div class="highlight"><pre><code class="language-text" data-lang="text">http://www.domain.me/site/index
+</code></pre></div>
+<p>ถ้าสังเกตจะเห็นว่า มีคำว่า <code>index.php</code> และตัวแประ <code>r</code> หายไป เพราะ mod_rewrite ซ่อนไว้ และ url จะดูสั้นขึ้นมากๆ</p>
+
+<h2 id="เปิดใช้งาน">เปิดใช้งาน</h2>
+
+<p>ก่อนอื่นให้ทำการคอนฟิกเพื่อเปิดการใช้งาน UrlManager ไปที<code>config/web.php</code> ใส่โค้ดนี้เข้าไปภาพใต้ <code>components</code>
+* <code>ShowScriptName</code> คือ ให้แสดง index.php เราเซ็ตเป็น <code>false</code>  เพื่อใม่ให้มันแสดง
+* <code>ennablePrettyUrl</code> คือเปิดการใช้งาน เซ็ตเป็น <code>true</code> เพื่อเปิดการใช้งาน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<span class="s1">&#39;components&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+<span class="c1">//.....</span>
+<span class="s1">&#39;urlManager&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+       <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\web\UrlManager&#39;</span><span class="p">,</span>
+       <span class="c1">// Disable index.php</span>
+       <span class="s1">&#39;showScriptName&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+       <span class="c1">// Disable r= routes</span>
+       <span class="s1">&#39;enablePrettyUrl&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+       <span class="s1">&#39;rules&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+              <span class="s1">&#39;&lt;controller:\w+&gt;/&lt;id:\d+&gt;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;controller&gt;/view&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;&lt;controller:\w+&gt;/&lt;action:\w+&gt;/&lt;id:\d+&gt;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;controller&gt;/&lt;action&gt;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;&lt;controller:\w+&gt;/&lt;action:\w+&gt;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;controller&gt;/&lt;action&gt;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;module/&lt;module:\w+&gt;/&lt;controller:\w+&gt;/&lt;action:\w+&gt;&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;module&gt;/&lt;controller&gt;/&lt;action&gt;&#39;</span><span class="p">,</span>
+       <span class="p">),</span>
+<span class="p">],</span>
+<span class="c1">//......</span>
+<span class="p">],</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h2 id="สร้างไฟล์-htaccess">สร้างไฟล์ .htaccess</h2>
+
+<p>สร้างไฟล์ชื่อ <code>.htaccess</code> ไว้ที่ <code>web/.htaccess</code> แล้วใส่โค้ดตามด้านล่างนี้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">RewriteEngine on
+# If a directory or a file exists, use it directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise forward it to index.php
+RewriteRule . index.php
+</code></pre></div>
+<p>ทดลองใช้งาน
+<code>
+http://www.domain.me/site/index
+</code></p>
+
+<blockquote>
+<p>หากยังไม่ได้ลองเช็คว่าเปิด <code>AllowOverride All</code> ที่ไฟล์ httpd.conf ใน server ของคุณด้วย หากไม่ได้เปิดมันจะไม่สามารถทำงานได้ครับ</p>
+</blockquote>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
