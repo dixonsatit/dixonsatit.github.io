@@ -5,11 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-<<<<<<< HEAD
-    <pubDate>Sun, 21 Jun 2015 22:57:20 +0700</pubDate>
-=======
-    <pubDate>Sat, 20 Jun 2015 23:33:38 +0700</pubDate>
->>>>>>> d74e467302b69aed01b12d55c12f6155dd6f3255
+    <pubDate>Sun, 21 Jun 2015 23:42:25 +0700</pubDate>
     
       <item>
         <title>การใช้ assetManager และปิดใช้งาน Bootstrap css,js,JQuery</title>
@@ -109,7 +105,6 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;หลัการทำงาน&quot;&gt;หลัการทำงาน&lt;/h2&gt;
 
-<<<<<<< HEAD
 &lt;p&gt;หลักการทำงานของ view ใน Yii 2 เมื่อ Web Application ของเราทำงานมันจะไป render ไฟล์ view ที่โฟลเดอร์ดีฟอลด์ views ก่อน
 จากนั้นก็จะเช็คว่ามีการเรียกใช้งานที่คอนโทรเลอร์ใหน มันก็จะไปค้นที่โฟล์เดอร์ที่มีชื่อตามคอนโทรเลอร์นั้นในไฟลเดอร์ views&lt;/p&gt;
 
@@ -874,26 +869,9 @@
 &lt;li&gt;สร้าง assets เพื่อเรียกใช้งาน css,js&lt;/li&gt;
 &lt;li&gt;สร้าง layout แบบอื่นๆ เพื่อใช้งานในรูปแบบที่แตกต่างกัน&lt;/li&gt;
 &lt;li&gt;ตั้งค่าที่ view  ให้ทำการเรียกใช้งาน view ที่ theme ของเรา&lt;/li&gt;
-=======
-&lt;p&gt;หลักการทำงานของ views ใน Yii 2 เมื่อ Web Application ของเราทำงานมันจะไป render ไฟล์ view ที่โฟลเดอร์ดีฟอลด์ views ก่อน
-จากนั้นก็จะเช็คว่ามีการเรียกใช้งานที่คอนโทรเลอร์ใหน มันก็จะไปค้นที่โฟล์เดอร์ชื่อตามคอนโทรเลอร์นั้นในไฟลเดอร์ views&lt;/p&gt;
-
-&lt;p&gt;ในการสร้างธีม เราก็แค่ตั้งค่าให้มันเปลี่ยนเส้นทางของการเรียกใช้งาน view จากปกติที่มันไปค้นทีโฟลเดอร์ views หรือ @app/views นั้น เราก็เปลี่ยนให้มันชีไปที่โฟล์เดอร์ธีมของเรา แค่นั้นเอง&lt;/p&gt;
-
-&lt;p&gt;หากมีการเรียกใช้งาน view ใหน และไปค้นในธีมที่เราชีไปแล้วไม่พบ มันจะกลับมาเรียกใช้งานที่พาทดีฟอลด์เดิมคือ views หรือ @app/views นั้นเอง&lt;/p&gt;
-
-&lt;h2 id=&quot;โครงสร้างโฟล์เดอร์-theme&quot;&gt;โครงสร้างโฟล์เดอร์ Theme&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;views
-
-&lt;ul&gt;
-&lt;li&gt; layouts&lt;/li&gt;
-&lt;li&gt;site&lt;/li&gt;
-&lt;li&gt;sdf&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
->>>>>>> d74e467302b69aed01b12d55c12f6155dd6f3255
 &lt;/ul&gt;
+
+&lt;p&gt;หวังว่าคงพอเป็นตัวอย่างในการสร้าง theme ได้นะครับ&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Jun 2015 00:00:00 +0700</pubDate>
       </item>
