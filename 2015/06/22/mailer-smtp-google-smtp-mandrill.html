@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การส่งเมล์ โดยใช้  yii2-swiftmailer  ด้วย smtp-google & smtp-mandrill | DixonSatit</title>
+	<meta name="description" content="ปกติเวลาส่งเมล์ เราจะใช้ mail() ของ php ที่มีให้ มันมักจะมีปัญหาเมื่อส่งไปแล้ว จะเข้าที่ junk หรือไม่ก็ spam วันนี้จึงขอแนะนำการส่งเมล์ด้วย smtp จะช่วยแก้ปัญ...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/22/mailer-smtp-google-smtp-mandrill.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การส่งเมล์ โดยใช้  yii2-swiftmailer  ด้วย smtp-google & smtp-mandrill</h1>
+    <p class="meta">
+    June 22, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p>ปกติเวลาส่งเมล์ เราจะใช้ mail() ของ php ที่มีให้ มันมักจะมีปัญหาเมื่อส่งไปแล้ว จะเข้าที่ junk หรือไม่ก็ spam วันนี้จึงขอแนะนำการส่งเมล์ด้วย smtp จะช่วยแก้ปัญหานี้ได้ และยังมีบริการให้ใช้ฟรี หลายๆ ราย เช่น google,mandrill อีกทั้งเรายังสามารถทดสอบส่งเมล์ได้ ถึงแม้ระบบของเรายังไม่ขึ้น Prodruction ก็ตาม หรือจะสร้าง layout เมล์แบบต่างๆ ก็สามารถทำได้ </p>
+
+<p>วันนี้ขอแนะนำการส่งเมล์ด้วย smtp-google และ smtp-mandrill เพราะฟรีและสามารถทำได้ง่ายๆ ซึ่ง Yii2 เตรียมพร้อมไว้ให้เราแล้ว คือ <a href="https://github.com/yiisoft/yii2-swiftmailer">yii2-swiftmailer</a> มันติดตั้งมาพร้อมแล้ว รอแค่เราตั้งค่าเพื่อเปิดใช้งาน</p>
+
+<h2 id="เตรียมความพร้อมกันก่อน">เตรียมความพร้อมกันก่อน</h2>
+
+<ul>
+<li>ติดตั้ง yii2-swiftmailer อันนี้สบายเพราะ Yii 2 ติดตั้งมาให้แล้ว</li>
+<li>smtp ที่ต้องการจะใช้ ซึ่งจะไม่เหมือนกัน เช่น smtp ของ google คือ <code>smpt.gmail.com</code></li>
+<li>อีเมล์ account ที่ใช้งานได้จริง ตามตัวอย่างนี้ผมใช้ของ gmail</li>
+<li>layout อีเมล์ เราสามารถสร้างรูปแบบอีเมล์หลายๆ แบบได้ เช่น layout สำหรับตอนสมัครสมาชิก, layout สำหรับตอนส่งข่าว</li>
+</ul>
+
+<h2 id="เปรียบเทียระหว่าง-gmail-และ-mandrill">เปรียบเทียระหว่าง Gmail และ Mandrill</h2>
+
+<p>Gmail คงไม่ต้องอธิบายคงทราบกันดี ส่วน <a href="http://www.mandrill.com/">Mandrill</a> นั้นมันเป็นระบบ SMTP Mandrill สำหรับส่งเมล์ในระบบเว็บหรือ App ต่างๆ ฟรี 12000 เมล์/เดือน คือมันสร้างมาเพื่อส่งเมล์โดยเฉพาะครับ มีกราฟแสดงให้ดู ตรวจสอบสถิติต่างๆ ส่งไปกี่เมล์ได้รับกี่เมล์ สามารถส่งได้ทีละเยอะๆ แต่ถ้าส่งไม่เกิน 12000 เมล์/เดือน ก็ฟรีครับ ลองไปสมัครใช้ดูได้</p>
+
+<blockquote>
+<p>ปล. เท่าที่ผมลองใช้ Mandrill ถ้า server อยู่ในไทย ผมลองแล้วรู้สึกว่า delay นิดนึงครับ แต่ถ้า server อยูต่างประเทศเร็วมากส่งปั๊บเข้าเลย พอดีผมใช้ <a href="https://www.digitalocean.com/?refcode=117ef266fe2c">DigitalOcean</a> ใครสนใจก็ลองได้ server ราคาถูกมากๆ ถูกกว่า <a href="http://aws.amazon.com/ec2/">Aws</a></p>
+</blockquote>
+
+<p>จริงๆ สองตัวนี้มีคุณสมบัติคือสามารถส่งเมล์ผ่าน smtp ได้เหมือนกัน  แล้วแต่จะเลือกใช้ครับ <sup>^</sup></p>
+
+<p>เปิดใช้งาน mailer และตั้งค่าตามนี้ ใส่ email และ password ของเรา</p>
+
+<h2 id="ตั้งค่า-smtp-google">ตั้งค่า SMTP Google</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">return [</span>
+<span class="x">    //....</span>
+<span class="x">    &#39;components&#39; =&gt; [</span>
+<span class="x">        &#39;mailer&#39; =&gt; [</span>
+<span class="x">           &#39;class&#39; =&gt; &#39;yii\swiftmailer\Mailer&#39;,</span>
+<span class="x">                &#39;viewPath&#39; =&gt; &#39;@backend/mail&#39;,</span>
+<span class="x">                &#39;useFileTransport&#39; =&gt; false,</span>
+<span class="x">                &#39;transport&#39; =&gt; [</span>
+<span class="x">                    &#39;class&#39; =&gt; &#39;Swift_SmtpTransport&#39;,</span>
+<span class="x">                    &#39;host&#39; =&gt; &#39;smtp.gmail.com&#39;,</span>
+<span class="x">                    &#39;username&#39; =&gt; &#39;username@gmail.com&#39;,</span>
+<span class="x">                    &#39;password&#39; =&gt; &#39;password&#39;,</span>
+<span class="x">                    &#39;port&#39; =&gt; &#39;587&#39;,</span>
+<span class="x">                    &#39;encryption&#39; =&gt; &#39;tls&#39;,</span>
+<span class="x">                ],</span>
+<span class="x">            ],</span>
+<span class="x">        ],</span>
+<span class="x">];</span>
+</code></pre></div>
+<h2 id="ตั้งค่า-smtp-mandrill">ตั้งค่า SMTP Mandrill</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">return [</span>
+<span class="x">    //....</span>
+<span class="x">    &#39;components&#39; =&gt; [</span>
+<span class="x">        &#39;mailer&#39; =&gt; [</span>
+<span class="x">           &#39;class&#39; =&gt; &#39;yii\swiftmailer\Mailer&#39;,</span>
+<span class="x">                &#39;viewPath&#39; =&gt; &#39;@backend/mail&#39;,</span>
+<span class="x">                &#39;useFileTransport&#39; =&gt; false,</span>
+<span class="x">                &#39;transport&#39; =&gt; [</span>
+<span class="x">                    &#39;class&#39; =&gt; &#39;Swift_SmtpTransport&#39;,</span>
+<span class="x">                    &#39;host&#39; =&gt; &#39;smtp.mandrillapp.com&#39;,</span>
+<span class="x">                    &#39;username&#39; =&gt; &#39;username@gmail.com&#39;,</span>
+<span class="x">                    &#39;password&#39; =&gt; &#39;password&#39;,</span>
+<span class="x">                    &#39;port&#39; =&gt; &#39;587&#39;,</span>
+<span class="x">                    &#39;encryption&#39; =&gt; &#39;tls&#39;,</span>
+<span class="x">                ],</span>
+<span class="x">        ],</span>
+<span class="x">   ],</span>
+<span class="x">];</span>
+</code></pre></div>
+<blockquote>
+<p><code>viewPath</code> ถ้าเป็นกรณี app basic ก็ตั้งค่าเป็น <code>@app/mail</code> </p>
+</blockquote>
+
+<h2 id="สร้าง-layout-mail">สร้าง layout Mail</h2>
+
+<p>สร้าง folder ไว้เก็บ view สำหรับเวลาส่งอีเมล์ ชื่อ <code>/mail/layouts/</code> ไว้ที่ application ของเรา
+จากนั้นสร้าง view ชื่อ <code>html.php</code> ไว้ที่ <code>/mail/layouts/html.php</code> เมื่อเรียกเป็น alias ก็คือ <code>@app/mail</code></p>
+
+<p>ซึ่งตัว layout นีจะเป็น layout หลักหรือเป็นหน้าโครงสร้าง html ให้เมล์ของเราส่วนใน layout ข้างในเราค่อยไปใส่เนื้อหาอีกที</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;?php</span>
+<span class="cp">use yii\helpers\Html;</span>
+<span class="cp">?&gt;</span>
+<span class="cp">&lt;?php $this-&gt;beginPage() ?&gt;</span>
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=&lt;?= Yii::$app-&gt;charset ?&gt;&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span><span class="cp">&lt;?= Html::encode($this-&gt;title) ?&gt;</span><span class="nt">&lt;/title&gt;</span>
+    <span class="cp">&lt;?php $this-&gt;head() ?&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="cp">&lt;?php $this-&gt;beginBody() ?&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;border: solid 1px rgb(236, 236, 236);border-radius: 5px;padding: 20px;&quot;</span><span class="nt">&gt;</span>
+    <span class="cp">&lt;?= $content ?&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">style=</span><span class="s">&quot;text-align:right;margin-top:5px;&quot;</span><span class="nt">&gt;</span> โรงพยาบาลขอนแก่น <span class="nt">&lt;small</span> <span class="nt">&gt;&lt;i&gt;</span>โทร 043-336789<span class="nt">&lt;/i&gt;&lt;/small&gt;&lt;/p&gt;</span>
+
+<span class="cp">&lt;?php $this-&gt;endBody() ?&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+<span class="cp">&lt;?php $this-&gt;endPage() ?&gt;</span>
+</code></pre></div>
+<p>ถ้าหาก preview จะได้แบบนี้</p>
+
+<p><img src="/img/mailer-main-layout.png" alt="mailer-main-layout.png"></p>
+
+<p>จากนั้นเราจะทำการสร้าง view ที่ใช้เป็น template ในการส่ง ในตัวอย่างนี้ผมสร้างอีเมล์แจ้งเตือนการลงทะเบียนงานประชุมวิชาการโรงพยาบาลขอนแก่น </p>
+
+<p>ไปที่โฟลเดอร์ <code>/mail/layouts/</code> ใน application ของคุณ สร้าง view ชื่อ register.php โดยที่ view นี้จะรับค่าตัวแปรชื่อ <code>$fullname</code> เพื่อแสดงชื่อของผู้ลงทะเบียน</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h1&gt;</span>งานประชุมวิชาการโรงพยาบาลขอนแก่น ครั้งที่ 7 ประจำปี 2558<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h3&gt;</span>Theme &quot;คุณธรรม คู่คุณภาพ เพื่อประชาชน&quot;<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;p&gt;</span>เนื่องในโอกาสครบรอบ 20 ปี ศูนย์แพทยศาสตรศึกษาชั้นคลินิก โรงพยาบาลขอนแก่น<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>24 - 26 มิถุนายน 2558 ณ โรงพยาบาลขอนแก่น<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>เรียนคุณ <span class="cp">&lt;?php echo $fullname; ?&gt;</span><span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>ตอนนี้คุณได้ทำการลงทะเบียนเข้าร่วมงานประชุมวิชาการ รพ.ขอนแก่น 2558 เรียบร้อยแล้ว<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;p&gt;</span>คุณสามารถดูรายละเอียดกำหนดการต่างๆ  ตามไฟล์แนบได้ หรือดูรายละเอียด <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://seminar.kkh.go.th&quot;</span><span class="nt">&gt;</span>ได้ที่นี่<span class="nt">&lt;/a&gt;</span> <span class="nt">&lt;/p&gt;</span>
+</code></pre></div>
+<p>เมือทำการส่งจะได้ layout แบบนี้</p>
+
+<p><img src="/img/mailer-register-layout.png" alt=""></p>
+
+<h2 id="ส่งอีเมล์">ส่งอีเมล์</h2>
+
+<p>หลังจากที่เราตั้งค่าที่ component แล้วเราจะสามารถเรียกใช้งานด้วย <code>Yii::$app-&gt;mailer</code> ได้ ดูตัวอย่าง</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">Yii</span><span class="o">::$</span><span class="nt">app-</span><span class="o">&gt;</span><span class="nt">mailer-</span><span class="o">&gt;</span><span class="nt">compose</span><span class="o">(</span><span class="s1">&#39;@app/mail/layouts/register&#39;</span><span class="o">,[</span>
+    <span class="s1">&#39;fullname&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;สาธิต สีถาพล&#39;</span>
+<span class="o">])</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">setFrom</span><span class="o">([</span><span class="s1">&#39;seminar@kkh.go.th&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Khon Kaen Hospital&#39;</span><span class="o">])</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">setTo</span><span class="o">(</span><span class="s1">&#39;emailTo@gmail.com&#39;</span><span class="o">)</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">setSubject</span><span class="o">(</span><span class="s1">&#39;ยินดีต้อนรับสู่งานประชุมวิชาการโรงพยาบาลขอนแก่น 2558&#39;</span><span class="o">)</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">send</span><span class="o">();</span>
+</code></pre></div>
+<ul>
+<li><code>compose</code> คือการเรียกไปที่ view ที่เราสร้างเป็น template ไว้หากต้องการใช้หลายๆ แบบ ก็สร้างไว้หลายๆ อันแล้วก็เรียกใช้ที่ตรงนี้ หาก view มีการรับค่าตัวแปร ก็ให้ส่งค่าไปด้วย ตามตัวอย่าง register.php รับค่าตัวแปร $fullname </li>
+<li><code>setFrom</code> เป็นการระบุว่าส่งมาจากที่ใด และใส่เป็นชื่อได้ด้วย <img src="/img/mailer-setfrom.png" alt=""></li>
+<li><code>setTo</code> คืออีเมล์ที่เราต้องการส่งไปหาใคร</li>
+<li><code>setSubject</code> ชื่อเรื่องอีเมล์ที่เราจะส่ง</li>
+</ul>
+
+<p>จากนั้นทดลองเรียกใช้งาน ก็จะได้รับอีเมล์แบบนี้</p>
+
+<p><img src="/img/mailer-full.png" alt=""></p>
+
+<p>หากต้องการแนบไฟล์ให้เพิ่ม <code>attach</code> เข้าไปดังนี้จะใส่กี่ไฟล์ก็ได้</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">Yii</span><span class="o">::$</span><span class="nt">app-</span><span class="o">&gt;</span><span class="nt">mailer-</span><span class="o">&gt;</span><span class="nt">compose</span><span class="o">(</span><span class="s1">&#39;@app/mail/layouts/register&#39;</span><span class="o">,[</span>
+    <span class="s1">&#39;fullname&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;สาธิต สีถาพล&#39;</span>
+<span class="o">])</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">setFrom</span><span class="o">([</span><span class="s1">&#39;seminar@kkh.go.th&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Khon Kaen Hospital&#39;</span><span class="o">])</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">setTo</span><span class="o">(</span><span class="s1">&#39;emailTo@gmail.com&#39;</span><span class="o">)</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">setSubject</span><span class="o">(</span><span class="s1">&#39;ยินดีต้อนรับสู่งานประชุมวิชาการโรงพยาบาลขอนแก่น 2558&#39;</span><span class="o">)</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">attach</span><span class="o">(</span><span class="nt">Yii</span><span class="o">:</span><span class="nd">:getAlias</span><span class="o">(</span><span class="s1">&#39;@webroot&#39;</span><span class="o">).</span><span class="s1">&#39;/attach/&#39;</span><span class="o">.</span><span class="s1">&#39;brochure.pdf&#39;</span><span class="o">)</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">attach</span><span class="o">(</span><span class="nt">Yii</span><span class="o">:</span><span class="nd">:getAlias</span><span class="o">(</span><span class="s1">&#39;@webroot&#39;</span><span class="o">).</span><span class="s1">&#39;/attach/&#39;</span><span class="o">.</span><span class="s1">&#39;Poster.pdf&#39;</span><span class="o">)</span>
+<span class="nt">-</span><span class="o">&gt;</span><span class="nt">send</span><span class="o">();</span>
+</code></pre></div>
+<blockquote>
+<p>ไม่ควรแนบไฟล์เยอะเพราะจะทำให้ตอนส่งช้าไปด้วย ถ้าไฟล์เยอะจริงๆ แนะนำทำเป็น zip และแนบ link ดาวน์โหลดไปจะดีกว่า</p>
+</blockquote>
+
+<p>เมื่อแนบไฟล์ เวลาส่งอีเมล์ผู้รับก็จะได้อีเมล์แบบนี้</p>
+
+<p><img src="/img/mailer-attach.png" alt=""></p>
+
+<p>ในการใช้งานจริงแนะนำให้สร้างเป็น function ไว้ใน controller ก็ได้ แล้วค่อยรับค่า parameter ต่างๆ เข้ามา</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+    <span class="c1">//...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">sendMail</span><span class="p">(</span><span class="nv">$email</span><span class="p">,</span><span class="nv">$fullname</span><span class="p">){</span>
+         <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">mailer</span>
+         <span class="o">-&gt;</span><span class="na">compose</span><span class="p">(</span><span class="s1">&#39;@app/mail/layouts/register&#39;</span><span class="p">,[</span>
+            <span class="s1">&#39;fullname&#39;</span><span class="o">=&gt;</span><span class="nv">$fullname</span>
+          <span class="p">])</span>
+         <span class="o">-&gt;</span><span class="na">setFrom</span><span class="p">([</span><span class="s1">&#39;seminar@kkh.go.th&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Khon Kaen Hospital&#39;</span><span class="p">])</span>
+         <span class="o">-&gt;</span><span class="na">setTo</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span>
+         <span class="o">-&gt;</span><span class="na">setSubject</span><span class="p">(</span><span class="s1">&#39;ยินดีต้อนรับสู่งานประชุมวิชาการโรงพยาบาลขอนแก่น 2558&#39;</span><span class="p">)</span>
+         <span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="na">getAlias</span><span class="p">(</span><span class="s1">&#39;@webroot&#39;</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/attach/&#39;</span><span class="o">.</span><span class="s1">&#39;brochure.pdf&#39;</span><span class="p">)</span>
+         <span class="o">-&gt;</span><span class="na">attach</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="na">getAlias</span><span class="p">(</span><span class="s1">&#39;@webroot&#39;</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/attach/&#39;</span><span class="o">.</span><span class="s1">&#39;Poster.pdf&#39;</span><span class="p">)</span>
+         <span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>ขอให้สนุกกับการส่งเมล์ครับผม.. <sup>^</sup> กะไว้ว่าเรื่องนี้จะเขียนประมาณซัก 20 นาทีเอาเข้าจริงๆ ปาเข้าไป 2 ชั่วโมงแระ ไม่ไหวนอนก่อนครับ</p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>

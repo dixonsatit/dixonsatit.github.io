@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การติดตั้งและใช้งาน Highchart | DixonSatit</title>
+	<meta name="description" content="heighchart เป็น chart ที่สามารถใช้งานได้ฟรีๆ ถ้าไม่ทำเป็นการค้านะครับ ซึ่งตัวมันเองมี chart มากมายหลายแบบ ใช้กันไม่หมดครับ เยอะจริงๆ">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/23/highcharts.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การติดตั้งและใช้งาน Highchart</h1>
+    <p class="meta">
+    June 23, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p>heighchart เป็น chart ที่สามารถใช้งานได้ฟรีๆ ถ้าไม่ทำเป็นการค้านะครับ ซึ่งตัวมันเองมี chart มากมายหลายแบบ ใช้กันไม่หมดครับ เยอะจริงๆ</p>
+
+<h2 id="ติดตั้ง">ติดตั้ง</h2>
+
+<p>มีคนทำ extension ไว้ให้แระ <a href="https://github.com/miloschuman/yii2-highcharts">https://github.com/miloschuman/yii2-highcharts</a></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer require --prefer-dist miloschuman/yii2-highcharts-widget &quot;dev-master&quot;
+</code></pre></div>
+<p>หรือเพิ่มใน composer.json ในส่วน require</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&quot;miloschuman/yii2-highcharts-widget&quot;: &quot;dev-master&quot;
+</code></pre></div>
+<p>รันคำสั่ง composer update</p>
+
+<h2 id="การใช้งาน">การใช้งาน</h2>
+
+<p>เท่าที่ผมสังเกต มีคนถามผมบ่อยๆ ว่าจะสร้าง array ในรูปแบบนีได้ยังไง query ออกมา จาก mysql ไม่ได้ตามแบบนี้</p>
+
+<p>ขอแนะนำง่ายๆ ครับ เราต้องมองข้อมูลออกเป็นส่วนๆ query ออกมาทีละอันแล้วค่อยจับมารวมกันอีกที </p>
+
+<blockquote>
+<p>อีกปัญหานึงที่เจอบ่อยๆ คือ  เมือเราสร้าง array ตามรูปแบบนี้ได้แล้วแต่ข้อมูลไม่ออกซักที ปัญหาส่วนใหญ่คือ type ของค่าต่างๆ ไม่ตรงเช่น มันรับเป็น init แต่ค่าที่อยู่ใน array เป็น string มันก็จะไม่แสดงนะครับ เพราะฉะนั้น var_dump เพื่อดูค่าของ array ว่ามี type ตรงกันหรือปล่าวครับ</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">miloschuman\highcharts\Highcharts</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="nx">Highcharts</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+   <span class="s1">&#39;options&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+      <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fruit Consumption&#39;</span><span class="p">],</span>
+      <span class="s1">&#39;xAxis&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+         <span class="s1">&#39;categories&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;Apples&#39;</span><span class="p">,</span> <span class="s1">&#39;Bananas&#39;</span><span class="p">,</span> <span class="s1">&#39;Oranges&#39;</span><span class="p">]</span>
+      <span class="p">],</span>
+      <span class="s1">&#39;yAxis&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+         <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fruit eaten&#39;</span><span class="p">]</span>
+      <span class="p">],</span>
+      <span class="s1">&#39;series&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+         <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Jane&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span>
+         <span class="p">[</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]]</span>
+      <span class="p">]</span>
+   <span class="p">]</span>
+<span class="p">]);</span>
+</code></pre></div></section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
