@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>การสร้าง Theme | DixonSatit</title>
-	<meta name="description" content="เชื่อว่าหลายๆ คนอาจจะไม่ชอบธีมเดิมๆ ที่ Yii 2  มีมาให้ ซึ่งเป็น Bootstrap ส่วนตัวผมเองมองว่ามันก็สามารถใช้งานได้ดี และมีคอมโพเน็นส์มาให้ครบ แทบจะไม่ต้องหาอะไ...">
+	<meta name="description" content="เชื่อว่าหลายๆ คนอาจจะไม่ชอบธีมเดิมๆ ที่ Yii 2  มีมาให้ ซึ่งเป็น Bootstrap ส่วนตัวผมเองมองว่ามันก็สามารถใช้งานได้ดี และมี component มาให้ครบ แทบจะไม่ต้องหาอะไ...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -183,9 +183,13 @@
     
     </p>
   </header>
-  <section class="post-content"><p>เชื่อว่าหลายๆ คนอาจจะไม่ชอบธีมเดิมๆ ที่ Yii 2  มีมาให้ ซึ่งเป็น <a href="http://getbootstrap.com">Bootstrap</a> ส่วนตัวผมเองมองว่ามันก็สามารถใช้งานได้ดี และมีคอมโพเน็นส์มาให้ครบ แทบจะไม่ต้องหาอะไรเพิ่ม แต่การใช้งานจริงๆ เราคงไม่สามารถใช้แค่ธีม Bootstrap แบบเดิมๆ ได้ (มันคงเบื่อกันบ้างแหละ <sup>^</sup> )</p>
+  <section class="post-content"><p>เชื่อว่าหลายๆ คนอาจจะไม่ชอบธีมเดิมๆ ที่ Yii 2  มีมาให้ ซึ่งเป็น <a href="http://getbootstrap.com">Bootstrap</a> ส่วนตัวผมเองมองว่ามันก็สามารถใช้งานได้ดี และมี component มาให้ครบ แทบจะไม่ต้องหาอะไรเพิ่ม แต่การใช้งานจริงๆ เราคงไม่สามารถใช้แค่ธีม Bootstrap แบบเดิมๆ ได้ (มันคงเบื่อกันบ้างแหละ <sup>^</sup> )</p>
 
-<p>วันนี้จะแนะนำการเปลี่ยนธิมของ Yii 2 ซึ่งทำได้ง่ายมาก แค่เปลี่ยนคอนฟิกใน main.php ในส่วนของ components -&gt; view ให้มันชี้ไปที่พาทที่เราเก็บธีมของเราไว้ (แค่นี้เองหรอ ดูเหมือนง่าย ง่ายเฉพาะคอนฟิกครับ ฮา..)</p>
+<blockquote>
+<p>update ตอนนี้ผมทำเป็น theme ไว้แล้ว สามารถติดตั้งได้เลย<a href="https://github.com/dixonsatit/yii2-agency-theme">ที่นี่</a></p>
+</blockquote>
+
+<p>วันนี้จะแนะนำการเปลี่ยนธิมของ Yii 2 ซึ่งทำได้ง่ายมาก แค่เปลี่ยนคอนฟิกใน main.php ในส่วนของ components -&gt; view ให้มันไปเรียกใช้งานธีมของเราที่ได้ตั้งค่าไว้ (แค่นี้เองหรอ ดูเหมือนง่าย ง่ายเฉพาะคอนฟิกครับ ฮา..)</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">&#39;view&#39; =&gt; [</span>
 <span class="x">     &#39;theme&#39; =&gt; [</span>
 <span class="x">         &#39;pathMap&#39; =&gt; [</span>
@@ -217,17 +221,15 @@
 
 <p><img src="/img/agency.png" alt=""></p>
 
-<p>เราจะต้องสร้างโฟลเดอร์เพื่อเก็บธีม โดยสร้างโฟลเดอร์ชื่อ themes/agency ที่ root โปรเจ็ค จากนั้นสร้างโฟลเดอร์ใน agency ดังนี้</p>
+<p>เราจะสร้างโฟลเดอร์เพื่อเก็บธีม ชื่อ /themes/agency ที่ application ของเรา จากนั้นสร้างโฟลเดอร์ใน agency ดังนี้</p>
 
 <ul>
-<li>assets</li>
-<li>views</li>
-<li>dist</li>
+<li><code>assets</code> เอาไว้เก็บ Asset Bundle ที่เราสร้างขึ้น</li>
+<li><code>views</code> เก็บ layouts และ view ทั้งหมด</li>
+<li><code>dist</code> เก็บไฟล์ css,js,images หรือ library ทั้งหมด</li>
 </ul>
 
-<p><code>assets</code> เอาไว้เก็บ Asset Bundle ที่เราสร้างขึ้น
-<code>views</code> เก็บ layouts และ view ทั้งหมด
-<code>dist</code> เก็บไฟล์ css,js,images</p>
+<p>ให้ทำการ copy ไฟล์ต่อไปนี้</p>
 
 <ul>
 <li>copy โฟลเดอร์ css,img,js จาก agency theme ไว้ที่ dist</li>
@@ -319,8 +321,6 @@
 <h2 id="สร้าง-layout">สร้าง layout</h2>
 
 <p>สร้าง layout <code>_base.php</code></p>
-
-<p>ที่ /themes/agency/_base.php และทำการเรียกใช้งาน <code>AgencyAsset::register($this)</code> ที่เราได้สร้างไว้</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">yii\bootstrap\Nav</span><span class="p">;</span>
@@ -354,6 +354,10 @@
 <span class="x">&lt;/html&gt;</span>
 <span class="cp">&lt;?php</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">endPage</span><span class="p">()</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
+<blockquote>
+<p>ที่ /themes/agency/_base.php และทำการเรียกใช้งาน <code>AgencyAsset::register($this)</code> ที่เราได้สร้างไว้</p>
+</blockquote>
+
 <p>สร้าง layout <code>_header.php</code></p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">   &lt;!-- Navigation --&gt;</span>
 <span class="x">   </span><span class="cp">&lt;?php</span>
