@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Tue, 23 Jun 2015 20:24:54 +0700</pubDate>
+    <pubDate>Tue, 23 Jun 2015 21:20:42 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน agency theme</title>
@@ -106,7 +106,7 @@
       </item>
     
       <item>
-        <title>การ include css,js ด้วย Client Script</title>
+        <title>การ Register css,js ด้วย Client Script</title>
         <link>http://dixonsatit.github.io/2015/06/23/client-script.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/23/client-script.html</guid>
         <description>&lt;p&gt;Yii 2 มีตัวช่วยในการจัดการพวก script file เช่น include ไฟล์พวก css,js หรือแทรกโค้ด css,js บางส่วนเข้าไปใช้เฉพาะ action ได้ ซึ่งโดยปกติ ถ้าเป็นไฟล์ที่ใช้ในทุกๆ หน้า เราจะใช้ Asset เป็นตัวจัดการให้อยู่แล้ว&lt;/p&gt;
