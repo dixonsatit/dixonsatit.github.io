@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การ include css,js ด้วย Client Script | DixonSatit</title>
+	<meta name="description" content="Yii 2 มีตัวช่วยในการจัดการพวก script file เช่น include ไฟล์พวก css,js หรือแทรกโค้ด css,js บางส่วนเข้าไปใช้เฉพาะ action ได้ ซึ่งโดยปกติ ถ้าเป็นไฟล์ที่ใช้ในทุก...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/23/client-script.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การ include css,js ด้วย Client Script</h1>
+    <p class="meta">
+    June 23, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p>Yii 2 มีตัวช่วยในการจัดการพวก script file เช่น include ไฟล์พวก css,js หรือแทรกโค้ด css,js บางส่วนเข้าไปใช้เฉพาะ action ได้ ซึ่งโดยปกติ ถ้าเป็นไฟล์ที่ใช้ในทุกๆ หน้า เราจะใช้ Asset เป็นตัวจัดการให้อยู่แล้ว</p>
+
+<p>แต่ถ้าหากเราต้องการแทรกไฟล์หรือโค้ดบางส่วนก็สามารถทำได้ ซึ่งคุณสมบัติเหล่านี้มีอยู่ใน <code>yii\web\View</code> อยู่แล้ว นั่นแสดงว่าคุณสามารถเรียกใช้ที่ view ใหนๆ ก็ได้ ลองใช้งานกัน</p>
+
+<h2 id="register-javascript">Register JavaScript</h2>
+
+<p>เป็นการเขียนโค้ด javascript เข้าไปโดยตรงใน view ในนั้น หลักการก็เหมือนเราเขียน javascript ในแท็ก script เพียงแค่เราไม่ต้องประกาศเอง</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="o">=&gt;</span><span class="k">true</span><span class="p">,</span><span class="s1">&#39;data&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]];</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerJs</span><span class="p">(</span><span class="s2">&quot;var options = &quot;</span><span class="o">.</span><span class="nb">json_encode</span><span class="p">(</span><span class="nv">$options</span><span class="p">)</span><span class="o">.</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="nx">View</span><span class="o">::</span><span class="na">POS_END</span><span class="p">,</span> <span class="s1">&#39;my-options&#39;</span><span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerJs</span><span class="p">(</span><span class="s2">&quot; $(&#39;body&#39;).click(function(){</span>
+<span class="s2">    alert(555);</span>
+<span class="s2">}); &quot;</span><span class="p">,</span> <span class="nx">View</span><span class="o">::</span><span class="na">POS_END</span><span class="p">,</span> <span class="s1">&#39;my-options&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p><code>$this-&gt;registerJs($js, $position = self::POS_READY, $key = null)</code> จะรับค่า parameter ดังนี้</p>
+
+<ul>
+<li><code>$js</code> คือคำสั่ง js ที่เราต้องการแทรกเข้าไปใน view</li>
+<li><code>$position</code> คือตำแหน่งที่ใช้ให้แทรก javascript ไว้จุดใหนของ html</li>
+<li><code>$key</code> ถ้าเรามี $this-&gt;registerJs() หลายๆจุดใหน หน้าเดียวกันแต่ไม่อย่างให้มันอยู่ใน script เดียวกันก็ตั้งเป็นคนละชื่อได้ ค่า defaul  ของมันคือ null</li>
+</ul>
+
+<p>ตามตัวอย่างนี้ parameter แรกเป็นการประกาศตัวแปร​ javascript ชื่อ options เก็บข้อมูล json ที่แปลงจาก array php และตัวอย่างที่ 2 เป็นการเขียนดักจับ event ถ้ามีการคลิกภายใต้ tag <code>body</code> ก็จะ alert &quot;555&quot; ออกมา</p>
+
+<p><code>position</code> ตัวที่กำหนดตำแหน่งว่าจะให้เอา script ที่ต้องการ register ไปไว้ส่วนใหนของ html มีตัวเลือกดังนี้</p>
+
+<ul>
+<li><code>View::POS_HEAD</code> ในส่วน <code>&lt;header&gt;</code></li>
+<li><code>View::POS_BEGIN</code> ใต้แท็ก  <code>&lt;body&gt;</code> ตัวแรก</li>
+<li><code>View::POS_END</code>  ก่อนแท็กปิด <code>&lt;/body&gt;</code></li>
+<li><code>View::POS_READY</code> เป็นการประกาศเข้าไปในแท็ก ready ของ jquery เลย </li>
+<li><code>View::POS_LOAD</code> สำหรับเมื่อมีการรันโค้ดถึงจะทำการ register script ให้.</li>
+</ul>
+
+<p>เมื่อ view page source ดูก็จะเห็นโค้ด Javascript ถูกแทกเข้าไปใน view ให้เอง</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="o">:</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]};</span><span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span><span class="nx">jQuery</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+ <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">});</span> 
+<span class="p">});</span><span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+<h2 id="register-javascript-file">Register Javascript File</h2>
+
+<p>เป็นการ include  ไฟล์เข้ามาใช้งานเลย และยังสามารถเรียกใช้งาน asset อื่นๆ ได้อีกด้วย ผ่าน <code>depends</code> เราก็ระบุชื่อ asset ที่ต้องการเรียกใช้งานเข้าไป ซึ่งตามตัวอย่าง ก็จะทำการ include main.js และทำการเรียกใช้งาน <code>JqueryAsset</code> เพื่อ include ไฟล์ jquery ด้วย</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerJsFile</span><span class="p">(</span><span class="s1">&#39;http://example.com/js/main.js&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;depends&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">\yii\web\JqueryAsset</span><span class="o">::</span><span class="na">className</span><span class="p">()]]);</span>
+</code></pre></div>
+<h2 id="registering-css">Registering CSS</h2>
+
+<p>เราสามารถที่จะแทรกสไตล์ใน view ได้เลยผ่าน <code>registerCss</code> สามารถใส่คำสั่ง css เข้าไปได้เลยตามตัวอย่าง</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$this-&gt;registerCss(&quot;body { background: #f00; }&quot;);
+</code></pre></div>
+<p>เมื่อ view page source จะเห็นเป็นแบบนี้</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;style&gt;</span>
+<span class="nt">body</span> <span class="p">{</span> <span class="k">background</span><span class="o">:</span> <span class="m">#f00</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+</code></pre></div>
+<h2 id="registering-css-file">Registering CSS File</h2>
+
+<p>เป็นการ register ไฟล์ css เข้ามาใช้งาน ใน view ของเราชื่อ black-and-white.css พร้อมทั้งเรียกใช้งาน BootstrapAsset ซึ่งเป็น css ของ bootstrap มาใช้งานด้วย และระบุ css media เท่ากับ print ด้วย </p>
+
+<blockquote>
+<p>css media คือกำรหนดการแสดงผลหน้าตาเว็บเพจ บนสื่อประเภทต่างๆ เราสามารถกำหนด style ให้แตกต่างกันได้ เช่น ตอนที่เราเห็นบนหน้าจอ (screen) กับตอนที่สั่งพิมพ์ออกกระดาษ (print) ให้แสดงผลไม่เหมือนกัน  <a href="http://www.enjoyday.net/webtutorial/css/css_chapter22.html">อ่าน css media ได้ที่นี</a></p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerCssFile</span><span class="p">(</span><span class="s2">&quot;http://example.com/css/themes/black-and-white.css&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;depends&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">BootstrapAsset</span><span class="o">::</span><span class="na">className</span><span class="p">()],</span>
+    <span class="s1">&#39;media&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;print&#39;</span><span class="p">,</span>
+<span class="p">],</span> <span class="s1">&#39;css-print-theme&#39;</span><span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerCssFile</span><span class="p">(</span><span class="s2">&quot;@web/css/style.css&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>หาก view page source ก็จะพบการเรียกใช้งาน css </p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/yii2/yii2-Leanning-Source/web/css/style.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/yii2/yii2-Leanning-Source/web/assets/99615aa3/css/bootstrap.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;http://example.com/css/themes/black-and-white.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">media=</span><span class="s">&quot;print&quot;</span><span class="nt">&gt;</span>
+</code></pre></div></section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
