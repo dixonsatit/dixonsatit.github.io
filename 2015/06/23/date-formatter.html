@@ -264,24 +264,25 @@ Wednesday, June 24, 2015
 2015-06-24
 </code></pre></div>
 <h2 id="astime">asTime()</h2>
-<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;?php
-Yii::$app-&gt;formatter-&gt;locale = &#39;en-US&#39;;
-echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;short&#39;);
-echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;medium&#39;);
-echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;long&#39;);
-echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;full&#39;);
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
-Yii::$app-&gt;formatter-&gt;locale = &#39;th&#39;;
-echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;short&#39;);
-echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;medium&#39;);
-echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;long&#39;);
-echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;full&#39;);
+<span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">locale</span> <span class="o">=</span> <span class="s1">&#39;en-US&#39;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;short&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;full&#39;</span><span class="p">);</span>
 
-// กำหนดเอง
-// ICU format
-echo Yii::$app-&gt;formatter-&gt;asDateTime($time, &#39;kk:mm:ss&#39;);
-// PHP date()-format
-echo Yii::$app-&gt;formatter-&gt;asDateTime($time, &#39;php:H:i:s&#39;); 
+<span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">locale</span> <span class="o">=</span> <span class="s1">&#39;th&#39;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;short&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;full&#39;</span><span class="p">);</span>
+
+<span class="c1">// กำหนดเอง</span>
+<span class="c1">// ICU format</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;kk:mm:ss&#39;</span><span class="p">);</span>
+<span class="c1">// PHP date()-format</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;php:H:i:s&#39;</span><span class="p">);</span> 
 </code></pre></div>
 <p>แสดงผล</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">5:32 AM
