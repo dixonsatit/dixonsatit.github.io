@@ -200,7 +200,19 @@
 
 <p>จริงๆ มีเยอะกว่านี้ สามารถดูเพิ่มเติมที่ <a href="http://www.yiiframework.com/doc-2.0/yii-i18n-formatter.html#asBoolean()-detail">Class Refferent</a> ได้</p>
 
-<p>ในส่วนตัวอย่างจะเน้นเฉพาะที่เราได้ใช้บ่อยๆ คือ <code>asDate</code>,<code>asDateTime</code></p>
+<p>ในส่วนตัวอย่างจะเน้นเฉพาะที่เราได้ใช้บ่อยๆ คือ <code>asDate</code>,<code>asTime</code>,<code>asDateTime</code></p>
+
+<p>โดยทั้ง 3 function นี้ มีการรับ parameter 2 ตัว</p>
+
+<ul>
+<li>ตัวแรกจะรับค่าเป็นวันที่หรือ timestamp ก็ได้ เช่น <code>time()</code> ,<code>2015-06-23</code>, <code>2015-06-23 22:00:31</code></li>
+<li>ตัวที่สองเป็นการระบุ format ที่จะให้มันแสดงผล ซึ่ง ก็มีแบบสำเร็จให้  4 แบบคือ <code>short</code>,<code>medium</code>,<code>long</code>,<code>full</code> และสามารถกำหนด format เองได้ สามารถใช้ได้ 2 แบบคือ<br>
+
+<ul>
+<li><a href="http://userguide.icu-project.org/formatparse/datetime">ICU format</a> สามารถระบุ  format ได้เลยเช่น <code>yyyy-MM-dd</code> จะได้ค่า <code>2014-10-06</code></li>
+<li><a href="http://php.net/manual/en/function.date.php">PHP date()-format</a> ต้องระบุ <code>php:</code> นำหน้าเสมอก่อนใส่ format เช่น <code>php:Y-m-d</code> จะได้ <code>2014-10-06</code></li>
+</ul></li>
+</ul>
 
 <blockquote>
 <p>เราสามารถเปลี่ยนการแสดงผลเป็นภาษาไทยได้ โดยไปที่ config/main.php เพิ่ม <code>language=&gt;&#39;th&#39;</code> เข้าไป ซึ่งโดยปกติค่า default จะเท่ากับ <code>en-US</code></p>
@@ -209,13 +221,6 @@
 <h2 id="asdate">asDate()</h2>
 
 <p>เป็นการแปลงข้อมูลให้แสดงผลในรูปแบบเฉพาะวันที่ แม้ว่าค่าที่รับเข้ามาจะมี เวลาอยู่ก็จะแสดงเฉพาะวันที่</p>
-
-<p><code>asDate()</code> มีการรับ parameter 2 ตัว</p>
-
-<ul>
-<li>ตัวแรกจะรับค่าเป็นวันที่หรือ timestamp ก็ได้ เล่น <code>time()</code> ,<code>2015-06-23</code>, <code>2015-06-23 22:00:31</code></li>
-<li>ตัวที่สองเป็นการระบุ format ที่จะให้มันแสดงผล ซึ่ง asDate ก็มีให้  4 แบบคือ <code>short</code>,<code>medium</code>,<code>long</code>,<code>full</code></li>
-</ul>
 
 <p>ตัวอย่างการเรียกใช้งาน</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
@@ -258,6 +263,39 @@ Wednesday, June 24, 2015
 2015-06-24
 2015-06-24
 </code></pre></div>
+<h2 id="astime">asTime()</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Yii::$app-&gt;formatter-&gt;locale = &#39;en-US&#39;;
+echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;short&#39;);
+echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;medium&#39;);
+echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;long&#39;);
+echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;full&#39;);
+
+Yii::$app-&gt;formatter-&gt;locale = &#39;th&#39;;
+echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;short&#39;);
+echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;medium&#39;);
+echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;long&#39;);
+echo Yii::$app-&gt;formatter-&gt;asTime($time, &#39;full&#39;);
+
+// กำหนดเอง
+// ICU format
+echo Yii::$app-&gt;formatter-&gt;asDateTime($time, &#39;kk:mm:ss&#39;);
+// PHP date()-format
+echo Yii::$app-&gt;formatter-&gt;asDateTime($time, &#39;php:H:i:s&#39;); 
+</code></pre></div>
+<p>แสดงผล</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">5:32 AM
+5:32:54 AM
+5:32:54 AM GMT+07:00
+5:32:54 AM Indochina Time
+
+5:32
+5:32:54
+5 นาฬิกา 32 นาที 54 วินาที GMT+07:00
+5 นาฬิกา 32 นาที 54 วินาที GMT+07:00
+
+05:32:54
+05:32:54
+</code></pre></div>
 <h2 id="asdatetime">asDateTime()</h2>
 
 <p>จะคล้ายกับ adDate แต่เพิ่มเวลาเข้ามา</p>
@@ -281,9 +319,9 @@ Wednesday, June 24, 2015
 
 <span class="c1">// กำหนดเอง</span>
 <span class="c1">// ICU format</span>
-<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;yyyy-MM-dd&#39;</span><span class="p">);</span> <span class="c1">// 2014-10-06</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;yyyy-MM-dd kk:mm:ss&#39;</span><span class="p">);</span> 
 <span class="c1">// PHP date()-format</span>
-<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;php:Y-m-d&#39;</span><span class="p">);</span> <span class="c1">// 2014-10-06</span>
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;php:Y-m-d H:i:s&#39;</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p><a href="http://userguide.icu-project.org/formatparse/datetime">ICU format ดูที่นี่</a>, PHP date() <a href="http://php.net/manual/en/function.date.php">ดูทีนี่</a></p>
@@ -301,8 +339,8 @@ Wednesday, June 24, 2015 5:32:54 AM Indochina Time
 24 มิถุนายน 2015, 5 นาฬิกา 32 นาที 54 วินาที GMT+07:00
 วันพุธที่ 24 มิถุนายน ค.ศ. 2015, 5 นาฬิกา 32 นาที 54 วินาที GMT+07:00
 
-2015-06-24
-2015-06-24
+2015-06-24 05:32:54
+2015-06-24 05:32:54
 </code></pre></div>
 <blockquote>
 <p>ผมตั้งค่า   <code>Yii::$app-&gt;formatter-&gt;locale</code> เพราะอยากให้เห็นความแตกต่าง จริงๆ เราตั้งค่าที่ config/main.php ได้ โดยตั้งค่า <code>language =&gt; &#39;th&#39;</code></p>
