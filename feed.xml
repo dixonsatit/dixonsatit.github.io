@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Thu, 25 Jun 2015 13:59:30 +0700</pubDate>
+    <pubDate>Thu, 25 Jun 2015 14:01:54 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน dektrium/yii2-user</title>
@@ -505,7 +505,9 @@ Wednesday, June 24, 2015 5:32:54 AM Indochina Time
 &lt;p&gt;เพิ่มเติม format อื่นๆ&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;echo Yii::$app-&amp;gt;formatter-&amp;gt;asPercent(0.125, 2); // output: 12.50%
 echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#39;); 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-output-formatting.html&quot;&gt;อ่านเพิ่มเติมได้ที่นี&lt;/a&gt;&lt;/p&gt;
+</description>
         <pubDate>Tue, 23 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
