@@ -196,7 +196,7 @@
 
 <p>แต่เดี๋ยวก่อน Yii2 มีนวัตกรรมใหม่ที่จะทำให้คุณพ่อบ้านสบายขึ้น (เดี่ยวๆ ก่อน..) มันดียังไง?</p>
 
-<p>ตามเอกสารเค้าบอกว่ามันสามารถใส่ข้อมูล timestamp ให้อัตโนมัติได้เพียงแค่เราต้งชื่อฟิวด์ create_at,update_at และกำหนด type ใน mysql เป็น Integer หลังจากนั้นเพิ่มการเรียกใช้งาน TimestampBehavior ใน model ดังนี้</p>
+<p>ตามเอกสารเค้าบอกว่ามันสามารถใส่ข้อมูล timestamp ให้อัตโนมัติได้เพียงแค่เราต้งชื่อฟิวด์ <code>created_at</code>,<code>updated_at</code> และกำหนด type ใน mysql เป็น Integer หลังจากนั้นเพิ่มการเรียกใช้งาน TimestampBehavior ใน model ดังนี้</p>
 
 <blockquote>
 <p>มันเก็บข้อมูลเป็น time() นะครับ</p>
@@ -211,7 +211,7 @@
 <span class="p">}</span>
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>หลังจากเรียกใช้งานแล้วหากมีการ create,update record <code>TimestampBehavior</code> จะเป็นตัวที่ใส่ข้อมูลให้เองอัตโนมัติ สะดวกมากๆ ครับ อย่าลืม!.. วิธีนี้ต้องกำหนดชื่อฟิวด์เป็น create_at,update_at เท่านั้นครับ</p>
+<p>หลังจากเรียกใช้งานแล้วหากมีการ create,update record <code>TimestampBehavior</code> จะเป็นตัวที่ใส่ข้อมูลให้เองอัตโนมัติ สะดวกมากๆ ครับ อย่าลืม!.. วิธีนี้ต้องกำหนดชื่อฟิวด์เป็น <code>created_at</code>,<code>updated_at</code> เท่านั้นครับ</p>
 
 <p>แต่หากใครไม่ได้กำหนดชื่อฟิวด์ตามนี้ก็สามารถกำหนดให้ TimestampBehavior ให้มันได้รู้จักฟิวด์ create,update ได้ ดูตัวอย่างด้านล่าง</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
@@ -232,7 +232,43 @@
 </code></pre></div>
 <p>เราสามารถสั่งให้มันเรียกข้อมูล timestame ให้ฟิวด์นั้นๆ ได้โดยใช้คำสั่งนี้</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">$model-&gt;touch(&#39;creation_time&#39;);
-</code></pre></div></section>
+</code></pre></div>
+<h2 id="การใช้งานกับ-gridview">การใช้งานกับ GridView</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+        <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+        <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+        <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;created_at:dateTime&#39;</span><span class="p">,</span> <span class="c1">// แสดงเฉพาวันที่ แสดงวันที่เวลา</span>
+            <span class="s1">&#39;updated_at:date&#39;</span><span class="p">,</span> <span class="c1">// แสดงเฉพาวันที่</span>
+            <span class="c1">// กำหนดเอง อ่านเพิ่มเติม link ด้านล่าง</span>
+            <span class="p">[</span><span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;created_at&#39;</span><span class="p">,</span><span class="s1">&#39;format&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;html&#39;</span><span class="p">,</span><span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="nv">$key</span><span class="p">,</span> <span class="nv">$index</span><span class="p">,</span> <span class="nv">$column</span><span class="p">){</span>
+                <span class="k">return</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDate</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">created_at</span><span class="p">,</span><span class="s1">&#39;medium&#39;</span><span class="p">);</span> <span class="c1">//short,medium,long,full</span>
+                <span class="c1">//return Yii::$app-&gt;formatter-&gt;asDateTime($model-&gt;created_at,&#39;medium&#39;);</span>
+            <span class="p">}],</span>
+
+        <span class="p">]</span>
+<span class="p">])</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h2 id="การใช้งานกับ-detailview">การใช้งานกับ DetailView</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">   </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">DetailView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+        <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+        <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;created_at:date&#39;</span><span class="p">,</span> <span class="c1">// แสดงเฉพาวันที่</span>
+            <span class="s1">&#39;updated_at:dateTime&#39;</span><span class="p">,</span><span class="c1">// แสดงเฉพาวันที่ แสดงวันที่เวลา</span>
+             <span class="c1">// กำหนดเอง อ่านเพิ่มเติม link ด้านล่าง</span>
+            <span class="p">[</span>
+                <span class="s1">&#39;attribute&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;updated_at&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;format&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;html&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDate</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">created_at</span><span class="p">,</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+    <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<blockquote>
+<p>อ่านการใช้งาน formatter  เพิ่มเติมได้<a href="/2015/06/23/date-formatter.html">ที่นี่</a></p>
+</blockquote>
+</section>
 </article>
 
 <!-- Post navigation -->
