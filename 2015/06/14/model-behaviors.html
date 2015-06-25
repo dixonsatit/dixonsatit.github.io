@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>การใช้งาน TimestempBehavior ใน model เพื่ออัพเดทข้อมูลวันที่ | DixonSatit</title>
-	<meta name="description" content="ส่วนใหญ่ในการสร้างตารางต่างๆ เราก็มักจะมีฟิวด์ที่เก็บข้อมูลคือ ">
+	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -185,7 +185,23 @@
     
     </p>
   </header>
-  <section class="post-content"><p>ส่วนใหญ่ในการสร้างตารางต่างๆ เราก็มักจะมีฟิวด์ที่เก็บข้อมูลคือ </p>
+  <section class="post-content"><p><img src="/img/timezone.png" alt=""></p>
+
+<p>การบันทึกเวลาเป็น init นั้นมีข้อดีคือ เราสามารถที่จะเปลี่ยนค่า Time  ที่เราบันทีกเป็น TimeZone ที่ใหนก็ได้ ทำให้เรารู้ว่า ณ ช่วงเวลาที่เราบันทึกข้อมูลตอนนี้ เป็นเวลากี่โมง ณ อีก timezone นึง </p>
+
+<p>ตัวอย่างเช่นเรามีระบบ application ที่มีคนใช้อยู่คนละ timeZone เช่น <code>America/Los_Angeles</code>  กับ <code>Asia/Bangkok</code> </p>
+
+<p>Yii 2 เราสามารถตั้งค่า <code>default</code>  TimeZone  ได้ที่ config/main.php ในส่วนของ <code>timeZone</code> ได้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">[
+    &#39;timeZone&#39; =&gt; &#39;America/Los_Angeles&#39;,
+    // ...
+]
+</code></pre></div>
+<blockquote>
+<p>หากไม่รู้ว่า default ของเราเป็น timezone อะไร สามารถใช้ function <code>date_default_timezone_set()</code> เพื่อ echo ตรวจสอบข้อมูลได้ เพราะการแสดงผลจะอิงตาม TimeZone</p>
+</blockquote>
+
+<p>ส่วนใหญ่ในการสร้างตารางต่างๆ เราก็มักจะมีฟิวด์ที่เก็บข้อมูลคือ </p>
 
 <ul>
 <li>create_date บอกว่าเราสร้าง record นี้เมื่อไหร่</li>
@@ -197,10 +213,6 @@
 <p>แต่เดี๋ยวก่อน Yii2 มีนวัตกรรมใหม่ที่จะทำให้คุณพ่อบ้านสบายขึ้น (เดี่ยวๆ ก่อน..) มันดียังไง?</p>
 
 <p>ตามเอกสารเค้าบอกว่ามันสามารถใส่ข้อมูล timestamp ให้อัตโนมัติได้เพียงแค่เราต้งชื่อฟิวด์ <code>created_at</code>,<code>updated_at</code> และกำหนด type ใน mysql เป็น Integer หลังจากนั้นเพิ่มการเรียกใช้งาน TimestampBehavior ใน model ดังนี้</p>
-
-<blockquote>
-<p>มันเก็บข้อมูลเป็น time()  เพราะฉะนั้นต้องตรวจสอบขอ้มูล TimeZone ว่าตอนนี้ค่า default เป็นอะไร</p>
-</blockquote>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">use</span> <span class="nx">yii\behaviors\TimestampBehavior</span><span class="p">;</span>
 <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
@@ -265,20 +277,6 @@
         <span class="p">],</span>
     <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>การบันทึกเวลาเป็น init นั้นมีข้อดีคือ เราสามารถที่จะเปลี่ยนค่า Time  ที่เราบันทีกเป็น TimeZone ที่ใหนก็ได้ ทำให้เรารู้ว่า ณ ช่วงเวลาที่เราบันทึกข้อมูลตอนนี้ เป็นเวลากี่โมง ณ อีก timezone นึง </p>
-
-<p>ตัวอย่างเช่นเรามีระบบ application ที่มีคนใช้อยู่คนละ timeZone เช่น <code>America/Los_Angeles</code>  กับ <code>Asia/Bangkok</code> </p>
-
-<p>Yii 2 เราสามารถตั้งค่า <code>default</code>  TimeZone  ได้ที่ config/main.php ในส่วนของ <code>timeZone</code> ได้</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">[
-    &#39;timeZone&#39; =&gt; &#39;America/Los_Angeles&#39;,
-    // ...
-]
-</code></pre></div>
-<blockquote>
-<p>หากไม่รู้ว่า default ของเราเป็น timezone อะไร สามารถใช้ function <code>date_default_timezone_set()</code> เพื่อ echo ตรวจสอบข้อมูลได้</p>
-</blockquote>
-
 <p>อ่านการใช้งาน formatter  เพิ่มเติมได้<a href="/2015/06/23/date-formatter.html">ที่นี่</a></p>
 </section>
 </article>
