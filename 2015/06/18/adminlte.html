@@ -209,11 +209,11 @@
 <p>ข้อเสียของวิธีนี้คือเราจะไม่สามารถแกไข layout view  ได้เลย หากเราไปแก้ไขไฟล์ที่ path <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> โดยตรง จริงๆ ก็สามารถทำได้ แต่เมื่อมีการอัพเดท ก็จะทำให้ข้อมูลส่วนที่เราแก้ไขถูกทับด้วยไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> </p>
 </blockquote>
 
-<p>แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลยก็สามารถตั้งค่า ตาม path นี้ได้</p>
+<p>แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลย ก็สามารถตั้งค่า ตาม path นี้ได้</p>
 
-<p>ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
+<p>ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view มาไว้ที่ application เพื่อให้สามารถแก้ไข view ได้ หรือปรับแต่งตามความต้องการได้ </p>
 
-<p>หลังจากติดตั้งเสร็จให้ทำการสร้างโฟลเดอร์ </p>
+<p>ให้ทำการสร้างโฟลเดอร์ ตามนี้</p>
 
 <ul>
 <li>แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte</li>
@@ -225,20 +225,24 @@
 </ul></li>
 </ul>
 
-<p>แล้วแต่ว่าเราจะใช้ที่ใหน หลังจากสร้างแล้วจะได้โครงสร้างโฟลเดอร์แบบนี้ </p>
+<p>จากนั้นทำการ copy โฟลเดอร์ <code>views</code>,<code>layouts</code> จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
+
+<p>แล้วแต่ว่าเราจะใช้ที่ใหน หลังจากสร้างและ copy ไฟล์มาแล้วเราจะได้โครงสร้างโฟลเดอร์แบบนี้ </p>
+
+<p>หากคุณใช้ Basic</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">- basic
     - themes/adminlte
         - layouts
         - site
 </code></pre></div>
-<p>หากใช้  frontend </p>
+<p>หากคุณใช้ที่ frontend </p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">- advance
     - frontend
         - themes/adminlte
             - layouts
             - site
 </code></pre></div>
-<p>หากใช้ backend </p>
+<p>หากคุณใช้ที backend </p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">- advance
     - backend
         - themes/adminlte
@@ -262,7 +266,7 @@
 </code></pre></div>
 <h2 id="app-advance-frontend">App Advance : Frontend</h2>
 
-<p>ตั้งค่า config ได้ที่ frontend/config/main.php </p>
+<p>ตั้งค่า config ได้ที่ <code>frontend/config/main.php</code></p>
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
     <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
          <span class="s1">&#39;theme&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
@@ -275,7 +279,7 @@
 </code></pre></div>
 <h2 id="app-advance-backend">App Advance : Backend</h2>
 
-<p>ตั้งค่า config ได้ที่ backend/config/main.php </p>
+<p>ตั้งค่า config ได้ที่ <code>backend/config/main.php</code></p>
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="s1">&#39;components&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
     <span class="s1">&#39;view&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
          <span class="s1">&#39;theme&#39;</span> <span class="o">=&gt;</span> <span class="o">[</span>
@@ -287,6 +291,8 @@
 <span class="o">],</span>
 </code></pre></div>
 <h2 id="advance-ใช้-adminlte-ทั้ง-frontend-amp-backend-โดยใช้-view-ร่วมกัน">Advance ใช้ Adminlte ทั้ง frontend &amp; backend โดยใช้ view ร่วมกัน</h2>
+
+<p>วิธีนี้คือการใช้งาน view ของ adminte ร่วมกันทั้ง fontend &amp; backend</p>
 
 <ul>
 <li>สร้่าง โฟลเดอร์ themes/adminlte  ที่ /common จะได้ `/common/themes/adminlte</li>

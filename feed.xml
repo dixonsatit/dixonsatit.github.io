@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 26 Jun 2015 16:27:21 +0700</pubDate>
+    <pubDate>Fri, 26 Jun 2015 16:40:51 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน dektrium/yii2-user</title>
@@ -2005,11 +2005,11 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;p&gt;ข้อเสียของวิธีนี้คือเราจะไม่สามารถแกไข layout view  ได้เลย หากเราไปแก้ไขไฟล์ที่ path &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; โดยตรง จริงๆ ก็สามารถทำได้ แต่เมื่อมีการอัพเดท ก็จะทำให้ข้อมูลส่วนที่เราแก้ไขถูกทับด้วยไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; &lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลยก็สามารถตั้งค่า ตาม path นี้ได้&lt;/p&gt;
+&lt;p&gt;แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลย ก็สามารถตั้งค่า ตาม path นี้ได้&lt;/p&gt;
 
-&lt;p&gt;ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view จาก &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น&lt;/p&gt;
+&lt;p&gt;ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view มาไว้ที่ application เพื่อให้สามารถแก้ไข view ได้ หรือปรับแต่งตามความต้องการได้ &lt;/p&gt;
 
-&lt;p&gt;หลังจากติดตั้งเสร็จให้ทำการสร้างโฟลเดอร์ &lt;/p&gt;
+&lt;p&gt;ให้ทำการสร้างโฟลเดอร์ ตามนี้&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte&lt;/li&gt;
@@ -2021,20 +2021,24 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;แล้วแต่ว่าเราจะใช้ที่ใหน หลังจากสร้างแล้วจะได้โครงสร้างโฟลเดอร์แบบนี้ &lt;/p&gt;
+&lt;p&gt;จากนั้นทำการ copy โฟลเดอร์ &lt;code&gt;views&lt;/code&gt;,&lt;code&gt;layouts&lt;/code&gt; จาก &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น&lt;/p&gt;
+
+&lt;p&gt;แล้วแต่ว่าเราจะใช้ที่ใหน หลังจากสร้างและ copy ไฟล์มาแล้วเราจะได้โครงสร้างโฟลเดอร์แบบนี้ &lt;/p&gt;
+
+&lt;p&gt;หากคุณใช้ Basic&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- basic
     - themes/adminlte
         - layouts
         - site
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากใช้  frontend &lt;/p&gt;
+&lt;p&gt;หากคุณใช้ที่ frontend &lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- advance
     - frontend
         - themes/adminlte
             - layouts
             - site
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากใช้ backend &lt;/p&gt;
+&lt;p&gt;หากคุณใช้ที backend &lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- advance
     - backend
         - themes/adminlte
@@ -2058,7 +2062,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;app-advance-frontend&quot;&gt;App Advance : Frontend&lt;/h2&gt;
 
-&lt;p&gt;ตั้งค่า config ได้ที่ frontend/config/main.php &lt;/p&gt;
+&lt;p&gt;ตั้งค่า config ได้ที่ &lt;code&gt;frontend/config/main.php&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;components&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
     &lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
          &lt;span class=&quot;s1&quot;&gt;&amp;#39;theme&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
@@ -2071,7 +2075,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;app-advance-backend&quot;&gt;App Advance : Backend&lt;/h2&gt;
 
-&lt;p&gt;ตั้งค่า config ได้ที่ backend/config/main.php &lt;/p&gt;
+&lt;p&gt;ตั้งค่า config ได้ที่ &lt;code&gt;backend/config/main.php&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;components&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
     &lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
          &lt;span class=&quot;s1&quot;&gt;&amp;#39;theme&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
@@ -2083,6 +2087,8 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;advance-ใช้-adminlte-ทั้ง-frontend-amp-backend-โดยใช้-view-ร่วมกัน&quot;&gt;Advance ใช้ Adminlte ทั้ง frontend &amp;amp; backend โดยใช้ view ร่วมกัน&lt;/h2&gt;
+
+&lt;p&gt;วิธีนี้คือการใช้งาน view ของ adminte ร่วมกันทั้ง fontend &amp;amp; backend&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;สร้่าง โฟลเดอร์ themes/adminlte  ที่ /common จะได้ `/common/themes/adminlte&lt;/li&gt;
