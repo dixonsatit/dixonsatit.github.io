@@ -213,7 +213,7 @@
 
 <p>ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
 
-<p>หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ </p>
+<p>หลังจากติดตั้งเสร็จให้ทำการสร้างโฟลเดอร์ </p>
 
 <ul>
 <li>แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte</li>
@@ -285,6 +285,26 @@
          <span class="o">],</span>
     <span class="o">],</span>
 <span class="o">],</span>
+</code></pre></div>
+<h2 id="advance-ใช้-adminlte-ทั้ง-frontend-amp-backend-โดยใช้-view-ร่วมกัน">Advance ใช้ Adminlte ทั้ง frontend &amp; backend โดยใช้ view ร่วมกัน</h2>
+
+<ul>
+<li>สร้่าง โฟลเดอร์ themes/adminlte  ที่ /common จะได้ `/common/themes/adminlte</li>
+<li>copy โฟลเดอร์จาก  <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มีอยู่ 2 โฟลเดอร์ มี <code>layouts</code> กับ <code>site</code></li>
+<li>copy โฟลเดอร์มาไว้ที่ /common/themes/adminlte/</li>
+<li>ทำการตั้งค่า config ดังนี้ ทั้ง frontend &amp; backend</li>
+</ul>
+
+<blockquote>
+<p>อย่าลืมว่า ทั้ง frontend และ backend ใช้ view adminlte ร่วมกัน เมื่อมีการแก้ไข ทั้ง frontend และ backend ก็จะถูกเปลี่ยนตามไปด้วย </p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&#39;view&#39; =&gt; [
+             &#39;theme&#39; =&gt; [
+                 &#39;pathMap&#39; =&gt; [
+                    &#39;@app/views&#39; =&gt; &#39;@common/themes/adminlte&#39;
+                 ],
+             ],
+        ],
 </code></pre></div>
 <p>จากนั้นก็ทดลองใช้งานได้เลยง่าย สะดวกมากๆ </p>
 

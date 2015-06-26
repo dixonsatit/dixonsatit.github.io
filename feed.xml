@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 26 Jun 2015 12:32:30 +0700</pubDate>
+    <pubDate>Fri, 26 Jun 2015 16:27:21 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน dektrium/yii2-user</title>
@@ -2009,7 +2009,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;p&gt;ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view จาก &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น&lt;/p&gt;
 
-&lt;p&gt;หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ &lt;/p&gt;
+&lt;p&gt;หลังจากติดตั้งเสร็จให้ทำการสร้างโฟลเดอร์ &lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte&lt;/li&gt;
@@ -2081,6 +2081,26 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
          &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
     &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;advance-ใช้-adminlte-ทั้ง-frontend-amp-backend-โดยใช้-view-ร่วมกัน&quot;&gt;Advance ใช้ Adminlte ทั้ง frontend &amp;amp; backend โดยใช้ view ร่วมกัน&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;สร้่าง โฟลเดอร์ themes/adminlte  ที่ /common จะได้ `/common/themes/adminlte&lt;/li&gt;
+&lt;li&gt;copy โฟลเดอร์จาก  &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มีอยู่ 2 โฟลเดอร์ มี &lt;code&gt;layouts&lt;/code&gt; กับ &lt;code&gt;site&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;copy โฟลเดอร์มาไว้ที่ /common/themes/adminlte/&lt;/li&gt;
+&lt;li&gt;ทำการตั้งค่า config ดังนี้ ทั้ง frontend &amp;amp; backend&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;อย่าลืมว่า ทั้ง frontend และ backend ใช้ view adminlte ร่วมกัน เมื่อมีการแก้ไข ทั้ง frontend และ backend ก็จะถูกเปลี่ยนตามไปด้วย &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;view&amp;#39; =&amp;gt; [
+             &amp;#39;theme&amp;#39; =&amp;gt; [
+                 &amp;#39;pathMap&amp;#39; =&amp;gt; [
+                    &amp;#39;@app/views&amp;#39; =&amp;gt; &amp;#39;@common/themes/adminlte&amp;#39;
+                 ],
+             ],
+        ],
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;จากนั้นก็ทดลองใช้งานได้เลยง่าย สะดวกมากๆ &lt;/p&gt;
 
