@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 26 Jun 2015 00:02:20 +0700</pubDate>
+    <pubDate>Fri, 26 Jun 2015 11:12:29 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน dektrium/yii2-user</title>
@@ -912,6 +912,9 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;/blockquote&gt;
 
 &lt;p&gt;วันนี้จะแนะนำการเปลี่ยนธิมของ Yii 2 ซึ่งทำได้ง่ายมาก แค่เปลี่ยนคอนฟิกใน main.php ในส่วนของ components -&amp;gt; view ให้มันไปเรียกใช้งานธีมของเราที่ได้ตั้งค่าไว้ (แค่นี้เองหรอ ดูเหมือนง่าย ง่ายเฉพาะคอนฟิกครับ ฮา..)&lt;/p&gt;
+
+&lt;p&gt;ในส่วนของการตั้งค่า App Basic จะอยู่ที่ &lt;code&gt;config/main.php&lt;/code&gt; ถ้าเป็น App Advance จะ Backend จะอยู่ที่ &lt;code&gt;backend/config/main.php&lt;/code&gt;
+ Frontend จะอยู่ที่ &lt;code&gt;frontend/config/main.php&lt;/code&gt;  &lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;&amp;#39;view&amp;#39; =&amp;gt; [&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;     &amp;#39;theme&amp;#39; =&amp;gt; [&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;         &amp;#39;pathMap&amp;#39; =&amp;gt; [&lt;/span&gt;
