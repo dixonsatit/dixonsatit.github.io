@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 26 Jun 2015 11:26:34 +0700</pubDate>
+    <pubDate>Fri, 26 Jun 2015 11:54:56 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน dektrium/yii2-user</title>
@@ -1987,19 +1987,37 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;h2 id=&quot;การติดตั้ง&quot;&gt;การติดตั้ง&lt;/h2&gt;
 
-&lt;p&gt;ง่ายมากๆ ก่อนอืนติดตั้งตัว extension ก่อน&lt;/p&gt;
+&lt;p&gt;ง่ายมากๆ ก่อนอื่นติดตั้งตัว Extension ก่อน&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require dmstr/yii2-adminlte-asset &amp;quot;2.*&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ ชื่อว่า themes/adminlte &lt;/p&gt;
+&lt;p&gt;หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ &lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;แบบ basic ที่ /themes/adminlte&lt;/li&gt;
-&lt;li&gt;แบบ advance ที่ /backend/themes/adminlte หรือไว้ที่ /frontend/themes/adminlte  แล้วแต่ว่าเราจะใช้ที่ใหน&lt;/li&gt;
+&lt;li&gt;แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte&lt;/li&gt;
+&lt;li&gt;แบบ Advance 
+
+&lt;ul&gt;
+&lt;li&gt; Backend สร้างโฟลเดอร์ตามนี่ /backend/themes/adminlte&lt;/li&gt;
+&lt;li&gt; Frontend สร้างโฟลเดอร์ตามนี่ /frontend/themes/adminlte&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;แล้วแต่ว่าเราจะใช้ที่ใหน&lt;/p&gt;
 
 &lt;p&gt;หลังจากนั้น ให้ทำการ copy ไฟล์ view จาก &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น&lt;/p&gt;
 
-&lt;p&gt;ในส่วนของการตั้งค่า App Basic จะอยู่ที่ &lt;code&gt;config/main.php&lt;/code&gt; ถ้าเป็น App Advance จะ Backend จะอยู่ที่ &lt;code&gt;backend/config/main.php&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;จะได้ข้อมูลแบบนี้ &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;themes/adminlte
+
+&lt;ul&gt;
+&lt;li&gt;layouts&lt;/li&gt;
+&lt;li&gt;site&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;หลังจากนั้นให้ทำการตั้งค่าในส่วนของการตั้งค่า เพื่อทำการเรียกใช้งาน theme&lt;/p&gt;
 
 &lt;h2 id=&quot;app-basic&quot;&gt;App Basic&lt;/h2&gt;
 

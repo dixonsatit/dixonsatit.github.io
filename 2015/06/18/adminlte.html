@@ -191,19 +191,37 @@
 
 <h2 id="การติดตั้ง">การติดตั้ง</h2>
 
-<p>ง่ายมากๆ ก่อนอืนติดตั้งตัว extension ก่อน</p>
+<p>ง่ายมากๆ ก่อนอื่นติดตั้งตัว Extension ก่อน</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">composer require dmstr/yii2-adminlte-asset &quot;2.*&quot;
 </code></pre></div>
-<p>หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ ชื่อว่า themes/adminlte </p>
+<p>หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ </p>
 
 <ul>
-<li>แบบ basic ที่ /themes/adminlte</li>
-<li>แบบ advance ที่ /backend/themes/adminlte หรือไว้ที่ /frontend/themes/adminlte  แล้วแต่ว่าเราจะใช้ที่ใหน</li>
+<li>แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte</li>
+<li>แบบ Advance 
+
+<ul>
+<li> Backend สร้างโฟลเดอร์ตามนี่ /backend/themes/adminlte</li>
+<li> Frontend สร้างโฟลเดอร์ตามนี่ /frontend/themes/adminlte<br></li>
+</ul></li>
 </ul>
+
+<p>แล้วแต่ว่าเราจะใช้ที่ใหน</p>
 
 <p>หลังจากนั้น ให้ทำการ copy ไฟล์ view จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
 
-<p>ในส่วนของการตั้งค่า App Basic จะอยู่ที่ <code>config/main.php</code> ถ้าเป็น App Advance จะ Backend จะอยู่ที่ <code>backend/config/main.php</code></p>
+<p>จะได้ข้อมูลแบบนี้ </p>
+
+<ul>
+<li>themes/adminlte
+
+<ul>
+<li>layouts</li>
+<li>site</li>
+</ul></li>
+</ul>
+
+<p>หลังจากนั้นให้ทำการตั้งค่าในส่วนของการตั้งค่า เพื่อทำการเรียกใช้งาน theme</p>
 
 <h2 id="app-basic">App Basic</h2>
 
