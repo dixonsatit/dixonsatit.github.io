@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 26 Jun 2015 16:40:51 +0700</pubDate>
+    <pubDate>Fri, 26 Jun 2015 16:45:22 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน dektrium/yii2-user</title>
@@ -2023,7 +2023,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;p&gt;จากนั้นทำการ copy โฟลเดอร์ &lt;code&gt;views&lt;/code&gt;,&lt;code&gt;layouts&lt;/code&gt; จาก &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น&lt;/p&gt;
 
-&lt;p&gt;แล้วแต่ว่าเราจะใช้ที่ใหน หลังจากสร้างและ copy ไฟล์มาแล้วเราจะได้โครงสร้างโฟลเดอร์แบบนี้ &lt;/p&gt;
+&lt;p&gt;หลังจากสร้างและ copy ไฟล์มาแล้วเราจะได้โครงสร้างโฟลเดอร์แบบนี้ ซึ่งก็แล้วแต่ว่าเราจะใช้แบบใหน ใช้เฉพาะ fontend ก็ตั้งค่า เฉพาะ fontend&lt;/p&gt;
 
 &lt;p&gt;หากคุณใช้ Basic&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- basic
