@@ -194,7 +194,7 @@
 <p>ง่ายมากๆ ก่อนอื่นติดตั้งตัว Extension ก่อน</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">composer require dmstr/yii2-adminlte-asset &quot;2.*&quot;
 </code></pre></div>
-<p>ถ้าดูตามตัวอย่างใน <a href="https://github.com/dmstr/yii2-adminlte-asset">https://github.com/dmstr/yii2-adminlte-asset</a> จะให้ชี้ไปที่ path extension <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code></p>
+<p>ถ้าหากดูตามตัวอย่างใน <a href="https://github.com/dmstr/yii2-adminlte-asset">https://github.com/dmstr/yii2-adminlte-asset</a> จะให้ชี้ไปที่ path view <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code></p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">&#39;components&#39; =&gt; [
     &#39;view&#39; =&gt; [
          &#39;theme&#39; =&gt; [
@@ -210,6 +210,8 @@
 </blockquote>
 
 <p>แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลยก็สามารถตั้งค่า ตาม path นี้ได้</p>
+
+<p>ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
 
 <p>หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ </p>
 
@@ -243,8 +245,6 @@
             - layouts
             - site
 </code></pre></div>
-<p>ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
-
 <p>หลังจากนั้นให้ทำการตั้งค่าในส่วนของการตั้งค่า เพื่อทำการเรียกใช้งาน theme</p>
 
 <h2 id="app-basic">App Basic</h2>
