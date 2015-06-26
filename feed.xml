@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 26 Jun 2015 12:11:01 +0700</pubDate>
+    <pubDate>Fri, 26 Jun 2015 12:28:14 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน dektrium/yii2-user</title>
@@ -1990,6 +1990,23 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;p&gt;ง่ายมากๆ ก่อนอื่นติดตั้งตัว Extension ก่อน&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require dmstr/yii2-adminlte-asset &amp;quot;2.*&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ถ้าดูตามตัวอย่างใน &lt;a href=&quot;https://github.com/dmstr/yii2-adminlte-asset&quot;&gt;https://github.com/dmstr/yii2-adminlte-asset&lt;/a&gt; จะให้ชี้ไปที่ path extension &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;components&amp;#39; =&amp;gt; [
+    &amp;#39;view&amp;#39; =&amp;gt; [
+         &amp;#39;theme&amp;#39; =&amp;gt; [
+             &amp;#39;pathMap&amp;#39; =&amp;gt; [
+                &amp;#39;@app/views&amp;#39; =&amp;gt; &amp;#39;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&amp;#39;
+             ],
+         ],
+    ],
+],
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ข้อเสียของวิธีนี้คือเราจะไม่สามารถแกไข layout view  ได้เลย หากเราไปแก้ไขไฟล์ที่ path &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; โดยตรง จริงๆ ก็สามารถทำได้ แต่เมื่อมีการอัพเดท ก็จะทำให้ข้อมูลส่วนที่เราแก้ไขถูกทับด้วยไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลยก็สามารถตั้งค่า ตาม path นี้ได้&lt;/p&gt;
+
 &lt;p&gt;หลังจากติดตั้งเสร็จให้ทำการสร้างโฟล์เดอร์ &lt;/p&gt;
 
 &lt;ul&gt;
@@ -2002,35 +2019,27 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;แล้วแต่ว่าเราจะใช้ที่ใหน&lt;/p&gt;
-
-&lt;p&gt;ถ้าดูตามตัวอย่างใน &lt;a href=&quot;https://github.com/dmstr/yii2-adminlte-asset&quot;&gt;https://github.com/dmstr/yii2-adminlte-asset&lt;/a&gt; จะให้ชี้ไปที่ path extension เลยทำให้เราไม่สามารถแก้ไข layout view ได้ &lt;/p&gt;
-
-&lt;p&gt;หากเราไปแก้ไขไฟล์ที่ path &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; นี้ จริงๆ ก็สามารถทำได้ แต่หากมีการอัพเดทเวอร์ชั่น ก็จะทำให้ข้อมูลส่วนนี้ถูกทับได้ไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ &lt;code&gt;vendor&lt;/code&gt; &lt;/p&gt;
-
-&lt;p&gt;แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลยก็สามารถตั้งค่า ตาม path นี้ได้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;components&amp;#39; =&amp;gt; [
-    &amp;#39;view&amp;#39; =&amp;gt; [
-         &amp;#39;theme&amp;#39; =&amp;gt; [
-             &amp;#39;pathMap&amp;#39; =&amp;gt; [
-                &amp;#39;@app/views&amp;#39; =&amp;gt; &amp;#39;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&amp;#39;
-             ],
-         ],
-    ],
-],
+&lt;p&gt;แล้วแต่ว่าเราจะใช้ที่ใหน หลังจากสร้างแล้วจะได้โครงสร้างโฟลเดอร์แบบนี้ &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- basic
+    - themes/adminlte
+        - layouts
+        - site
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หากใช้  frontend &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- advance
+    - frontend
+        - themes/adminlte
+            - layouts
+            - site
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หากใช้ backend &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- advance
+    - backend
+        - themes/adminlte
+            - layouts
+            - site
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view จาก &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น&lt;/p&gt;
-
-&lt;p&gt;จะได้โครงสร้างโฟลเดอร์แบบนี้ &lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;themes/adminlte
-
-&lt;ul&gt;
-&lt;li&gt;layouts&lt;/li&gt;
-&lt;li&gt;site&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;p&gt;หลังจากนั้นให้ทำการตั้งค่าในส่วนของการตั้งค่า เพื่อทำการเรียกใช้งาน theme&lt;/p&gt;
 
