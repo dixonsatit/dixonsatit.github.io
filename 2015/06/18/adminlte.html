@@ -208,7 +208,22 @@
 
 <p>แล้วแต่ว่าเราจะใช้ที่ใหน</p>
 
-<p>หลังจากนั้น ให้ทำการ copy ไฟล์ view จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
+<p>ถ้าดูตามตัวอย่างใน <a href="https://github.com/dmstr/yii2-adminlte-asset">https://github.com/dmstr/yii2-adminlte-asset</a> จะให้ชี้ไปที่ path extension เลยทำให้เราไม่สามารถแก้ไข layout view ได้ </p>
+
+<p>หากเราไปแก้ไขไฟล์ที่ path <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> นี้ จริงๆ ก็สามารถทำได้ แต่หากมีการอัพเดทเวอร์ชั่น ก็จะทำให้ข้อมูลส่วนนี้ถูกทับได้ไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ <code>vendor</code> </p>
+
+<p>แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลยก็สามารถตั้งค่า ตาม path นี้ได้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&#39;components&#39; =&gt; [
+    &#39;view&#39; =&gt; [
+         &#39;theme&#39; =&gt; [
+             &#39;pathMap&#39; =&gt; [
+                &#39;@app/views&#39; =&gt; &#39;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&#39;
+             ],
+         ],
+    ],
+],
+</code></pre></div>
+<p>ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view จาก <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น</p>
 
 <p>จะได้โครงสร้างโฟลเดอร์แบบนี้ </p>
 
