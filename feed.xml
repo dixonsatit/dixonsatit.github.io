@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Fri, 26 Jun 2015 11:54:56 +0700</pubDate>
+    <pubDate>Fri, 26 Jun 2015 11:57:18 +0700</pubDate>
     
       <item>
         <title>การติดตั้งและใช้งาน dektrium/yii2-user</title>
@@ -2006,7 +2006,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;p&gt;หลังจากนั้น ให้ทำการ copy ไฟล์ view จาก &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น&lt;/p&gt;
 
-&lt;p&gt;จะได้ข้อมูลแบบนี้ &lt;/p&gt;
+&lt;p&gt;จะได้โครงสร้างโฟลเดอร์แบบนี้ &lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;themes/adminlte
