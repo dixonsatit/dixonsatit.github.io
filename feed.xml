@@ -5,13 +5,15 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 28 Jun 2015 13:21:03 +0700</pubDate>
+    <pubDate>Sun, 28 Jun 2015 14:00:18 +0700</pubDate>
     
       <item>
         <title>การสร้าง RBAC อย่างง่าย</title>
         <link>http://dixonsatit.github.io/2015/06/27/simple-rbac.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/27/simple-rbac.html</guid>
-        <description>&lt;p&gt;Tutorial นี้เป็นการสร้าง RBAC อย่างง่ายๆ เพื่อให้เราเข้าใจภาพรวมการใช้งาน RBAC ก่อน และเราจะสร้าง AccessRole ขึ้นมาใช้งานเองเป็นการตรวจสอบสิทธิ์แบบง่ายๆ&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/img/rbac-index.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Tutorial นี้เป็นการสร้าง RBAC อย่างง่ายๆ เพื่อให้เราเข้าใจภาพรวมการใช้งาน RBAC ก่อน และเราจะสร้าง AccessRole ขึ้นมาใช้งานเองเป็นการตรวจสอบสิทธิ์แบบง่ายๆ&lt;/p&gt;
 
 &lt;p&gt;มาดูความหมายของ RBAC กันซักนิด RBAC ย่อมาจาก Role-Based Access Control หรือ เป็นตรวจตรวจสอบระดับของผู้ใช้งาน
 Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ คือ&lt;/p&gt;
