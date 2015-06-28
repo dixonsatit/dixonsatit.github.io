@@ -5,10 +5,10 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 28 Jun 2015 19:16:11 +0700</pubDate>
+    <pubDate>Sun, 28 Jun 2015 19:20:01 +0700</pubDate>
     
       <item>
-        <title>การสร้าง RBAC อย่างง่าย</title>
+        <title>การสร้าง RBAC ใน Yii 2 อย่างง่าย</title>
         <link>http://dixonsatit.github.io/2015/06/27/simple-rbac.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/27/simple-rbac.html</guid>
         <description>&lt;p&gt;&lt;img src=&quot;/img/simple-rbac-index.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
