@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การสร้าง RBAC อย่างง่าย | DixonSatit</title>
+	<meta name="description" content="Tutorial นี้เป็นการสร้าง RBAC อย่างง่ายๆ เพื่อให้เราเข้าใจภาพรวมการใช้งาน RBAC ก่อน และเราจะสร้าง AccessRole ขึ้นมาใช้งานเองเป็นการตรวจสอบสิทธิ์แบบง่ายๆ">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/27/simple-rbac.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">DixonSatit</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/satit.seethaphon" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การสร้าง RBAC อย่างง่าย</h1>
+    <p class="meta">
+    June 27, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p>Tutorial นี้เป็นการสร้าง RBAC อย่างง่ายๆ เพื่อให้เราเข้าใจภาพรวมการใช้งาน RBAC ก่อน และเราจะสร้าง AccessRole ขึ้นมาใช้งานเองเป็นการตรวจสอบสิทธิ์แบบง่ายๆ</p>
+
+<p>มาดูความหมายของ RBAC กันซักนิด RBAC ย่อมาจาก Role-Based Access Control หรือ เป็นตรวจตรวจสอบระดับของผู้ใช้งาน
+Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ คือ</p>
+
+<ul>
+<li>Roles</li>
+<li>Tasks</li>
+<li>Operations</li>
+</ul>
+
+<p>มาดูแต่ละส่วนกัน</p>
+
+<ul>
+<li>Operations  เป็นการกระทำเพียง 1 อย่าง หรือมองเป็น action ก็ได้ อย่างเช่น  <code>create</code>,<code>update</code>,<code>delete</code></li>
+<li>Tasks เป็นชื่อกลุ่มที่รวบรวม Operations ต่างๆ ที่เกี่ยวข้องกัน อย่างเช่น <code>TasksUser</code>  จะมี Operations คือ UserCreate, UserUpdate, UserDelete มองประมาณ controller ก็ได้</li>
+<li>Roles คือกลุ่มของ Task,Operations และ Role  ทำให้เราจัดกลุ่มสิทธ์ต่างๆ ได้อย่างมีประสิทธิภาพ อย่างเช่น Role Admin, Role User, Role Administrator  ซึ่งในแต่ละกลุ่มก็แล้วแต่เราจะนำเอา Role,task ที่ใหนมาใช้บ้าง</li>
+</ul>
+
+<p>ช่างมันเถอะ อาจจะงง ผมก็อธิบายไม่ถูก เดี่ยวทำไปๆ น่าจะเข้าใจ ^ ^</p>
+
+<h2 id="เตรียม-project-กันก่อน">เตรียม Project กันก่อน</h2>
+
+<p>ตัวอย่างนี้ ผมเราจะใช้ Advance Template เพราะมีระบบ login อยู่แล้ว หลังจากนั้นจะทำการสร้างระบบ Blog และระบบจัดการผู้ใช้งาน เพื่อทดลองสร้าง การตรวจสอบสิทธิ์ ให้คุณได้มองเห็นภาพและเข้าใจได้ง่ายยิ่งขึ้น</p>
+
+<p>เตรียมตัวก่อน</p>
+
+<ul>
+<li>สร้าง project Advance ขึ้นมา <a href="https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md">อ่านวิธีติดตั้ง advance ได้ทีนี</a></li>
+<li>รันคำสั่ง <code>php init</code>,<code>yii migrate</code> ให้เรียบร้อย สร้าง db ชื่อ <code>simple-rbac</code> และตั้งค่า config ฐานข้อมูลให้เรียบร้อย</li>
+<li>ลงทะเบียน user และทำการ login ให้สำเร็จ</li>
+</ul>
+
+<p>เมื่อทำตามขั้นตอนนี้เสร็จแล้ว เราจะสร้างตาราง blog ขึ้นมาเพื่อทดสอบการใช้งานสิทธิ์</p>
+
+<p>ให้สร้าง Blog ขึ้นมาตามโครงสร้างนี้</p>
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">blog</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">topic</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;ชื่อเรื่อง&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">detail</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;รายละเอียด&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">tag</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;แท็ก&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">created_by</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">updated_by</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">created_at</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">updated_at</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">4</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span>
+</code></pre></div>
+<p>จากนั้นไปที่ frontend และทำการ <code>Gii Model Blog</code>และ <code>Gii CRUD Blog</code> ตามนี้</p>
+
+<p><strong>Gii Model Blog</strong></p>
+
+<p><img src="/img/simple-rbac-model-gii.png" alt=""></p>
+
+<p><strong>Gii CRUD Blog</strong></p>
+
+<p><img src="/img/simple-rbac-gii-crud.png" alt=""></p>
+
+<p>ทดสอบให้รันใช้งานได้เป็นพอ</p>
+
+<h2 id="เพิ่มเมนู-blog-ที่-frontend">เพิ่มเมนู Blog ที่ Frontend</h2>
+
+<p>เพิ่มเมนู blog ให้เราสามารถเข้าใช้งานได้ง่ายๆ โดยเพิ่ม เมนูที่ `<code>/frontend/views/layout/main.php</code> ในส่วนของ  $menuItems เพิ่มเมนู Blog เข้าไป</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$menuItems = [</span>
+<span class="x">              [&#39;label&#39; =&gt; &#39;Home&#39;, &#39;url&#39; =&gt; [&#39;/site/index&#39;]],</span>
+<span class="x">              [&#39;label&#39; =&gt; &#39;Blog&#39;, &#39;url&#39; =&gt; [&#39;/blog/index&#39;]],</span>
+<span class="x">              [&#39;label&#39; =&gt; &#39;About&#39;, &#39;url&#39; =&gt; [&#39;/site/about&#39;]],</span>
+<span class="x">              [&#39;label&#39; =&gt; &#39;Contact&#39;, &#39;url&#39; =&gt; [&#39;/site/contact&#39;]],</span>
+<span class="x">          ];</span>
+</code></pre></div>
+<h2 id="สร้างกลุ่มสิทธ์หรือระดับการเข้าใช้งาน">สร้างกลุ่มสิทธ์หรือระดับการเข้าใช้งาน</h2>
+
+<p>เราจะออกแบบ Role หรือระดับการเข้าใช้งาน ไว้ 3 กลุ่ม และแต่ละกลุ่มมีหน้าที่นังนี้</p>
+
+<ul>
+<li><code>Administrator</code> เป็นระดับสูงสุดทำได้ทุกอย่าง</li>
+<li><code>Moderator</code> เป็นกลุ่มที่มีหน้าที่ตรวจสอบข้อมูล</li>
+<li><code>User</code> เป็นกลุ่ม user ทั่วไป</li>
+</ul>
+
+<p>เราจะทำการสร้าง Role ไว้ที่ Model ​User ที่ <code>/common/models/User.php</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> </span><span class="cp">&lt;?php</span>
+
+ <span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">ActiveRecord</span> <span class="k">implements</span> <span class="nx">IdentityInterface</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">STATUS_DELETED</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">STATUS_ACTIVE</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="no">ROLE_USER</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">ROLE_MODERATOR</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">ROLE_ADMIN</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>และเพิ่มฟิวด์ <code>role</code> เข้าไปที่ตาราง user กำหนด type ข้อมูลเป็น int เพื่อเอาไว้เก็บสิทธิ์ของแต่ละคนว่าอยู่ระดับใด</p>
+
+<h2 id="สร้าง-user">สร้าง user</h2>
+
+<p>สร้าง user เพื่อทดสอบ โดยให้เราไปที่ frontend และ signup user ให้ครบ 3 user กำหนด username และ password ตามด้านล่าง และแก้ไขข้อมูล role ใน table user ตามค่าที่ระบุด้านล่าง</p>
+
+<ul>
+<li>admin : 123456 กำหนด role = 30 เป็น admin</li>
+<li>mod   : 123456 กำหนด role = 20 เป็น moderator</li>
+<li>user  : 123456 กำหนด role = 10 เป็น user</li>
+</ul>
+
+<p><img src="/img/simple-rbac-signup.png" alt=""></p>
+
+<p>จะได้ข้อมูลประมาณนี้</p>
+
+<p><img src="/img/simple-rbac-db.png" alt=""></p>
+
+<h2 id="สร้าง-accessrule">สร้าง AccessRule</h2>
+
+<p>AccessRule เป็น filter และมีหน้าที่ตรวจสอบเวลาที่เราเรียกใช้งานในแต่ละ action โดยดึงข้อมูล user ที่ทำการ login และเช็คสิทธิ์จากฟิวด์ <code>role</code> ว่ามีสิทธิ์เข้าใช้งานหรือไม่</p>
+
+<p>สร้างโฟลเดอร <code>components</code> ที่ common แล้วสร้างไฟล์  <code>common\components\AccessRule.php</code> ตามนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> </span><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">common\components</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">common\models\User</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">AccessRule</span> <span class="k">extends</span> <span class="nx">\yii\filters\AccessRule</span><span class="p">{</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">matchRole</span><span class="p">(</span><span class="nv">$user</span><span class="p">){</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">roles</span><span class="p">)){</span>
+            <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">roles</span> <span class="k">as</span> <span class="nv">$role</span><span class="p">){</span>
+
+            <span class="k">if</span><span class="p">(</span><span class="nv">$role</span> <span class="o">==</span> <span class="s1">&#39;?&#39;</span> <span class="o">&amp;&amp;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getIsGuest</span><span class="p">()){</span>
+                    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">elseif</span><span class="p">(</span><span class="nv">$role</span> <span class="o">==</span> <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_USER</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getIsGuest</span><span class="p">()){</span>
+                    <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">elseif</span><span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getIsGuest</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="nv">$role</span> <span class="o">==</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">identity</span><span class="o">-&gt;</span><span class="na">role</span><span class="p">){</span>
+                <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="เรียกใช้งานที่-controller">เรียกใช้งานที่ Controller</h2>
+
+<p>หลังจากที่เราได้สร้าง <code>AccessRule</code> ไปแล้ว เราจะเรียกใช้งานที่ <code>function behaviors()</code> ซึ่งปกติ หลังจาก gii crud มาแล้ว จะยังไม่มีการกำหนดสิทธิ์การเข้าใช้งาน และของเดิมที่ gii crud มา จะได้แบบนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> </span><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">frontend\controllers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">common\models\Blog</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">frontend\models\BlogSearch</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\web\Controller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\web\NotFoundHttpException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\filters\VerbFilter</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * BlogController implements the CRUD actions for Blog model.</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">BlogController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">&#39;verbs&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">VerbFilter</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+                <span class="s1">&#39;actions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;delete&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">],</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>เราจะทำการกำหนดสิทธ์การใช้งาน เบื้องต้นเราได้กำหนด Role ไว้ที่ model User แล้วคือ</p>
+
+<ul>
+<li>Admin</li>
+<li>Moderator</li>
+<li>User</li>
+</ul>
+
+<p>ใน Controller มี action <code>index</code>,<code>create</code>,<code>view</code>,<code>update</code>,<code>delete</code> เราจะแบ่งสิทธิ์การเข้าใช้งาน ดังนี้</p>
+
+<ul>
+<li>Action <code>index</code>,<code>create</code>,<code>view</code> สามารถใช้ได้ทั้ง 3 Role คือ <code>admin</code>,<code>moderator</code>,<code>user</code></li>
+<li>Action <code>update</code> สามารถใช้งานได้เฉพาะ role  <code>admin</code>,<code>moderator</code></li>
+<li>Action <code>delete</code> สามารถใช้งานได้เฉพาะ role <code>admin</code></li>
+</ul>
+
+<p>เวลาใช้งานก็แล้วแต่ว่า user จะได้รับ role อะไร แต่เราจะกำหนดค่า default Role ไว้เท่ากับ 10 ซึ่งก็คือ <code>ROLE_USER</code></p>
+
+<p>จากนั้นกำหนดค่าที่เราได้ออกแบบไว้ ที่ controller ใน <code>function behaviors()</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">backend\controllers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">common\models\User</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">backend\models\UserSearch</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\web\Controller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\web\NotFoundHttpException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\filters\VerbFilter</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\filters\AccessControl</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">common\components\AccessRule</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * UserController implements the CRUD actions for User model.</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+  <span class="c1">// ...</span>
+  <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">&#39;verbs&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">VerbFilter</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+                <span class="s1">&#39;actions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;delete&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">],</span>
+                <span class="p">],</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;access&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="nx">AccessControl</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+                <span class="s1">&#39;only&#39;</span><span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;create&#39;</span><span class="p">,</span><span class="s1">&#39;update&#39;</span><span class="p">,</span><span class="s1">&#39;view&#39;</span><span class="p">,</span><span class="s1">&#39;delete&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;ruleConfig&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                    <span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="nx">AccessRule</span><span class="o">::</span><span class="na">className</span><span class="p">()</span> <span class="c1">// เรียกใช้งาน accessRule ที่เราสร้างขึั้น</span>
+                <span class="p">],</span>
+                <span class="s1">&#39;rules&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                    <span class="p">[</span>
+                        <span class="s1">&#39;actions&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;create&#39;</span><span class="p">,</span><span class="s1">&#39;view&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;allow&#39;</span><span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+                        <span class="s1">&#39;roles&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                            <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_USER</span><span class="p">,</span>
+                            <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_MODERATOR</span><span class="p">,</span>
+                            <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_ADMIN</span>
+                        <span class="p">]</span>
+                    <span class="p">],[</span>
+                        <span class="s1">&#39;actions&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;update&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;allow&#39;</span><span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+                        <span class="s1">&#39;roles&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                            <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_MODERATOR</span><span class="p">,</span>
+                            <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_ADMIN</span>
+                        <span class="p">]</span>
+                    <span class="p">],[</span>
+                        <span class="s1">&#39;actions&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;allow&#39;</span><span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+                        <span class="s1">&#39;roles&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="nx">User</span><span class="o">::</span><span class="na">ROLE_ADMIN</span><span class="p">]</span>
+                    <span class="p">]</span>
+                <span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>ทดลอง login และเปลี่ยน เข้าใช้งานในแต่ละ user ดู หากไม่มีสิทธิ์เข้าใจงานจะเจอ error <code>Forbidden</code> แบบนี้ หลักๆ RBAC จะมีเพียงเท่านี้ ^ ^ ที่เหลือจะเป็นการปรับปรุงให้ระบบใช้งานได้ดียิ่งขึ้น</p>
+
+<p><img src="/img/simple-rbac-forbidden.png" alt=""></p>
+
+<h2 id="ปรับปรุงระบบลงทะเบียนใหม่-signup">ปรับปรุงระบบลงทะเบียนใหม่ (Signup)</h2>
+
+<p>เราจะทำการปรับปรุงระบบลงทะเบียนใหม่ ให้มีการเพิ่ม  <code>role</code> default ให้กับ user ในตอนที่ลงทะเบียนด้วย เพื่อให้สามารถใช้งานได้ทันที</p>
+
+<p>ปรับปรุงไฟล์ model Signup ที่  <code>application/frontend/model/SignupForm.php</code> ไปที่ <code>function signup</code>
+เพิ่ม <code>$user-&gt;role = User::ROLE_USER;</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">frontend\models</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">common\models\User</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\base\Model</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * Signup form</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">SignupForm</span> <span class="k">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+<span class="c1">// ...</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">signup</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">();</span>
+            <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">;</span>
+            <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">email</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="p">;</span>
+            <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">);</span>
+            <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">generateAuthKey</span><span class="p">();</span>
+            <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">role</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_USER</span><span class="p">;</span> <span class="c1">// &lt;&lt;--------</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">())</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nv">$user</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="c1">// ...</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>จากนั้นทดสอบทำการลงทะเบียนใหม่ จะพบค่า role  default เท่ากับ 10 ซึ่งก็จะสามารถใช้งาน Blog ได้ทันที่</p>
+
+<h2 id="สร้างระบบจัดการ-user-ที่-backend">สร้างระบบจัดการ User ที่ Backend</h2>
+
+<p>เราจะทำการสร้างระบบจัดการ user ที่ <code>Backend</code>`เพื่อให้สามารถปรับปรุงสิทธิ์ในแต่ละ user ได้ และสามารถเพิ่ม,ลบ,แก้ไข user ได้</p>
+
+<p><img src="/img/simple-rbac-user.png" alt=""></p>
+
+<p><img src="/img/simple-rbac-update.png" alt=""></p>
+
+<p>ปรับปรุง model User ที่  <code>/common/models/User.php</code></p>
+
+<p>ปรับปรุง  rules เพื่อให้สามารถ เพิ่ม,ลบ,แก้ไขได้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">public function rules()</span>
+<span class="x">{</span>
+<span class="x">    return [</span>
+<span class="x">        [&#39;status&#39;, &#39;default&#39;, &#39;value&#39; =&gt; self::STATUS_ACTIVE],</span>
+<span class="x">        [&#39;status&#39;, &#39;in&#39;, &#39;range&#39; =&gt; [self::STATUS_ACTIVE, self::STATUS_DELETED]],</span>
+
+<span class="x">        [&#39;role&#39;,&#39;integer&#39;],</span>
+<span class="x">        [&#39;role&#39;, &#39;default&#39;, &#39;value&#39; =&gt; self::ROLE_USER],</span>
+
+<span class="x">        [&#39;username&#39;, &#39;filter&#39;, &#39;filter&#39; =&gt; &#39;trim&#39;],</span>
+<span class="x">        [&#39;username&#39;, &#39;required&#39;],</span>
+<span class="x">        [&#39;username&#39;, &#39;unique&#39;, &#39;targetClass&#39; =&gt; &#39;\common\models\User&#39;, &#39;message&#39; =&gt; &#39;This username has already been taken.&#39;],</span>
+<span class="x">        [&#39;username&#39;, &#39;string&#39;, &#39;min&#39; =&gt; 2, &#39;max&#39; =&gt; 255],</span>
+
+<span class="x">        [&#39;email&#39;, &#39;filter&#39;, &#39;filter&#39; =&gt; &#39;trim&#39;],</span>
+<span class="x">        [&#39;email&#39;, &#39;required&#39;],</span>
+<span class="x">        [&#39;email&#39;, &#39;email&#39;],</span>
+<span class="x">        [&#39;email&#39;, &#39;unique&#39;, &#39;targetClass&#39; =&gt; &#39;\common\models\User&#39;, &#39;message&#39; =&gt; &#39;This email address has already been taken.&#39;],</span>
+
+<span class="x">        [&#39;password&#39;, &#39;required&#39;],</span>
+<span class="x">        [&#39;password&#39;, &#39;string&#39;, &#39;min&#39; =&gt; 6],</span>
+<span class="x">    ];</span>
+<span class="x">}</span>
+</code></pre></div>
+<p>และเพิ่มโค้ดในการสร้าง itemAlias เพื่อให้สามารถดึงข้อมูลรายการไปแสดงผลที่ ActiveForm,GridView,detailView  ได้ง่ายๆ</p>
+
+<p>ผมคิดว่านี่คือ Pattern ที่ดีในการจัดการข้อมูล มันทำให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็นการเรียกใช้งานเพื่อแสดงผล หรือ นำ items ไปแสดงที่ form แม้กระทั้ง filter ในส่วนของ Gridview  ก็สามารถทำได้ง่ายๆ</p>
+
+<p>ข้อดีอีกอย่างเมื่อเราพัฒนาคนอื่นๆ สามารถมองโค้ดของเราเข้าใจ ทำให้สามารถพัฒนนาร่วมกันได้อย่างมีประสิทธิภาพ ตัวอย่างนี้อาจไม่ใช่ดีที่สุด แต่น่าจะเป็นจุดเริ่มต้นที่ดีในการออกแบบ เมื่อเราเริ่มจากจุดเล็กๆ รวมกันเข้ามันจะแข็งแกร่งอย่างไม่หน้าเชื่อ</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">public static function getItemsAlias($id){
+    $items =  [
+        &#39;status&#39;=&gt;[
+            self::STATUS_ACTIVE =&gt; &#39;Active&#39;,
+            self::STATUS_DELETED =&gt; &#39;Deleted&#39;
+        ],
+        &#39;role&#39; =&gt; [
+            self::ROLE_ADMIN =&gt; &#39;Administrator&#39;,
+            self::ROLE_MODERATOR =&gt; &#39;Moderator&#39;,
+            self::ROLE_USER =&gt; &#39;User&#39;
+        ]
+    ];
+    return array_key_exists($id, $items) ? $items[$id] : [];
+}
+
+public function getItemStatus(){
+    return self::getItemsAlias(&#39;status&#39;);
+}
+
+public function getStatusName(){
+    $items =  $this-&gt;getItemStatus();
+    return array_key_exists($this-&gt;status, $items) ? $items[$this-&gt;status] : null;
+}
+
+public function getItemRole(){
+    return self::getItemsAlias(&#39;role&#39;);
+}
+
+public function getRoleName(){
+    $items =  $this-&gt;getItemRole();
+    return array_key_exists($this-&gt;role, $items) ? $items[$this-&gt;role] : null;
+}
+</code></pre></div>
+<h3 id="getitemsalias">getItemsAlias()</h3>
+
+<p>เป็นฟังก์ชันรวม itemsAlias ต่างๆ ที่มีรายการไม่เยอะและไม่ได้นำไปสร้างเป็น table ผมจึงแนะนำให้สร้างแบบนี้</p>
+
+<p>function ประกาศเป็น static เพื่อให้สามารถเรียกใช้ได้แม้ไม่ได้ new object ซึ่งจะรับค่าเป็น type ที่เราต้องการเรียกใช้ข้อมูล และ return ค่าออกมาเป็น array items ที่เราต้องการ</p>
+
+<h3 id="getitemstatus">getItemStatus()</h3>
+
+<p>เป็น function เพื่อเรียกใช้งาน items status เอาไว้ใช้ใน form เพื่อแสดงผลเป็น radioList,DropdownList ได้ สามารถเรียกใช้งานผ่าน <code>$model-&gt;getItemStatus()</code></p>
+
+<p>ตัวอย่าง</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemStatus</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">dropdownList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemStatus</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<h3 id="getstatusname-getitemrole">getStatusName(),getItemRole()</h3>
+
+<p>เป็น function ที่เอาไว้แสดงผล status,role ใน <code>GridView</code>,<code>DetailView</code> เพื่อให้เราเรียกใช้งานได้ง่ายๆ ซึ่งรูปแบบนี้เรียกว่า virtual attribute เป็นความสามารถที่มีมาตั้งแต่ Yii 1 แล้ว <a href="http://www.yiiframework.com/wiki/167/understanding-virtual-attributes-and-get-set-methods/">อ่านเพิ่มเติมได้ที่นี่</a> หรืออ่านบทความที่ผมเขียนไว้<a href="/2014/11/30/relations.html">ที่นี่</a></p>
+
+<p>ตัวอย่างการเรียกใช้งานสามารถเรียกแบบแสดงผลแค่ชื่อ หรือเพิ่มในส่วนของ filter เข้าไปได้ จะเห็นว่าเราสามารถเรียกใช้งานได้อย่างง่ายๆ</p>
+
+<p><strong>Gridviw</strong></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">common\models\User</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+        <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+        <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+        <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;statusName&#39;</span><span class="p">,</span>
+            <span class="p">[</span>
+              <span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;status&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;filter&#39;</span><span class="o">=&gt;</span><span class="nx">User</span><span class="o">::</span><span class="na">getItemsAlias</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">),</span>
+              <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+                <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">statusName</span><span class="p">;</span>
+              <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;roleName&#39;</span><span class="p">,</span>
+            <span class="p">[</span>
+              <span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;role&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;filter&#39;</span><span class="o">=&gt;</span><span class="nx">User</span><span class="o">::</span><span class="na">getItemsAlias</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">),</span>
+              <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+                <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">roleName</span><span class="p">;</span>
+              <span class="p">}</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><strong>DetailView</strong></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">DetailView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+    <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;statusName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;roleName&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><strong>รวมโค้ดที่เพิ่มเข้าไปทั้งหมดใน model user</strong></p>
+
+<blockquote>
+<p>ผมได้เพิ่ม <code>public $password</code> เพื่อใช้ในการรับค่ารหัสผ่านจาก from  ซึ่งฟิวด์นี้จะไม่มีอยู่จริงใน table user หลังจากเรากรอก password ในform แล้ว model จะเรียยกใช้งานฟังก์ชัน setPassword() เพื่อแปลงค่าที่เรากรอกเข้าไปเป็นค่า has ที่ยาวๆ เพื่อเก็บใน db ต่อไป</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">common\models</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\base\NotSupportedException</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\behaviors\TimestampBehavior</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\db\ActiveRecord</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\web\IdentityInterface</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * User model</span>
+<span class="sd"> *</span>
+<span class="sd"> * @property integer $id</span>
+<span class="sd"> * @property string $username</span>
+<span class="sd"> * @property string $password_hash</span>
+<span class="sd"> * @property string $password_reset_token</span>
+<span class="sd"> * @property string $email</span>
+<span class="sd"> * @property string $auth_key</span>
+<span class="sd"> * @property integer $status</span>
+<span class="sd"> * @property integer $created_at</span>
+<span class="sd"> * @property integer $updated_at</span>
+<span class="sd"> * @property string $password write-only password</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">ActiveRecord</span> <span class="k">implements</span> <span class="nx">IdentityInterface</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">STATUS_DELETED</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">STATUS_ACTIVE</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="no">ROLE_USER</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">ROLE_MODERATOR</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">ROLE_ADMIN</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nv">$password</span><span class="p">;</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">tableName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="nx">TimestampBehavior</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">STATUS_ACTIVE</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;range&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nx">self</span><span class="o">::</span><span class="na">STATUS_ACTIVE</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="na">STATUS_DELETED</span><span class="p">]],</span>
+
+            <span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">,</span><span class="s1">&#39;integer&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;role&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">ROLE_USER</span><span class="p">],</span>
+
+            <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;filter&#39;</span><span class="p">,</span> <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;trim&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;unique&#39;</span><span class="p">,</span> <span class="s1">&#39;targetClass&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;\common\models\User&#39;</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;This username has already been taken.&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">],</span>
+
+            <span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;filter&#39;</span><span class="p">,</span> <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;trim&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;unique&#39;</span><span class="p">,</span> <span class="s1">&#39;targetClass&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;\common\models\User&#39;</span><span class="p">,</span> <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;This email address has already been taken.&#39;</span><span class="p">],</span>
+
+            <span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;required&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span> <span class="o">=&gt;</span> <span class="mi">6</span><span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">findIdentity</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="na">findOne</span><span class="p">([</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">STATUS_ACTIVE</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">findIdentityByAccessToken</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$type</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotSupportedException</span><span class="p">(</span><span class="s1">&#39;&quot;findIdentityByAccessToken&quot; is not implemented.&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Finds user by username</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $username</span>
+<span class="sd">     * @return static|null</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">findByUsername</span><span class="p">(</span><span class="nv">$username</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="na">findOne</span><span class="p">([</span><span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nv">$username</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">STATUS_ACTIVE</span><span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Finds user by password reset token</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $token password reset token</span>
+<span class="sd">     * @return static|null</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">findByPasswordResetToken</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">static</span><span class="o">::</span><span class="na">isPasswordResetTokenValid</span><span class="p">(</span><span class="nv">$token</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="na">findOne</span><span class="p">([</span>
+            <span class="s1">&#39;password_reset_token&#39;</span> <span class="o">=&gt;</span> <span class="nv">$token</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">STATUS_ACTIVE</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Finds out if password reset token is valid</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $token password reset token</span>
+<span class="sd">     * @return boolean</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">isPasswordResetTokenValid</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$token</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nv">$expire</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">params</span><span class="p">[</span><span class="s1">&#39;user.passwordResetTokenExpire&#39;</span><span class="p">];</span>
+        <span class="nv">$parts</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="nv">$token</span><span class="p">);</span>
+        <span class="nv">$timestamp</span> <span class="o">=</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nb">end</span><span class="p">(</span><span class="nv">$parts</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$timestamp</span> <span class="o">+</span> <span class="nv">$expire</span> <span class="o">&gt;=</span> <span class="nb">time</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getId</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getPrimaryKey</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getAuthKey</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">auth_key</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">validateAuthKey</span><span class="p">(</span><span class="nv">$authKey</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getAuthKey</span><span class="p">()</span> <span class="o">===</span> <span class="nv">$authKey</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Validates password</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $password password to validate</span>
+<span class="sd">     * @return boolean if password provided is valid for current user</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">validatePassword</span><span class="p">(</span><span class="nv">$password</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">validatePassword</span><span class="p">(</span><span class="nv">$password</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">password_hash</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Generates password hash from password and sets it to the model</span>
+<span class="sd">     *</span>
+<span class="sd">     * @param string $password</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">setPassword</span><span class="p">(</span><span class="nv">$password</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">password_hash</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">generatePasswordHash</span><span class="p">(</span><span class="nv">$password</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Generates &quot;remember me&quot; authentication key</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">generateAuthKey</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">auth_key</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">generateRandomString</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Generates new password reset token</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">generatePasswordResetToken</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">password_reset_token</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">security</span><span class="o">-&gt;</span><span class="na">generateRandomString</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;_&#39;</span> <span class="o">.</span> <span class="nb">time</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Removes password reset token</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">removePasswordResetToken</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">password_reset_token</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">getItemsAlias</span><span class="p">(</span><span class="nv">$id</span><span class="p">){</span>
+        <span class="nv">$items</span> <span class="o">=</span>  <span class="p">[</span>
+            <span class="s1">&#39;status&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">STATUS_ACTIVE</span> <span class="o">=&gt;</span> <span class="s1">&#39;Active&#39;</span><span class="p">,</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">STATUS_DELETED</span> <span class="o">=&gt;</span> <span class="s1">&#39;Deleted&#39;</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">ROLE_ADMIN</span> <span class="o">=&gt;</span> <span class="s1">&#39;Administrator&#39;</span><span class="p">,</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">ROLE_MODERATOR</span> <span class="o">=&gt;</span> <span class="s1">&#39;Moderator&#39;</span><span class="p">,</span>
+                <span class="nx">self</span><span class="o">::</span><span class="na">ROLE_USER</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span>
+            <span class="p">]</span>
+        <span class="p">];</span>
+        <span class="k">return</span> <span class="nb">array_key_exists</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$items</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$items</span><span class="p">[</span><span class="nv">$id</span><span class="p">]</span> <span class="o">:</span> <span class="p">[];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getItemStatus</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">getItemsAlias</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getStatusName</span><span class="p">(){</span>
+        <span class="nv">$items</span> <span class="o">=</span>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemStatus</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nb">array_key_exists</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">status</span><span class="p">,</span> <span class="nv">$items</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$items</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">status</span><span class="p">]</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getItemRole</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">getItemsAlias</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getRoleName</span><span class="p">(){</span>
+        <span class="nv">$items</span> <span class="o">=</span>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemRole</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nb">array_key_exists</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">role</span><span class="p">,</span> <span class="nv">$items</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$items</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">role</span><span class="p">]</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="gii-crud-user">Gii CRUD User</h2>
+
+<p>หลังจากที่เตรียม model user เสร็จเรียบร้อย ให้เราไปที่ Backend และทำการ gii crud User
+และตั้งค่าดังนี้</p>
+
+<p><img src="/img/simple-gii-crud-user.png" alt=""></p>
+
+<p>ทดลองคร่าวๆ ว่าเข้าใช้งานได้</p>
+
+<h2 id="เพิ่มเมนู-user-management-ที่-backend">เพิ่มเมนู User Management ที่ Backend</h2>
+
+<p>เพิ่มเมนู User Managemen ให้เราสามารถเข้าใช้งานได้ง่ายๆ โดยเพิ่ม เมนูที่ `<code>/backend/views/layout/main.php</code> ในส่วนของ  $menuItems เพิ่มเมนู User Managemen เข้าไป</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$menuItems = [</span>
+<span class="x">              [&#39;label&#39; =&gt; &#39;Home&#39;, &#39;url&#39; =&gt; [&#39;/site/index&#39;]],</span>
+<span class="x">              [&#39;label&#39; =&gt; &#39;User Management&#39;, &#39;url&#39; =&gt; [&#39;/user/index&#39;]],</span>
+<span class="x">          ];</span>
+</code></pre></div>
+<h2 id="ปรับปรุง-usercontroller">ปรับปรุง UserController</h2>
+
+<p>ปรับปรุง UserController เพื่อให้สามารถเพิ่ม,ลบ,แก้ไข ข้อมูล user ได้ ผ่าน backend โดยไม่ต้อง register จาก frontend</p>
+
+<p>ปรับปรุง Rule ก่อน เพื่อกำหนดให้เฉพาะ admin เท่านั้นที่สามารถจัดการข้อมูล user ได้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s1">&#39;verbs&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">VerbFilter</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+            <span class="s1">&#39;actions&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;delete&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">],</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;access&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+            <span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span> <span class="nx">AccessControl</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+            <span class="s1">&#39;only&#39;</span> <span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;view&#39;</span><span class="p">,</span><span class="s1">&#39;create&#39;</span><span class="p">,</span><span class="s1">&#39;update&#39;</span><span class="p">,</span><span class="s1">&#39;delete&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;ruleConfig&#39;</span><span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">AccessRule</span><span class="o">::</span><span class="na">className</span><span class="p">()</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;rules&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                <span class="p">[</span>
+                   <span class="s1">&#39;roles&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                        <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_ADMIN</span>
+                    <span class="p">],</span>
+                   <span class="s1">&#39;allow&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>ปรับปรุง action create,update  ใน <code>/backend/controllers/UserController.php</code>เพื่อให้ระบบแปลงข้อมูล password ที่กรอกเข้ามาให้อยู่ในรูปแบบ has ก่อนนำไปบันทึกข้อมูล  แก้ไขเข้าไปดังนี้</p>
+
+<blockquote>
+<p>คิดว่าดูโค้ดแล้วน่าจะพอเข้าใจ</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// ...</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Creates a new User model.</span>
+<span class="sd"> * If creation is successful, the browser will be redirected to the &#39;view&#39; page.</span>
+<span class="sd"> * @return mixed</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">actionCreate</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">())</span> <span class="p">{</span>
+
+        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">);</span>
+        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">generateAuthKey</span><span class="p">();</span>
+        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">]);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Updates an existing User model.</span>
+<span class="sd"> * If update is successful, the browser will be redirected to the &#39;view&#39; page.</span>
+<span class="sd"> * @param integer $id</span>
+<span class="sd"> * @return mixed</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">actionUpdate</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findModel</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">password</span> <span class="o">=</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">password_hash</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">password_hash</span><span class="o">!=</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">password</span> <span class="p">){</span>
+             <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">]);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>ในส่วนของ Gridview ที่ <code>index.php</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+        <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+        <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+        <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+          <span class="c1">//  [&#39;class&#39; =&gt; &#39;yii\grid\SerialColumn&#39;],</span>
+
+            <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+            <span class="c1">// &#39;auth_key&#39;,</span>
+            <span class="c1">// &#39;password_hash&#39;,</span>
+            <span class="c1">// &#39;password_reset_token&#39;,</span>
+            <span class="s1">&#39;email:email&#39;</span><span class="p">,</span>
+
+            <span class="c1">//&#39;created_at&#39;,</span>
+
+            <span class="s1">&#39;updated_at:dateTime&#39;</span><span class="p">,</span>
+            <span class="c1">//&#39;roleName&#39;,</span>
+            <span class="p">[</span>
+              <span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;role&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;filter&#39;</span><span class="o">=&gt;</span><span class="nx">User</span><span class="o">::</span><span class="na">getItemsAlias</span><span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">),</span>
+              <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+                <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">roleName</span><span class="p">;</span>
+              <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="c1">//&#39;statusName&#39;,</span>
+            <span class="p">[</span>
+              <span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;status&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;filter&#39;</span><span class="o">=&gt;</span><span class="nx">User</span><span class="o">::</span><span class="na">getItemsAlias</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">),</span>
+              <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+                <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">statusName</span><span class="p">;</span>
+              <span class="p">}</span>
+            <span class="p">],</span>
+
+            <span class="p">[</span>
+            <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\grid\ActionColumn&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;options&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;width:120px;&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;buttonOptions&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;btn btn-default&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;template&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;&lt;div class=&quot;btn-group btn-group-sm text-center&quot; role=&quot;group&quot;&gt; {view} {update} {delete} &lt;/div&gt;&#39;</span>
+            <span class="p">],</span>
+        <span class="p">],</span>
+    <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>ในส่วนของ DetailView ที่ <code>view.php</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">DetailView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+      <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+      <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+          <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;username&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;email:email&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;statusName&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;created_at:dateTime&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;updated_at:dateTime&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;roleName&#39;</span><span class="p">,</span>
+      <span class="p">],</span>
+  <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>ในส่วนของ form  ที่ <code>_from.php</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\bootstrap\ActiveForm</span><span class="p">;</span>
+
+<span class="cm">/* @var $this yii\web\View */</span>
+<span class="cm">/* @var $model common\models\User */</span>
+<span class="cm">/* @var $form yii\widgets\ActiveForm */</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;div class=&quot;user-form&quot;&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nv">$form</span> <span class="o">=</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">begin</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">passwordInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    &lt;div class=&quot;row&quot;&gt;</span>
+<span class="x">        &lt;div class=&quot;col-xs-6&quot;&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemStatus</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/div&gt;</span>
+<span class="x">        &lt;div class=&quot;col-xs-6&quot;&gt;</span>
+<span class="x">            </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;role&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemRole</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">        &lt;/div&gt;</span>
+<span class="x">    &lt;/div&gt;</span>
+
+<span class="x">    &lt;div class=&quot;form-group&quot;&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">Html</span><span class="o">::</span><span class="na">submitButton</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">isNewRecord</span> <span class="o">?</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;Create&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;Update&#39;</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">isNewRecord</span> <span class="o">?</span> <span class="s1">&#39;btn btn-success&#39;</span> <span class="o">:</span> <span class="s1">&#39;btn btn-primary&#39;</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/div&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">end</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;/div&gt;</span>
+</code></pre></div>
+<h2 id="สรุป">สรุป</h2>
+
+<p>นี่เป็นเพียงจุดเริ่มต้นในการใช้ RBAC อย่างง่ายๆ เมื่อเราพัฒนาระบบ เราต้องออกแบบและคิดภาพรวมในหัวก่อนว่า ระบบของเรานั้น แบ่งกลุ่มผู้ใช้งานเป็นกี่กลุ่ม แต่ละกลุ่มสามารถใช้งานอะไรได้บ้าง แล้วค่อยทำการสร้าง role และแบ่งกลุ่มผู้ใช้งานขึ้นมา</p>
+
+<p>ตัวอย่างนี้จึงเหมาะสำหรับระบบที่ไม่ได้มีการใช้งานที่ซับซ้อนอะไร และข้อกัดอีก 1 อย่างนี้ก็คือ ไม่สามารถ ให้สิทธ์ user ได้มากกว่า 1 กลุ่ม ซึ่งหากเป็นระบบใหญ่ๆ และซับซ้อนเราจะใช้ RBAC ที่เก็บข้อมูลใน DB แทนค่อยติดตามในบทต่อๆ ไปครับ</p>
+
+<p>หวังว่าคงจะทำให้เราเข้าใจในพื้นฐานการใช้งาน RBAC บ้างนะครับ</p>
+
+<blockquote>
+<p>ปล. บทความนี้ใช้เวลา 2 วันในการเขียนและทดลองทำตัวอย่างขึ้นมา นึกว่าวันเดียวจะเสร็จฮ่าๆ หากเจอบั๊กหรือติดอะไรที่ผมเขียนไม่ครบ คอมเม้นไว้ด้านล่างได้เลยครับ</p>
+</blockquote>
+
+<p>ดาวน์โหลดตัวอย่างโค้ด Simple-RBAC <a href="https://github.com/dixonsatit/yii2-workshop-simple-rbac">ได้ที่นี่</a></p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dixonsatit';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
