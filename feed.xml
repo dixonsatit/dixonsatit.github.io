@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Sun, 28 Jun 2015 14:28:35 +0700</pubDate>
+    <pubDate>Sun, 28 Jun 2015 19:16:11 +0700</pubDate>
     
       <item>
         <title>การสร้าง RBAC อย่างง่าย</title>
@@ -29,7 +29,7 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 &lt;ul&gt;
 &lt;li&gt;Operations  เป็นการกระทำเพียง 1 อย่าง หรือมองเป็น action ก็ได้ อย่างเช่น  &lt;code&gt;create&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Tasks เป็นชื่อกลุ่มที่รวบรวม Operations ต่างๆ ที่เกี่ยวข้องกัน อย่างเช่น &lt;code&gt;TasksUser&lt;/code&gt;  จะมี Operations คือ UserCreate, UserUpdate, UserDelete มองประมาณ controller ก็ได้&lt;/li&gt;
-&lt;li&gt;Roles คือกลุ่มของ Task,Operations และ Role  ทำให้เราจัดกลุ่มสิทธ์ต่างๆ ได้อย่างมีประสิทธิภาพ อย่างเช่น Role Admin, Role User, Role Administrator  ซึ่งในแต่ละกลุ่มก็แล้วแต่เราจะนำเอา Role,task ที่ใหนมาใช้บ้าง&lt;/li&gt;
+&lt;li&gt;Roles คือกลุ่มของ Task,Operations และ Role  ทำให้เราจัดกลุ่มสิทธ์ต่างๆ ได้อย่างมีประสิทธิภาพ อย่างเช่น Role Admin, Role User, Role Administrator  ซึ่งในแต่ละกลุ่มก็แล้วแต่เราจะนำเอา Role,task ที่ใหนมาใช้บ้าง &lt;a href=&quot;http://yiisos.blogspot.com/2013/09/rbac.html&quot;&gt;ที่มา&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;ช่างมันเถอะ อาจจะงง ผมก็อธิบายไม่ถูก เดี่ยวทำไปๆ น่าจะเข้าใจ ^ ^&lt;/p&gt;
@@ -913,6 +913,8 @@ public function getRoleName(){
 &lt;/blockquote&gt;
 
 &lt;p&gt;ดาวน์โหลดตัวอย่างโค้ด Simple-RBAC &lt;a href=&quot;https://github.com/dixonsatit/yii2-workshop-simple-rbac&quot;&gt;ได้ที่นี่&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://code.tutsplus.com/tutorials/programming-with-yii2-user-access-controls--cms-23173&quot;&gt;ที่มา&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sat, 27 Jun 2015 00:00:00 +0700</pubDate>
       </item>
