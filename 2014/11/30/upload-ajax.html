@@ -206,6 +206,16 @@
 <span class="s2">&quot;2amigos/yii2-date-picker-widget&quot;</span> <span class="err">:</span> <span class="s2">&quot;~1.0&quot;</span><span class="err">,</span>
 <span class="s2">&quot;2amigos/yii2-gallery-widget&quot;</span> <span class="err">:</span> <span class="s2">&quot;*&quot;</span>
 </code></pre></div>
+<blockquote>
+<p>yii2-image ต้องเปิดใช้งานที่ config ในส่วนของ components เพิ่มการตั้งค่าเข้าไป</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&#39;image&#39; =&gt; [  
+    &#39;class&#39; =&gt; &#39;yii\image\ImageDriver&#39;,
+    &#39;driver&#39; =&gt; &#39;GD&#39;,  //GD or Imagick
+],
+</code></pre></div>
+<p><a href="http://dixonsatit.github.io/2014/11/30/upload-ajax.htmls">อ่านเพิ่มเติมได้ที่นี่</a></p>
+
 <h2 id="gii-model-และ-gii-crud-photolibrary">Gii Model และ Gii CRUD PhotoLibrary</h2>
 
 <p>ในตัวอย่างนี้เราจะสร้างระบบเก็บรูปภาพโดยใช้ตารางชื่อว่า photolibrary และสร้างตารางตามนี้</p>
@@ -1017,7 +1027,7 @@ public function actionUploadAjax(){
 <p><a href="https://github.com/dimpled/Yii2-Learning-Source">ดาวน์โหลด soucrecode ได้ที่นี่</a></p>
 
 <blockquote>
-<p>ตัวอย่างอยู่ที่ PhotoLibraryController </p>
+<p>ตัวอย่างอยู่ที่ PhotoLibraryController</p>
 </blockquote>
 </section>
 </article>
