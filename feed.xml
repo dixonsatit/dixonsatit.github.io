@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Mon, 29 Jun 2015 19:33:16 +0700</pubDate>
+    <pubDate>Mon, 29 Jun 2015 19:53:37 +0700</pubDate>
     
       <item>
         <title>การสร้าง RBAC ใน Yii 2 อย่างง่าย</title>
@@ -2782,12 +2782,14 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
         <title>การสร้างและการใช้งาน AssetBundle</title>
         <link>http://dixonsatit.github.io/2015/06/20/create-assets.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/20/create-assets.html</guid>
-        <description>&lt;p&gt;Asset Bundles คือตัวช่วยในการเรียกใช้งานกลุ่มไฟล์ต่างๆ ให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็น css หรือ  js ยกตัวอย่าง เช่น &lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;/img/assets-resource.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Asset Bundles คือตัวช่วยในการเรียกใช้งานกลุ่มไฟล์ต่างๆ ให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็น css หรือ  js ยกตัวอย่าง เช่น&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;yii\bootstrap\BootstrapAsset&lt;/code&gt; เป็น assets ที่เอาไว้เรียกไฟล์ css ของ Bootstrap &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;yii\bootstrap\BootstrapPluginAsset&lt;/code&gt; เป็น assets ที่เอาไว้เรียกไฟล์ js ของ Bootstrap &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;yii\web\YiiAsset&lt;/code&gt; เป็น assets ที่เรียกใช้งาน yii.js &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;yii\bootstrap\BootstrapAsset&lt;/code&gt; เป็น assets ที่เอาไว้เรียกไฟล์ css ของ Bootstrap&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;yii\bootstrap\BootstrapPluginAsset&lt;/code&gt; เป็น assets ที่เอาไว้เรียกไฟล์ js ของ Bootstrap&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;yii\web\YiiAsset&lt;/code&gt; เป็น assets ที่เรียกใช้งาน yii.js&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;yii\web\JqueryAsset&lt;/code&gt; เป็น assets ที่เรียกใช้งาน JQuery&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;yii\jui\JuiAsset&lt;/code&gt; เป็น assets ที่เรียกใช้งาน css,js jquery-ui&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;app\assets\AppAsset&lt;/code&gt; เป็น asset ดีฟอลต์ที่เรียกใช้งาน site.css และ asset ตัวนี้ ยังได้เรียก &lt;code&gt;YiiAsset&lt;/code&gt;,&lt;code&gt;BootstrapAsset&lt;/code&gt; ด้วย&lt;/li&gt;
@@ -2858,7 +2860,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
     &lt;span class=&quot;nt&quot;&gt;&amp;quot;bower-asset/fontawesome&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;4.3.*&amp;quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;lt;&amp;lt;-----&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เมื่อรันคำสั่ง composer update แล้ว ไลบราลี่ในส่วนของ Bower จะถูกดาวน์โหลดมาไว้ที่ &lt;code&gt;vendor/bower/fontawesome&lt;/code&gt; เราก็สามารถเขียน asset เพื่อเรียกใช้งาน css ตัวนี้ได้ โดยไม่จำเป็นต้อง copy ไฟล์ css มาไว้ที่ web/css เพียงแค่ระบุใน asset ที่เราสร้างว่า sorucePath ของเราอยู่ที่ @bower/fontawesome &lt;/p&gt;
+&lt;p&gt;เมื่อรันคำสั่ง composer update แล้ว ไลบราลี่ในส่วนของ Bower จะถูกดาวน์โหลดมาไว้ที่ &lt;code&gt;vendor/bower/fontawesome&lt;/code&gt; เราก็สามารถเขียน asset เพื่อเรียกใช้งาน css ตัวนี้ได้ โดยไม่จำเป็นต้อง copy ไฟล์ css มาไว้ที่ web/css เพียงแค่ระบุใน asset ที่เราสร้างว่า sorucePath ของเราอยู่ที่ @bower/fontawesome&lt;/p&gt;
 
 &lt;p&gt;ต่อจากนั้น composer จะ copy ไฟล์ไปไว้ที่ web/assets/xxxx ซึ่ง xxxx จะเป็นชื่อโฟล์เดอร์ที่เก็บไฟล์ของแต่ละ asset และไฟล์ที่ใช้งานจริงๆ จะถูเรียกใช้งานจากที่นี่&lt;/p&gt;
 
@@ -2870,11 +2872,11 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\web\AssetBundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FontAwesomeAsset&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AssetBundle&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FontAwesomeAsset&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AssetBundle&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sourcePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@bower/fontawesome&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; 
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;css/font-awesome.min.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sourcePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@bower/fontawesome&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;css/font-awesome.min.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$publishOptions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
         &lt;span class=&quot;s1&quot;&gt;&amp;#39;only&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;

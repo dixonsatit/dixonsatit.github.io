@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>การสร้างและการใช้งาน AssetBundle | DixonSatit</title>
-	<meta name="description" content="Asset Bundles คือตัวช่วยในการเรียกใช้งานกลุ่มไฟล์ต่างๆ ให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็น css หรือ  js ยกตัวอย่าง เช่น ">
+	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -185,12 +185,14 @@
     
     </p>
   </header>
-  <section class="post-content"><p>Asset Bundles คือตัวช่วยในการเรียกใช้งานกลุ่มไฟล์ต่างๆ ให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็น css หรือ  js ยกตัวอย่าง เช่น </p>
+  <section class="post-content"><p><img src="/img/assets-resource.jpg" alt=""></p>
+
+<p>Asset Bundles คือตัวช่วยในการเรียกใช้งานกลุ่มไฟล์ต่างๆ ให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็น css หรือ  js ยกตัวอย่าง เช่น</p>
 
 <ul>
-<li><code>yii\bootstrap\BootstrapAsset</code> เป็น assets ที่เอาไว้เรียกไฟล์ css ของ Bootstrap </li>
-<li><code>yii\bootstrap\BootstrapPluginAsset</code> เป็น assets ที่เอาไว้เรียกไฟล์ js ของ Bootstrap </li>
-<li><code>yii\web\YiiAsset</code> เป็น assets ที่เรียกใช้งาน yii.js </li>
+<li><code>yii\bootstrap\BootstrapAsset</code> เป็น assets ที่เอาไว้เรียกไฟล์ css ของ Bootstrap</li>
+<li><code>yii\bootstrap\BootstrapPluginAsset</code> เป็น assets ที่เอาไว้เรียกไฟล์ js ของ Bootstrap</li>
+<li><code>yii\web\YiiAsset</code> เป็น assets ที่เรียกใช้งาน yii.js</li>
 <li><code>yii\web\JqueryAsset</code> เป็น assets ที่เรียกใช้งาน JQuery</li>
 <li><code>yii\jui\JuiAsset</code> เป็น assets ที่เรียกใช้งาน css,js jquery-ui</li>
 <li><code>app\assets\AppAsset</code> เป็น asset ดีฟอลต์ที่เรียกใช้งาน site.css และ asset ตัวนี้ ยังได้เรียก <code>YiiAsset</code>,<code>BootstrapAsset</code> ด้วย</li>
@@ -261,7 +263,7 @@
     <span class="nt">&quot;bower-asset/fontawesome&quot;</span><span class="p">:</span> <span class="s2">&quot;4.3.*&quot;</span> <span class="err">&lt;&lt;-----</span>
   <span class="p">}</span>
 </code></pre></div>
-<p>เมื่อรันคำสั่ง composer update แล้ว ไลบราลี่ในส่วนของ Bower จะถูกดาวน์โหลดมาไว้ที่ <code>vendor/bower/fontawesome</code> เราก็สามารถเขียน asset เพื่อเรียกใช้งาน css ตัวนี้ได้ โดยไม่จำเป็นต้อง copy ไฟล์ css มาไว้ที่ web/css เพียงแค่ระบุใน asset ที่เราสร้างว่า sorucePath ของเราอยู่ที่ @bower/fontawesome </p>
+<p>เมื่อรันคำสั่ง composer update แล้ว ไลบราลี่ในส่วนของ Bower จะถูกดาวน์โหลดมาไว้ที่ <code>vendor/bower/fontawesome</code> เราก็สามารถเขียน asset เพื่อเรียกใช้งาน css ตัวนี้ได้ โดยไม่จำเป็นต้อง copy ไฟล์ css มาไว้ที่ web/css เพียงแค่ระบุใน asset ที่เราสร้างว่า sorucePath ของเราอยู่ที่ @bower/fontawesome</p>
 
 <p>ต่อจากนั้น composer จะ copy ไฟล์ไปไว้ที่ web/assets/xxxx ซึ่ง xxxx จะเป็นชื่อโฟล์เดอร์ที่เก็บไฟล์ของแต่ละ asset และไฟล์ที่ใช้งานจริงๆ จะถูเรียกใช้งานจากที่นี่</p>
 
@@ -273,11 +275,11 @@
 
 <span class="k">use</span> <span class="nx">yii\web\AssetBundle</span><span class="p">;</span>
 
-<span class="k">class</span> <span class="nc">FontAwesomeAsset</span> <span class="k">extends</span> <span class="nx">AssetBundle</span> 
+<span class="k">class</span> <span class="nc">FontAwesomeAsset</span> <span class="k">extends</span> <span class="nx">AssetBundle</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="nv">$sourcePath</span> <span class="o">=</span> <span class="s1">&#39;@bower/fontawesome&#39;</span><span class="p">;</span> 
-    <span class="k">public</span> <span class="nv">$css</span> <span class="o">=</span> <span class="p">[</span> 
-        <span class="s1">&#39;css/font-awesome.min.css&#39;</span><span class="p">,</span> 
+    <span class="k">public</span> <span class="nv">$sourcePath</span> <span class="o">=</span> <span class="s1">&#39;@bower/fontawesome&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$css</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;css/font-awesome.min.css&#39;</span><span class="p">,</span>
     <span class="p">];</span>
     <span class="k">public</span> <span class="nv">$publishOptions</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;only&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
