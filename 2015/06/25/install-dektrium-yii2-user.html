@@ -206,6 +206,12 @@
 <h2 id="ตั้งค่า">ตั้งค่า</h2>
 
 <p>เปิดใช้งาน module user และ components user</p>
+
+<ul>
+<li>basic แก้ไขไฟล์ที่  <code>config/web.php</code></li>
+<li>advance <code>frontend/config/main.php</code></li>
+<li>advance <code>backend/config/main.php</code></li>
+</ul>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
 <span class="nv">$params</span> <span class="o">=</span> <span class="k">require</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/params.php&#39;</span><span class="p">);</span>
@@ -232,7 +238,7 @@
 <span class="p">],</span>
 </code></pre></div>
 <blockquote>
-<p>หากคุณเปิดใช้งาน PrettyUrl ให้เพิ่ม <code>rule</code> สำหรับการใช้งาน module ที่ <code>config/main.php</code> ด้วยครับ</p>
+<p>หากคุณเปิดใช้งาน PrettyUrl ให้เพิ่ม <code>rule</code> สำหรับการใช้งาน module ที่ config ด้วยครับ</p>
 </blockquote>
 <div class="highlight"><pre><code class="language-text" data-lang="text">&#39;&lt;module:\w+&gt;/&lt;controller:\w+&gt;/&lt;action:\w+&gt;&#39; =&gt; &#39;&lt;module&gt;/&lt;controller&gt;/&lt;action&gt;&#39;,
 </code></pre></div>
@@ -261,10 +267,14 @@
 <span class="p">]</span>
 </code></pre></div>
 <h2 id="นำเข้าข้อมูลโดยใช้-migrate">นำเข้าข้อมูลโดยใช้ Migrate</h2>
+
+<blockquote>
+<p>หารใครที่รันคำสั่ง <code>yii migrate</code> ไปแล้วในตอนติดตั้ง advance ให้เราเปลี่ยนชื่อตาราง <code>user</code> เป็นชื่ออื่นก่อนนะครับ หรือคิดว่าไม่ได้ใช้แล้วก็สามารถลบออกได้เลย แล้วหลังจากนั้นค่อย install ตามคำสั่งด้านล่าง</p>
+</blockquote>
 <div class="highlight"><pre><code class="language-text" data-lang="text">php yii migrate/up --migrationPath=@vendor/dektrium/yii2-user/migrations
 </code></pre></div>
 <blockquote>
-<p>หากรันคำสั่งแล้วพบ error </p>
+<p>หากรันคำสั่งแล้วพบ error</p>
 </blockquote>
 <div class="highlight"><pre><code class="language-text" data-lang="text">Exception &#39;yii\db\Exception&#39; with message &#39;SQLSTATE[HY000] [2002] Can&#39;t connect to local MySQL server through socket &#39;/Applications/MAMP/tmp/mysql/mysql.sock&#39; (2)&#39;
 </code></pre></div>
@@ -369,7 +379,7 @@ Migrated up successfully.
 
 <h2 id="การใช้งาน">การใช้งาน</h2>
 
-<p>ให้ทำการ register ก่อน เพราะระบบจะไม่มีข้อมูล user มาให้เลย ต้อง register </p>
+<p>ให้ทำการ register ก่อน เพราะระบบจะไม่มีข้อมูล user มาให้เลย ต้อง register</p>
 
 <blockquote>
 <p>ในส่วนของ module user เราจะทำการตั้งค่า <code>&#39;enableUnconfirmedLogin&#39; =&gt; false</code> เพื่อให้ไม่ต้องยืนยันอีเมล์หลังสมัครสมาชิก เพื่อลงทะเบียนในครั้งแรกก่อน</p>
@@ -377,7 +387,7 @@ Migrated up successfully.
 
 <p><img src="/img/user-register.png" alt=""></p>
 
-<p>ลงทะเบียนเสร็จให้ทำการ login </p>
+<p>ลงทะเบียนเสร็จให้ทำการ login</p>
 
 <p><img src="/img/user-login.png" alt=""></p>
 
@@ -389,7 +399,7 @@ Migrated up successfully.
 
 <p><img src="/img/user-profile.png" alt=""></p>
 
-<p>หน้าจอ account </p>
+<p>หน้าจอ account</p>
 
 <p><img src="/img/user-account.png" alt=""></p>
 

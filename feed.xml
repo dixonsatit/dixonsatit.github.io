@@ -5,7 +5,108 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Mon, 29 Jun 2015 19:53:37 +0700</pubDate>
+    <pubDate>Tue, 30 Jun 2015 00:38:04 +0700</pubDate>
+    
+      <item>
+        <title>การติดตั้ง และการใช้งาน composer กับ Yii 2</title>
+        <link>http://dixonsatit.github.io/2015/06/29/using-extensions.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/29/using-extensions.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/composer.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ในการพัฒนาระบบโดยใช้ php นั้น แต่ก่อนจะไม่มีระบบจัดการแพ็จเกจมาให้ เราจะต้องเข้าไปดาวน์โหลดที่เว็บไซต์ของ library เองจากนั้นทำการแตกซิบไฟล์แล้ว include เข้ามาใช้งาน วันดีคืนดี หาก library มีการอัพเดท ก็ต้องตามไปโหลด library มาแล้วนำไฟล์มาทับของเก่า ซึ่งก็เป็นเรื่องที่น่าเบื่อมากๆ  ยิ่งถ้าเราใช้ library เยอะๆ นี่ตามไปโหลดแทบไม่ไหว&lt;/p&gt;
+
+&lt;p&gt;php จึงมองเห็นความลำบากนี้ (จริงๆ ภาษาอื่นๆ เค้ามีกันไปนานแล้วววว เอาเถอะยังไงมาช้าก็ดีกว่าไม่มา  )
+จึงมีระบบจัดการแพ็ตเกจของ php ขึ้นชื่อว่า &lt;code&gt;composer&lt;/code&gt; ซึ่งเป็นมาตรฐานกลาง ทำให้เราสามารถจัดการแพ็คเกจต่างๆ ได้ที่เดียว ไม่ต้องตามไปดาวน์โหลดจากเว็บไซต์ของ library ต่างๆ&lt;/p&gt;
+
+&lt;h2 id=&quot;การติดตั้ง-composer&quot;&gt;การติดตั้ง Composer&lt;/h2&gt;
+
+&lt;p&gt;สามารถทำได้ง่ายๆ ติดตั้งได้ทั้ง Windows,Linux,Mac ตัว composer เป็นแค่ไฟล์ php เล็กๆ ไฟล์นึงเท่านั้น เอาไว้จัดการ เพ็คเกจต่างๆ&lt;/p&gt;
+
+&lt;h3 id=&quot;windows&quot;&gt;Windows&lt;/h3&gt;
+
+&lt;p&gt;สามารถโหลดตัว exe มาติดตั้งได้เลย &lt;a href=&quot;https://getcomposer.org/doc/00-intro.md#installation-windows&quot;&gt;ดาวน์โหลดตัวติดตั้ง&lt;/a&gt; จากนั้นจะได้ &lt;code&gt;Composer-Setup.exe&lt;/code&gt; ทำการคลิกและติดตั้งเองได้เลย&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;หากมี error เกี่ยวกับ &lt;code&gt;http&lt;/code&gt; ให้ทำการเปิด extension &lt;code&gt;php_openssl.dll&lt;/code&gt; ใน php.ini และหากติดตั้งแล้วยังไม่ได้ ให้ลองติดตั้งซ้ำใหม่อีกรอบ ส่วนใหญ่จะเจอแค่ xp&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;linux-amp-mac&quot;&gt;Linux &amp;amp; Mac&lt;/h3&gt;
+
+&lt;p&gt;ติดตั้งผ่านคำ curl จากนั้นรันคำสั่ง mv เพื่อเปลี่ยนชื่อไฟล์ เป็น composer และย้ายไปไว้ที่ bin&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;curl -sS https://getcomposer.org/installer | php
+mv composer.phar /usr/local/bin/composer
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;เรียกใช้งาน&quot;&gt;เรียกใช้งาน&lt;/h2&gt;
+
+&lt;p&gt;เปิด command หรือ terminal  ขึ้นมาแล้ว รันคำสั่ง &lt;code&gt;composer&lt;/code&gt; จะพบกับหน้าจอ composer แบบนี้ แสดงว่าพร้อมใช้งานแล้ว&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;______
+/ ____/___  ____ ___  ____  ____  ________  _____
+/ /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                  /_/
+Composer version 1.0-dev (4f80e7ff68466cab970c22b425725b8058c32970) 2015-06-09 00:03:48
+
+Usage:
+command [options] [arguments]
+
+Options:
+--help (-h)           Display this help message
+--quiet (-q)          Do not output any message
+--verbose (-v|vv|vvv) Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+--version (-V)        Display this application version
+--ansi                Force ANSI output
+--no-ansi             Disable ANSI output
+--no-interaction (-n) Do not ask any interactive question
+--profile             Display timing and memory usage information
+--working-dir (-d)    If specified, use the given directory as working directory.
+
+Available commands:
+about            Short information about Composer
+archive          Create an archive of this composer package
+browse           Opens the package&amp;#39;s repository URL or homepage in your browser.
+clear-cache      Clears composer&amp;#39;s internal package cache.
+clearcache       Clears composer&amp;#39;s internal package cache.
+config           Set config options
+create-project   Create new project from a package into given directory.
+depends          Shows which packages depend on the given package
+diagnose         Diagnoses the system to identify common errors.
+dump-autoload    Dumps the autoloader
+dumpautoload     Dumps the autoloader
+global           Allows running commands in the global composer dir ($COMPOSER_HOME).
+help             Displays help for a command
+home             Opens the package&amp;#39;s repository URL or homepage in your browser.
+info             Show information about packages
+init             Creates a basic composer.json file in current directory.
+install          Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json.
+licenses         Show information about licenses of dependencies
+list             Lists commands
+remove           Removes a package from the require or require-dev
+require          Adds required packages to your composer.json and installs them
+run-script       Run the scripts defined in composer.json.
+search           Search for packages
+self-update      Updates composer.phar to the latest version.
+selfupdate       Updates composer.phar to the latest version.
+show             Show information about packages
+status           Show a list of locally modified packages
+update           Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file.
+validate         Validates a composer.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;เราสามารถสั่งให้มันอัพเดทตัวเองได้  โดยใช้คำสั่ง &lt;code&gt;composer self-update&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;การติดตั้ง-extension&quot;&gt;การติดตั้ง extension&lt;/h3&gt;
+
+&lt;p&gt;การติดตั้ง extension ผ่าน composer นั้นทำได้ 2 วิธีคือ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ติดตั้งผ่านคำสั่ง &lt;code&gt;composer install&lt;/code&gt; เหมาสำหร้บหรับการติดตั้งทีละ 1 อย่าง&lt;/li&gt;
+&lt;li&gt;ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json โดยครง สามาระบุได้ทีละหลายๆ รายการ&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 29 Jun 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การสร้าง RBAC ใน Yii 2 อย่างง่าย</title>
@@ -944,6 +1045,12 @@ public function getRoleName(){
 &lt;h2 id=&quot;ตั้งค่า&quot;&gt;ตั้งค่า&lt;/h2&gt;
 
 &lt;p&gt;เปิดใช้งาน module user และ components user&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;basic แก้ไขไฟล์ที่  &lt;code&gt;config/web.php&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;advance &lt;code&gt;frontend/config/main.php&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;advance &lt;code&gt;backend/config/main.php&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 
 &lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__DIR__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/params.php&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -970,7 +1077,7 @@ public function getRoleName(){
 &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;blockquote&gt;
-&lt;p&gt;หากคุณเปิดใช้งาน PrettyUrl ให้เพิ่ม &lt;code&gt;rule&lt;/code&gt; สำหรับการใช้งาน module ที่ &lt;code&gt;config/main.php&lt;/code&gt; ด้วยครับ&lt;/p&gt;
+&lt;p&gt;หากคุณเปิดใช้งาน PrettyUrl ให้เพิ่ม &lt;code&gt;rule&lt;/code&gt; สำหรับการใช้งาน module ที่ config ด้วยครับ&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;&amp;lt;module:\w+&amp;gt;/&amp;lt;controller:\w+&amp;gt;/&amp;lt;action:\w+&amp;gt;&amp;#39; =&amp;gt; &amp;#39;&amp;lt;module&amp;gt;/&amp;lt;controller&amp;gt;/&amp;lt;action&amp;gt;&amp;#39;,
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -999,10 +1106,14 @@ public function getRoleName(){
 &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;นำเข้าข้อมูลโดยใช้-migrate&quot;&gt;นำเข้าข้อมูลโดยใช้ Migrate&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;หารใครที่รันคำสั่ง &lt;code&gt;yii migrate&lt;/code&gt; ไปแล้วในตอนติดตั้ง advance ให้เราเปลี่ยนชื่อตาราง &lt;code&gt;user&lt;/code&gt; เป็นชื่ออื่นก่อนนะครับ หรือคิดว่าไม่ได้ใช้แล้วก็สามารถลบออกได้เลย แล้วหลังจากนั้นค่อย install ตามคำสั่งด้านล่าง&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;php yii migrate/up --migrationPath=@vendor/dektrium/yii2-user/migrations
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;blockquote&gt;
-&lt;p&gt;หากรันคำสั่งแล้วพบ error &lt;/p&gt;
+&lt;p&gt;หากรันคำสั่งแล้วพบ error&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Exception &amp;#39;yii\db\Exception&amp;#39; with message &amp;#39;SQLSTATE[HY000] [2002] Can&amp;#39;t connect to local MySQL server through socket &amp;#39;/Applications/MAMP/tmp/mysql/mysql.sock&amp;#39; (2)&amp;#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1107,7 +1218,7 @@ Migrated up successfully.
 
 &lt;h2 id=&quot;การใช้งาน&quot;&gt;การใช้งาน&lt;/h2&gt;
 
-&lt;p&gt;ให้ทำการ register ก่อน เพราะระบบจะไม่มีข้อมูล user มาให้เลย ต้อง register &lt;/p&gt;
+&lt;p&gt;ให้ทำการ register ก่อน เพราะระบบจะไม่มีข้อมูล user มาให้เลย ต้อง register&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;ในส่วนของ module user เราจะทำการตั้งค่า &lt;code&gt;&amp;#39;enableUnconfirmedLogin&amp;#39; =&amp;gt; false&lt;/code&gt; เพื่อให้ไม่ต้องยืนยันอีเมล์หลังสมัครสมาชิก เพื่อลงทะเบียนในครั้งแรกก่อน&lt;/p&gt;
@@ -1115,7 +1226,7 @@ Migrated up successfully.
 
 &lt;p&gt;&lt;img src=&quot;/img/user-register.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;ลงทะเบียนเสร็จให้ทำการ login &lt;/p&gt;
+&lt;p&gt;ลงทะเบียนเสร็จให้ทำการ login&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/user-login.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
@@ -1127,7 +1238,7 @@ Migrated up successfully.
 
 &lt;p&gt;&lt;img src=&quot;/img/user-profile.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;หน้าจอ account &lt;/p&gt;
+&lt;p&gt;หน้าจอ account&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/user-account.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
@@ -3190,50 +3301,6 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;endforeach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img src=&quot;/img/flash-message.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 17 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>BlameableBehavior บันทึกข้อมูลรหัสผู้ใช้งานอัตโนมัติ</title>
-        <link>http://dixonsatit.github.io/2015/06/17/blameable-behavior.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/17/blameable-behavior.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/bleamable-behavior.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ปกติเวลาที่เราสร้างตารางส่วนใหญ่ก็จะมีฟิวด์ &lt;code&gt;user_id&lt;/code&gt; เพื่อบันทึกข้อมูลผู้ใช้งานที่ &lt;code&gt;Create&lt;/code&gt; หรือ &lt;code&gt;Update&lt;/code&gt; ข้อมูล ซึ่งเราต้องกำหนดค่ารหัสผู้ใช้งานทีล็อกอินเอง &lt;/p&gt;
-
-&lt;p&gt;yii2 ได้แก้ปัญหานี โดยใช้ &lt;code&gt;BlameableBehavior&lt;/code&gt; เพื่อใช้งานกับ Model ที่เราต้องการได้ โดย &lt;code&gt;BlameableBehavior&lt;/code&gt; มีค่าฟิวด์  &lt;code&gt;default&lt;/code&gt; กำหนดไว้คือ &lt;code&gt;created_by&lt;/code&gt;,&lt;code&gt;updated_by&lt;/code&gt;  ถ้าหากเราตั้งชื่อตามนี้สามารถเรียกใช้งานตามโค้ดด้านล่างได้เลย&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\BlameableBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;nx&quot;&gt;BlameableBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;แต่ถ้าหากเรากำหนดชื่อฟิดว์เป็นชื่ออื่นๆ ก็สามารถระบุได้เช่นกัน โดย defautl มันสามารถกำหนดได้ 2 ฟิวด์คือ createdByAttribute,updatedByAttribute ตามตัวอย่างผมเก็บแค่ ฟิวด์เดียวก็คือ &lt;code&gt;user_id&lt;/code&gt; เลยเซ็ตค่าให้ตรงกันทั้ง 2 อัน&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\BlameableBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BlameableBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;createdByAttribute&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;user_id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;updatedByAttribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;user_id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//.....&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากนั้นข้อมูลในส่วน user_id มันจะทำการเติมให้อัตโนมัติทุกครั้งที่มีการ create หรือ update ข้อมูล&lt;/p&gt;
 </description>
         <pubDate>Wed, 17 Jun 2015 00:00:00 +0700</pubDate>
       </item>
