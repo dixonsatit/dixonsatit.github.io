@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>BlameableBehavior บันทึกข้อมูลรหัสผู้ใช้งานอัตโนมัติ | DixonSatit</title>
-	<meta name="description" content="">
+	<title>BlameableBehavior บันทึกข้อมูลรหัสผู้ใช้งานอัตโนมัติ | Yii 2 Learning</title>
+	<meta name="description" content="BlameableBehavior บันทึกข้อมูลรหัสผู้ใช้งานอัตโนมัติ , yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/17/blameable-behavior.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -189,7 +189,7 @@
   </header>
   <section class="post-content"><p><img src="/img/bleamable-behavior.png" alt=""></p>
 
-<p>ปกติเวลาที่เราสร้างตารางส่วนใหญ่ก็จะมีฟิวด์ <code>user_id</code> เพื่อบันทึกข้อมูลผู้ใช้งานที่ <code>Create</code> หรือ <code>Update</code> ข้อมูล ซึ่งเราต้องกำหนดค่ารหัสผู้ใช้งานทีล็อกอินเอง </p>
+<p>ปกติเวลาที่เราสร้างตารางส่วนใหญ่ก็จะมีฟิวด์ <code>user_id</code> เพื่อบันทึกข้อมูลผู้ใช้งานที่ <code>Create</code> หรือ <code>Update</code> ข้อมูล ซึ่งเราต้องกำหนดค่ารหัสผู้ใช้งานทีล็อกอินเอง</p>
 
 <p>yii2 ได้แก้ปัญหานี โดยใช้ <code>BlameableBehavior</code> เพื่อใช้งานกับ Model ที่เราต้องการได้ โดย <code>BlameableBehavior</code> มีค่าฟิวด์  <code>default</code> กำหนดไว้คือ <code>created_by</code>,<code>updated_by</code>  ถ้าหากเราตั้งชื่อตามนี้สามารถเรียกใช้งานตามโค้ดด้านล่างได้เลย</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>

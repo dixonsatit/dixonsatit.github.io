@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>การใช้งาน FlashMessage + Growl Widget | DixonSatit</title>
-	<meta name="description" content="หากคุณเคยใช้ flashMessage มาบ้างแล้ว หากยังไม่เคยใช้ ลองอ่านที่นี่ คุณอาจจะรูสึกว่ามันไม่ค่อยสวยเลย วันนี้ผมมี yii2-widget-growl มาแนะนำ ซึ่งตัวนี้สวยงามและน...">
+	<title>การใช้งาน FlashMessage + Growl Widget | Yii 2 Learning</title>
+	<meta name="description" content="การใช้งาน FlashMessage + Growl Widget , yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/17/flash-message-growl-widget.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -189,11 +189,11 @@
   </header>
   <section class="post-content"><p>หากคุณเคยใช้ flashMessage มาบ้างแล้ว หากยังไม่เคยใช้ <a href="/2015/06/17/flash-message.html">ลองอ่านที่นี่</a> คุณอาจจะรูสึกว่ามันไม่ค่อยสวยเลย วันนี้ผมมี <code>yii2-widget-growl</code> มาแนะนำ ซึ่งตัวนี้สวยงามและน่าใช้เลยทีเดียว</p>
 
-<p>ก่อนอื่นไปติดตั้งกันก่อน <a href="https://github.com/kartik-v/yii2-widget-growl">yii2-widget-growl</a> </p>
+<p>ก่อนอื่นไปติดตั้งกันก่อน <a href="https://github.com/kartik-v/yii2-widget-growl">yii2-widget-growl</a></p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">composer  require kartik-v/yii2-widget-growl &quot;*&quot;
 </code></pre></div>
 <h2 id="กำหนดค่า">กำหนดค่า</h2>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
     <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">getSession</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setFlash</span><span class="p">(</span><span class="s1">&#39;alert1&#39;</span><span class="p">,</span> <span class="p">[</span>
         <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;success&#39;</span><span class="p">,</span>
         <span class="s1">&#39;duration&#39;</span> <span class="o">=&gt;</span> <span class="mi">12000</span><span class="p">,</span>
@@ -216,7 +216,7 @@
 <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
 <h2 id="การแสดงผล">การแสดงผล</h2>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
 

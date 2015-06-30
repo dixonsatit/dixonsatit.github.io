@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>การติดตั้งและใช้งาน AdminLTE | DixonSatit</title>
-	<meta name="description" content="">
+	<title>การติดตั้งและใช้งาน AdminLTE | Yii 2 Learning</title>
+	<meta name="description" content="การติดตั้งและใช้งาน AdminLTE, yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/18/adminlte.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -208,18 +208,18 @@
 ],
 </code></pre></div>
 <blockquote>
-<p>ข้อเสียของวิธีนี้คือเราจะไม่สามารถแกไข layout view  ได้เลย หากเราไปแก้ไขไฟล์ที่ path <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> โดยตรง จริงๆ ก็สามารถทำได้ แต่เมื่อมีการอัพเดท ก็จะทำให้ข้อมูลส่วนที่เราแก้ไขถูกทับด้วยไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> </p>
+<p>ข้อเสียของวิธีนี้คือเราจะไม่สามารถแกไข layout view  ได้เลย หากเราไปแก้ไขไฟล์ที่ path <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code> โดยตรง จริงๆ ก็สามารถทำได้ แต่เมื่อมีการอัพเดท ก็จะทำให้ข้อมูลส่วนที่เราแก้ไขถูกทับด้วยไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ <code>@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app</code></p>
 </blockquote>
 
 <p>แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลย ก็สามารถตั้งค่า ตาม path นี้ได้</p>
 
-<p>ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view มาไว้ที่ application เพื่อให้สามารถแก้ไข view ได้ หรือปรับแต่งตามความต้องการได้ </p>
+<p>ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view มาไว้ที่ application เพื่อให้สามารถแก้ไข view ได้ หรือปรับแต่งตามความต้องการได้</p>
 
 <p>ให้ทำการสร้างโฟลเดอร์ ตามนี้</p>
 
 <ul>
 <li>แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte</li>
-<li>แบบ Advance 
+<li>แบบ Advance
 
 <ul>
 <li> Backend สร้างโฟลเดอร์ตามนี่ /backend/themes/adminlte</li>
@@ -237,14 +237,14 @@
         - layouts
         - site
 </code></pre></div>
-<p>หากคุณใช้ที่ frontend </p>
+<p>หากคุณใช้ที่ frontend</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">- advance
     - frontend
         - themes/adminlte
             - layouts
             - site
 </code></pre></div>
-<p>หากคุณใช้ที backend </p>
+<p>หากคุณใช้ที backend</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">- advance
     - backend
         - themes/adminlte
@@ -304,7 +304,7 @@
 </ul>
 
 <blockquote>
-<p>อย่าลืมว่า ทั้ง frontend และ backend ใช้ view adminlte ร่วมกัน เมื่อมีการแก้ไข ทั้ง frontend และ backend ก็จะถูกเปลี่ยนตามไปด้วย </p>
+<p>อย่าลืมว่า ทั้ง frontend และ backend ใช้ view adminlte ร่วมกัน เมื่อมีการแก้ไข ทั้ง frontend และ backend ก็จะถูกเปลี่ยนตามไปด้วย</p>
 </blockquote>
 <div class="highlight"><pre><code class="language-text" data-lang="text">&#39;view&#39; =&gt; [
              &#39;theme&#39; =&gt; [
@@ -314,7 +314,7 @@
              ],
         ],
 </code></pre></div>
-<p>จากนั้นก็ทดลองใช้งานได้เลยง่าย สะดวกมากๆ </p>
+<p>จากนั้นก็ทดลองใช้งานได้เลยง่าย สะดวกมากๆ</p>
 
 <h2 id="เปลี่ยน-skin-adminlte">เปลี่ยน skin AdminLTE</h2>
 

@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>การใช้งาน Data Formater เพื่อแปลงวันที่, เวลา | DixonSatit</title>
-	<meta name="description" content="Date Formatter  จะทำให้การแปลงข้อมูลวันที่ ให้เป็นเรื่องง่ายๆ ไม่ว่าจะแปลงเป็น วันที หรือเวลา แสดงวันที่แบบย่อๆ หรือแบบยาวๆ  ได้หลายแบบ อีกทั้งยังแสดงเวลาตาม...">
+	<title>การใช้งาน Data Formater เพื่อแปลงวันที่, เวลา | Yii 2 Learning</title>
+	<meta name="description" content="การใช้งาน Data Formater เพื่อแปลงวันที่, เวลา , yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/23/date-formatter.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -189,7 +189,7 @@
   </header>
   <section class="post-content"><p>Date Formatter  จะทำให้การแปลงข้อมูลวันที่ ให้เป็นเรื่องง่ายๆ ไม่ว่าจะแปลงเป็น วันที หรือเวลา แสดงวันที่แบบย่อๆ หรือแบบยาวๆ  ได้หลายแบบ อีกทั้งยังแสดงเวลาตาม <code>language</code> ที่ได้ตั้งค่าไว้ได้ เช่น th ก็จะแสดงภาษาไทย ถ้าเป็น en-US ก็จะแสดงภาษาอังกฤษ ลองดูตัวอย่างกันครับ</p>
 
-<p>เราสามารถเรียกผ่าน <code>Yii::$app-&gt;formatter-&gt;as</code> แล้วต่อด้วย format ที่ต้องการเช่น </p>
+<p>เราสามารถเรียกผ่าน <code>Yii::$app-&gt;formatter-&gt;as</code> แล้วต่อด้วย format ที่ต้องการเช่น</p>
 
 <ul>
 <li><code>Yii::$app-&gt;formatter-&gt;asDate()</code></li>
@@ -284,7 +284,7 @@ Wednesday, June 24, 2015
 <span class="c1">// ICU format</span>
 <span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;kk:mm:ss&#39;</span><span class="p">);</span>
 <span class="c1">// PHP date()-format</span>
-<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;php:H:i:s&#39;</span><span class="p">);</span> 
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;php:H:i:s&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>แสดงผล</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">5:32 AM
@@ -323,7 +323,7 @@ Wednesday, June 24, 2015
 
 <span class="c1">// กำหนดเอง</span>
 <span class="c1">// ICU format</span>
-<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;yyyy-MM-dd kk:mm:ss&#39;</span><span class="p">);</span> 
+<span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;yyyy-MM-dd kk:mm:ss&#39;</span><span class="p">);</span>
 <span class="c1">// PHP date()-format</span>
 <span class="k">echo</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDateTime</span><span class="p">(</span><span class="nv">$time</span><span class="p">,</span> <span class="s1">&#39;php:Y-m-d H:i:s&#39;</span><span class="p">);</span>
 </code></pre></div>
@@ -365,7 +365,7 @@ Wednesday, June 24, 2015 5:32:54 AM Indochina Time
 </code></pre></div>
 <p>เพิ่มเติม format อื่นๆ</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">echo Yii::$app-&gt;formatter-&gt;asPercent(0.125, 2); // output: 12.50%
-echo Yii::$app-&gt;formatter-&gt;asEmail(&#39;cebe@example.com&#39;); 
+echo Yii::$app-&gt;formatter-&gt;asEmail(&#39;cebe@example.com&#39;);
 </code></pre></div>
 <p><a href="http://www.yiiframework.com/doc-2.0/guide-output-formatting.html">อ่านเพิ่มเติมได้ที่นี</a></p>
 </section>

@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>การสร้าง Theme | DixonSatit</title>
-	<meta name="description" content="เชื่อว่าหลายๆ คนอาจจะไม่ชอบธีมเดิมๆ ที่ Yii 2  มีมาให้ ซึ่งเป็น Bootstrap ส่วนตัวผมเองมองว่ามันก็สามารถใช้งานได้ดี และมี component มาให้ครบ แทบจะไม่ต้องหาอะไ...">
+	<title>การสร้าง Theme | Yii 2 Learning</title>
+	<meta name="description" content="การสร้าง Theme, yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/20/create-theme-yii2.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -210,13 +210,13 @@
 <p>หลักการทำงานของ view ใน Yii 2 เมื่อ Web Application ของเราทำงานมันจะไป render ไฟล์ view ที่โฟลเดอร์ดีฟอลด์ views ก่อน
 จากนั้นก็จะเช็คว่ามีการเรียกใช้งานที่คอนโทรเลอร์ใหน มันก็จะไปค้นที่โฟล์เดอร์ที่มีชื่อตามคอนโทรเลอร์นั้นในไฟลเดอร์ views</p>
 
-<p>ในการสร้างธีม เราสามารถตั้งค่าให้มันเปลี่ยนเส้นทางของการเรียกใช้งาน view จากปกติจะค้นทีโฟลเดอร์ views หรือ @app/views นั้น เราก็เปลี่ยนให้มันไปเรียกใช้งานที่โฟล์เดอร์ธีมของเราเป็นอันดับแรกแทน </p>
+<p>ในการสร้างธีม เราสามารถตั้งค่าให้มันเปลี่ยนเส้นทางของการเรียกใช้งาน view จากปกติจะค้นทีโฟลเดอร์ views หรือ @app/views นั้น เราก็เปลี่ยนให้มันไปเรียกใช้งานที่โฟล์เดอร์ธีมของเราเป็นอันดับแรกแทน</p>
 
 <p>หากมีการเรียกใช้งาน view ใหน และไปค้นในธีมที่เราตั้งค่าไว้ไม่พบ มันจะกลับมาเรียกใช้งานที่พาทดีฟอลด์เดิมคือ views หรือ @app/views นั่นเอง</p>
 
 <h2 id="ลองสร้าง-theme-กัน">ลองสร้าง Theme กัน</h2>
 
-<p>ตัวอย่างนี้เป็นการนำ Html Template มาสร้างเป็นธีมสำหรับ Yii 2 เราใช้ <a href="http://startbootstrap.com/template-overviews/agency/">agency</a> ซึ่งเป็นธีมที่สร้างมาจาก bootstrap อยู่แล้ว และที่สำคัญมันฟรี </p>
+<p>ตัวอย่างนี้เป็นการนำ Html Template มาสร้างเป็นธีมสำหรับ Yii 2 เราใช้ <a href="http://startbootstrap.com/template-overviews/agency/">agency</a> ซึ่งเป็นธีมที่สร้างมาจาก bootstrap อยู่แล้ว และที่สำคัญมันฟรี</p>
 
 <p><img src="/img/agency-theme.png" alt=""></p>
 
@@ -271,7 +271,7 @@
 
 <span class="k">class</span> <span class="nc">AgencyAsset</span> <span class="k">extends</span> <span class="nx">AssetBundle</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="nv">$sourcePath</span> <span class="o">=</span> <span class="s1">&#39;@agency/dist&#39;</span><span class="p">;</span> 
+    <span class="k">public</span> <span class="nv">$sourcePath</span> <span class="o">=</span> <span class="s1">&#39;@agency/dist&#39;</span><span class="p">;</span>
     <span class="k">public</span> <span class="nv">$css</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;css/agency.css&#39;</span><span class="p">,</span>
         <span class="s1">&#39;//fonts.googleapis.com/css?family=Montserrat:400,700&#39;</span><span class="p">,</span>
@@ -301,7 +301,7 @@
 
 <h2 id="สร้าง-fontawesomeasset">สร้าง FontAwesomeAsset</h2>
 
-<p>ไฟล์ css ของ font-awesome เราจะเรียกใช้จากแพคเกจของ Bower คือ font-awesome โดยติดตั้งที่ composer.json และเพิ่ม <code>&quot;bower-asset/fontawesome&quot;: &quot;4.3.*&quot;</code> ในส่วน require เข้าไป </p>
+<p>ไฟล์ css ของ font-awesome เราจะเรียกใช้จากแพคเกจของ Bower คือ font-awesome โดยติดตั้งที่ composer.json และเพิ่ม <code>&quot;bower-asset/fontawesome&quot;: &quot;4.3.*&quot;</code> ในส่วน require เข้าไป</p>
 
 <p>จากนั้นรันคำสั่ง <code>composer update</code> เพื่อติดตั้งแพคเกจ</p>
 
@@ -311,11 +311,11 @@
 
 <span class="k">use</span> <span class="nx">yii\web\AssetBundle</span><span class="p">;</span>
 
-<span class="k">class</span> <span class="nc">FontAwesomeAsset</span> <span class="k">extends</span> <span class="nx">AssetBundle</span> 
+<span class="k">class</span> <span class="nc">FontAwesomeAsset</span> <span class="k">extends</span> <span class="nx">AssetBundle</span>
 <span class="p">{</span>
-    <span class="k">public</span> <span class="nv">$sourcePath</span> <span class="o">=</span> <span class="s1">&#39;@bower/fontawesome&#39;</span><span class="p">;</span> 
-    <span class="k">public</span> <span class="nv">$css</span> <span class="o">=</span> <span class="p">[</span> 
-        <span class="s1">&#39;css/font-awesome.min.css&#39;</span><span class="p">,</span> 
+    <span class="k">public</span> <span class="nv">$sourcePath</span> <span class="o">=</span> <span class="s1">&#39;@bower/fontawesome&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$css</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;css/font-awesome.min.css&#39;</span><span class="p">,</span>
     <span class="p">];</span>
     <span class="k">public</span> <span class="nv">$publishOptions</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s1">&#39;only&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
@@ -511,7 +511,7 @@
 <ul>
 <li><code>main.php</code> เป็น layout หลักปกติ Yii2 จะเรียก layout นี้เป็นหลักเว้นแต่ว่าเรากำหนดให้เรียก view อื่นๆ</li>
 <li><code>homepage.php</code> เป็น layout ที่ผมสร้างไว้สำหรับหน้าหลัก</li>
-<li><code>page_header.php</code> เป็น layout สำหรับหน้าต่างๆ </li>
+<li><code>page_header.php</code> เป็น layout สำหรับหน้าต่างๆ</li>
 </ul>
 
 <h2 id="สร้างหน้า-homepage">สร้างหน้า Homepage</h2>

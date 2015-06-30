@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>เปิดการใช้งาน Pretty urls (mod_rewrite) | DixonSatit</title>
-	<meta name="description" content="Pretty urls ก็คือการทำให้ url ที่มันจำยากๆ ให้มันสามารถอ่านเข้าใจได้ ซึ่งปกติคนทั่วไป ถ้าดูแล้วอาจจะงงๆ นอกจากคนที่อยู่ในสาย develop ก็คงจะพอเข้าใจ แต่ประโยช...">
+	<title>เปิดการใช้งาน Pretty urls (mod_rewrite) | Yii 2 Learning</title>
+	<meta name="description" content="เปิดการใช้งาน Pretty urls (mod_rewrite), yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/modrewrite.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -192,7 +192,7 @@
 <h3 id="แบบ-url-ปกติ">แบบ url ปกติ</h3>
 <div class="highlight"><pre><code class="language-text" data-lang="text">http://www.domain.me/index.php?r=site/index
 </code></pre></div>
-<p>ถ้าดูตาม url เราจะเข้าใจได้ว่า url นี้ รับค่าตัวแปรชื่อ  <code>r</code> ซึ่งเก็บค่า <code>site/index</code> </p>
+<p>ถ้าดูตาม url เราจะเข้าใจได้ว่า url นี้ รับค่าตัวแปรชื่อ  <code>r</code> ซึ่งเก็บค่า <code>site/index</code></p>
 
 <ul>
 <li><code>site</code> คือชื่อ controller</li>
@@ -209,7 +209,7 @@
 <p>ก่อนอื่นให้ทำการคอนฟิกเพื่อเปิดการใช้งาน UrlManager ไปที<code>config/web.php</code> ใส่โค้ดนี้เข้าไปภาพใต้ <code>components</code>
 * <code>ShowScriptName</code> คือ ให้แสดง index.php เราเซ็ตเป็น <code>false</code>  เพื่อใม่ให้มันแสดง
 * <code>ennablePrettyUrl</code> คือเปิดการใช้งาน เซ็ตเป็น <code>true</code> เพื่อเปิดการใช้งาน</p>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> 
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 <span class="s1">&#39;components&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
 <span class="c1">//.....</span>
 <span class="s1">&#39;urlManager&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>

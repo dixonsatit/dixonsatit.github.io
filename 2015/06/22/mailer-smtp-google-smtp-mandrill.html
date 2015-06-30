@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>การส่งเมล์ โดยใช้  yii2-swiftmailer  ด้วย smtp-google & smtp-mandrill | DixonSatit</title>
-	<meta name="description" content="ปกติเวลาส่งเมล์ เราจะใช้ mail() ของ php ที่มีให้ มันมักจะมีปัญหาเมื่อส่งไปแล้ว จะเข้าที่ junk หรือไม่ก็ spam วันนี้จึงขอแนะนำการส่งเมล์ด้วย smtp จะช่วยแก้ปัญ...">
+	<title>การส่งเมล์ โดยใช้  yii2-swiftmailer  ด้วย smtp-google & smtp-mandrill | Yii 2 Learning</title>
+	<meta name="description" content="การส่งเมล์ โดยใช้  yii2-swiftmailer  ด้วย smtp-google & smtp-mandrill, yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/22/mailer-smtp-google-smtp-mandrill.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -187,7 +187,7 @@
     
     </p>
   </header>
-  <section class="post-content"><p>ปกติเวลาส่งเมล์ เราจะใช้ mail() ของ php ที่มีให้ มันมักจะมีปัญหาเมื่อส่งไปแล้ว จะเข้าที่ junk หรือไม่ก็ spam วันนี้จึงขอแนะนำการส่งเมล์ด้วย smtp จะช่วยแก้ปัญหานี้ได้ และยังมีบริการให้ใช้ฟรี หลายๆ ราย เช่น google,mandrill อีกทั้งเรายังสามารถทดสอบส่งเมล์ได้ ถึงแม้ระบบของเรายังไม่ขึ้น Prodruction ก็ตาม หรือจะสร้าง layout เมล์แบบต่างๆ ก็สามารถทำได้ </p>
+  <section class="post-content"><p>ปกติเวลาส่งเมล์ เราจะใช้ mail() ของ php ที่มีให้ มันมักจะมีปัญหาเมื่อส่งไปแล้ว จะเข้าที่ junk หรือไม่ก็ spam วันนี้จึงขอแนะนำการส่งเมล์ด้วย smtp จะช่วยแก้ปัญหานี้ได้ และยังมีบริการให้ใช้ฟรี หลายๆ ราย เช่น google,mandrill อีกทั้งเรายังสามารถทดสอบส่งเมล์ได้ ถึงแม้ระบบของเรายังไม่ขึ้น Prodruction ก็ตาม หรือจะสร้าง layout เมล์แบบต่างๆ ก็สามารถทำได้</p>
 
 <p>วันนี้ขอแนะนำการส่งเมล์ด้วย smtp-google และ smtp-mandrill เพราะฟรีและสามารถทำได้ง่ายๆ ซึ่ง Yii2 เตรียมพร้อมไว้ให้เราแล้ว คือ <a href="https://github.com/yiisoft/yii2-swiftmailer">yii2-swiftmailer</a> มันติดตั้งมาพร้อมแล้ว รอแค่เราตั้งค่าเพื่อเปิดใช้งาน</p>
 
@@ -253,7 +253,7 @@
 <span class="x">];</span>
 </code></pre></div>
 <blockquote>
-<p><code>viewPath</code> ถ้าเป็นกรณี app basic ก็ตั้งค่าเป็น <code>@app/mail</code> </p>
+<p><code>viewPath</code> ถ้าเป็นกรณี app basic ก็ตั้งค่าเป็น <code>@app/mail</code></p>
 </blockquote>
 
 <h2 id="สร้าง-layout-mail">สร้าง layout Mail</h2>
@@ -290,7 +290,7 @@
 
 <p><img src="/img/mailer-main-layout.png" alt="mailer-main-layout.png"></p>
 
-<p>จากนั้นเราจะทำการสร้าง view ที่ใช้เป็น template ในการส่ง ในตัวอย่างนี้ผมสร้างอีเมล์แจ้งเตือนการลงทะเบียนงานประชุมวิชาการโรงพยาบาลขอนแก่น </p>
+<p>จากนั้นเราจะทำการสร้าง view ที่ใช้เป็น template ในการส่ง ในตัวอย่างนี้ผมสร้างอีเมล์แจ้งเตือนการลงทะเบียนงานประชุมวิชาการโรงพยาบาลขอนแก่น</p>
 
 <p>ไปที่โฟลเดอร์ <code>/mail/layouts/</code> ใน application ของคุณ สร้าง view ชื่อ register.php โดยที่ view นี้จะรับค่าตัวแปรชื่อ <code>$fullname</code> เพื่อแสดงชื่อของผู้ลงทะเบียน</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h1&gt;</span>งานประชุมวิชาการโรงพยาบาลขอนแก่น ครั้งที่ 7 ประจำปี 2558<span class="nt">&lt;/h1&gt;</span>
@@ -318,7 +318,7 @@
 <span class="nt">-</span><span class="o">&gt;</span><span class="nt">send</span><span class="o">();</span>
 </code></pre></div>
 <ul>
-<li><code>compose</code> คือการเรียกไปที่ view ที่เราสร้างเป็น template ไว้หากต้องการใช้หลายๆ แบบ ก็สร้างไว้หลายๆ อันแล้วก็เรียกใช้ที่ตรงนี้ หาก view มีการรับค่าตัวแปร ก็ให้ส่งค่าไปด้วย ตามตัวอย่าง register.php รับค่าตัวแปร $fullname </li>
+<li><code>compose</code> คือการเรียกไปที่ view ที่เราสร้างเป็น template ไว้หากต้องการใช้หลายๆ แบบ ก็สร้างไว้หลายๆ อันแล้วก็เรียกใช้ที่ตรงนี้ หาก view มีการรับค่าตัวแปร ก็ให้ส่งค่าไปด้วย ตามตัวอย่าง register.php รับค่าตัวแปร $fullname</li>
 <li><code>setFrom</code> เป็นการระบุว่าส่งมาจากที่ใด และใส่เป็นชื่อได้ด้วย <img src="/img/mailer-setfrom.png" alt=""></li>
 <li><code>setTo</code> คืออีเมล์ที่เราต้องการส่งไปหาใคร</li>
 <li><code>setSubject</code> ชื่อเรื่องอีเมล์ที่เราจะส่ง</li>

@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>การใช้งาน TimestampBehavior ใน model เพื่ออัพเดทข้อมูลวันที่ | DixonSatit</title>
-	<meta name="description" content="">
+	<title>การใช้งาน TimestampBehavior ใน model เพื่ออัพเดทข้อมูลวันที่ | Yii 2 Learning</title>
+	<meta name="description" content="การใช้งาน TimestampBehavior ใน model เพื่ออัพเดทข้อมูลวันที่ , yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/14/model-behaviors.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -189,9 +189,9 @@
   </header>
   <section class="post-content"><p><img src="/img/timezone.png" alt="timezone"></p>
 
-<p>การบันทึกเวลาเป็น init นั้นมีข้อดีคือ เราสามารถที่จะเปลี่ยนค่า Time  ที่เราบันทีกเป็น TimeZone ที่ใหนก็ได้ ทำให้เรารู้ว่า ณ ช่วงเวลาที่เราบันทึกข้อมูลตอนนี้ เป็นเวลากี่โมง ณ อีก timezone นึง </p>
+<p>การบันทึกเวลาเป็น init นั้นมีข้อดีคือ เราสามารถที่จะเปลี่ยนค่า Time  ที่เราบันทีกเป็น TimeZone ที่ใหนก็ได้ ทำให้เรารู้ว่า ณ ช่วงเวลาที่เราบันทึกข้อมูลตอนนี้ เป็นเวลากี่โมง ณ อีก timezone นึง</p>
 
-<p>ตัวอย่างเช่นเรามีระบบ application ที่มีคนใช้อยู่คนละ timeZone เช่น <code>America/Los_Angeles</code>  กับ <code>Asia/Bangkok</code> </p>
+<p>ตัวอย่างเช่นเรามีระบบ application ที่มีคนใช้อยู่คนละ timeZone เช่น <code>America/Los_Angeles</code>  กับ <code>Asia/Bangkok</code></p>
 
 <p>Yii 2 เราสามารถตั้งค่า <code>default</code>  TimeZone  ได้ที่ config/main.php ในส่วนของ <code>timeZone</code> ได้</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">[
@@ -203,7 +203,7 @@
 <p>หากไม่รู้ว่า default ของเราเป็น timezone อะไร สามารถใช้ function <code>date_default_timezone_set()</code> เพื่อ echo ตรวจสอบข้อมูลได้ เพราะการแสดงผลจะอิงตาม TimeZone</p>
 </blockquote>
 
-<p>ส่วนใหญ่ในการสร้างตารางต่างๆ เราก็มักจะมีฟิวด์ที่เก็บข้อมูลคือ </p>
+<p>ส่วนใหญ่ในการสร้างตารางต่างๆ เราก็มักจะมีฟิวด์ที่เก็บข้อมูลคือ</p>
 
 <ul>
 <li>create_date บอกว่าเราสร้าง record นี้เมื่อไหร่</li>

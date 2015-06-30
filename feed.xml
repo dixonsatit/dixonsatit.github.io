@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>DixonSatit</title>
+    <title>Yii 2 Learning</title>
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
-    <description>A website with blog posts and pages</description>
-    <pubDate>Tue, 30 Jun 2015 22:30:31 +0700</pubDate>
+    <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
+    <pubDate>Wed, 01 Jul 2015 00:31:32 +0700</pubDate>
     
       <item>
         <title>รวม extension ต่างๆ และ tutorial ที่น่าสนใจ</title>
@@ -1360,7 +1360,7 @@ Migrated up successfully.
         <description>&lt;p&gt;&lt;img src=&quot;/img/agency-theme-top.png&quot; alt=&quot;agency theme&quot;&gt;
 ใหนๆ ก็สอน&lt;a href=&quot;/2015/06/20/create-theme-yii2.html&quot;&gt;วิธีการสร้าง theme&lt;/a&gt; แล้ว ก็เลยเอา theme ที่สร้างมาทำเป็น extension ให้ติดตั้งใช้งานกันได้ง่ายๆ ผ่าน composer ซักหน่อย&lt;/p&gt;
 
-&lt;p&gt;theme นี้ฟรี และสามารถเอามาทำเป็น portfolio ของเราได้ หน้าตาก็ ok &lt;/p&gt;
+&lt;p&gt;theme นี้ฟรี และสามารถเอามาทำเป็น portfolio ของเราได้ หน้าตาก็ ok&lt;/p&gt;
 
 &lt;h2 id=&quot;การติดตั้ง&quot;&gt;การติดตั้ง&lt;/h2&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; composer require dixonsatit/yii2-agency-theme
@@ -1372,7 +1372,7 @@ Migrated up successfully.
 
 &lt;h2 id=&quot;การใช้งาน&quot;&gt;การใช้งาน&lt;/h2&gt;
 
-&lt;p&gt;หลังจากติดตั้งเสร็จ ให้ทำการตั้งค่าที่ config/main.php &lt;/p&gt;
+&lt;p&gt;หลังจากติดตั้งเสร็จ ให้ทำการตั้งค่าที่ config/main.php&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;        &amp;#39;view&amp;#39;=&amp;gt;[&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;            &amp;#39;theme&amp;#39;=&amp;gt;[&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;                &amp;#39;pathMap&amp;#39;=&amp;gt;[&lt;/span&gt;
@@ -1423,7 +1423,7 @@ Migrated up successfully.
 
 &lt;p&gt;เท่าที่ผมสังเกต มีคนถามผมบ่อยๆ ว่าจะสร้าง array ในรูปแบบนีได้ยังไง query ออกมา จาก mysql ไม่ได้ตามแบบนี้&lt;/p&gt;
 
-&lt;p&gt;ขอแนะนำง่ายๆ ครับ เราต้องมองข้อมูลออกเป็นส่วนๆ query ออกมาทีละอันแล้วค่อยจับมารวมกันอีกที &lt;/p&gt;
+&lt;p&gt;ขอแนะนำง่ายๆ ครับ เราต้องมองข้อมูลออกเป็นส่วนๆ query ออกมาทีละอันแล้วค่อยจับมารวมกันอีกที&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;อีกปัญหานึงที่เจอบ่อยๆ คือ  เมือเราสร้าง array ตามรูปแบบนี้ได้แล้วแต่ข้อมูลไม่ออกซักที ปัญหาส่วนใหญ่คือ type ของค่าต่างๆ ไม่ตรงเช่น มันรับเป็น init แต่ค่าที่อยู่ใน array เป็น string มันก็จะไม่แสดงนะครับ เพราะฉะนั้น var_dump เพื่อดูค่าของ array ว่ามี type ตรงกันหรือปล่าวครับ&lt;/p&gt;
@@ -1457,7 +1457,7 @@ Migrated up successfully.
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/23/date-formatter.html</guid>
         <description>&lt;p&gt;Date Formatter  จะทำให้การแปลงข้อมูลวันที่ ให้เป็นเรื่องง่ายๆ ไม่ว่าจะแปลงเป็น วันที หรือเวลา แสดงวันที่แบบย่อๆ หรือแบบยาวๆ  ได้หลายแบบ อีกทั้งยังแสดงเวลาตาม &lt;code&gt;language&lt;/code&gt; ที่ได้ตั้งค่าไว้ได้ เช่น th ก็จะแสดงภาษาไทย ถ้าเป็น en-US ก็จะแสดงภาษาอังกฤษ ลองดูตัวอย่างกันครับ&lt;/p&gt;
 
-&lt;p&gt;เราสามารถเรียกผ่าน &lt;code&gt;Yii::$app-&amp;gt;formatter-&amp;gt;as&lt;/code&gt; แล้วต่อด้วย format ที่ต้องการเช่น &lt;/p&gt;
+&lt;p&gt;เราสามารถเรียกผ่าน &lt;code&gt;Yii::$app-&amp;gt;formatter-&amp;gt;as&lt;/code&gt; แล้วต่อด้วย format ที่ต้องการเช่น&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;Yii::$app-&amp;gt;formatter-&amp;gt;asDate()&lt;/code&gt;&lt;/li&gt;
@@ -1552,7 +1552,7 @@ Wednesday, June 24, 2015
 &lt;span class=&quot;c1&quot;&gt;// ICU format&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;formatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asDateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;kk:mm:ss&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;// PHP date()-format&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;formatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asDateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;php:H:i:s&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;formatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asDateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;php:H:i:s&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;แสดงผล&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;5:32 AM
@@ -1591,7 +1591,7 @@ Wednesday, June 24, 2015
 
 &lt;span class=&quot;c1&quot;&gt;// กำหนดเอง&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;// ICU format&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;formatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asDateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yyyy-MM-dd kk:mm:ss&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;formatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asDateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yyyy-MM-dd kk:mm:ss&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;// PHP date()-format&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;formatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asDateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;php:Y-m-d H:i:s&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1633,7 +1633,7 @@ Wednesday, June 24, 2015 5:32:54 AM Indochina Time
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;เพิ่มเติม format อื่นๆ&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;echo Yii::$app-&amp;gt;formatter-&amp;gt;asPercent(0.125, 2); // output: 12.50%
-echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#39;); 
+echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#39;);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-output-formatting.html&quot;&gt;อ่านเพิ่มเติมได้ที่นี&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -1675,7 +1675,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;li&gt;&lt;code&gt;View::POS_HEAD&lt;/code&gt; ในส่วน &lt;code&gt;&amp;lt;header&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;View::POS_BEGIN&lt;/code&gt; ใต้แท็ก  &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; ตัวแรก&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;View::POS_END&lt;/code&gt;  ก่อนแท็กปิด &lt;code&gt;&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;View::POS_READY&lt;/code&gt; เป็นการประกาศเข้าไปในแท็ก ready ของ jquery เลย &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;View::POS_READY&lt;/code&gt; เป็นการประกาศเข้าไปในแท็ก ready ของ jquery เลย&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;View::POS_LOAD&lt;/code&gt; สำหรับเมื่อมีการรันโค้ดถึงจะทำการ register script ให้.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1685,7 +1685,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;jQuery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
  &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;register-javascript-file&quot;&gt;Register Javascript File&lt;/h2&gt;
@@ -1706,7 +1706,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;registering-css-file&quot;&gt;Registering CSS File&lt;/h2&gt;
 
-&lt;p&gt;เป็นการ register ไฟล์ css เข้ามาใช้งาน ใน view ของเราชื่อ black-and-white.css พร้อมทั้งเรียกใช้งาน BootstrapAsset ซึ่งเป็น css ของ bootstrap มาใช้งานด้วย และระบุ css media เท่ากับ print ด้วย &lt;/p&gt;
+&lt;p&gt;เป็นการ register ไฟล์ css เข้ามาใช้งาน ใน view ของเราชื่อ black-and-white.css พร้อมทั้งเรียกใช้งาน BootstrapAsset ซึ่งเป็น css ของ bootstrap มาใช้งานด้วย และระบุ css media เท่ากับ print ด้วย&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;css media คือกำรหนดการแสดงผลหน้าตาเว็บเพจ บนสื่อประเภทต่างๆ เราสามารถกำหนด style ให้แตกต่างกันได้ เช่น ตอนที่เราเห็นบนหน้าจอ (screen) กับตอนที่สั่งพิมพ์ออกกระดาษ (print) ให้แสดงผลไม่เหมือนกัน  &lt;a href=&quot;http://www.enjoyday.net/webtutorial/css/css_chapter22.html&quot;&gt;อ่าน css media ได้ที่นี&lt;/a&gt;&lt;/p&gt;
@@ -1719,7 +1719,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerCssFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;@web/css/style.css&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หาก view page source ก็จะพบการเรียกใช้งาน css &lt;/p&gt;
+&lt;p&gt;หาก view page source ก็จะพบการเรียกใช้งาน css&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/yii2/yii2-Leanning-Source/web/css/style.css&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/yii2/yii2-Leanning-Source/web/assets/99615aa3/css/bootstrap.css&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://example.com/css/themes/black-and-white.css&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;media=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;print&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
@@ -1733,7 +1733,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
         <title>การส่งเมล์ โดยใช้  yii2-swiftmailer  ด้วย smtp-google &amp; smtp-mandrill</title>
         <link>http://dixonsatit.github.io/2015/06/22/mailer-smtp-google-smtp-mandrill.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/22/mailer-smtp-google-smtp-mandrill.html</guid>
-        <description>&lt;p&gt;ปกติเวลาส่งเมล์ เราจะใช้ mail() ของ php ที่มีให้ มันมักจะมีปัญหาเมื่อส่งไปแล้ว จะเข้าที่ junk หรือไม่ก็ spam วันนี้จึงขอแนะนำการส่งเมล์ด้วย smtp จะช่วยแก้ปัญหานี้ได้ และยังมีบริการให้ใช้ฟรี หลายๆ ราย เช่น google,mandrill อีกทั้งเรายังสามารถทดสอบส่งเมล์ได้ ถึงแม้ระบบของเรายังไม่ขึ้น Prodruction ก็ตาม หรือจะสร้าง layout เมล์แบบต่างๆ ก็สามารถทำได้ &lt;/p&gt;
+        <description>&lt;p&gt;ปกติเวลาส่งเมล์ เราจะใช้ mail() ของ php ที่มีให้ มันมักจะมีปัญหาเมื่อส่งไปแล้ว จะเข้าที่ junk หรือไม่ก็ spam วันนี้จึงขอแนะนำการส่งเมล์ด้วย smtp จะช่วยแก้ปัญหานี้ได้ และยังมีบริการให้ใช้ฟรี หลายๆ ราย เช่น google,mandrill อีกทั้งเรายังสามารถทดสอบส่งเมล์ได้ ถึงแม้ระบบของเรายังไม่ขึ้น Prodruction ก็ตาม หรือจะสร้าง layout เมล์แบบต่างๆ ก็สามารถทำได้&lt;/p&gt;
 
 &lt;p&gt;วันนี้ขอแนะนำการส่งเมล์ด้วย smtp-google และ smtp-mandrill เพราะฟรีและสามารถทำได้ง่ายๆ ซึ่ง Yii2 เตรียมพร้อมไว้ให้เราแล้ว คือ &lt;a href=&quot;https://github.com/yiisoft/yii2-swiftmailer&quot;&gt;yii2-swiftmailer&lt;/a&gt; มันติดตั้งมาพร้อมแล้ว รอแค่เราตั้งค่าเพื่อเปิดใช้งาน&lt;/p&gt;
 
@@ -1799,7 +1799,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;span class=&quot;x&quot;&gt;];&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;viewPath&lt;/code&gt; ถ้าเป็นกรณี app basic ก็ตั้งค่าเป็น &lt;code&gt;@app/mail&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;viewPath&lt;/code&gt; ถ้าเป็นกรณี app basic ก็ตั้งค่าเป็น &lt;code&gt;@app/mail&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;สร้าง-layout-mail&quot;&gt;สร้าง layout Mail&lt;/h2&gt;
@@ -1836,7 +1836,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;p&gt;&lt;img src=&quot;/img/mailer-main-layout.png&quot; alt=&quot;mailer-main-layout.png&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;จากนั้นเราจะทำการสร้าง view ที่ใช้เป็น template ในการส่ง ในตัวอย่างนี้ผมสร้างอีเมล์แจ้งเตือนการลงทะเบียนงานประชุมวิชาการโรงพยาบาลขอนแก่น &lt;/p&gt;
+&lt;p&gt;จากนั้นเราจะทำการสร้าง view ที่ใช้เป็น template ในการส่ง ในตัวอย่างนี้ผมสร้างอีเมล์แจ้งเตือนการลงทะเบียนงานประชุมวิชาการโรงพยาบาลขอนแก่น&lt;/p&gt;
 
 &lt;p&gt;ไปที่โฟลเดอร์ &lt;code&gt;/mail/layouts/&lt;/code&gt; ใน application ของคุณ สร้าง view ชื่อ register.php โดยที่ view นี้จะรับค่าตัวแปรชื่อ &lt;code&gt;$fullname&lt;/code&gt; เพื่อแสดงชื่อของผู้ลงทะเบียน&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;งานประชุมวิชาการโรงพยาบาลขอนแก่น ครั้งที่ 7 ประจำปี 2558&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
@@ -1864,7 +1864,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;compose&lt;/code&gt; คือการเรียกไปที่ view ที่เราสร้างเป็น template ไว้หากต้องการใช้หลายๆ แบบ ก็สร้างไว้หลายๆ อันแล้วก็เรียกใช้ที่ตรงนี้ หาก view มีการรับค่าตัวแปร ก็ให้ส่งค่าไปด้วย ตามตัวอย่าง register.php รับค่าตัวแปร $fullname &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;compose&lt;/code&gt; คือการเรียกไปที่ view ที่เราสร้างเป็น template ไว้หากต้องการใช้หลายๆ แบบ ก็สร้างไว้หลายๆ อันแล้วก็เรียกใช้ที่ตรงนี้ หาก view มีการรับค่าตัวแปร ก็ให้ส่งค่าไปด้วย ตามตัวอย่าง register.php รับค่าตัวแปร $fullname&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;setFrom&lt;/code&gt; เป็นการระบุว่าส่งมาจากที่ใด และใส่เป็นชื่อได้ด้วย &lt;img src=&quot;/img/mailer-setfrom.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;setTo&lt;/code&gt; คืออีเมล์ที่เราต้องการส่งไปหาใคร&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;setSubject&lt;/code&gt; ชื่อเรื่องอีเมล์ที่เราจะส่ง&lt;/li&gt;
@@ -1981,7 +1981,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
         &lt;span class=&quot;s1&quot;&gt;&amp;#39;assetManager&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
             &lt;span class=&quot;s1&quot;&gt;&amp;#39;bundles&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
                 &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\web\JqueryAsset&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;sourcePath&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; 
+                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;sourcePath&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
                     &lt;span class=&quot;s1&quot;&gt;&amp;#39;js&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
                         &lt;span class=&quot;s1&quot;&gt;&amp;#39;//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
                     &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
@@ -2057,13 +2057,13 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;p&gt;หลักการทำงานของ view ใน Yii 2 เมื่อ Web Application ของเราทำงานมันจะไป render ไฟล์ view ที่โฟลเดอร์ดีฟอลด์ views ก่อน
 จากนั้นก็จะเช็คว่ามีการเรียกใช้งานที่คอนโทรเลอร์ใหน มันก็จะไปค้นที่โฟล์เดอร์ที่มีชื่อตามคอนโทรเลอร์นั้นในไฟลเดอร์ views&lt;/p&gt;
 
-&lt;p&gt;ในการสร้างธีม เราสามารถตั้งค่าให้มันเปลี่ยนเส้นทางของการเรียกใช้งาน view จากปกติจะค้นทีโฟลเดอร์ views หรือ @app/views นั้น เราก็เปลี่ยนให้มันไปเรียกใช้งานที่โฟล์เดอร์ธีมของเราเป็นอันดับแรกแทน &lt;/p&gt;
+&lt;p&gt;ในการสร้างธีม เราสามารถตั้งค่าให้มันเปลี่ยนเส้นทางของการเรียกใช้งาน view จากปกติจะค้นทีโฟลเดอร์ views หรือ @app/views นั้น เราก็เปลี่ยนให้มันไปเรียกใช้งานที่โฟล์เดอร์ธีมของเราเป็นอันดับแรกแทน&lt;/p&gt;
 
 &lt;p&gt;หากมีการเรียกใช้งาน view ใหน และไปค้นในธีมที่เราตั้งค่าไว้ไม่พบ มันจะกลับมาเรียกใช้งานที่พาทดีฟอลด์เดิมคือ views หรือ @app/views นั่นเอง&lt;/p&gt;
 
 &lt;h2 id=&quot;ลองสร้าง-theme-กัน&quot;&gt;ลองสร้าง Theme กัน&lt;/h2&gt;
 
-&lt;p&gt;ตัวอย่างนี้เป็นการนำ Html Template มาสร้างเป็นธีมสำหรับ Yii 2 เราใช้ &lt;a href=&quot;http://startbootstrap.com/template-overviews/agency/&quot;&gt;agency&lt;/a&gt; ซึ่งเป็นธีมที่สร้างมาจาก bootstrap อยู่แล้ว และที่สำคัญมันฟรี &lt;/p&gt;
+&lt;p&gt;ตัวอย่างนี้เป็นการนำ Html Template มาสร้างเป็นธีมสำหรับ Yii 2 เราใช้ &lt;a href=&quot;http://startbootstrap.com/template-overviews/agency/&quot;&gt;agency&lt;/a&gt; ซึ่งเป็นธีมที่สร้างมาจาก bootstrap อยู่แล้ว และที่สำคัญมันฟรี&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/agency-theme.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
@@ -2118,7 +2118,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AgencyAsset&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AssetBundle&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sourcePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@agency/dist&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sourcePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@agency/dist&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
         &lt;span class=&quot;s1&quot;&gt;&amp;#39;css/agency.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;s1&quot;&gt;&amp;#39;//fonts.googleapis.com/css?family=Montserrat:400,700&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -2148,7 +2148,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;h2 id=&quot;สร้าง-fontawesomeasset&quot;&gt;สร้าง FontAwesomeAsset&lt;/h2&gt;
 
-&lt;p&gt;ไฟล์ css ของ font-awesome เราจะเรียกใช้จากแพคเกจของ Bower คือ font-awesome โดยติดตั้งที่ composer.json และเพิ่ม &lt;code&gt;&amp;quot;bower-asset/fontawesome&amp;quot;: &amp;quot;4.3.*&amp;quot;&lt;/code&gt; ในส่วน require เข้าไป &lt;/p&gt;
+&lt;p&gt;ไฟล์ css ของ font-awesome เราจะเรียกใช้จากแพคเกจของ Bower คือ font-awesome โดยติดตั้งที่ composer.json และเพิ่ม &lt;code&gt;&amp;quot;bower-asset/fontawesome&amp;quot;: &amp;quot;4.3.*&amp;quot;&lt;/code&gt; ในส่วน require เข้าไป&lt;/p&gt;
 
 &lt;p&gt;จากนั้นรันคำสั่ง &lt;code&gt;composer update&lt;/code&gt; เพื่อติดตั้งแพคเกจ&lt;/p&gt;
 
@@ -2158,11 +2158,11 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 
 &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\web\AssetBundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FontAwesomeAsset&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AssetBundle&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FontAwesomeAsset&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AssetBundle&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sourcePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@bower/fontawesome&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; 
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;css/font-awesome.min.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sourcePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@bower/fontawesome&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;css/font-awesome.min.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$publishOptions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
         &lt;span class=&quot;s1&quot;&gt;&amp;#39;only&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
@@ -2358,7 +2358,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;main.php&lt;/code&gt; เป็น layout หลักปกติ Yii2 จะเรียก layout นี้เป็นหลักเว้นแต่ว่าเรากำหนดให้เรียก view อื่นๆ&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;homepage.php&lt;/code&gt; เป็น layout ที่ผมสร้างไว้สำหรับหน้าหลัก&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;page_header.php&lt;/code&gt; เป็น layout สำหรับหน้าต่างๆ &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;page_header.php&lt;/code&gt; เป็น layout สำหรับหน้าต่างๆ&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;สร้างหน้า-homepage&quot;&gt;สร้างหน้า Homepage&lt;/h2&gt;
@@ -3133,18 +3133,18 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 ],
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;blockquote&gt;
-&lt;p&gt;ข้อเสียของวิธีนี้คือเราจะไม่สามารถแกไข layout view  ได้เลย หากเราไปแก้ไขไฟล์ที่ path &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; โดยตรง จริงๆ ก็สามารถทำได้ แต่เมื่อมีการอัพเดท ก็จะทำให้ข้อมูลส่วนที่เราแก้ไขถูกทับด้วยไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;ข้อเสียของวิธีนี้คือเราจะไม่สามารถแกไข layout view  ได้เลย หากเราไปแก้ไขไฟล์ที่ path &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; โดยตรง จริงๆ ก็สามารถทำได้ แต่เมื่อมีการอัพเดท ก็จะทำให้ข้อมูลส่วนที่เราแก้ไขถูกทับด้วยไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลย ก็สามารถตั้งค่า ตาม path นี้ได้&lt;/p&gt;
 
-&lt;p&gt;ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view มาไว้ที่ application เพื่อให้สามารถแก้ไข view ได้ หรือปรับแต่งตามความต้องการได้ &lt;/p&gt;
+&lt;p&gt;ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view มาไว้ที่ application เพื่อให้สามารถแก้ไข view ได้ หรือปรับแต่งตามความต้องการได้&lt;/p&gt;
 
 &lt;p&gt;ให้ทำการสร้างโฟลเดอร์ ตามนี้&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte&lt;/li&gt;
-&lt;li&gt;แบบ Advance 
+&lt;li&gt;แบบ Advance
 
 &lt;ul&gt;
 &lt;li&gt; Backend สร้างโฟลเดอร์ตามนี่ /backend/themes/adminlte&lt;/li&gt;
@@ -3162,14 +3162,14 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
         - layouts
         - site
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากคุณใช้ที่ frontend &lt;/p&gt;
+&lt;p&gt;หากคุณใช้ที่ frontend&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- advance
     - frontend
         - themes/adminlte
             - layouts
             - site
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากคุณใช้ที backend &lt;/p&gt;
+&lt;p&gt;หากคุณใช้ที backend&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- advance
     - backend
         - themes/adminlte
@@ -3229,7 +3229,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;อย่าลืมว่า ทั้ง frontend และ backend ใช้ view adminlte ร่วมกัน เมื่อมีการแก้ไข ทั้ง frontend และ backend ก็จะถูกเปลี่ยนตามไปด้วย &lt;/p&gt;
+&lt;p&gt;อย่าลืมว่า ทั้ง frontend และ backend ใช้ view adminlte ร่วมกัน เมื่อมีการแก้ไข ทั้ง frontend และ backend ก็จะถูกเปลี่ยนตามไปด้วย&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;view&amp;#39; =&amp;gt; [
              &amp;#39;theme&amp;#39; =&amp;gt; [
@@ -3239,7 +3239,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
              ],
         ],
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นก็ทดลองใช้งานได้เลยง่าย สะดวกมากๆ &lt;/p&gt;
+&lt;p&gt;จากนั้นก็ทดลองใช้งานได้เลยง่าย สะดวกมากๆ&lt;/p&gt;
 
 &lt;h2 id=&quot;เปลี่ยน-skin-adminlte&quot;&gt;เปลี่ยน skin AdminLTE&lt;/h2&gt;
 
@@ -3269,11 +3269,11 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/17/flash-message-growl-widget.html</guid>
         <description>&lt;p&gt;หากคุณเคยใช้ flashMessage มาบ้างแล้ว หากยังไม่เคยใช้ &lt;a href=&quot;/2015/06/17/flash-message.html&quot;&gt;ลองอ่านที่นี่&lt;/a&gt; คุณอาจจะรูสึกว่ามันไม่ค่อยสวยเลย วันนี้ผมมี &lt;code&gt;yii2-widget-growl&lt;/code&gt; มาแนะนำ ซึ่งตัวนี้สวยงามและน่าใช้เลยทีเดียว&lt;/p&gt;
 
-&lt;p&gt;ก่อนอื่นไปติดตั้งกันก่อน &lt;a href=&quot;https://github.com/kartik-v/yii2-widget-growl&quot;&gt;yii2-widget-growl&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;ก่อนอื่นไปติดตั้งกันก่อน &lt;a href=&quot;https://github.com/kartik-v/yii2-widget-growl&quot;&gt;yii2-widget-growl&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer  require kartik-v/yii2-widget-growl &amp;quot;*&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;กำหนดค่า&quot;&gt;กำหนดค่า&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFlash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;alert1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
         &lt;span class=&quot;s1&quot;&gt;&amp;#39;type&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
         &lt;span class=&quot;s1&quot;&gt;&amp;#39;duration&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -3296,7 +3296,7 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;การแสดงผล&quot;&gt;การแสดงผล&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 

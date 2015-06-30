@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>Relations & Virtual Attribute | DixonSatit</title>
-	<meta name="description" content="">
+	<title>Relations & Virtual Attribute | Yii 2 Learning</title>
+	<meta name="description" content="Relations & Virtual Attribute, yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/relations.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -189,7 +189,7 @@
   </header>
   <section class="post-content"><p><img src="/img/sort.png" alt="sort"></p>
 
-<p>ตัวอย่างง่ายๆ ในการสร้าง relation กับ model ตัวอย่างนี้ผมจำลองข้อมูลไว้ 2 ตารางคือ Patient &amp; Hospital 
+<p>ตัวอย่างง่ายๆ ในการสร้าง relation กับ model ตัวอย่างนี้ผมจำลองข้อมูลไว้ 2 ตารางคือ Patient &amp; Hospital
 โดยที่ตาราง patient จะเก็บรหัสของโรงพยาบาลไว้ คือ hospital_code
 ลองดูตัวอย่างง่ายๆ นะครับ</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">Patient
@@ -207,7 +207,7 @@ Hospital                  |
 <p>อีกส่วนเราจะสร้าง virtual attribute ชื่อ  <code>$fullName</code> เพื่อแสดงข้อมูลชื่อ - นามสกุล โดยจะรวม โดยจะรวม name,surname ไว้เป็น field ใหม่เลยชื่อว่า fullName</p>
 
 <blockquote>
-<p>ผมใส่เครื่องหมาย <code>@</code> นำหน้าเพื่อให้มันไม่ error เวลาที่ไม่สามารถเชื่อมกับ <code>Hospital</code> เช่น  กรณีไม่ได้บันทึกรหัสโรงพยาบาล เวลาแสดงผลที่ <code>GridView</code> มันจะ error เพราะไม่สามารถเชื่อมได้ </p>
+<p>ผมใส่เครื่องหมาย <code>@</code> นำหน้าเพื่อให้มันไม่ error เวลาที่ไม่สามารถเชื่อมกับ <code>Hospital</code> เช่น  กรณีไม่ได้บันทึกรหัสโรงพยาบาล เวลาแสดงผลที่ <code>GridView</code> มันจะ error เพราะไม่สามารถเชื่อมได้</p>
 </blockquote>
 
 <h2 id="เพิ่มใน-model-patient">เพิ่มใน Model Patient</h2>
@@ -222,7 +222,7 @@ Hospital                  |
     <span class="k">public</span> <span class="k">function</span> <span class="nf">getHospitalName</span><span class="p">(){</span>
         <span class="k">return</span> <span class="o">@</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">hospital</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="c1">// virtual attribute fullName </span>
+    <span class="c1">// virtual attribute fullName</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">getFullname</span><span class="p">(){</span>
         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">name</span><span class="o">.</span> <span class="s2">&quot; &quot;</span> <span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">surname</span><span class="p">;</span>
     <span class="p">}</span>
@@ -295,7 +295,7 @@ Hospital                  |
 <span class="k">class</span> <span class="nc">PatientSearch</span> <span class="k">extends</span> <span class="nx">Patient</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="nv">$hospitalName</span><span class="p">;</span>
-    <span class="k">public</span> <span class="nv">$fullName</span><span class="p">;</span>   
+    <span class="k">public</span> <span class="nv">$fullName</span><span class="p">;</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
     <span class="p">{</span>
         <span class="k">return</span> <span class="p">[</span>

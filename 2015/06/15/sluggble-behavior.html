@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>การใช้งาน SluggbleBehavior เพื่อแปลงคำไทยเป็นอังกฤษเพื่อใช้กับ Url | DixonSatit</title>
-	<meta name="description" content="SluggbleBehavior เป็น class ที่ใช้สำหรับแปลงข้อความจากภาษาอื่นๆ ให้เป็นภาษาอังกฤษเพื่อใช้กับ url ลองเล่นกันดูตัวนี้เป็น Behaviors ซึ่งแน่นอนมันจะทำงานให้อย่า...">
+	<title>การใช้งาน SluggbleBehavior เพื่อแปลงคำไทยเป็นอังกฤษเพื่อใช้กับ Url | Yii 2 Learning</title>
+	<meta name="description" content="การใช้งาน SluggbleBehavior เพื่อแปลงคำไทยเป็นอังกฤษเพื่อใช้กับ Urlิ , yii2, yii Framework">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -18,7 +18,7 @@
 	<link rel="canonical" href="http://dixonsatit.github.io/2015/06/15/sluggble-behavior.html">
 
 	<!-- RSS -->
-	<link rel="alternate" type="application/atom+xml" title="DixonSatit" href="http://dixonsatit.github.io/feed.xml" />
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
 
 	<!-- Font Awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -57,7 +57,7 @@
 		</a>
 		
 		<h1 class="site-title">
-			<a href="/">DixonSatit</a>
+			<a href="/">Yii 2 Learning</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -190,12 +190,12 @@
   <section class="post-content"><p>SluggbleBehavior เป็น class ที่ใช้สำหรับแปลงข้อความจากภาษาอื่นๆ ให้เป็นภาษาอังกฤษเพื่อใช้กับ url ลองเล่นกันดู
 ตัวนี้เป็น Behaviors ซึ่งแน่นอนมันจะทำงานให้อย่างอัตโนมัติ เพียงแค่เราทำการตั้งค่าที่ model ที่เราต้องการ อย่างเช่น</p>
 
-<p>ผมต้องการใช้คำว่า &quot;ข่าวประชาสัมพันธ์&quot;  เพื่อใช้เป็น url ในการเลือกข้อมูลที่มีเฉพาะข่าวประชาสัมพันธ์ มันก็จะทำการแปลงคำ จาก  &quot;ข่าวประชาสัมพันธ์&quot; ให้เป็น &quot;khaw-prachasamphanth&quot; ซึ่งอาจจะไม่ตรงนัก แต่คิดว่าได้แค่นี้ก็แจ่มแระ ฮ่าๆ </p>
+<p>ผมต้องการใช้คำว่า &quot;ข่าวประชาสัมพันธ์&quot;  เพื่อใช้เป็น url ในการเลือกข้อมูลที่มีเฉพาะข่าวประชาสัมพันธ์ มันก็จะทำการแปลงคำ จาก  &quot;ข่าวประชาสัมพันธ์&quot; ให้เป็น &quot;khaw-prachasamphanth&quot; ซึ่งอาจจะไม่ตรงนัก แต่คิดว่าได้แค่นี้ก็แจ่มแระ ฮ่าๆ</p>
 
 <p>เป้าหมายของเราคือ ให้ทำการแปลงข้อมูลจากฟิวด์ title แล้วนำข้อมูลที่แปลงแล้วมาเก็บที่ฟิวด์ slug</p>
 
 <blockquote>
-<p>ถ้าหากตั้งชื่อฟิวด์ ที่จะรับข้อมูลเป็น slug ก็สามารถใช้งานได้เลยไม่ต้องตั้งค่าใดๆ เพิ่ม แต่ถ้าหากตั้งเป็นชื่ออื่น   เราก็สามารถกำหนดค่าให้มันได้ที่ slugAttribute ว่าชื่อฟิวด์ slug ของเราชื่ออะไร </p>
+<p>ถ้าหากตั้งชื่อฟิวด์ ที่จะรับข้อมูลเป็น slug ก็สามารถใช้งานได้เลยไม่ต้องตั้งค่าใดๆ เพิ่ม แต่ถ้าหากตั้งเป็นชื่ออื่น   เราก็สามารถกำหนดค่าให้มันได้ที่ slugAttribute ว่าชื่อฟิวด์ slug ของเราชื่ออะไร</p>
 </blockquote>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
