@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Tue, 30 Jun 2015 00:38:04 +0700</pubDate>
+    <pubDate>Tue, 30 Jun 2015 09:15:11 +0700</pubDate>
     
       <item>
         <title>การติดตั้ง และการใช้งาน composer กับ Yii 2</title>
@@ -93,17 +93,30 @@ update           Updates your dependencies to the latest version according to co
 validate         Validates a composer.json
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;blockquote&gt;
-&lt;p&gt;เราสามารถสั่งให้มันอัพเดทตัวเองได้  โดยใช้คำสั่ง &lt;code&gt;composer self-update&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;เราสามารถสั่งให้มันอัพเดทตัวเองได้  โดยใช้คำสั่ง &lt;code&gt;composer self-update&lt;/code&gt; และคำสังอื่นๆ สามารถดูได้ที่เวลาเราพิมพ์คำสั่ง composer เข้าไปเฉยๆ แล้วดูตรง &lt;code&gt;Available commands&lt;/code&gt; เหมือนด้านบน&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;การติดตั้ง-extension&quot;&gt;การติดตั้ง extension&lt;/h3&gt;
 
 &lt;p&gt;การติดตั้ง extension ผ่าน composer นั้นทำได้ 2 วิธีคือ&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;ติดตั้งผ่านคำสั่ง &lt;code&gt;composer install&lt;/code&gt; เหมาสำหร้บหรับการติดตั้งทีละ 1 อย่าง&lt;/li&gt;
-&lt;li&gt;ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json โดยครง สามาระบุได้ทีละหลายๆ รายการ&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;ติดตั้งผ่านคำสั่ง &lt;code&gt;composer require&lt;/code&gt; เหมาะสำหร้บหรับการติดตั้งทีละ 1 extension ตัวอย่างการติดตั้ง&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require --prefer-dist yiisoft/yii2-imagine
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json โดยครงที่ &lt;code&gt;require&lt;/code&gt; สามารถติดตั้งได้ทีละหลายๆ ตัว ตัวอย่างนี้เพิ่มเข้าไป 2 extension คือ &lt;code&gt;yii2-chartjs-widget&lt;/code&gt;,&lt;code&gt;yii2-imagine&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;require&amp;quot;: {
+      &amp;quot;php&amp;quot;: &amp;quot;&amp;gt;=5.4.0&amp;quot;,
+      &amp;quot;yiisoft/yii2&amp;quot;: &amp;quot;&amp;gt;=2.0.4&amp;quot;,
+      &amp;quot;yiisoft/yii2-bootstrap&amp;quot;: &amp;quot;*&amp;quot;,
+      &amp;quot;yiisoft/yii2-swiftmailer&amp;quot;: &amp;quot;*&amp;quot;,
+      &amp;quot;2amigos/yii2-chartjs-widget&amp;quot;: &amp;quot;~2.0&amp;quot;,
+      &amp;quot;yiisoft/yii2-imagine&amp;quot;: &amp;quot;*&amp;quot;
+  },
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากเพิ่ม extension ที่ต้องการจะติดตั้งเสร็จ ให้ทำการรันคำสั่ง &lt;code&gt;composer update&lt;/code&gt; composer จะทำการตรวจสอบและ install extension ให้เรา&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากนั้น extension ที่เราติดตั้งจะถูกโหลดไปเก็บไว้ที่ &lt;code&gt;vendor&lt;/code&gt; เพื่อรอให้เราเรียกใช้งานผ่าน namespace ได้&lt;/p&gt;
 </description>
         <pubDate>Mon, 29 Jun 2015 00:00:00 +0700</pubDate>
       </item>

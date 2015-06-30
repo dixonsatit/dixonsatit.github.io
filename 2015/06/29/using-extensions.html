@@ -267,17 +267,30 @@ update           Updates your dependencies to the latest version according to co
 validate         Validates a composer.json
 </code></pre></div>
 <blockquote>
-<p>เราสามารถสั่งให้มันอัพเดทตัวเองได้  โดยใช้คำสั่ง <code>composer self-update</code></p>
+<p>เราสามารถสั่งให้มันอัพเดทตัวเองได้  โดยใช้คำสั่ง <code>composer self-update</code> และคำสังอื่นๆ สามารถดูได้ที่เวลาเราพิมพ์คำสั่ง composer เข้าไปเฉยๆ แล้วดูตรง <code>Available commands</code> เหมือนด้านบน</p>
 </blockquote>
 
 <h3 id="การติดตั้ง-extension">การติดตั้ง extension</h3>
 
 <p>การติดตั้ง extension ผ่าน composer นั้นทำได้ 2 วิธีคือ</p>
 
-<ul>
-<li>ติดตั้งผ่านคำสั่ง <code>composer install</code> เหมาสำหร้บหรับการติดตั้งทีละ 1 อย่าง</li>
-<li>ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json โดยครง สามาระบุได้ทีละหลายๆ รายการ</li>
-</ul>
+<p>ติดตั้งผ่านคำสั่ง <code>composer require</code> เหมาะสำหร้บหรับการติดตั้งทีละ 1 extension ตัวอย่างการติดตั้ง</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer require --prefer-dist yiisoft/yii2-imagine
+</code></pre></div>
+<p>ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json โดยครงที่ <code>require</code> สามารถติดตั้งได้ทีละหลายๆ ตัว ตัวอย่างนี้เพิ่มเข้าไป 2 extension คือ <code>yii2-chartjs-widget</code>,<code>yii2-imagine</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&quot;require&quot;: {
+      &quot;php&quot;: &quot;&gt;=5.4.0&quot;,
+      &quot;yiisoft/yii2&quot;: &quot;&gt;=2.0.4&quot;,
+      &quot;yiisoft/yii2-bootstrap&quot;: &quot;*&quot;,
+      &quot;yiisoft/yii2-swiftmailer&quot;: &quot;*&quot;,
+      &quot;2amigos/yii2-chartjs-widget&quot;: &quot;~2.0&quot;,
+      &quot;yiisoft/yii2-imagine&quot;: &quot;*&quot;
+  },
+</code></pre></div>
+<p>หลังจากเพิ่ม extension ที่ต้องการจะติดตั้งเสร็จ ให้ทำการรันคำสั่ง <code>composer update</code> composer จะทำการตรวจสอบและ install extension ให้เรา</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer update
+</code></pre></div>
+<p>หลังจากนั้น extension ที่เราติดตั้งจะถูกโหลดไปเก็บไว้ที่ <code>vendor</code> เพื่อรอให้เราเรียกใช้งานผ่าน namespace ได้</p>
 </section>
 </article>
 
