@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>A website with blog posts and pages</description>
-    <pubDate>Tue, 30 Jun 2015 09:26:35 +0700</pubDate>
+    <pubDate>Tue, 30 Jun 2015 09:31:51 +0700</pubDate>
     
       <item>
         <title>การติดตั้ง และการใช้งาน composer กับ Yii 2</title>
@@ -96,6 +96,8 @@ validate         Validates a composer.json
 &lt;p&gt;เราสามารถสั่งให้มันอัพเดทตัวเองได้  โดยใช้คำสั่ง &lt;code&gt;composer self-update&lt;/code&gt; และคำสังอื่นๆ สามารถดูได้ที่เวลาเราพิมพ์คำสั่ง composer เข้าไปเฉยๆ แล้วดูตรง &lt;code&gt;Available commands&lt;/code&gt; เหมือนด้านบน&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;p&gt;ใน project Yii ที่เราได้สร้างขึ้น จะมีไฟล์ชื่อว่า composer.json เป็นตัวบอกว่า Applicaion  ของเราได้ติดตั้ง extension อะไรไปบ้าง&lt;/p&gt;
+
 &lt;h3 id=&quot;การติดตั้ง-extension&quot;&gt;การติดตั้ง extension&lt;/h3&gt;
 
 &lt;p&gt;การติดตั้ง extension ผ่าน composer นั้นทำได้ 2 วิธีคือ&lt;/p&gt;
@@ -103,6 +105,8 @@ validate         Validates a composer.json
 &lt;p&gt;ติดตั้งผ่านคำสั่ง &lt;code&gt;composer require&lt;/code&gt; เหมาะสำหร้บหรับการติดตั้งทีละ 1 extension ตัวอย่างการติดตั้ง&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require --prefer-dist yiisoft/yii2-imagine
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากติดตั้งเสร็จ composer จะแก้ไขไฟล์ composer.json ให้เราเอง โดยเพิ่ม ชื่อ extension ที่ tag require ที่เราได้ติดตั้งเข้าไป&lt;/p&gt;
+
 &lt;p&gt;ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json โดยครงที่ &lt;code&gt;require&lt;/code&gt; สามารถติดตั้งได้ทีละหลายๆ ตัว ตัวอย่างนี้เพิ่มเข้าไป 2 extension คือ &lt;code&gt;yii2-chartjs-widget&lt;/code&gt;,&lt;code&gt;yii2-imagine&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;require&amp;quot;: {
       &amp;quot;php&amp;quot;: &amp;quot;&amp;gt;=5.4.0&amp;quot;,
