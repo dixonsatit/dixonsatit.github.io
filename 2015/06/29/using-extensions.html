@@ -270,18 +270,22 @@ validate         Validates a composer.json
 <p>เราสามารถสั่งให้มันอัพเดทตัวเองได้  โดยใช้คำสั่ง <code>composer self-update</code> และคำสังอื่นๆ สามารถดูได้ที่เวลาเราพิมพ์คำสั่ง composer เข้าไปเฉยๆ แล้วดูตรง <code>Available commands</code> เหมือนด้านบน</p>
 </blockquote>
 
-<p>ใน project Yii ที่เราได้สร้างขึ้น จะมีไฟล์ชื่อว่า composer.json เป็นตัวบอกว่า Applicaion  ของเราได้ติดตั้ง extension อะไรไปบ้าง</p>
+<p>ใน project Yii ที่เราได้สร้างขึ้น จะมีไฟล์ชื่อว่า composer.json เป็นตัวจัดการ packages ทั้งหมดและสามารถบอกได้ว่า Applicaion  ของเราได้ติดตั้ง extension อะไรไปบ้าง หากมีการติดตั้ง extension เพิ่มเติมมันจะทำการแก้ไขไฟล์นี้ให้อัตโนมัติ ยกเว้นว่าเราเพิ่ม extension เองในไฟล์นี้</p>
 
 <h3 id="การติดตั้ง-extension">การติดตั้ง extension</h3>
 
 <p>การติดตั้ง extension ผ่าน composer นั้นทำได้ 2 วิธีคือ</p>
 
-<p>ติดตั้งผ่านคำสั่ง <code>composer require</code> เหมาะสำหร้บหรับการติดตั้งทีละ 1 extension ตัวอย่างการติดตั้ง</p>
+<p><strong>ติดตั้งผ่านคำสั่ง <code>composer require</code></strong></p>
+
+<p>วิธีนี้สามารถติดตั้งได้ทีละ 1 extension ตัวอย่างการติดตั้ง</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">composer require --prefer-dist yiisoft/yii2-imagine
 </code></pre></div>
 <p>หลังจากติดตั้งเสร็จ composer จะแก้ไขไฟล์ composer.json ให้เราเอง โดยเพิ่ม ชื่อ extension ที่ tag require ที่เราได้ติดตั้งเข้าไป</p>
 
-<p>ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json โดยครงที่ <code>require</code> สามารถติดตั้งได้ทีละหลายๆ ตัว ตัวอย่างนี้เพิ่มเข้าไป 2 extension คือ <code>yii2-chartjs-widget</code>,<code>yii2-imagine</code></p>
+<p><strong>ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json</strong></p>
+
+<p>สามารถเข้าไปแก้ไขไฟล์โดยตรงในส่วนของ <code>require</code> สามารถติดตั้งได้ทีละหลายๆ ตัว ตัวอย่างนี้เพิ่มเข้าไป 2 extension คือ <code>yii2-chartjs-widget</code>,<code>yii2-imagine</code></p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">&quot;require&quot;: {
       &quot;php&quot;: &quot;&gt;=5.4.0&quot;,
       &quot;yiisoft/yii2&quot;: &quot;&gt;=2.0.4&quot;,
