@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Wed, 01 Jul 2015 00:31:32 +0700</pubDate>
+    <pubDate>Wed, 01 Jul 2015 13:19:12 +0700</pubDate>
     
       <item>
         <title>รวม extension ต่างๆ และ tutorial ที่น่าสนใจ</title>
@@ -1630,6 +1630,18 @@ Wednesday, June 24, 2015 5:32:54 AM Indochina Time
 &lt;span class=&quot;x&quot;&gt;        &amp;#39;currencyCode&amp;#39; =&amp;gt; &amp;#39;EUR&amp;#39;,&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;   ],&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;],&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;หากใช้แล้วยังไม่เปลี่ยนเป็นภาษาไทยให้ลองตั้งค่าที่ php.ini เพื่อเปิด &lt;code&gt;php_intl&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;extension=php_intl.dll
+
+[intl]
+intl.default_locale =th_TH.UTF-8
+; This directive allows you to produce PHP errors when some error
+; happens within intl functions. The value is the level of the error produced.
+; Default is 0, which does not produce any errors.
+;intl.error_level = E_WARNING
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;เพิ่มเติม format อื่นๆ&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;echo Yii::$app-&amp;gt;formatter-&amp;gt;asPercent(0.125, 2); // output: 12.50%

@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>การใช้งาน Data Formater เพื่อแปลงวันที่, เวลา | Yii 2 Learning</title>
-	<meta name="description" content="การใช้งาน Data Formater เพื่อแปลงวันที่, เวลา , yii2, yii Framework">
+	<meta name="description" content="Date Formatter  จะทำให้การแปลงข้อมูลวันที่ ให้เป็นเรื่องง่ายๆ ไม่ว่าจะแปลงเป็น วันที หรือเวลา แสดงวันที่แบบย่อๆ หรือแบบยาวๆ  ได้หลายแบบ อีกทั้งยังแสดงเวลาตาม...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -362,6 +362,18 @@ Wednesday, June 24, 2015 5:32:54 AM Indochina Time
 <span class="x">        &#39;currencyCode&#39; =&gt; &#39;EUR&#39;,</span>
 <span class="x">   ],</span>
 <span class="x">],</span>
+</code></pre></div>
+<blockquote>
+<p>หากใช้แล้วยังไม่เปลี่ยนเป็นภาษาไทยให้ลองตั้งค่าที่ php.ini เพื่อเปิด <code>php_intl</code></p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text">extension=php_intl.dll
+
+[intl]
+intl.default_locale =th_TH.UTF-8
+; This directive allows you to produce PHP errors when some error
+; happens within intl functions. The value is the level of the error produced.
+; Default is 0, which does not produce any errors.
+;intl.error_level = E_WARNING
 </code></pre></div>
 <p>เพิ่มเติม format อื่นๆ</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">echo Yii::$app-&gt;formatter-&gt;asPercent(0.125, 2); // output: 12.50%
