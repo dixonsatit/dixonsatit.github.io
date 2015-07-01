@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Wed, 01 Jul 2015 19:45:05 +0700</pubDate>
+    <pubDate>Wed, 01 Jul 2015 19:48:42 +0700</pubDate>
     
       <item>
         <title>รวม extension ต่างๆ และ tutorial ที่น่าสนใจ</title>
@@ -1649,6 +1649,10 @@ intl.default_locale =th_TH.UTF-8
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;echo Yii::$app-&amp;gt;formatter-&amp;gt;asPercent(0.125, 2); // output: 12.50%
 echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#39;);
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;แก้ปัญหาเปลี่ยน-ค-ศ-เป็น-พศ&quot;&gt;แก้ปัญหาเปลี่ยน ค.ศ เป็น พศ&lt;/h2&gt;
+
+&lt;p&gt;ผมได้สร้างเป็น extension ไว้แล้วนะครับชื่อ &lt;a href=&quot;https://github.com/dixonsatit/yii2-thai-year-formatter&quot;&gt;yii2-thai-year-formatter&lt;/a&gt; ลองติดตั้งใช้งานดู หากพบเจอปัญหาก็แนะนำมาได้เลยนะครับ&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-output-formatting.html&quot;&gt;อ่านเพิ่มเติมได้ที่นี&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 23 Jun 2015 00:00:00 +0700</pubDate>
