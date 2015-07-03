@@ -245,13 +245,16 @@
 
 <p>ทำการเรียกใช้งาน model ทั้งหมด เรียก ArrayHelper และ DepDrop</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\helpers\Url</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\helpers\ArrayHelper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\bootstrap\ActiveForm</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">kartik\widgets\DepDrop</span><span class="p">;</span>
+
 <span class="k">use</span> <span class="nx">app\models\Province</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">app\models\Amphur</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">app\models\District</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">yii\helpers\ArrayHelper</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">kartik\widgets\DepDrop</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="สร้าง-dropdownlist-จังหวัด">สร้าง DropdownList จังหวัด</h2>
 
@@ -325,6 +328,27 @@
 
 <p>เราจะทำการสร้าง action ไว้ที่ controllers/EmployeeController.php
 action แรกจะเป็น actionGetAmphur() ตรงนี้จะรองรับการคลิกเลือกจังหวัดและส่งค่าอำเภอกลับไปให้กับ dropdownlist อำเภอเป็น json</p>
+
+<p><strong>Use</strong></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">use Yii;
+
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
+use yii\filters\VerbFilter;
+use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
+use yii\helpers\BaseFileHelper;
+
+use app\models\Province;
+use app\models\Amphur;
+use app\models\District;
+use app\models\Uploads;
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+</code></pre></div>
+<p>เพิ่ม function</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">public function actionGetAmphur() {</span>
 <span class="x">     $out = [];</span>
 <span class="x">     if (isset($_POST[&#39;depdrop_parents&#39;])) {</span>
@@ -449,7 +473,14 @@ action แรกจะเป็น actionGetAmphur() ตรงนี้จะร
     <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
 <p>ลองใช้กันดูนะครับ
-ดาวน์โหลด source code <a href="https://github.com/dimpled/Yii2-Learning-Source/releases"> ได้ทีนี่</a></p>
+ดาวน์โหลด source code ทั้งหมด <a href="https://github.com/dimpled/Yii2-Learning-Source/releases"> ได้ทีนี่</a></p>
+
+<p>หรือดูเฉพาะไฟล์ได้ที่นี่</p>
+
+<ul>
+<li>Controller <a href="https://github.com/dimpled/Yii2-Learning-Source/blob/master/controllers/EmployeeController.php">Controller</a></li>
+<li>view <a href="https://github.com/dimpled/Yii2-Learning-Source/blob/master/views/employee/_form.php"> _form.php</a></li>
+</ul>
 </section>
 </article>
 
