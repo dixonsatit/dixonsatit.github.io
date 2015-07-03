@@ -3,8 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>การสร้าง RBAC ใน Yii 2 อย่างง่าย | Yii 2 Learning</title>
-	<meta name="description" content="
-">
+	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -393,11 +392,12 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 <p>จากนั้นกำหนดค่าที่เราได้ออกแบบไว้ ที่ controller ใน <code>function behaviors()</code></p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
-<span class="k">namespace</span> <span class="nx">backend\controllers</span><span class="p">;</span>
+<span class="k">namespace</span> <span class="nx">frontend\controllers</span><span class="p">;</span>
 
 <span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">common\models\Blog</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">common\models\User</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">backend\models\UserSearch</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">frontend\models\BlogSearch</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">yii\web\Controller</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">yii\web\NotFoundHttpException</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">yii\filters\VerbFilter</span><span class="p">;</span>
@@ -405,12 +405,11 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 <span class="k">use</span> <span class="nx">common\components\AccessRule</span><span class="p">;</span>
 
 <span class="sd">/**</span>
-<span class="sd"> * UserController implements the CRUD actions for User model.</span>
+<span class="sd"> * BlogController implements the CRUD actions for Blog model.</span>
 <span class="sd"> */</span>
-<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="k">class</span> <span class="nc">BlogController</span> <span class="k">extends</span> <span class="nx">Controller</span>
 <span class="p">{</span>
-  <span class="c1">// ...</span>
-  <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">(){</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">(){</span>
         <span class="k">return</span> <span class="p">[</span>
             <span class="s1">&#39;verbs&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
                 <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">VerbFilter</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
@@ -422,7 +421,7 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
                 <span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="nx">AccessControl</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
                 <span class="s1">&#39;only&#39;</span><span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="s1">&#39;create&#39;</span><span class="p">,</span><span class="s1">&#39;update&#39;</span><span class="p">,</span><span class="s1">&#39;view&#39;</span><span class="p">,</span><span class="s1">&#39;delete&#39;</span><span class="p">],</span>
                 <span class="s1">&#39;ruleConfig&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
-                    <span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="nx">AccessRule</span><span class="o">::</span><span class="na">className</span><span class="p">()</span> <span class="c1">// เรียกใช้งาน accessRule ที่เราสร้างขึั้น</span>
+                    <span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="nx">AccessRule</span><span class="o">::</span><span class="na">className</span><span class="p">()</span>
                 <span class="p">],</span>
                 <span class="s1">&#39;rules&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
                     <span class="p">[</span>
@@ -432,15 +431,18 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
                             <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_USER</span><span class="p">,</span>
                             <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_MODERATOR</span><span class="p">,</span>
                             <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_ADMIN</span>
+
                         <span class="p">]</span>
-                    <span class="p">],[</span>
+                    <span class="p">],</span>
+                    <span class="p">[</span>
                         <span class="s1">&#39;actions&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;update&#39;</span><span class="p">],</span>
                         <span class="s1">&#39;allow&#39;</span><span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
                         <span class="s1">&#39;roles&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
                             <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_MODERATOR</span><span class="p">,</span>
                             <span class="nx">User</span><span class="o">::</span><span class="na">ROLE_ADMIN</span>
                         <span class="p">]</span>
-                    <span class="p">],[</span>
+                    <span class="p">],</span>
+                    <span class="p">[</span>
                         <span class="s1">&#39;actions&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;delete&#39;</span><span class="p">],</span>
                         <span class="s1">&#39;allow&#39;</span><span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
                         <span class="s1">&#39;roles&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="nx">User</span><span class="o">::</span><span class="na">ROLE_ADMIN</span><span class="p">]</span>
