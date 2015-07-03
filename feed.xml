@@ -5,10 +5,10 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Fri, 03 Jul 2015 13:01:48 +0700</pubDate>
+    <pubDate>Fri, 03 Jul 2015 21:14:35 +0700</pubDate>
     
       <item>
-        <title>การตั้งค่า connection db หลายๆ ฐานข้อมูล</title>
+        <title>การเปิดใช้งาน Multiple Database Connection</title>
         <link>http://dixonsatit.github.io/2015/07/03/multiple-db-connection.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/03/multiple-db-connection.html</guid>
         <description>&lt;p&gt;&lt;img src=&quot;/img/multiple-db.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
@@ -134,11 +134,20 @@
 
 &lt;p&gt;&lt;img src=&quot;/img/connection-db2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;เมื่อดูในไฟล์ model ที่เราสร้างขึ้นมาจะพบว่ามันเพิ่ม &lt;code&gt;function  getDb()&lt;/code&gt; ขึ้นมา เพื่อให้ไปเรียกใช้ db2 ซึ่งปกติดหากไม่ได้ตั้งค่าใหม่ มันจะใช้ค่า default คือ &lt;code&gt;db&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;การ-เรียกใช้ใน-model&quot;&gt;การ เรียกใช้ใน Model&lt;/h2&gt;
+
+&lt;p&gt;หาก Gii ตามด้านบนเมื่อดูในไฟล์ model ที่เราสร้างขึ้นมาจะพบว่ามันเพิ่ม &lt;code&gt;function  getDb()&lt;/code&gt; ขึ้นมา เพื่อให้ไปเรียกใช้ db2 ซึ่งปกติดหากไม่ได้ตั้งค่าใหม่ มันจะใช้ค่า default คือ &lt;code&gt;db&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;ถ้าหาไม่ได้ gii ก็สามารถเพิ่ม function นี้เข้าไปเองได้ แล้วทำการเปลี่ยนเป็นชื่อ connection ที่ต้องการเรียกใช้งาน&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;  public static function getDb()&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;  {&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;      return Yii::$app-&amp;gt;get(&amp;#39;db2&amp;#39;);&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;  }&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;การ-เรียกใช้ใน-sql-queries&quot;&gt;การ เรียกใช้ใน SQL Queries&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$posts = Yii::$app-&amp;gt;db2-&amp;gt;createCommand(&amp;#39;SELECT * FROM post&amp;#39;)-&amp;gt;queryAll();
+
+Yii::$app-&amp;gt;db2-&amp;gt;createCommand((new \yii\db\Query)-&amp;gt;select(&amp;#39;*&amp;#39;)-&amp;gt;from(&amp;#39;tbl_name&amp;#39;))-&amp;gt;queryAll()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         <pubDate>Fri, 03 Jul 2015 00:00:00 +0700</pubDate>
       </item>
