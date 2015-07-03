@@ -189,7 +189,7 @@
   </header>
   <section class="post-content"><p><img src="/img/multiple-db.jpg" alt=""></p>
 
-<p>Yii 2 สามารถตั้งค่า connection db ได้หลายๆ ฐานข้อมูลแม้จะไม่ได้อยู่ใน ip เดียวกัน เช่น เรามีฐานข้อมูล อยู่ 2 ที่คนละ ip กัน ตัวอย่าง</p>
+<p>Yii 2 สามารถตั้งค่า connection db ได้หลายๆ ฐานข้อมูลหรือ หลายๆ server แม้จะไม่ได้อยู่ใน ip เดียวกัน เช่น เรามีฐานข้อมูล อยู่ 2 ที่คนละ ip กัน ตัวอย่าง</p>
 
 <ul>
 <li> MySql 192.168.0.101</li>
@@ -309,7 +309,13 @@
 <p>เราสามารถตั้งค่าเป็น db2 ดังนี้</p>
 
 <p><img src="/img/connection-db2.png" alt=""></p>
-</section>
+
+<p>เมื่อดูในไฟล์ model ที่เราสร้างขึ้นมาจะพบว่ามันเพิ่ม <code>function  getDb()</code> ขึ้นมา เพื่อให้ไปเรียกใช้ db2 ซึ่งปกติดหากไม่ได้ตั้งค่าใหม่ มันจะใช้ค่า default คือ <code>db</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">  public static function getDb()</span>
+<span class="x">  {</span>
+<span class="x">      return Yii::$app-&gt;get(&#39;db2&#39;);</span>
+<span class="x">  }</span>
+</code></pre></div></section>
 </article>
 
 <!-- Post navigation -->
