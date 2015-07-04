@@ -5,7 +5,93 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Sat, 04 Jul 2015 09:06:58 +0700</pubDate>
+    <pubDate>Sat, 04 Jul 2015 11:27:21 +0700</pubDate>
+    
+      <item>
+        <title>ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย</title>
+        <link>http://dixonsatit.github.io/2015/07/04/thai-year-formatter.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/04/thai-year-formatter.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/thai-year-formatter.jpg&quot; alt=&quot;ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ปกติกเมื่อเราใช้งาน formatter เพื่อแปลงวันที่เป็นภาษาไทย ซึ่งมันจะแปลงให้เฉพาะ วันและเดือน เท่านั้น ส่วนปี ยังเป็น ค.ศ เหมือนเดิม หากใครไม่ทราบ formatter คืออะไร อ่านเรื่องการใช้งาน formatter  &lt;a href=&quot;/2015/06/23/date-formatter.html&quot;&gt;ที่นี่&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ผมจึงสร้าง extension ThaiYearFormatter  ขึ้นมาเพื่อแก้ปัญหานี้ ลองใช้กันดูนะครับ หากติดปัญหาอะไรแจ้งมาได้ครับ&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ThaiYearFormatter จำเป็นต้องเปิดการใช้งาน  php extension intl  ใน php.ini&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;เปิดไฟล์ php.ini แล้วเปิดใช้งาน ดังนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;extension=php_intl.dll
+
+[intl]
+intl.default_locale =th_TH.UTF-8
+; This directive allows you to produce PHP errors when some error
+; happens within intl functions. The value is the level of the error produced.
+; Default is 0, which does not produce any errors.
+;intl.error_level = E_WARNING
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หากยังไม่มีให้ติดตั้งที่ server &lt;a href=&quot;http://php.net/manual/en/intl.installation.php&quot;&gt;ดูที่นี่&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/3191664/list-of-all-locales-and-their-short-codes&quot;&gt;ที่มา  http://stackoverflow.com/questions/3191664/list-of-all-locales-and-their-short-codes&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;การติดตั้ง&quot;&gt;การติดตั้ง&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require --prefer-dist dixonsatit/yii2-thai-year-formatter &amp;quot;0.9.6&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หรือเพิ่มที่ ไฟล์ composer.json ในส่วน require&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;dixonsatit/yii2-thai-year-formatter&amp;quot;: &amp;quot;0.9.6&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากนั้น รันคำสั่ง &lt;code&gt;composer update&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;การตั้งค่า&quot;&gt;การตั้งค่า&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;language&amp;#39;=&amp;gt;&amp;#39;th_TH&amp;#39;, // เปิดใช้งานภาษาไทย
+&amp;#39;components&amp;#39; =&amp;gt; [
+    //...
+    &amp;#39;thaiFormatter&amp;#39;=&amp;gt;[
+        &amp;#39;class&amp;#39;=&amp;gt;&amp;#39;dixonsatit\thaiYearFormatter\ThaiYearFormatter&amp;#39;,
+    ],
+]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;การเรียกใช้งาน&quot;&gt;การเรียกใช้งาน&lt;/h2&gt;
+
+&lt;p&gt;เรียกใช้งานผ่าน component &lt;code&gt;thaiFormatter&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$time = time();&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;//$time = &amp;#39;2015-06-03 13:25:17&amp;#39;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;short&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;medium&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;long&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;full&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;short&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;medium&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;long&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;full&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;php:Y-m-d&amp;#39;);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;php:Y-m-d H:i:s&amp;#39;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ดู php date format ได้ที่นี่ &lt;a href=&quot;http://php.net/manual/en/function.date.php&quot;&gt;php date format&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;แสดงผล&quot;&gt;แสดงผล&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;25/6/2558
+25 มิ.ย. 2558
+25 มิถุนายน 2558
+วันอาทิตย์ที่ 25 มิถุนายน พ.ศ. 2558
+
+25/6/2558, 9:57
+25 มิ.ย. 2558, 9:57:18
+25 มิถุนายน 2558, 9 นาฬิกา 57 นาที 18 วินาที GMT+07:00
+วันอาทิตย์ที่ 25 มิถุนายน พ.ศ. 2558, 9 นาฬิกา 57 นาที 18 วินาที GMT+07:00
+
+2015-06-24
+2015-06-24 05:32:54
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Sat, 04 Jul 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การเปิดใช้งาน Multiple Database Connection</title>
@@ -3272,161 +3358,6 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;p&gt;ในส่วนของ $publishOptions เป็นการระบุว่าให้ copy ไปเฉพาะโฟลเดอร์ fonts,css เพราะปกติเมื่อเราระบุ &lt;code&gt;$sourcePath = &amp;#39;@bower/fontawesome&amp;#39;;&lt;/code&gt; และไม่ได้ระบุใน &lt;code&gt;$publishOptions&lt;/code&gt; ในโฟลเดอร์ fontawesome มีอะไรมันจะทำการ copy ไปให้หมดเลย&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การติดตั้งและใช้งาน AdminLTE</title>
-        <link>http://dixonsatit.github.io/2015/06/18/adminlte.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/18/adminlte.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/adminlte.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://almsaeedstudio.com/&quot;&gt;AdminLte&lt;/a&gt; เป็นธีมที่สวยงามน่าใช้งาน มีเลเอาท์ต่างๆ พร้อมใช้งาน และที่สำคัญฟรี ด้วย และตอนนี้ก็มีคนสร้าง &lt;a href=&quot;https://github.com/dmstr/yii2-adminlte-asset&quot;&gt;AdminLTE Asset&lt;/a&gt; สำหรับใช้กับ yii2 เท่าที่ลองใช้งาน พบว่าสะดวกมากๆ ไปลองใช้กัน ^ ^&lt;/p&gt;
-
-&lt;h2 id=&quot;การติดตั้ง&quot;&gt;การติดตั้ง&lt;/h2&gt;
-
-&lt;p&gt;ง่ายมากๆ ก่อนอื่นติดตั้งตัว Extension ก่อน&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require dmstr/yii2-adminlte-asset &amp;quot;2.*&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ถ้าหากดูตามตัวอย่างใน &lt;a href=&quot;https://github.com/dmstr/yii2-adminlte-asset&quot;&gt;https://github.com/dmstr/yii2-adminlte-asset&lt;/a&gt; จะให้ชี้ไปที่ path view &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;components&amp;#39; =&amp;gt; [
-    &amp;#39;view&amp;#39; =&amp;gt; [
-         &amp;#39;theme&amp;#39; =&amp;gt; [
-             &amp;#39;pathMap&amp;#39; =&amp;gt; [
-                &amp;#39;@app/views&amp;#39; =&amp;gt; &amp;#39;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&amp;#39;
-             ],
-         ],
-    ],
-],
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;ข้อเสียของวิธีนี้คือเราจะไม่สามารถแกไข layout view  ได้เลย หากเราไปแก้ไขไฟล์ที่ path &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; โดยตรง จริงๆ ก็สามารถทำได้ แต่เมื่อมีการอัพเดท ก็จะทำให้ข้อมูลส่วนที่เราแก้ไขถูกทับด้วยไฟล์ใหม่ๆ เพราะฉะนั้นผมแนะนำว่าไม่ควรที่จะไปแก้ไฟล์ อะไรก็ตามที่ &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;แต่ถ้าหากมั่นใจว่าไม่แก้ไข view เลย ก็สามารถตั้งค่า ตาม path นี้ได้&lt;/p&gt;
-
-&lt;p&gt;ในส่วนตัวผมแนะนำให้ทำการ copy ไฟล์ view มาไว้ที่ application เพื่อให้สามารถแก้ไข view ได้ หรือปรับแต่งตามความต้องการได้&lt;/p&gt;
-
-&lt;p&gt;ให้ทำการสร้างโฟลเดอร์ ตามนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;แบบ Basic สร้างโฟลเดอร์ตามนี้ /themes/adminlte&lt;/li&gt;
-&lt;li&gt;แบบ Advance
-
-&lt;ul&gt;
-&lt;li&gt; Backend สร้างโฟลเดอร์ตามนี่ /backend/themes/adminlte&lt;/li&gt;
-&lt;li&gt; Frontend สร้างโฟลเดอร์ตามนี่ /frontend/themes/adminlte&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;จากนั้นทำการ copy โฟลเดอร์ &lt;code&gt;views&lt;/code&gt;,&lt;code&gt;layouts&lt;/code&gt; จาก &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มาไว้ที่ themes/adminlte/ ทีเราสร้างขึ้น&lt;/p&gt;
-
-&lt;p&gt;หลังจากสร้างและ copy ไฟล์มาแล้วเราจะได้โครงสร้างโฟลเดอร์แบบนี้ ซึ่งก็แล้วแต่ว่าเราจะใช้แบบใหน ใช้เฉพาะ fontend ก็ตั้งค่า เฉพาะ fontend&lt;/p&gt;
-
-&lt;p&gt;หากคุณใช้ Basic&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- basic
-    - themes/adminlte
-        - layouts
-        - site
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากคุณใช้ที่ frontend&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- advance
-    - frontend
-        - themes/adminlte
-            - layouts
-            - site
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หากคุณใช้ที backend&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;- advance
-    - backend
-        - themes/adminlte
-            - layouts
-            - site
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากนั้นให้ทำการตั้งค่าในส่วนของการตั้งค่า เพื่อทำการเรียกใช้งาน theme&lt;/p&gt;
-
-&lt;h2 id=&quot;app-basic&quot;&gt;App Basic&lt;/h2&gt;
-
-&lt;p&gt;ตั้งค่า config ได้ที่ &lt;code&gt;config/main.php&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;components&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-         &lt;span class=&quot;s1&quot;&gt;&amp;#39;theme&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-             &lt;span class=&quot;s1&quot;&gt;&amp;#39;pathMap&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;@app/views&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@app/themes/adminlte&amp;#39;&lt;/span&gt;
-             &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;app-advance-frontend&quot;&gt;App Advance : Frontend&lt;/h2&gt;
-
-&lt;p&gt;ตั้งค่า config ได้ที่ &lt;code&gt;frontend/config/main.php&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;components&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-         &lt;span class=&quot;s1&quot;&gt;&amp;#39;theme&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-             &lt;span class=&quot;s1&quot;&gt;&amp;#39;pathMap&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-                 &lt;span class=&quot;s1&quot;&gt;&amp;#39;@frontend/views&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@frontend/themes/adminlte&amp;#39;&lt;/span&gt;
-             &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;app-advance-backend&quot;&gt;App Advance : Backend&lt;/h2&gt;
-
-&lt;p&gt;ตั้งค่า config ได้ที่ &lt;code&gt;backend/config/main.php&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;components&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-         &lt;span class=&quot;s1&quot;&gt;&amp;#39;theme&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-             &lt;span class=&quot;s1&quot;&gt;&amp;#39;pathMap&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-                 &lt;span class=&quot;s1&quot;&gt;&amp;#39;@backend/views&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@backend/themes/adminlte&amp;#39;&lt;/span&gt;
-             &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;advance-ใช้-adminlte-ทั้ง-frontend-amp-backend-โดยใช้-view-ร่วมกัน&quot;&gt;Advance ใช้ Adminlte ทั้ง frontend &amp;amp; backend โดยใช้ view ร่วมกัน&lt;/h2&gt;
-
-&lt;p&gt;วิธีนี้คือการใช้งาน view ของ adminte ร่วมกันทั้ง fontend &amp;amp; backend&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;สร้่าง โฟลเดอร์ themes/adminlte  ที่ /common จะได้ `/common/themes/adminlte&lt;/li&gt;
-&lt;li&gt;copy โฟลเดอร์จาก  &lt;code&gt;@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app&lt;/code&gt; มีอยู่ 2 โฟลเดอร์ มี &lt;code&gt;layouts&lt;/code&gt; กับ &lt;code&gt;site&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;copy โฟลเดอร์มาไว้ที่ /common/themes/adminlte/&lt;/li&gt;
-&lt;li&gt;ทำการตั้งค่า config ดังนี้ ทั้ง frontend &amp;amp; backend&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;อย่าลืมว่า ทั้ง frontend และ backend ใช้ view adminlte ร่วมกัน เมื่อมีการแก้ไข ทั้ง frontend และ backend ก็จะถูกเปลี่ยนตามไปด้วย&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;view&amp;#39; =&amp;gt; [
-             &amp;#39;theme&amp;#39; =&amp;gt; [
-                 &amp;#39;pathMap&amp;#39; =&amp;gt; [
-                    &amp;#39;@app/views&amp;#39; =&amp;gt; &amp;#39;@common/themes/adminlte&amp;#39;
-                 ],
-             ],
-        ],
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นก็ทดลองใช้งานได้เลยง่าย สะดวกมากๆ&lt;/p&gt;
-
-&lt;h2 id=&quot;เปลี่ยน-skin-adminlte&quot;&gt;เปลี่ยน skin AdminLTE&lt;/h2&gt;
-
-&lt;p&gt;AdminLTE มี skin มาใช้ใช้หลายแบบมากๆ เราสามารถเปลี่ยน skin ได้ง่ายๆ โดยเปิดไฟล์ &lt;code&gt;themes/adminlte/layouts/main.php&lt;/code&gt; และทำการค้นหาแท็ก &lt;code&gt;body&lt;/code&gt; จะพบ skin default คือ &lt;code&gt;skin-blue&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; &amp;lt;body class=&amp;quot;skin-blue sidebar-mini&amp;quot;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;สามารถเปลี่ยนเป็นแบบต่างๆ ได้ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;skin-blue&amp;quot;,
-&amp;quot;skin-black&amp;quot;,
-&amp;quot;skin-red&amp;quot;,
-&amp;quot;skin-yellow&amp;quot;,
-&amp;quot;skin-purple&amp;quot;,
-&amp;quot;skin-green&amp;quot;,
-&amp;quot;skin-blue-light&amp;quot;,
-&amp;quot;skin-black-light&amp;quot;,
-&amp;quot;skin-red-light&amp;quot;,
-&amp;quot;skin-yellow-light&amp;quot;,
-&amp;quot;skin-purple-light&amp;quot;,
-&amp;quot;skin-green-light&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-        <pubDate>Thu, 18 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
   </channel>

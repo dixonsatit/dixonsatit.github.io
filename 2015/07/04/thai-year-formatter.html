@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย | Yii 2 Learning</title>
+	<meta name="description" content="ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย |  Yii2, Yii Framework, Extension, Howto,tutorial">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/07/04/thai-year-formatter.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Yii 2 Learning</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/yii2Learning" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย</h1>
+    <p class="meta">
+    July 4, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p><img src="/img/thai-year-formatter.jpg" alt="ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย"></p>
+
+<p>ปกติกเมื่อเราใช้งาน formatter เพื่อแปลงวันที่เป็นภาษาไทย ซึ่งมันจะแปลงให้เฉพาะ วันและเดือน เท่านั้น ส่วนปี ยังเป็น ค.ศ เหมือนเดิม หากใครไม่ทราบ formatter คืออะไร อ่านเรื่องการใช้งาน formatter  <a href="/2015/06/23/date-formatter.html">ที่นี่</a></p>
+
+<p>ผมจึงสร้าง extension ThaiYearFormatter  ขึ้นมาเพื่อแก้ปัญหานี้ ลองใช้กันดูนะครับ หากติดปัญหาอะไรแจ้งมาได้ครับ</p>
+
+<blockquote>
+<p>ThaiYearFormatter จำเป็นต้องเปิดการใช้งาน  php extension intl  ใน php.ini</p>
+</blockquote>
+
+<p>เปิดไฟล์ php.ini แล้วเปิดใช้งาน ดังนี้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">extension=php_intl.dll
+
+[intl]
+intl.default_locale =th_TH.UTF-8
+; This directive allows you to produce PHP errors when some error
+; happens within intl functions. The value is the level of the error produced.
+; Default is 0, which does not produce any errors.
+;intl.error_level = E_WARNING
+</code></pre></div>
+<p>หากยังไม่มีให้ติดตั้งที่ server <a href="http://php.net/manual/en/intl.installation.php">ดูที่นี่</a></p>
+
+<hr>
+
+<p><a href="http://stackoverflow.com/questions/3191664/list-of-all-locales-and-their-short-codes">ที่มา  http://stackoverflow.com/questions/3191664/list-of-all-locales-and-their-short-codes</a></p>
+
+<h2 id="การติดตั้ง">การติดตั้ง</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">composer require --prefer-dist dixonsatit/yii2-thai-year-formatter &quot;0.9.6&quot;
+</code></pre></div>
+<p>หรือเพิ่มที่ ไฟล์ composer.json ในส่วน require</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&quot;dixonsatit/yii2-thai-year-formatter&quot;: &quot;0.9.6&quot;
+</code></pre></div>
+<p>หลังจากนั้น รันคำสั่ง <code>composer update</code></p>
+
+<h2 id="การตั้งค่า">การตั้งค่า</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&#39;language&#39;=&gt;&#39;th_TH&#39;, // เปิดใช้งานภาษาไทย
+&#39;components&#39; =&gt; [
+    //...
+    &#39;thaiFormatter&#39;=&gt;[
+        &#39;class&#39;=&gt;&#39;dixonsatit\thaiYearFormatter\ThaiYearFormatter&#39;,
+    ],
+]
+</code></pre></div>
+<h2 id="การเรียกใช้งาน">การเรียกใช้งาน</h2>
+
+<p>เรียกใช้งานผ่าน component <code>thaiFormatter</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$time = time();</span>
+<span class="x">//$time = &#39;2015-06-03 13:25:17&#39;;</span>
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDate($time, &#39;short&#39;).&quot;&lt;br&gt;&quot;;</span>
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDate($time, &#39;medium&#39;).&quot;&lt;br&gt;&quot;;</span>
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDate($time, &#39;long&#39;).&quot;&lt;br&gt;&quot;;</span>
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDate($time, &#39;full&#39;).&quot;&lt;br&gt;&quot;;</span>
+
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDateTime($time, &#39;short&#39;).&quot;&lt;br&gt;&quot;;</span>
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDateTime($time, &#39;medium&#39;).&quot;&lt;br&gt;&quot;;</span>
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDateTime($time, &#39;long&#39;).&quot;&lt;br&gt;&quot;;</span>
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDateTime($time, &#39;full&#39;).&quot;&lt;br&gt;&quot;;</span>
+
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDate($time, &#39;php:Y-m-d&#39;);</span>
+<span class="x">echo Yii::$app-&gt;thaiFormatter-&gt;asDateTime($time, &#39;php:Y-m-d H:i:s&#39;);</span>
+</code></pre></div>
+<blockquote>
+<p>ดู php date format ได้ที่นี่ <a href="http://php.net/manual/en/function.date.php">php date format</a></p>
+</blockquote>
+
+<h2 id="แสดงผล">แสดงผล</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">25/6/2558
+25 มิ.ย. 2558
+25 มิถุนายน 2558
+วันอาทิตย์ที่ 25 มิถุนายน พ.ศ. 2558
+
+25/6/2558, 9:57
+25 มิ.ย. 2558, 9:57:18
+25 มิถุนายน 2558, 9 นาฬิกา 57 นาที 18 วินาที GMT+07:00
+วันอาทิตย์ที่ 25 มิถุนายน พ.ศ. 2558, 9 นาฬิกา 57 นาที 18 วินาที GMT+07:00
+
+2015-06-24
+2015-06-24 05:32:54
+</code></pre></div></section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dixonsatit';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
