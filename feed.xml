@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 06 Jul 2015 07:15:35 +0700</pubDate>
+    <pubDate>Mon, 06 Jul 2015 14:25:46 +0700</pubDate>
     
       <item>
         <title>ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย</title>
@@ -258,6 +258,12 @@ Yii::$app-&amp;gt;db2-&amp;gt;createCommand((new \yii\db\Query)-&amp;gt;select(&
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/dektrium/yii2-user&quot;&gt;dektrium/yii2-user&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/amnah/yii2-user&quot;&gt;amnah/yii2-user&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;i18n&quot;&gt;i18n&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/OmgDef/yii2-multilingual-behavior&quot;&gt;yii2-multilingual-behavior(สร้าง content หลายๆ ภาษา)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;rbac&quot;&gt;RBAC&lt;/h2&gt;
