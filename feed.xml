@@ -5,7 +5,156 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 06 Jul 2015 14:25:46 +0700</pubDate>
+    <pubDate>Tue, 07 Jul 2015 00:54:28 +0700</pubDate>
+    
+      <item>
+        <title>Tip การใช้งาน GridView และการปรับแต่ง Columns</title>
+        <link>http://dixonsatit.github.io/2015/07/06/gridview.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/06/gridview.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/grid-view.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;GridView เป็น Widget พื้นฐานที่เราน่าจะคุ้นเคยกันดี และส่วนใหญ่เวลาแสดงผล เราก็มักจะใช้ GridView เป็นหลักเพราะด้วยความที่ใช้งานง่ายและสะดวก วันนี้จะขอแนะนำการปรับแต่ง GridView เพื่อให้เราสามารถใช้งาน GridView ได้อย่างเต็มประสิทธิภาพ&lt;/p&gt;
+
+&lt;h2 id=&quot;columns&quot;&gt;Columns&lt;/h2&gt;
+
+&lt;p&gt;Columns มีอยู่ 2 ส่วนหลักที่เราใช้งานบ่อยๆ คือ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;columns&lt;/code&gt; เป็นส่วนที่เอาไว้กำหนดว่าเราต้องการแสดงข้อมูลคอลัมน์ใหนบ้างโดยระบุชื่อคอลัมน์เข้าไป&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ActionColumn&lt;/code&gt; เป็น class ที่เอาไว้แสดงผลปุ่มในคอลัมน์ เพื่อทำงานบางอย่าง โดยปกติ default มีให้ 3 ปุ่มคือ &lt;code&gt;view&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;การใช้งาน-column&quot;&gt;การใช้งาน column&lt;/h3&gt;
+
+&lt;p&gt;ซึ่งในส่วนของ columns เมื่อเราต้องการที่จะแสดงข้อมูล column อะไรบ้างเราสามารถระบุชื่อ column ลงไปได้เลยเช่น ต้องการแสดงข้อมูล &lt;code&gt;title&lt;/code&gt;,&lt;code&gt;name&lt;/code&gt;,&lt;code&gt;surname&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;surname&amp;#39;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ส่วนใหญ่เราก็จะใช้กันแค่นี้..&lt;/p&gt;
+
+&lt;h3 id=&quot;shortcut-format&quot;&gt;Shortcut Format&lt;/h3&gt;
+
+&lt;p&gt;ปกติเราก็จะระบุแค่ชื่อคอลัมน์เข้าไป แต่จริงๆ GridView คุณสมบัติอีกอย่างนึง ที่มันทำให้เราปรับแต่งการแสดงผลใน column ได้ง่ายๆ นั้นคือ &lt;code&gt;shortcut format&lt;/code&gt; ซึ่งรูปแบบจะเป็นดังนี้ &lt;code&gt;&amp;quot;attribute:format:label&amp;quot;&lt;/code&gt; ปกติเราจะใส่แต่ชื่อคอลัมน์เข้าไปแต่นี่ เราสามารถกำหนดการแสดงผลได้ ว่าจะให้ออกมา format อะไร และยังกำหนด label ในตรงนี้ได้อีกด้วย แค่คั้นด้วยเครื่องหมาย &lt;code&gt;:&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;attribute&lt;/code&gt; คือชื่อคอลัมน์ที่ต้องการแสดงผล&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;format&lt;/code&gt; คือข้อมูลที่เราต้องการให้แสดงผลออกมาในรูปแบบที่ต้องการ เช่น เราเก็บข้อมูลเป็นวันที่ &lt;code&gt;2015-06-01&lt;/code&gt; เราสามารถกำหนด format เป็น &lt;code&gt;date&lt;/code&gt; ได้โดยผลลัพจะออกมาเป็น &lt;code&gt;Jun 24, 2015&lt;/code&gt; ได้ซึ่งมีหลาย format มาก เช่น &lt;code&gt;date&lt;/code&gt;,&lt;code&gt;dateTime&lt;/code&gt;,&lt;code&gt;email&lt;/code&gt;,&lt;code&gt;time&lt;/code&gt;,&lt;code&gt;text&lt;/code&gt;,&lt;code&gt;html&lt;/code&gt; ไปเลือกใช้งานกันเองได้&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/yii-i18n-formatter.html&quot;&gt;ที่นี่&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;label&lt;/code&gt; เป็นข้อความของหัวคอลัมน์ที่เราต้องการแสดงผลให้เปลี่ยนจากของเดิมที่กำหนดไว้ใน &lt;code&gt;attributesLabel()&lt;/code&gt; ใน Model และตรงนี้เป็น option จะระบุหรือไม่ก็ได้&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ตัวอย่างการเรียกใช้งาน &lt;code&gt;shortcut format&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at:date:วันที่สร้าง&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงผลวันที่&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;updated_at:dateTime&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงผลวันที่และเวลา&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;email:email&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็น link MailTo&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;website:url&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// แสดงผล link url&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;is_admin:boolean&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงเป็น Yes,No&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;payroll:decimal&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นทศนิยม&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;content:html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็น Html&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;photo:image&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นรูปภาพ&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;age:integer&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นจำนวนเต็ม&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;vat:percent&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็น %&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;content:text&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลข้อความ text&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at:time&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นเวลา&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;file_size:size&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นหน่วยของขนาดเช่น 12 kilobytes ค่าข้อมูลต้องเป็น bytes&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;file_size:shortSize&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นหน่วยของขนาดเช่น 12 KB ค่าข้อมูลต้องเป็น bytes&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at:relativeTime&amp;#39;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นเวลาที่ผ่านมาแล้ว&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;จะเห็นว่าเราสามารถกำหนดแบบสั้นๆ ได้  โดยที่เราไม่ต้องระบุโค้ดแบบเต็มๆ ทำให้ลดเวลาได้มากๆ  เพราะถ้าเขียนเต็มๆ จะยาวมากๆ แบบนี้ทุกคอลัมน์&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; //...&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt; &amp;#39;columns&amp;#39; =&amp;gt; [&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;   [&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        &amp;#39;attribute&amp;#39; =&amp;gt; &amp;#39;name&amp;#39;,&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        &amp;#39;format&amp;#39; =&amp;gt; &amp;#39;text&amp;#39;,&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        &amp;#39;label&amp;#39; =&amp;gt; &amp;#39;Name&amp;#39;,&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    ],&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  ]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;การปรับแต่งคอลัมน์แบบกำหนดเอง&quot;&gt;การปรับแต่งคอลัมน์แบบกำหนดเอง&lt;/h2&gt;
+
+&lt;p&gt;ปกติหากไม่ได้มีการใช้งานที่มีเงือนไขซับซ้อนอะไร ใช้ด้านบนดังที่กล่าวมาแล้วก็เพียงพอ แต่ถ้าหากมีเขื่อนไขที่ซับซ้อน เราก็ยังสามารถปรับแต่งคอลัมน์ได้อีก ซึ่งการใช้งานแบบนี้ เรียกว่า  &lt;code&gt;anonymous function&lt;/code&gt; ถ้าใครเคยเขียน JavaScript &amp;amp; jQuery จะเห็นว่าคล้ายๆกัน โดยเราสามารถประการ function เข้าไปแบบนี้ได้เลย สะดวกมากๆ&lt;/p&gt;
+
+&lt;p&gt;ตัวอย่างการใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// รวมคอลัมน์&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ชื่อ-นามสกุล&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lastname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงข้อมูล string&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;is_admin&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;is_admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;NO&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงข้อมูลออกเป็น icon&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;is_admin&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;is_admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;i class=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;glyphicon glyphicon-ok&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;i class=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;glyphicon glyphicon-remove&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงข้อมูลออกเป็นสีตามเงื่อนไข&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;is_admin&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;is_admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;span style=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;color:green;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;gt;YES&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;span style=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;color:red;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;gt;No&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ตัวอย่าง&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/gridview.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;รายละเอียด &lt;code&gt;anonymous function&lt;/code&gt; จะมี parameter ให้สามารถเรียกใช้งานได้ดังนี้&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$model คือตัวแทนข้อมูล record นั้นๆ สามารถเรียกคอลัมน์อื่นๆ ได้&lt;/li&gt;
+&lt;li&gt;$key pk ของ record นั้น&lt;/li&gt;
+&lt;li&gt;$index ลำดับของ index&lt;/li&gt;
+&lt;li&gt;$column  yii\grid\DataColumn object&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ส่วนใหญ่ใช้แค่ $model ก็เพียงพอแล้ว ระบุแบบนี้ได้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lastname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/yii-grid-datacolumn.html#$value-detail&quot;&gt;รายละเอียดเพิ่มเติม&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 06 Jul 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย</title>
@@ -3267,119 +3416,6 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;/ul&gt;
 
 &lt;p&gt;หวังว่าคงพอเป็นตัวอย่างในการสร้าง theme ได้นะครับ&lt;/p&gt;
-</description>
-        <pubDate>Sat, 20 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การสร้างและการใช้งาน AssetBundle</title>
-        <link>http://dixonsatit.github.io/2015/06/20/create-assets.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/20/create-assets.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/assets-resource.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;Asset Bundles คือตัวช่วยในการเรียกใช้งานกลุ่มไฟล์ต่างๆ ให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็น css หรือ  js ยกตัวอย่าง เช่น&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;yii\bootstrap\BootstrapAsset&lt;/code&gt; เป็น assets ที่เอาไว้เรียกไฟล์ css ของ Bootstrap&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;yii\bootstrap\BootstrapPluginAsset&lt;/code&gt; เป็น assets ที่เอาไว้เรียกไฟล์ js ของ Bootstrap&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;yii\web\YiiAsset&lt;/code&gt; เป็น assets ที่เรียกใช้งาน yii.js&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;yii\web\JqueryAsset&lt;/code&gt; เป็น assets ที่เรียกใช้งาน JQuery&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;yii\jui\JuiAsset&lt;/code&gt; เป็น assets ที่เรียกใช้งาน css,js jquery-ui&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;app\assets\AppAsset&lt;/code&gt; เป็น asset ดีฟอลต์ที่เรียกใช้งาน site.css และ asset ตัวนี้ ยังได้เรียก &lt;code&gt;YiiAsset&lt;/code&gt;,&lt;code&gt;BootstrapAsset&lt;/code&gt; ด้วย&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;สังเกตว่าแต่ละ asset จะเป็น asset เฉพาะเรื่องนั้นๆ เพื่อให้สามารถเลือกใช้แต่ละตัวได้ง่ายๆ&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;การเรียกใช้งาน&quot;&gt;การเรียกใช้งาน&lt;/h2&gt;
-
-&lt;p&gt;เราสามารถเรียก  assets ที่ view ใหนก็ได้ หลังจากนั้นจะทำการ include css,js ตามที่ได้สร้าง asset ไว้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;use app\assets\AppAsset;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;AppAsset::register($this);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;การสร้าง-asset&quot;&gt;การสร้าง Asset&lt;/h2&gt;
-
-&lt;p&gt;ตัวอย่างนี้เราจะสร้าง assets เพื่อใช้เรียก style.css,main.js มาใช้งาน โดยที่ไฟล์ css,js ของเราอยู่ที่โฟลเดอร์ web&lt;/p&gt;
-
-&lt;p&gt;สร้างโฟลเดอร์ชื่อ assets ที่ root โปรเจคเพื่อเก็บไฟล์ asset จากนั้นสร้างไฟล์ php ชือ MyAsstes.php&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$basePath&lt;/code&gt; พาทที่เก็บไฟล์จริง&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$baseUrl&lt;/code&gt; url ที่เรียกใช้งาน&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$css&lt;/code&gt; ระบุชื่อ css ที่เรียกใช้งาน สามารถระบุได้ทีละหลายๆ ตัว เป็น array&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$js&lt;/code&gt; ระบุชื่อ js ที่เรียกใช้งาน สามารถระบุได้ทีละหลายๆ ตัว เป็น array&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$depends&lt;/code&gt; เป็นการเรียกใช้ asset อื่นๆ เข้ามาใช้งานได้&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app\assets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\web\AssetBundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyAsset&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AssetBundle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$basePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@webroot&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$baseUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@web&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;css/style.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$js&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;js/main.js&amp;#39;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$depends&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\web\YiiAsset&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\bootstrap\BootstrapAsset&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ที่เรียกใช้งานที่ view ที่ต้องการ&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;use app\assets\MyAsset;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;MyAsset::register($this);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นเมื้อเรา view page source ก็จะพบไฟล์ style.css,main.js ถูกเรียกใช้งาน และเรียกใช้งาน asset อื่นที่ $depends ได้ระบุไว้&lt;/p&gt;
-
-&lt;h2 id=&quot;การสร้าง-asset-จากเพ็คเก็จ-bower-amp-npm&quot;&gt;การสร้าง Asset จากเพ็คเก็จ Bower &amp;amp; NPM&lt;/h2&gt;
-
-&lt;p&gt;หากใครเคยเขียน angularJs,Node.js เชื่อว่าคงคุ้นเคยกับ Bower และ NPM เป็นอย่างดีเพราะเป็นตัวจัดการไลบราลี่ให้ สามารถเรียกใช้งาน Web Library ต่างๆ เช่น jquery,bootstrap โดยที่เราไม่ต้องเข้าไปดาวน์โหลดไฟล์ หลังจากได้ไฟล์ก็ต้องทำการเรียกใช้งานเอง หากใช้งาน Bower มันสามารถ include  ไฟล์เข้ามาใช้งานได้เลยหรือยกเลิกการใช้งานไลบราลี่ให้เอง ซึ่งทำได้แค่ไม่กี่คำสั่ง ซึ่งสะดวกมากๆ (ในฝั่งของ javascript นะ)&lt;/p&gt;
-
-&lt;p&gt;ในส่วนของ Composer เป็นระบบจัดการไลบลาลี่ ของฝั่ง php บางครั้งเราก็จำเป็นต้องเรียกไลบลาลี่จาก bower เพราะ composer ไม่มี ดังนั้น composer จึงเปิดให้เราเรียกใช้งาน Bower ผ่านตัว composer ได้ด้วย&lt;/p&gt;
-
-&lt;p&gt;เราสามารถเรียกใช้งาน Bower และ NPM โดยใช้ Composer ทำได้ง่ายมากๆ เพียงแค่ระบุใน require &lt;code&gt;bower-asset/PackageName&lt;/code&gt; สำหรับ bower และ &lt;code&gt;npm-asset/PackageName&lt;/code&gt;  หากเป็น NPM ในไฟล์ composer.json&lt;/p&gt;
-
-&lt;p&gt;ตัวอย่างการเรียก fontawesome จาก Bower แพคเกจ ในไฟล์ composer.json&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-json&quot; data-lang=&quot;json&quot;&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;require&amp;quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;quot;php&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;=5.4.0&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;quot;yiisoft/yii2&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;2.0.*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;quot;bower-asset/fontawesome&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;4.3.*&amp;quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&amp;lt;&amp;lt;-----&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เมื่อรันคำสั่ง composer update แล้ว ไลบราลี่ในส่วนของ Bower จะถูกดาวน์โหลดมาไว้ที่ &lt;code&gt;vendor/bower/fontawesome&lt;/code&gt; เราก็สามารถเขียน asset เพื่อเรียกใช้งาน css ตัวนี้ได้ โดยไม่จำเป็นต้อง copy ไฟล์ css มาไว้ที่ web/css เพียงแค่ระบุใน asset ที่เราสร้างว่า sorucePath ของเราอยู่ที่ @bower/fontawesome&lt;/p&gt;
-
-&lt;p&gt;ต่อจากนั้น composer จะ copy ไฟล์ไปไว้ที่ web/assets/xxxx ซึ่ง xxxx จะเป็นชื่อโฟล์เดอร์ที่เก็บไฟล์ของแต่ละ asset และไฟล์ที่ใช้งานจริงๆ จะถูเรียกใช้งานจากที่นี่&lt;/p&gt;
-
-&lt;p&gt;สังเกต หากทำการ view page source ดูจะพบ url ในตอนเรียกใช้งานจะเป็นแบบนี้ &lt;code&gt;http://127.0.0.1/yii2/yii2-Leanning-Source/web/assets/9a53425f/css/font-awesome.min.css&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;สร้างไฟล์ asset ชื่อ &lt;code&gt;FontAwesomeAsset&lt;/code&gt; และทำการเรียกใช้งไฟล์จาก vendor\bower\fontawesome โดยระบุไว้ที่ $sourcePath = @bower/fontawesome&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app\assets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\web\AssetBundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FontAwesomeAsset&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AssetBundle&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$sourcePath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@bower/fontawesome&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$css&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;css/font-awesome.min.css&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$publishOptions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;only&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;fonts/&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;css/&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ในส่วนของ $publishOptions เป็นการระบุว่าให้ copy ไปเฉพาะโฟลเดอร์ fonts,css เพราะปกติเมื่อเราระบุ &lt;code&gt;$sourcePath = &amp;#39;@bower/fontawesome&amp;#39;;&lt;/code&gt; และไม่ได้ระบุใน &lt;code&gt;$publishOptions&lt;/code&gt; ในโฟลเดอร์ fontawesome มีอะไรมันจะทำการ copy ไปให้หมดเลย&lt;/p&gt;
 </description>
         <pubDate>Sat, 20 Jun 2015 00:00:00 +0700</pubDate>
       </item>
