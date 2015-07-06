@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Sat, 04 Jul 2015 11:27:21 +0700</pubDate>
+    <pubDate>Mon, 06 Jul 2015 07:15:35 +0700</pubDate>
     
       <item>
         <title>ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย</title>
@@ -474,9 +474,14 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 
 &lt;h2 id=&quot;เตรียม-project-กันก่อน&quot;&gt;เตรียม Project กันก่อน&lt;/h2&gt;
 
-&lt;p&gt;ตัวอย่างนี้ ผมเราจะใช้ Advance Template เพราะมีระบบ login อยู่แล้ว หลังจากนั้นจะทำการสร้างระบบ Blog และระบบจัดการผู้ใช้งาน เพื่อทดลองสร้าง การตรวจสอบสิทธิ์ ให้คุณได้มองเห็นภาพและเข้าใจได้ง่ายยิ่งขึ้น&lt;/p&gt;
+&lt;p&gt;ตัวอย่างนี้ ผมเราจะใช้ Advance Template เพราะมีระบบ login อยู่แล้ว หลังจากนั้นจะทำการสร้างระบบ Blog และระบบจัดการผู้ใช้งาน เพื่อทดลองสร้าง การตรวจสอบสิทธิ์ ให้คุณได้มองเห็นภาพและเข้าใจได้ง่ายยิ่งขึ้น โดยตัวอย่างนี้แบ่งเป็น 2 ส่วน&lt;/p&gt;
 
-&lt;p&gt;เตรียมตัวก่อน&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;การสร้าง RBAC&lt;/li&gt;
+&lt;li&gt;การสร้าง controller User เพื่อเอาไว้จัดการสิทธิ์ให้แต่ละ User&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;การสร้าง-rbac&quot;&gt;การสร้าง RBAC&lt;/h2&gt;
 
 &lt;ul&gt;
 &lt;li&gt;สร้าง project Advance ขึ้นมา &lt;a href=&quot;https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/start-installation.md&quot;&gt;อ่านวิธีติดตั้ง advance ได้ทีนี&lt;/a&gt;&lt;/li&gt;
@@ -484,7 +489,14 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 &lt;li&gt;ลงทะเบียน user และทำการ login ให้สำเร็จ&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;เมื่อทำตามขั้นตอนนี้เสร็จแล้ว เราจะสร้างตาราง blog ขึ้นมาเพื่อทดสอบการใช้งานสิทธิ์&lt;/p&gt;
+&lt;p&gt;เมื่อทำตามขั้นตอนนี้เสร็จแล้ว เราจะสร้างตาราง blog ขึ้นมาเพื่อทดสอบการใช้งานสิทธิ์โดยมีขั้นตอนดังนี้&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;สร้างตารางและทำการ gii Model, gii CRUD&lt;/li&gt;
+&lt;li&gt;ปรับปรุงแก้ไขไฟล์ User.php และทำการเพิ่มกลุ่มของ Role เข้าไป&lt;/li&gt;
+&lt;li&gt;สร้างไฟล์ AccessRole.php เพื่อเอาไว้เช็คใน controller เวลามีการเรียกใช้งานแต่ละ action&lt;/li&gt;
+&lt;li&gt;เรียกใช้งาน AccessRole ใน controller เพื่อควบคุมสิทธิ์การเข้าใช้งาน&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;ให้สร้าง Blog ขึ้นมาตามโครงสร้างนี้&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
@@ -545,11 +557,13 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
     &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;และเพิ่มฟิวด์ &lt;code&gt;role&lt;/code&gt; เข้าไปที่ตาราง user กำหนด type ข้อมูลเป็น int เพื่อเอาไว้เก็บสิทธิ์ของแต่ละคนว่าอยู่ระดับใด&lt;/p&gt;
+&lt;h2 id=&quot;ปรับปรุงโครงสร้างตาราง-user&quot;&gt;ปรับปรุงโครงสร้างตาราง User&lt;/h2&gt;
+
+&lt;p&gt;ให้ทำการเพิ่มฟิวด์ชือว่า &lt;code&gt;role&lt;/code&gt; เข้าไปที่ตาราง user  กำหนด type ข้อมูลเป็น &lt;code&gt;int&lt;/code&gt; เพื่อเอาไว้เก็บสิทธิ์ของแต่ละคนว่าอยู่ระดับใด&lt;/p&gt;
 
 &lt;h2 id=&quot;สร้าง-user&quot;&gt;สร้าง user&lt;/h2&gt;
 
-&lt;p&gt;สร้าง user เพื่อทดสอบ โดยให้เราไปที่ frontend และ signup user ให้ครบ 3 user กำหนด username และ password ตามด้านล่าง และแก้ไขข้อมูล role ใน table user ตามค่าที่ระบุด้านล่าง&lt;/p&gt;
+&lt;p&gt;สร้าง user เพื่อทดสอบการใช้งาน RBAC โดยให้เราไปที่ frontend และไปที่หน้า signup user หรือหน้าสมัครสมาชิก และทำการลงทะเบียนไว้ 3 user กำหนด username และ password ตามด้านล่าง และแก้ไขข้อมูล role ใน table user ตามค่าที่ระบุด้านล่าง&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;admin : 123456 กำหนด role = 30 เป็น admin&lt;/li&gt;
@@ -720,6 +734,10 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 
 &lt;p&gt;&lt;img src=&quot;/img/simple-rbac-forbidden.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
+&lt;h2 id=&quot;การสร้าง-controller-user-เพื่อเอาไว้จัดการสิทธิ์ให้แต่ละ-user&quot;&gt;การสร้าง controller User เพื่อเอาไว้จัดการสิทธิ์ให้แต่ละ User&lt;/h2&gt;
+
+&lt;p&gt;หลังจากที่เราได้สร้าง RBAC ไปแล้ว เราจะต้องสร้างหน้าจัดการผู้ใช้งาน เพื่อให้สามารถให้สิทธิ์ หรือแก้ไขสิทธิ์ของแต่ละ user ได้ และทำการสร้าง user, แก้ไข user ได้&lt;/p&gt;
+
 &lt;h2 id=&quot;ปรับปรุงระบบลงทะเบียนใหม่-signup&quot;&gt;ปรับปรุงระบบลงทะเบียนใหม่ (Signup)&lt;/h2&gt;
 
 &lt;p&gt;เราจะทำการปรับปรุงระบบลงทะเบียนใหม่ ให้มีการเพิ่ม  &lt;code&gt;role&lt;/code&gt; default ให้กับ user ในตอนที่ลงทะเบียนด้วย เพื่อให้สามารถใช้งานได้ทันที&lt;/p&gt;
@@ -763,7 +781,7 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 
 &lt;h2 id=&quot;สร้างระบบจัดการ-user-ที่-backend&quot;&gt;สร้างระบบจัดการ User ที่ Backend&lt;/h2&gt;
 
-&lt;p&gt;เราจะทำการสร้างระบบจัดการ user ที่ &lt;code&gt;Backend&lt;/code&gt;`เพื่อให้สามารถปรับปรุงสิทธิ์ในแต่ละ user ได้ และสามารถเพิ่ม,ลบ,แก้ไข user ได้&lt;/p&gt;
+&lt;p&gt;เราจะทำการสร้างระบบจัดการ user ที่ &lt;code&gt;Backend&lt;/code&gt;`เพื่อให้สามารถปรับปรุงสิทธิ์ในแต่ละ user ได้ และสามารถเพิ่ม,ลบ,แก้ไข user ได้ โดยจะมีหน้าตาดังนี้&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/simple-rbac-user.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
@@ -771,7 +789,7 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 
 &lt;p&gt;ปรับปรุง model User ที่  &lt;code&gt;/common/models/User.php&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;ปรับปรุง  rules เพื่อให้สามารถ เพิ่ม,ลบ,แก้ไขได้&lt;/p&gt;
+&lt;p&gt;ปรับปรุง  rules เพื่อให้สามารถ เพิ่ม,ลบ,แก้ไขได้ เพิ่มโค้ดส่วนนี้เข้าไป&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function rules()&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;    return [&lt;/span&gt;
@@ -796,11 +814,7 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 &lt;span class=&quot;x&quot;&gt;    ];&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;และเพิ่มโค้ดในการสร้าง itemAlias เพื่อให้สามารถดึงข้อมูลรายการไปแสดงผลที่ ActiveForm,GridView,detailView  ได้ง่ายๆ&lt;/p&gt;
-
-&lt;p&gt;ผมคิดว่านี่คือ Pattern ที่ดีในการจัดการข้อมูล มันทำให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็นการเรียกใช้งานเพื่อแสดงผล หรือ นำ items ไปแสดงที่ form แม้กระทั้ง filter ในส่วนของ Gridview  ก็สามารถทำได้ง่ายๆ&lt;/p&gt;
-
-&lt;p&gt;ข้อดีอีกอย่างเมื่อเราพัฒนาคนอื่นๆ สามารถมองโค้ดของเราเข้าใจ ทำให้สามารถพัฒนนาร่วมกันได้อย่างมีประสิทธิภาพ ตัวอย่างนี้อาจไม่ใช่ดีที่สุด แต่น่าจะเป็นจุดเริ่มต้นที่ดีในการออกแบบ เมื่อเราเริ่มจากจุดเล็กๆ รวมกันเข้ามันจะแข็งแกร่งอย่างไม่หน้าเชื่อ&lt;/p&gt;
+&lt;p&gt;และเพิ่มโค้ดในการสร้าง itemAlias เพื่อให้สามารถดึงข้อมูลรายการไปแสดงผลที่ ActiveForm,GridView,detailView  ได้ง่ายๆ เพิ่มเติมเข้าไปที่ด้านล่างสุดของ Model User.php&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;public static function getItemsAlias($id){
     $items =  [
         &amp;#39;status&amp;#39;=&amp;gt;[
@@ -834,6 +848,10 @@ public function getRoleName(){
     return array_key_exists($this-&amp;gt;role, $items) ? $items[$this-&amp;gt;role] : null;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ผมคิดว่านี่คือ Pattern ที่ดีในการจัดการข้อมูล มันทำให้เราสามารถเรียกใช้งานได้ง่ายๆ ไม่ว่าจะเป็นการเรียกใช้งานเพื่อแสดงผล หรือ นำ items ไปแสดงที่ form แม้กระทั้ง filter ในส่วนของ Gridview  ก็สามารถทำได้ง่ายๆ&lt;/p&gt;
+
+&lt;p&gt;ข้อดีอีกอย่างเมื่อเราพัฒนาคนอื่นๆ สามารถมองโค้ดของเราเข้าใจ ทำให้สามารถพัฒนนาร่วมกันได้อย่างมีประสิทธิภาพ ตัวอย่างนี้อาจไม่ใช่ดีที่สุด แต่น่าจะเป็นจุดเริ่มต้นที่ดีในการออกแบบ เมื่อเราเริ่มจากจุดเล็กๆ รวมกันเข้ามันจะแข็งแกร่งอย่างไม่หน้าเชื่อ ลองมาดูแต่ละ function&lt;/p&gt;
+
 &lt;h3 id=&quot;getitemsalias&quot;&gt;getItemsAlias()&lt;/h3&gt;
 
 &lt;p&gt;เป็นฟังก์ชันรวม itemsAlias ต่างๆ ที่มีรายการไม่เยอะและไม่ได้นำไปสร้างเป็น table ผมจึงแนะนำให้สร้างแบบนี้&lt;/p&gt;
