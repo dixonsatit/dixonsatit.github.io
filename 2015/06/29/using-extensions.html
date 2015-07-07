@@ -301,6 +301,27 @@ validate         Validates a composer.json
 <div class="highlight"><pre><code class="language-text" data-lang="text">composer update
 </code></pre></div>
 <p>หลังจากนั้น extension ที่เราติดตั้งจะถูกโหลดไปเก็บไว้ที่ <code>vendor</code> เพื่อรอให้เราเรียกใช้งานผ่าน namespace ได้</p>
+
+<h2 id="ปัญหาที่เจอในการติดตั้ง">ปัญหาที่เจอในการติดตั้ง</h2>
+
+<p><strong>ปัญหาถาม username  &amp; password account Github</strong></p>
+
+<p>ให้ทำการสมัครสมาชิกที่ <a href="https://github.com/">Github.com</a> และยืนยันอีเมล์ให้เรียบร้อย และนำ username &amp; password มากรอกเวลาที่ composer  ถาม</p>
+
+<p><strong>ปัญหา access tokens</strong></p>
+
+<p>ปัญหานี้เกิดจากการที่ composer ต้องเข้าไปโหลดข้อมูลจากเว็บไซต์ github มันจึงต้องการระบุตัวตนผู้ใช้งานโดยการถามหา access tokens  ซึ่งเราสามารถสร้าง access tokens นี้ได้ง่ายๆ เพียงทำขั้นตอนดังต่อไปนี้</p>
+
+<p><img src="/img/access-token.jpg" alt=""></p>
+
+<ol>
+<li>เข้า Github แล้วเข้าไปที่ account แล้วไปที่ settings</li>
+<li>คลิกเข้าไปที่ Personal access tokens เมนูด้านขวา</li>
+<li>คลิกที่ปุ่ม Generate new token</li>
+<li>ระบบจะถามรหัสผ่าน ให้เรากรอกรหัสผ่านเข้าไป</li>
+<li>จะพบกับหน้าจอ New Personal access token ให้ใส่คำอธิบายลงไปเล็กน้อย จากนั้นกดปุ่ม Generate token</li>
+<li>จะพบกับเลข token ยาว copy และนำมาใส่ที่ composer เวลาที่มันถาม หลังจากนั้นก็จะสามารถใช้งานได้ต่อไป</li>
+</ol>
 </section>
 </article>
 

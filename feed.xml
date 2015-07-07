@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 07 Jul 2015 11:50:49 +0700</pubDate>
+    <pubDate>Tue, 07 Jul 2015 21:11:44 +0700</pubDate>
     
       <item>
         <title>Tip การใช้งาน GridView และการปรับแต่ง Columns</title>
@@ -658,6 +658,27 @@ validate         Validates a composer.json
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer update
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;หลังจากนั้น extension ที่เราติดตั้งจะถูกโหลดไปเก็บไว้ที่ &lt;code&gt;vendor&lt;/code&gt; เพื่อรอให้เราเรียกใช้งานผ่าน namespace ได้&lt;/p&gt;
+
+&lt;h2 id=&quot;ปัญหาที่เจอในการติดตั้ง&quot;&gt;ปัญหาที่เจอในการติดตั้ง&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;ปัญหาถาม username  &amp;amp; password account Github&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;ให้ทำการสมัครสมาชิกที่ &lt;a href=&quot;https://github.com/&quot;&gt;Github.com&lt;/a&gt; และยืนยันอีเมล์ให้เรียบร้อย และนำ username &amp;amp; password มากรอกเวลาที่ composer  ถาม&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ปัญหา access tokens&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;ปัญหานี้เกิดจากการที่ composer ต้องเข้าไปโหลดข้อมูลจากเว็บไซต์ github มันจึงต้องการระบุตัวตนผู้ใช้งานโดยการถามหา access tokens  ซึ่งเราสามารถสร้าง access tokens นี้ได้ง่ายๆ เพียงทำขั้นตอนดังต่อไปนี้&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/access-token.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;เข้า Github แล้วเข้าไปที่ account แล้วไปที่ settings&lt;/li&gt;
+&lt;li&gt;คลิกเข้าไปที่ Personal access tokens เมนูด้านขวา&lt;/li&gt;
+&lt;li&gt;คลิกที่ปุ่ม Generate new token&lt;/li&gt;
+&lt;li&gt;ระบบจะถามรหัสผ่าน ให้เรากรอกรหัสผ่านเข้าไป&lt;/li&gt;
+&lt;li&gt;จะพบกับหน้าจอ New Personal access token ให้ใส่คำอธิบายลงไปเล็กน้อย จากนั้นกดปุ่ม Generate token&lt;/li&gt;
+&lt;li&gt;จะพบกับเลข token ยาว copy และนำมาใส่ที่ composer เวลาที่มันถาม หลังจากนั้นก็จะสามารถใช้งานได้ต่อไป&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         <pubDate>Mon, 29 Jun 2015 00:00:00 +0700</pubDate>
       </item>
