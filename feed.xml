@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 07 Jul 2015 09:47:00 +0700</pubDate>
+    <pubDate>Tue, 07 Jul 2015 11:50:49 +0700</pubDate>
     
       <item>
         <title>Tip การใช้งาน GridView และการปรับแต่ง Columns</title>
@@ -21,12 +21,9 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;columns&lt;/code&gt; เป็นส่วนที่เอาไว้กำหนดว่าเราต้องการแสดงข้อมูลคอลัมน์ใหนบ้างโดยระบุชื่อคอลัมน์เข้าไป&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ActionColumn&lt;/code&gt; เป็น class ที่เอาไว้แสดงผลปุ่มในคอลัมน์ เพื่อทำงานบางอย่าง โดยปกติ default มีให้ 3 ปุ่มคือ &lt;code&gt;view&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Shortcut Format&lt;/code&gt; เป็นการกำหนด format ของการแสดงผลในแต่ละคอลัมน์สามารถระบบ format ต่อท้ายชื่อคอลัมน์ได้เลยโดยคั่นด้วยเครื่องหมาย &lt;code&gt;:&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Anonymous functions&lt;/code&gt; เป็นการปรับแต่งคอลัมน์ที่ยือยุ่นที่สุด สามารถใส่เงื่อนไข รับค่าตัวแปรต่างๆ ได้ กำหนดสี, ใส่ icon อืนๆ &lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ในส่วน ActionColumn ผมจะแยกเป็นอีกบทความเพราะรู้สึกเริ่มยาวแระ! รอติดตามนะครับ ^ ^&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;การใช้งาน-column&quot;&gt;การใช้งาน column&lt;/h3&gt;
 
@@ -41,7 +38,7 @@
       &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ส่วนใหญ่เราก็จะใช้กันแค่นี้..แต่จริงๆ แล้ว มันมีฟังชันก์อีก 1 ตัวที่อยากแนะนำคือ &lt;code&gt;Shortcut Format&lt;/code&gt; สิ่งที่จะทำให้เรากำหนดรูปแบบการแสดงผลได้ง่ายๆ &lt;/p&gt;
+&lt;p&gt;ส่วนใหญ่เราก็จะใช้กันแค่นี้..แต่จริงๆ แล้ว มันมีฟังชันก์อีก 1 ตัวที่อยากแนะนำคือ &lt;code&gt;Shortcut Format&lt;/code&gt; สิ่งที่จะทำให้เรากำหนดรูปแบบการแสดงผลได้ง่ายๆ&lt;/p&gt;
 
 &lt;h3 id=&quot;shortcut-format&quot;&gt;Shortcut Format&lt;/h3&gt;
 
@@ -86,9 +83,24 @@
 &lt;span class=&quot;x&quot;&gt;    ],&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;  ]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;การปรับแต่งคอลัมน์แบบกำหนดเอง&quot;&gt;การปรับแต่งคอลัมน์แบบกำหนดเอง&lt;/h2&gt;
+&lt;h2 id=&quot;การปรับแต่งคอลัมน์โดยใช้-anonymous-functions&quot;&gt;การปรับแต่งคอลัมน์โดยใช้ Anonymous functions&lt;/h2&gt;
 
-&lt;p&gt;ปกติหากไม่ได้มีการใช้งานที่มีเงือนไขซับซ้อนอะไร ใช้ด้านบนดังที่กล่าวมาแล้วก็เพียงพอ แต่ถ้าหากมีเขื่อนไขที่ซับซ้อน เราก็ยังสามารถปรับแต่งคอลัมน์ได้อีก ซึ่งการใช้งานแบบนี้ เรียกว่า  &lt;code&gt;anonymous function&lt;/code&gt; ถ้าใครเคยเขียน JavaScript &amp;amp; jQuery จะเห็นว่าคล้ายๆกัน โดยเราสามารถประการ function เข้าไปแบบนี้ได้เลย สะดวกมากๆ&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://php.net/manual/en/functions.anonymous.php&quot;&gt;Anonymous functions&lt;/a&gt; เป็นความสามารถของ PHP นะครับ มีให้ใช้ตั้งแต่เวอร์ชั่น 5.3.0 แต่แนะนำ 5.4.0 นะครับเพราะน่าจะทำงานได้ดีกว่า&lt;/p&gt;
+
+&lt;p&gt;ปกติการใช้งาน GridView หากไม่ได้มีการใช้งานที่มีเงื่อนไขซับซ้อนอะไร ก็สามารถใช้ตามแบบที่แนะนำเบื้องต้นก็เพียงพอ แต่หากมีเงื่อนไขที่ซับซ้อน เราก็ยังสามารถปรับแต่งคอลัมน์ได้อีก ซึ่งการใช้งานแบบนี้ เรียกว่า  &lt;code&gt;anonymous function&lt;/code&gt; ถ้าใครเคยเขียน JavaScript &amp;amp; jQuery จะเห็นว่าคล้ายๆกัน โดยเราสามารถประการ function เข้าไปที่ property &lt;code&gt;value&lt;/code&gt; แบบนี้ได้เลย &lt;code&gt;value=&amp;gt;function(){}&lt;/code&gt;  สะดวกมากๆ&lt;/p&gt;
+
+&lt;p&gt;รายละเอียด &lt;code&gt;anonymous function&lt;/code&gt; จะมี parameter ให้สามารถเรียกใช้งานได้ดังนี้&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$model คือตัวแทนข้อมูล record นั้นๆ สามารถเรียกคอลัมน์อื่นๆ ได้&lt;/li&gt;
+&lt;li&gt;$key pk ของ record นั้น&lt;/li&gt;
+&lt;li&gt;$index ลำดับของ index&lt;/li&gt;
+&lt;li&gt;$column  yii\grid\DataColumn object&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;เราสามารถตั้งค่าตัวแปรพวกนี้เป็นชื่ออะไรก็ได้ เพราะมันจะยึดตามลำดับเป็นหลัก เพราะฉะนั้นเราต้องรู้เองนะครับว่า ตัวแปรที่ตั้งใหม่อยู่ที่ลำดับอะไร ชื่ออะไร&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;ตัวอย่างการใช้งาน&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
@@ -127,20 +139,11 @@
       &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ตัวอย่าง&lt;/p&gt;
+&lt;p&gt;ตัวอย่างการแสดงผล&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/img/gridview.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;รายละเอียด &lt;code&gt;anonymous function&lt;/code&gt; จะมี parameter ให้สามารถเรียกใช้งานได้ดังนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;$model คือตัวแทนข้อมูล record นั้นๆ สามารถเรียกคอลัมน์อื่นๆ ได้&lt;/li&gt;
-&lt;li&gt;$key pk ของ record นั้น&lt;/li&gt;
-&lt;li&gt;$index ลำดับของ index&lt;/li&gt;
-&lt;li&gt;$column  yii\grid\DataColumn object&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ส่วนใหญ่ใช้แค่ $model ก็เพียงพอแล้ว ระบุแบบนี้ได้&lt;/p&gt;
+&lt;p&gt;และเราสามารถระบุใช้งาน parameter แค่บางตัวก็ได้ ส่วนใหญ่ใช้แค่ $model ก็เพียงพอแล้ว ระบุแบบนี้ได้&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
       &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
       &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -175,6 +178,38 @@
   &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;a href=&quot;/2015/06/23/date-formatter.html&quot;&gt;อ่านเพิ่มเติมการใช้งาน formatter ได้ทีนี่&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;เรียกใช้งานตัวแปรที่อยู่นอก-scoping-anonymous-function&quot;&gt;เรียกใช้งานตัวแปรที่อยู่นอก scoping &lt;code&gt;anonymous function&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;ปกติการใช้งาน &lt;code&gt;anonymous function&lt;/code&gt; ภายใน function นี้ มันจะไม่รู้จักตัวแปรที่อยู่ด้านนอก function เลย แต่ก็มีบางกรณี ที่เราต้องการนำตัวแปรต่างๆ เข้าไปใช้ใน  &lt;code&gt;anonymous function&lt;/code&gt; ซึง  &lt;code&gt;anonymous function&lt;/code&gt; เองนั้น รองรับอยู่แล้ว แค่ &lt;code&gt;use&lt;/code&gt; ตัวแปรที่ต้องการใช้งานเข้าไป รูปแบบ&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;function () use ($parms1,$parms2,$parms n....) {}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ตัวอย่าง ผมได้ประกาศตัวแปรไว้ด้านนอก GridView และจะทำการเรียกใช้งานที่ &lt;code&gt;anonymous function&lt;/code&gt; ซึ่งสามารถเรียกได้ทุกๆ column เลย จะใช้กี่ตัวก็ได้แค่ use เข้าไป&lt;/p&gt;
+
+&lt;p&gt;ตัวอย่างการใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$fullname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Satit Seethaphon&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+ &lt;span class=&quot;o&quot;&gt;&amp;lt;?=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$fullname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;created_at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot; | &amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$fullname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;อ่านเพิ่มเติม &lt;a href=&quot;http://php.net/manual/en/functions.anonymous.php&quot;&gt;functions.anonymous&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ขอบคุณ อ.&lt;a href=&quot;https://www.facebook.com/tehnn?fref=ufi&quot;&gt;@Utehn Phnu&lt;/a&gt; ที่แนะนำมาครับ&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;หวังว่าน่าจะเป็นประโยชน์และช่วยให้เราสามารถปรับแต่งได้ง่ายขึ้นนะครับ.&lt;/p&gt;
 

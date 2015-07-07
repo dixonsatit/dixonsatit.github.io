@@ -197,12 +197,9 @@
 
 <ul>
 <li><code>columns</code> เป็นส่วนที่เอาไว้กำหนดว่าเราต้องการแสดงข้อมูลคอลัมน์ใหนบ้างโดยระบุชื่อคอลัมน์เข้าไป</li>
-<li><code>ActionColumn</code> เป็น class ที่เอาไว้แสดงผลปุ่มในคอลัมน์ เพื่อทำงานบางอย่าง โดยปกติ default มีให้ 3 ปุ่มคือ <code>view</code>,<code>update</code>,<code>delete</code> </li>
+<li><code>Shortcut Format</code> เป็นการกำหนด format ของการแสดงผลในแต่ละคอลัมน์สามารถระบบ format ต่อท้ายชื่อคอลัมน์ได้เลยโดยคั่นด้วยเครื่องหมาย <code>:</code></li>
+<li><code>Anonymous functions</code> เป็นการปรับแต่งคอลัมน์ที่ยือยุ่นที่สุด สามารถใส่เงื่อนไข รับค่าตัวแปรต่างๆ ได้ กำหนดสี, ใส่ icon อืนๆ </li>
 </ul>
-
-<blockquote>
-<p>ในส่วน ActionColumn ผมจะแยกเป็นอีกบทความเพราะรู้สึกเริ่มยาวแระ! รอติดตามนะครับ ^ ^</p>
-</blockquote>
 
 <h3 id="การใช้งาน-column">การใช้งาน column</h3>
 
@@ -217,7 +214,7 @@
       <span class="p">],</span>
   <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>ส่วนใหญ่เราก็จะใช้กันแค่นี้..แต่จริงๆ แล้ว มันมีฟังชันก์อีก 1 ตัวที่อยากแนะนำคือ <code>Shortcut Format</code> สิ่งที่จะทำให้เรากำหนดรูปแบบการแสดงผลได้ง่ายๆ </p>
+<p>ส่วนใหญ่เราก็จะใช้กันแค่นี้..แต่จริงๆ แล้ว มันมีฟังชันก์อีก 1 ตัวที่อยากแนะนำคือ <code>Shortcut Format</code> สิ่งที่จะทำให้เรากำหนดรูปแบบการแสดงผลได้ง่ายๆ</p>
 
 <h3 id="shortcut-format">Shortcut Format</h3>
 
@@ -262,9 +259,24 @@
 <span class="x">    ],</span>
 <span class="x">  ]</span>
 </code></pre></div>
-<h2 id="การปรับแต่งคอลัมน์แบบกำหนดเอง">การปรับแต่งคอลัมน์แบบกำหนดเอง</h2>
+<h2 id="การปรับแต่งคอลัมน์โดยใช้-anonymous-functions">การปรับแต่งคอลัมน์โดยใช้ Anonymous functions</h2>
 
-<p>ปกติหากไม่ได้มีการใช้งานที่มีเงือนไขซับซ้อนอะไร ใช้ด้านบนดังที่กล่าวมาแล้วก็เพียงพอ แต่ถ้าหากมีเขื่อนไขที่ซับซ้อน เราก็ยังสามารถปรับแต่งคอลัมน์ได้อีก ซึ่งการใช้งานแบบนี้ เรียกว่า  <code>anonymous function</code> ถ้าใครเคยเขียน JavaScript &amp; jQuery จะเห็นว่าคล้ายๆกัน โดยเราสามารถประการ function เข้าไปแบบนี้ได้เลย สะดวกมากๆ</p>
+<p><a href="http://php.net/manual/en/functions.anonymous.php">Anonymous functions</a> เป็นความสามารถของ PHP นะครับ มีให้ใช้ตั้งแต่เวอร์ชั่น 5.3.0 แต่แนะนำ 5.4.0 นะครับเพราะน่าจะทำงานได้ดีกว่า</p>
+
+<p>ปกติการใช้งาน GridView หากไม่ได้มีการใช้งานที่มีเงื่อนไขซับซ้อนอะไร ก็สามารถใช้ตามแบบที่แนะนำเบื้องต้นก็เพียงพอ แต่หากมีเงื่อนไขที่ซับซ้อน เราก็ยังสามารถปรับแต่งคอลัมน์ได้อีก ซึ่งการใช้งานแบบนี้ เรียกว่า  <code>anonymous function</code> ถ้าใครเคยเขียน JavaScript &amp; jQuery จะเห็นว่าคล้ายๆกัน โดยเราสามารถประการ function เข้าไปที่ property <code>value</code> แบบนี้ได้เลย <code>value=&gt;function(){}</code>  สะดวกมากๆ</p>
+
+<p>รายละเอียด <code>anonymous function</code> จะมี parameter ให้สามารถเรียกใช้งานได้ดังนี้</p>
+
+<ul>
+<li>$model คือตัวแทนข้อมูล record นั้นๆ สามารถเรียกคอลัมน์อื่นๆ ได้</li>
+<li>$key pk ของ record นั้น</li>
+<li>$index ลำดับของ index</li>
+<li>$column  yii\grid\DataColumn object</li>
+</ul>
+
+<blockquote>
+<p>เราสามารถตั้งค่าตัวแปรพวกนี้เป็นชื่ออะไรก็ได้ เพราะมันจะยึดตามลำดับเป็นหลัก เพราะฉะนั้นเราต้องรู้เองนะครับว่า ตัวแปรที่ตั้งใหม่อยู่ที่ลำดับอะไร ชื่ออะไร</p>
+</blockquote>
 
 <p>ตัวอย่างการใช้งาน</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
@@ -303,20 +315,11 @@
       <span class="p">],</span>
   <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>ตัวอย่าง</p>
+<p>ตัวอย่างการแสดงผล</p>
 
 <p><img src="/img/gridview.png" alt=""></p>
 
-<p>รายละเอียด <code>anonymous function</code> จะมี parameter ให้สามารถเรียกใช้งานได้ดังนี้</p>
-
-<ul>
-<li>$model คือตัวแทนข้อมูล record นั้นๆ สามารถเรียกคอลัมน์อื่นๆ ได้</li>
-<li>$key pk ของ record นั้น</li>
-<li>$index ลำดับของ index</li>
-<li>$column  yii\grid\DataColumn object</li>
-</ul>
-
-<p>ส่วนใหญ่ใช้แค่ $model ก็เพียงพอแล้ว ระบุแบบนี้ได้</p>
+<p>และเราสามารถระบุใช้งาน parameter แค่บางตัวก็ได้ ส่วนใหญ่ใช้แค่ $model ก็เพียงพอแล้ว ระบุแบบนี้ได้</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
       <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
       <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
@@ -351,6 +354,38 @@
   <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
 <p><a href="/2015/06/23/date-formatter.html">อ่านเพิ่มเติมการใช้งาน formatter ได้ทีนี่</a></p>
+
+<h3 id="เรียกใช้งานตัวแปรที่อยู่นอก-scoping-anonymous-function">เรียกใช้งานตัวแปรที่อยู่นอก scoping <code>anonymous function</code></h3>
+
+<p>ปกติการใช้งาน <code>anonymous function</code> ภายใน function นี้ มันจะไม่รู้จักตัวแปรที่อยู่ด้านนอก function เลย แต่ก็มีบางกรณี ที่เราต้องการนำตัวแปรต่างๆ เข้าไปใช้ใน  <code>anonymous function</code> ซึง  <code>anonymous function</code> เองนั้น รองรับอยู่แล้ว แค่ <code>use</code> ตัวแปรที่ต้องการใช้งานเข้าไป รูปแบบ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">function () use ($parms1,$parms2,$parms n....) {}</span>
+</code></pre></div>
+<p>ตัวอย่าง ผมได้ประกาศตัวแปรไว้ด้านนอก GridView และจะทำการเรียกใช้งานที่ <code>anonymous function</code> ซึ่งสามารถเรียกได้ทุกๆ column เลย จะใช้กี่ตัวก็ได้แค่ use เข้าไป</p>
+
+<p>ตัวอย่างการใช้งาน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$fullname</span> <span class="o">=</span> <span class="s1">&#39;Satit Seethaphon&#39;</span><span class="p">;</span>
+
+ <span class="o">&lt;?=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+      <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+      <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+      <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span>
+          <span class="s1">&#39;attribute&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$fullname</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">created_at</span> <span class="o">.</span> <span class="s2">&quot; | &quot;</span> <span class="o">.</span> <span class="nv">$fullname</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+        <span class="c1">// ...</span>
+      <span class="p">],</span>
+  <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>อ่านเพิ่มเติม <a href="http://php.net/manual/en/functions.anonymous.php">functions.anonymous</a></p>
+
+<blockquote>
+<p>ขอบคุณ อ.<a href="https://www.facebook.com/tehnn?fref=ufi">@Utehn Phnu</a> ที่แนะนำมาครับ</p>
+</blockquote>
 
 <p>หวังว่าน่าจะเป็นประโยชน์และช่วยให้เราสามารถปรับแต่งได้ง่ายขึ้นนะครับ.</p>
 
