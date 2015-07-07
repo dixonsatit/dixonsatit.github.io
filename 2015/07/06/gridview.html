@@ -331,6 +331,27 @@
       <span class="p">],</span>
   <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
+<blockquote>
+<p>จะสังเกตได้ว่า หาเรากำหนด <code>anonymous function</code> แบบนี้แล้ว ตัว property <code>attribute</code> จะมีหน้าที่แค่ดึงข้อมูล hedader label มาแสดงเท่านั้น หากเราไม่ต้องการ ก็สามารถระบุเข้าไปโดยตรงได้ โดยใช้ attribute <code>label</code> กำหนดค่า ข้อความที่ต้องการเข้าไปได้เลย</p>
+</blockquote>
+
+<p>และถ้าอยากกำหนด format เองแบบ <code>shortcut format</code> ก็สามารถทำได้ และสามารถใช้ได้ทุก format ที่กล่าวมา</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+      <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+      <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+      <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span>
+          <span class="s1">&#39;attribute&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">formatter</span><span class="o">-&gt;</span><span class="na">asDate</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">created_at</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+        <span class="c1">// ...</span>
+      <span class="p">],</span>
+  <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><a href="/2015/06/23/date-formatter.html">อ่านเพิ่มเติมการใช้งาน formatter ได้ทีนี่</a></p>
+
 <p>หวังว่าน่าจะเป็นประโยชน์และช่วยให้เราสามารถปรับแต่งได้ง่ายขึ้นนะครับ.</p>
 
 <p><a href="http://www.yiiframework.com/doc-2.0/yii-grid-datacolumn.html#$value-detail">รายละเอียดเพิ่มเติม</a></p>
