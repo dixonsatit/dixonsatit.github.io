@@ -189,7 +189,7 @@
   </header>
   <section class="post-content"><p><img src="/img/grid-view.png" alt=""></p>
 
-<p>GridView เป็น Widget พื้นฐานที่เราน่าจะคุ้นเคยกันดี และส่วนใหญ่เวลาแสดงผล เราก็มักจะใช้ GridView เป็นหลักเพราะด้วยความที่ใช้งานง่ายและสะดวก วันนี้จะขอแนะนำการปรับแต่ง GridView เพื่อให้เราสามารถใช้งาน GridView ได้อย่างเต็มประสิทธิภาพ</p>
+<p>GridView เป็น Widget พื้นฐานที่เราน่าจะคุ้นเคยกันดี และส่วนใหญ่เวลาแสดงผล เราก็มักจะใช้ GridView เป็นหลักเพราะด้วยความที่ใช้งานง่ายและสะดวก วันนี้จะขอแนะนำการปรับแต่ง GridView เพื่อให้เราสามารถใช้งาน GridView ได้อย่างเต็มประสิทธิภาพ และส่วนที่เราใช้งานมากที่สุดนั้นก็คือ <code>columns</code></p>
 
 <h2 id="columns">Columns</h2>
 
@@ -197,8 +197,12 @@
 
 <ul>
 <li><code>columns</code> เป็นส่วนที่เอาไว้กำหนดว่าเราต้องการแสดงข้อมูลคอลัมน์ใหนบ้างโดยระบุชื่อคอลัมน์เข้าไป</li>
-<li><code>ActionColumn</code> เป็น class ที่เอาไว้แสดงผลปุ่มในคอลัมน์ เพื่อทำงานบางอย่าง โดยปกติ default มีให้ 3 ปุ่มคือ <code>view</code>,<code>update</code>,<code>delete</code></li>
+<li><code>ActionColumn</code> เป็น class ที่เอาไว้แสดงผลปุ่มในคอลัมน์ เพื่อทำงานบางอย่าง โดยปกติ default มีให้ 3 ปุ่มคือ <code>view</code>,<code>update</code>,<code>delete</code> </li>
 </ul>
+
+<blockquote>
+<p>ในส่วน ActionColumn ผมจะแยกเป็นอีกบทความเพราะรู้สึกเริ่มยาวแระ! รอติดตามนะครับ ^ ^</p>
+</blockquote>
 
 <h3 id="การใช้งาน-column">การใช้งาน column</h3>
 
@@ -213,7 +217,7 @@
       <span class="p">],</span>
   <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
-<p>ส่วนใหญ่เราก็จะใช้กันแค่นี้..</p>
+<p>ส่วนใหญ่เราก็จะใช้กันแค่นี้..แต่จริงๆ แล้ว มันมีฟังชันก์อีก 1 ตัวที่อยากแนะนำคือ <code>Shortcut Format</code> สิ่งที่จะทำให้เรากำหนดรูปแบบการแสดงผลได้ง่ายๆ </p>
 
 <h3 id="shortcut-format">Shortcut Format</h3>
 
@@ -327,6 +331,8 @@
       <span class="p">],</span>
   <span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
+<p>หวังว่าน่าจะเป็นประโยชน์และช่วยให้เราสามารถปรับแต่งได้ง่ายขึ้นนะครับ.</p>
+
 <p><a href="http://www.yiiframework.com/doc-2.0/yii-grid-datacolumn.html#$value-detail">รายละเอียดเพิ่มเติม</a></p>
 </section>
 </article>

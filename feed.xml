@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 07 Jul 2015 01:07:21 +0700</pubDate>
+    <pubDate>Tue, 07 Jul 2015 09:32:56 +0700</pubDate>
     
       <item>
         <title>Tip การใช้งาน GridView และการปรับแต่ง Columns</title>
@@ -13,7 +13,7 @@
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/06/gridview.html</guid>
         <description>&lt;p&gt;&lt;img src=&quot;/img/grid-view.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;GridView เป็น Widget พื้นฐานที่เราน่าจะคุ้นเคยกันดี และส่วนใหญ่เวลาแสดงผล เราก็มักจะใช้ GridView เป็นหลักเพราะด้วยความที่ใช้งานง่ายและสะดวก วันนี้จะขอแนะนำการปรับแต่ง GridView เพื่อให้เราสามารถใช้งาน GridView ได้อย่างเต็มประสิทธิภาพ&lt;/p&gt;
+&lt;p&gt;GridView เป็น Widget พื้นฐานที่เราน่าจะคุ้นเคยกันดี และส่วนใหญ่เวลาแสดงผล เราก็มักจะใช้ GridView เป็นหลักเพราะด้วยความที่ใช้งานง่ายและสะดวก วันนี้จะขอแนะนำการปรับแต่ง GridView เพื่อให้เราสามารถใช้งาน GridView ได้อย่างเต็มประสิทธิภาพ และส่วนที่เราใช้งานมากที่สุดนั้นก็คือ &lt;code&gt;columns&lt;/code&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;columns&quot;&gt;Columns&lt;/h2&gt;
 
@@ -21,8 +21,12 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;columns&lt;/code&gt; เป็นส่วนที่เอาไว้กำหนดว่าเราต้องการแสดงข้อมูลคอลัมน์ใหนบ้างโดยระบุชื่อคอลัมน์เข้าไป&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ActionColumn&lt;/code&gt; เป็น class ที่เอาไว้แสดงผลปุ่มในคอลัมน์ เพื่อทำงานบางอย่าง โดยปกติ default มีให้ 3 ปุ่มคือ &lt;code&gt;view&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ActionColumn&lt;/code&gt; เป็น class ที่เอาไว้แสดงผลปุ่มในคอลัมน์ เพื่อทำงานบางอย่าง โดยปกติ default มีให้ 3 ปุ่มคือ &lt;code&gt;view&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt; &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ในส่วน ActionColumn ผมจะแยกเป็นอีกบทความเพราะรู้สึกเริ่มยาวแระ! รอติดตามนะครับ ^ ^&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3 id=&quot;การใช้งาน-column&quot;&gt;การใช้งาน column&lt;/h3&gt;
 
@@ -37,7 +41,7 @@
       &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ส่วนใหญ่เราก็จะใช้กันแค่นี้..&lt;/p&gt;
+&lt;p&gt;ส่วนใหญ่เราก็จะใช้กันแค่นี้..แต่จริงๆ แล้ว มันมีฟังชันก์อีก 1 ตัวที่อยากแนะนำคือ &lt;code&gt;Shortcut Format&lt;/code&gt; สิ่งที่จะทำให้เรากำหนดรูปแบบการแสดงผลได้ง่ายๆ &lt;/p&gt;
 
 &lt;h3 id=&quot;shortcut-format&quot;&gt;Shortcut Format&lt;/h3&gt;
 
@@ -151,6 +155,8 @@
       &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หวังว่าน่าจะเป็นประโยชน์และช่วยให้เราสามารถปรับแต่งได้ง่ายขึ้นนะครับ.&lt;/p&gt;
+
 &lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/yii-grid-datacolumn.html#$value-detail&quot;&gt;รายละเอียดเพิ่มเติม&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 06 Jul 2015 00:00:00 +0700</pubDate>
