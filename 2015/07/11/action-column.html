@@ -263,7 +263,16 @@
 
 <h3 id="การเพิ่มปุ่ม">การเพิ่มปุ่ม</h3>
 
-<p>ตัวอย่างนี้ เป็นการสร้างปุ่ม copy เพิ่มเข้าไปใน ActionColumn</p>
+<p>ตัวอย่างนี้ เป็นการสร้างปุ่ม copy เพิ่มเข้าไปใน ActionColumn โดยเราจะต้องประกาศค่าปุ่มที่ template โดยเพิ่ม <code>{copy}</code>  เข้าไปเพื่อให้มันรู้ว่ามีปุ่มนี้อยู่</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&#39;template&#39;=&gt;&#39;{copy} {view} {update} {delete}&#39;,
+</code></pre></div>
+<p>จากนั้นไปกำหนดค่าต่างๆ ของปุ่มที่ Properties <code>buttons</code> โดยใช้ค่าที่เราตั้งไว้ใน template คือ <code>copy</code> และกำหนดค่าต่างๆ ได้เองเลย โดย buttons จะมีค่า params มาให้ใช้ 3 ตัวคือ</p>
+
+<ul>
+<li><code>$url</code> ระบบมันจะสร้างให้ตามชื่อปุ่มที่เราตั้งไว้ หาไม่ใช้ก็สามารถกำหนดเองได้</li>
+<li><code>$model</code> ข้อมูลทั้งหมดของแถวนั้นๆ สามารถเรียกใช้งานได้ทุกฟิวด์ ที่มีในตาราง <code>$model-&gt;fieldName</code></li>
+<li><code>$key</code> คือค่า pk ของตารางสามารถนำไปใช้ได้เลย</li>
+</ul>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">[</span>
 <span class="x">  &#39;class&#39; =&gt; &#39;yii\grid\ActionColumn&#39;,</span>
 <span class="x">  &#39;template&#39;=&gt;&#39;{copy} {view} {update} {delete}&#39;,</span>
@@ -339,7 +348,9 @@ Html::a(&#39;&lt;i class=&quot;glyphicon glyphicon-duplicate&quot;&gt;&lt;/i&gt;
 
 <p><img src="/img/all-button-action-column.png" alt=""></p>
 
-<h2 id="สรุปโค้ดการเพิ่ม-style-button-groups-ให้กับปุ่มเดิมๆ-ของเรา">สรุปโค้ดการเพิ่ม style Button Groups ให้กับปุ่มเดิมๆ ของเรา</h2>
+<h3 id="โค้ดการเพิ่ม-style-button-groups-ให้กับปุ่มเดิมๆ-ของเรา">โค้ดการเพิ่ม style Button Groups ให้กับปุ่มเดิมๆ ของเรา</h3>
+
+<p>เราสามารถเพิ่ม Button Groups เข้าไปได้ และจะทำให้ปุ่มของเราดูชัดเจนขึ้น, มองง่ายขึ้น, ดูสวยขึ้น </p>
 <div class="highlight"><pre><code class="language-html" data-lang="html">[
   &#39;class&#39; =&gt; &#39;yii\grid\ActionColumn&#39;,
   &#39;buttonOptions&#39;=&gt;[&#39;class&#39;=&gt;&#39;btn btn-default&#39;],
@@ -353,6 +364,10 @@ Html::a(&#39;&lt;i class=&quot;glyphicon glyphicon-duplicate&quot;&gt;&lt;/i&gt;
 ],
 </code></pre></div>
 <p><img src="/img/button-groups-copy.png" alt=""></p>
+
+<h2 id="สรุป-actioncolumn">สรุป ActionColumn</h2>
+
+<p>Yii 2 ค่อนข้างเปิดกว้างให้เราได้ปรับแต่งส่วนต่างๆ ได้เองทังหมด ในส่วน ActionColumn ก็เหมือนกัน ลองใช้งานและปรับแต่งดูครับ หากติดปัญหาก็คอมเม้นด้านล่างได้เลยครับ ^ ^</p>
 </section>
 </article>
 

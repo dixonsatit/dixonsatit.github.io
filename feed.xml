@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 13 Jul 2015 10:34:58 +0700</pubDate>
+    <pubDate>Mon, 13 Jul 2015 10:52:54 +0700</pubDate>
     
       <item>
         <title>การปรับแต่ง Action Column ใน GridView</title>
@@ -87,7 +87,16 @@
 
 &lt;h3 id=&quot;การเพิ่มปุ่ม&quot;&gt;การเพิ่มปุ่ม&lt;/h3&gt;
 
-&lt;p&gt;ตัวอย่างนี้ เป็นการสร้างปุ่ม copy เพิ่มเข้าไปใน ActionColumn&lt;/p&gt;
+&lt;p&gt;ตัวอย่างนี้ เป็นการสร้างปุ่ม copy เพิ่มเข้าไปใน ActionColumn โดยเราจะต้องประกาศค่าปุ่มที่ template โดยเพิ่ม &lt;code&gt;{copy}&lt;/code&gt;  เข้าไปเพื่อให้มันรู้ว่ามีปุ่มนี้อยู่&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;template&amp;#39;=&amp;gt;&amp;#39;{copy} {view} {update} {delete}&amp;#39;,
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;จากนั้นไปกำหนดค่าต่างๆ ของปุ่มที่ Properties &lt;code&gt;buttons&lt;/code&gt; โดยใช้ค่าที่เราตั้งไว้ใน template คือ &lt;code&gt;copy&lt;/code&gt; และกำหนดค่าต่างๆ ได้เองเลย โดย buttons จะมีค่า params มาให้ใช้ 3 ตัวคือ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;$url&lt;/code&gt; ระบบมันจะสร้างให้ตามชื่อปุ่มที่เราตั้งไว้ หาไม่ใช้ก็สามารถกำหนดเองได้&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$model&lt;/code&gt; ข้อมูลทั้งหมดของแถวนั้นๆ สามารถเรียกใช้งานได้ทุกฟิวด์ ที่มีในตาราง &lt;code&gt;$model-&amp;gt;fieldName&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;$key&lt;/code&gt; คือค่า pk ของตารางสามารถนำไปใช้ได้เลย&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;  &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;  &amp;#39;template&amp;#39;=&amp;gt;&amp;#39;{copy} {view} {update} {delete}&amp;#39;,&lt;/span&gt;
@@ -163,7 +172,9 @@ Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quo
 
 &lt;p&gt;&lt;img src=&quot;/img/all-button-action-column.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;สรุปโค้ดการเพิ่ม-style-button-groups-ให้กับปุ่มเดิมๆ-ของเรา&quot;&gt;สรุปโค้ดการเพิ่ม style Button Groups ให้กับปุ่มเดิมๆ ของเรา&lt;/h2&gt;
+&lt;h3 id=&quot;โค้ดการเพิ่ม-style-button-groups-ให้กับปุ่มเดิมๆ-ของเรา&quot;&gt;โค้ดการเพิ่ม style Button Groups ให้กับปุ่มเดิมๆ ของเรา&lt;/h3&gt;
+
+&lt;p&gt;เราสามารถเพิ่ม Button Groups เข้าไปได้ และจะทำให้ปุ่มของเราดูชัดเจนขึ้น, มองง่ายขึ้น, ดูสวยขึ้น &lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;[
   &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,
   &amp;#39;buttonOptions&amp;#39;=&amp;gt;[&amp;#39;class&amp;#39;=&amp;gt;&amp;#39;btn btn-default&amp;#39;],
@@ -177,6 +188,10 @@ Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quo
 ],
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img src=&quot;/img/button-groups-copy.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;สรุป-actioncolumn&quot;&gt;สรุป ActionColumn&lt;/h2&gt;
+
+&lt;p&gt;Yii 2 ค่อนข้างเปิดกว้างให้เราได้ปรับแต่งส่วนต่างๆ ได้เองทังหมด ในส่วน ActionColumn ก็เหมือนกัน ลองใช้งานและปรับแต่งดูครับ หากติดปัญหาก็คอมเม้นด้านล่างได้เลยครับ ^ ^&lt;/p&gt;
 </description>
         <pubDate>Sat, 11 Jul 2015 00:00:00 +0700</pubDate>
       </item>
