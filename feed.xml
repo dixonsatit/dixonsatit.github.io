@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 13 Jul 2015 10:52:54 +0700</pubDate>
+    <pubDate>Wed, 15 Jul 2015 10:08:33 +0700</pubDate>
     
       <item>
         <title>การปรับแต่ง Action Column ใน GridView</title>
@@ -894,7 +894,7 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 &lt;ul&gt;
 &lt;li&gt;Operations  เป็นการกระทำเพียง 1 อย่าง หรือมองเป็น action ก็ได้ อย่างเช่น  &lt;code&gt;create&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Tasks เป็นชื่อกลุ่มที่รวบรวม Operations ต่างๆ ที่เกี่ยวข้องกัน อย่างเช่น &lt;code&gt;TasksUser&lt;/code&gt;  จะมี Operations คือ UserCreate, UserUpdate, UserDelete มองประมาณ controller ก็ได้&lt;/li&gt;
-&lt;li&gt;Roles คือกลุ่มของ Task,Operations และ Role  ทำให้เราจัดกลุ่มสิทธ์ต่างๆ ได้อย่างมีประสิทธิภาพ อย่างเช่น Role Admin, Role User, Role Administrator  ซึ่งในแต่ละกลุ่มก็แล้วแต่เราจะนำเอา Role,task ที่ใหนมาใช้บ้าง &lt;a href=&quot;http://yiisos.blogspot.com/2013/09/rbac.html&quot;&gt;ที่มา&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Roles คือกลุ่มของ Task,Operations และ Role  ทำให้เราจัดกลุ่มสิทธิ์ต่างๆ ได้อย่างมีประสิทธิภาพ อย่างเช่น Role Admin, Role User, Role Administrator  ซึ่งในแต่ละกลุ่มก็แล้วแต่เราจะนำเอา Role,task ที่ใหนมาใช้บ้าง &lt;a href=&quot;http://yiisos.blogspot.com/2013/09/rbac.html&quot;&gt;ที่มา&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;ช่างมันเถอะ อาจจะงง ผมก็อธิบายไม่ถูก เดี่ยวทำไปๆ น่าจะเข้าใจ ^ ^&lt;/p&gt;
@@ -960,7 +960,7 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
 &lt;span class=&quot;x&quot;&gt;              [&amp;#39;label&amp;#39; =&amp;gt; &amp;#39;Contact&amp;#39;, &amp;#39;url&amp;#39; =&amp;gt; [&amp;#39;/site/contact&amp;#39;]],&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;          ];&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;สร้างกลุ่มสิทธ์หรือระดับการเข้าใช้งาน&quot;&gt;สร้างกลุ่มสิทธ์หรือระดับการเข้าใช้งาน&lt;/h2&gt;
+&lt;h2 id=&quot;สร้างกลุ่มสิทธิ์หรือระดับการเข้าใช้งาน&quot;&gt;สร้างกลุ่มสิทธิ์หรือระดับการเข้าใช้งาน&lt;/h2&gt;
 
 &lt;p&gt;เราจะออกแบบ Role หรือระดับการเข้าใช้งาน ไว้ 3 กลุ่ม และแต่ละกลุ่มมีหน้าที่นังนี้&lt;/p&gt;
 
@@ -1074,7 +1074,7 @@ Yii 2 จะแบ่ง ระดับไว้ที่ 3 ระดับ ค
     &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เราจะทำการกำหนดสิทธ์การใช้งาน เบื้องต้นเราได้กำหนด Role ไว้ที่ model User แล้วคือ&lt;/p&gt;
+&lt;p&gt;เราจะทำการกำหนดสิทธิ์การใช้งาน เบื้องต้นเราได้กำหนด Role ไว้ที่ model User แล้วคือ&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Admin&lt;/li&gt;
@@ -1790,7 +1790,7 @@ public function getRoleName(){
 
 &lt;p&gt;นี่เป็นเพียงจุดเริ่มต้นในการใช้ RBAC อย่างง่ายๆ เมื่อเราพัฒนาระบบ เราต้องออกแบบและคิดภาพรวมในหัวก่อนว่า ระบบของเรานั้น แบ่งกลุ่มผู้ใช้งานเป็นกี่กลุ่ม แต่ละกลุ่มสามารถใช้งานอะไรได้บ้าง แล้วค่อยทำการสร้าง role และแบ่งกลุ่มผู้ใช้งานขึ้นมา&lt;/p&gt;
 
-&lt;p&gt;ตัวอย่างนี้จึงเหมาะสำหรับระบบที่ไม่ได้มีการใช้งานที่ซับซ้อนอะไร และข้อกัดอีก 1 อย่างนี้ก็คือ ไม่สามารถ ให้สิทธ์ user ได้มากกว่า 1 กลุ่ม ซึ่งหากเป็นระบบใหญ่ๆ และซับซ้อนเราจะใช้ RBAC ที่เก็บข้อมูลใน DB แทนค่อยติดตามในบทต่อๆ ไปครับ&lt;/p&gt;
+&lt;p&gt;ตัวอย่างนี้จึงเหมาะสำหรับระบบที่ไม่ได้มีการใช้งานที่ซับซ้อนอะไร และข้อกัดอีก 1 อย่างนี้ก็คือ ไม่สามารถ ให้สิทธิ์ user ได้มากกว่า 1 กลุ่ม ซึ่งหากเป็นระบบใหญ่ๆ และซับซ้อนเราจะใช้ RBAC ที่เก็บข้อมูลใน DB แทนค่อยติดตามในบทต่อๆ ไปครับ&lt;/p&gt;
 
 &lt;p&gt;หวังว่าคงจะทำให้เราเข้าใจในพื้นฐานการใช้งาน RBAC บ้างนะครับ&lt;/p&gt;
 
