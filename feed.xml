@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Thu, 23 Jul 2015 20:05:34 +0700</pubDate>
+    <pubDate>Thu, 23 Jul 2015 20:07:52 +0700</pubDate>
     
       <item>
         <title>การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList</title>
@@ -966,6 +966,8 @@
 &lt;p&gt;คิดว่าคงพอเป็นตัวอย่างที่ดีในการพัฒนาได้ บางคร้ัง เราอาจเขียนโปรแกรมให้มันใช้ใช้งานได้ แต่อย่าลืมว่าเมื่อเราต้องมีการแก้ไปหรือปรับปรุงระบบ มันต้องง่ายและยืดหยุ่น และที่สำคัญต้องให้คนอื่นอ่านโค้ดเราเข้าใจได้ด้วย ไม่งั้นพอได้คนใหม่มาหรือต้องทำงานรว่มกันเป็นทีม  ก็ต้องมารือทำระบบใหม่อีกที เป็นวนเวียนอยู่แบบนี้ ถ้าเขียนแล้วมันใช้ได้นานๆ ยืดยุ่น มันก็น่าคิดนะครับ ว่าคุณแค่อยากเขียนโค้ดแค่ให้พอรันได้ ให้มันเสร็จๆไป หรือคุณอยากเขียนโค้ดให้อ่านได้ รันได้ และยืดยุ่นกว่า ส่วนใหญ่ bug มันก็เกิดตั้งแต่ส่วนเล็กๆ แบบนี้แหละครับ ทำจุดเล็กๆ แต่ละจุดให้มันดี พอรวมกันแล้วมันจะแข็งแกร่งอย่างไม่น่าเชื่อ..&lt;/p&gt;
 
 &lt;p&gt;สำหรับผมแล้วสิ่งเหล่านี้คนอื่นอาจไม่เห็น คนใช้อาจไม่รู้ แต่มันเป็นความสุขที่สัมผัสได้ เป็นความภูมิใจเล็กๆ น้อยๆ ^ ^&lt;/p&gt;
+
+&lt;p&gt;ดาวโหลด Source Code &lt;a href=&quot;https://github.com/dixonsatit/yii2-workshop-items-alias&quot;&gt;ได้ที่นี่&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;@DixonSatit&lt;/p&gt;
 </description>
