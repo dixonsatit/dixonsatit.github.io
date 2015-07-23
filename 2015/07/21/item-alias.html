@@ -194,7 +194,7 @@
 <p>ในการใช้งานฟอร์มส่วนใหญ่ หากมีข้อมูลเพียงเล็กน้อยที่ต้องใช้งานในฟอร์มเพื่อแสดงผล DropdownList,RadioList,CheckBoxList  และข้อมูลส่วนนี้ ไม่ค่อยมีการเปลี่ยนแปลงอะไรมากมาย ผมจะสร้างเป็น function ที่เก็บค่า array  ไว้ เพื่อเรียกใช้งานในตัว Model เลย</p>
 
 <blockquote>
-<p>ตัวอย่างนี้เป็นการกำหนดค่า array เข้าไปใน model เลย ซึ่งมันจะเหมาะกับข้อมูลที่ไม่ได้มีการเปลี่ยลแปลงบ่อยๆ ข้อมูลไม่เยอะ ไม่จำเป็นต้องสร้าง table เพิ่มเติม</p>
+<p>ตัวอย่างนี้เป็นการกำหนดค่า array เข้าไปใน model เลย ซึ่งมันจะเหมาะกับข้อมูลที่ไม่ได้มีการเปลี่ยนแปลงบ่อยๆ ข้อมูลไม่เยอะ ไม่จำเป็นต้องสร้าง table เพิ่มเติม</p>
 </blockquote>
 
 <p>ผมเองเชื่อว่าหลายๆ คนคงเจอปัญหาในการใช้งาน array เพราะเมื่อจะใช้ที ก็ไปเขียน array ไว้ที่ form หรือที่ Gridviw มันไม่สะดวก เวลาที่ต้องแก้ไข ก็ไปตามที่จุดนั้นๆ วุ่นวาย เห็นหลายๆ คนชอบเขียนแบบนี้จึงอยากจะแนะนำวิธีการสร้าง array เก็บเป็น <code>itemsAlias()</code> ฟังก์ชัน เพื่อให้สามารถใช้งานได้สะดวกๆ และเป็นรูปแบบที่มาตรฐาน ไม่ว่าจะเป็นการนำไปใช้งานกับ  DropdownList,RadioList,CheckBoxLis หรือนำเป็นแสดงผลในที่ต่างๆ GridView,DetailView,Listview</p>
@@ -284,9 +284,9 @@
 
 <h2 id="สร้าง-function-ใน-model-เพื่อเตรียมไว้เรียกใช้งานใน-form">สร้าง function ใน model เพื่อเตรียมไว้เรียกใช้งานใน Form</h2>
 
-<p>เราจะทำการสร้าง function itemsAlias() เพื่อเก็บค่า array ทั้งหมดที่ต้องการใช้งานใน Model Resume ดังนี้</p>
+<p>เราจะทำการสร้าง function itemsAlias() เพื่อเก็บค่า array ทั้งหมดที่ต้องการใช้งานใน Model Resume.php ดังนี้</p>
 
-<p>ในส่วนของ sex จะทำการประกาศเป็น constant เพื่อให้สามารถเรียกใช้งานด้วยชื่อง่ายๆ ไม่ต้องจำว่า 1 คือ ชาย, 2 คือ หญิง เวลาจะเรียกใช้งานก็ <code>Resume::SEX_MEN</code> เลย เพิ่มการกำหนดค่าเข้าไปใน Resume ดังนี้</p>
+<p>ฟิวด์แรกคือ sex จะทำการประกาศเป็น constant เพื่อให้สามารถเรียกใช้งานด้วยชื่อง่ายๆ ไม่ต้องจำว่า 1 คือ ชาย, 2 คือ หญิง เวลาจะเรียกใช้งานก็ <code>Resume::SEX_MEN</code> เลย เพิ่มการกำหนดค่าเข้าไปใน Resume ดังนี้</p>
 <div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="x">class Resume extends \yii\db\ActiveRecord</span>
 <span class="x">{</span>
 
@@ -313,7 +313,7 @@
 <p>หากค่าตัวใหนไม่จำเป็นต้องใช้ where หรือเรียกใช้งานอื่นๆ  ก็ไม่จำเป็นต้องประกาศเป็น constant เหมือน <code>sex</code> ก็ได้ ให้กำหนดค่าใน array itemsAlias ไปเลย</p>
 </blockquote>
 
-<p>หลังจากนั้นให้เราทำการสร้าง <code>static function itemsAlias()</code> เพื่อเก็บค่า array ทั้งหมดไว้ที่นี่ โดย สามารถเรียกใช้งาน และระบุค่า key ที่ต้องการเข้าไป ก็จะได้ array ของ items ที่เราต้องการ เช่น <code>Resume::itemsAlias(&#39;sex&#39;)</code> จะ return ค่า array sex ออกมา</p>
+<p>หลังจากนั้นให้เราทำการสร้าง <code>static function itemsAlias()</code> เพื่อเก็บค่า array ทั้งหมดไว้ที่นี่ โดย สามารถเรียกใช้งาน และระบุค่า key ที่ต้องการเข้าไป ก็จะได้ array ของ items ที่เราต้องการ เช่น <code>Resume::itemsAlias(&#39;sex&#39;)</code> จะ return ค่า array sex ออกมา เขียนเป็นฟังก์ชันได้ดังนี้</p>
 <div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
 
 <span class="k">class</span> <span class="nc">Resume</span> <span class="k">extends</span> <span class="nx">\yii\db\ActiveRecord</span>
@@ -371,7 +371,7 @@
   <span class="c1">//return array_key_exists($key, $items) ? $items[$key] : [];</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>จากนั้นสร้าง function เพื่อให้สามารถเรียกใช้งาน array ในฟอร์มได้ง่ายๆ เพื่อให้ฟอร์มนำไปแสดงผลเป็น DropdownList,RadioList,CheckBoxList</p>
+<p>จากนั้นสร้าง function <code>getItem</code> เพื่อให้สามารถเรียกใช้งาน array item แต่ละตัวในฟอร์มได้ง่ายๆ เพื่อให้ฟอร์มนำไปแสดงผลเป็น DropdownList,RadioList,CheckBoxList</p>
 <div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">getItemSex</span><span class="p">()</span>
@@ -399,7 +399,7 @@
   <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;skill&#39;</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>หลายๆ คนอาจสงสัยเราสร้าง itemsAlias ไว้แล้วทำไมยังต้องสร้าง getItem ขึ้นมาอีก จริงๆ สามารถเรียกใช้ itemsAlias ตรงๆได้ ตามตัวอย่างด้านล่างได้ จะเห็นว่ามันต้อง <code>use app\models\Resume</code> เพื่อให้สามารถเรียกใช้งาน function แบบ static แบบนี้ <code>Resume::itemsAlias(&#39;title&#39;)</code> ได้</p>
+<p>หลายๆ คนอาจสงสัยเราสร้าง itemsAlias ไว้แล้วทำไมยังต้องสร้าง getItem ขึ้นมาอีก จริงๆ สามารถเรียกใช้ itemsAlias ตรงๆ ได้ และหากดูตามตัวอย่างด้านล่างแล้ว จะเห็นว่ามันต้อง <code>use app\models\Resume</code> เพื่อให้สามารถเรียกใช้งาน function แบบ static แบบนี้ <code>Resume::itemsAlias(&#39;title&#39;)</code> ได้</p>
 
 <blockquote>
 <p>เรื่องนี้มันเกี่ยวกับการประกาศ function ใน class เป็น public,static ลองไปหาข้อมูลเพิ่มเติมดูนะครับ</p>
@@ -518,7 +518,7 @@
 
 <p><strong>ก่อน Create &amp; Update แปลงข้อมูลจาก array เป็น string</strong></p>
 
-<p>ก่อนที่จะนำข้อมูลไปบันทึกเราจะแปลข้อมูลจาก checkBoxList ที่เป็น array ให้เป็น string โดยใช้ฟังก์ชัน <code>implode()</code> เพื่อให้เราไม่ต้องเขียนโค้ดวุ่นวายเราจะใช้ความสามารถของ  <code>behaviors()</code>  ของ model เพื่อดักจับ event <code>before-insert</code>,<code>before-update</code> เพื่อให้มันทำงาน ณ ตอนนั้น เพิ่มฟังก์ชันนี้เข้าไปใน Model Resume.php</p>
+<p>ก่อนที่จะนำข้อมูลไปบันทึกเราจะแปลงข้อมูลจาก checkBoxList ที่เป็น array ให้เป็น string โดยใช้ฟังก์ชัน <code>implode()</code> เพื่อให้เราไม่ต้องเขียนโค้ดวุ่นวายเราจะใช้ความสามารถของ  <code>behaviors()</code>  ของ model เพื่อดักจับ event <code>before-insert</code>,<code>before-update</code> เพื่อให้มันทำงาน ณ ตอนนั้น เพิ่มฟังก์ชันนี้เข้าไปใน Model Resume.php</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">app\models</span><span class="p">;</span>
@@ -639,7 +639,7 @@
 
 <span class="k">public</span> <span class="k">function</span> <span class="nf">getFullName</span><span class="p">()</span>
 <span class="p">{</span>
-   <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">firstname</span><span class="o">.</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">lastname</span><span class="p">;</span>
+   <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">titleName</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">firstname</span><span class="o">.</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">lastname</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 <p>การเรียกใช้งานผ่านตัวแปร $model</p>
@@ -692,7 +692,7 @@
     <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemTitle</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>ตอนเรียกใช้งานก็ $model-&gt;sexLebel,$model-&gt;titleLebel,$model-&gt;skillLebel ได้เลย ส่วนใน gridView,DetailView ก็เหมือนตัวอย่าง fullName ด้านบน</p>
+<p>ตอนเรียกใช้งานก็ $model-&gt;sexName,$model-&gt;titleName,$model-&gt;skillName ได้เลย ส่วนใน gridView,DetailView ก็เหมือนตัวอย่าง fullName ด้านบน</p>
 
 <p>แต่ในส่วนของ skill เราต้องปรับแต่งเป็น พิเศษเพื่อให้แสดงข้อมูลได้หลายๆ รายการเพราะมันเลือกได้มากกว่า 1 รายการ เพิ่มฟังก์ชั่นนี้ใน Model Resume.php เพิ่มฟังก์ชัน <code>getSkillName()</code> เข้าไป</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>

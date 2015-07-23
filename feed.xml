@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Thu, 23 Jul 2015 20:07:52 +0700</pubDate>
+    <pubDate>Fri, 24 Jul 2015 00:05:12 +0700</pubDate>
     
       <item>
         <title>การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList</title>
@@ -16,7 +16,7 @@
 &lt;p&gt;ในการใช้งานฟอร์มส่วนใหญ่ หากมีข้อมูลเพียงเล็กน้อยที่ต้องใช้งานในฟอร์มเพื่อแสดงผล DropdownList,RadioList,CheckBoxList  และข้อมูลส่วนนี้ ไม่ค่อยมีการเปลี่ยนแปลงอะไรมากมาย ผมจะสร้างเป็น function ที่เก็บค่า array  ไว้ เพื่อเรียกใช้งานในตัว Model เลย&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;ตัวอย่างนี้เป็นการกำหนดค่า array เข้าไปใน model เลย ซึ่งมันจะเหมาะกับข้อมูลที่ไม่ได้มีการเปลี่ยลแปลงบ่อยๆ ข้อมูลไม่เยอะ ไม่จำเป็นต้องสร้าง table เพิ่มเติม&lt;/p&gt;
+&lt;p&gt;ตัวอย่างนี้เป็นการกำหนดค่า array เข้าไปใน model เลย ซึ่งมันจะเหมาะกับข้อมูลที่ไม่ได้มีการเปลี่ยนแปลงบ่อยๆ ข้อมูลไม่เยอะ ไม่จำเป็นต้องสร้าง table เพิ่มเติม&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;ผมเองเชื่อว่าหลายๆ คนคงเจอปัญหาในการใช้งาน array เพราะเมื่อจะใช้ที ก็ไปเขียน array ไว้ที่ form หรือที่ Gridviw มันไม่สะดวก เวลาที่ต้องแก้ไข ก็ไปตามที่จุดนั้นๆ วุ่นวาย เห็นหลายๆ คนชอบเขียนแบบนี้จึงอยากจะแนะนำวิธีการสร้าง array เก็บเป็น &lt;code&gt;itemsAlias()&lt;/code&gt; ฟังก์ชัน เพื่อให้สามารถใช้งานได้สะดวกๆ และเป็นรูปแบบที่มาตรฐาน ไม่ว่าจะเป็นการนำไปใช้งานกับ  DropdownList,RadioList,CheckBoxLis หรือนำเป็นแสดงผลในที่ต่างๆ GridView,DetailView,Listview&lt;/p&gt;
@@ -106,9 +106,9 @@
 
 &lt;h2 id=&quot;สร้าง-function-ใน-model-เพื่อเตรียมไว้เรียกใช้งานใน-form&quot;&gt;สร้าง function ใน model เพื่อเตรียมไว้เรียกใช้งานใน Form&lt;/h2&gt;
 
-&lt;p&gt;เราจะทำการสร้าง function itemsAlias() เพื่อเก็บค่า array ทั้งหมดที่ต้องการใช้งานใน Model Resume ดังนี้&lt;/p&gt;
+&lt;p&gt;เราจะทำการสร้าง function itemsAlias() เพื่อเก็บค่า array ทั้งหมดที่ต้องการใช้งานใน Model Resume.php ดังนี้&lt;/p&gt;
 
-&lt;p&gt;ในส่วนของ sex จะทำการประกาศเป็น constant เพื่อให้สามารถเรียกใช้งานด้วยชื่อง่ายๆ ไม่ต้องจำว่า 1 คือ ชาย, 2 คือ หญิง เวลาจะเรียกใช้งานก็ &lt;code&gt;Resume::SEX_MEN&lt;/code&gt; เลย เพิ่มการกำหนดค่าเข้าไปใน Resume ดังนี้&lt;/p&gt;
+&lt;p&gt;ฟิวด์แรกคือ sex จะทำการประกาศเป็น constant เพื่อให้สามารถเรียกใช้งานด้วยชื่อง่ายๆ ไม่ต้องจำว่า 1 คือ ชาย, 2 คือ หญิง เวลาจะเรียกใช้งานก็ &lt;code&gt;Resume::SEX_MEN&lt;/code&gt; เลย เพิ่มการกำหนดค่าเข้าไปใน Resume ดังนี้&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-PHP&quot; data-lang=&quot;PHP&quot;&gt;&lt;span class=&quot;x&quot;&gt;class Resume extends \yii\db\ActiveRecord&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
 
@@ -135,7 +135,7 @@
 &lt;p&gt;หากค่าตัวใหนไม่จำเป็นต้องใช้ where หรือเรียกใช้งานอื่นๆ  ก็ไม่จำเป็นต้องประกาศเป็น constant เหมือน &lt;code&gt;sex&lt;/code&gt; ก็ได้ ให้กำหนดค่าใน array itemsAlias ไปเลย&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;หลังจากนั้นให้เราทำการสร้าง &lt;code&gt;static function itemsAlias()&lt;/code&gt; เพื่อเก็บค่า array ทั้งหมดไว้ที่นี่ โดย สามารถเรียกใช้งาน และระบุค่า key ที่ต้องการเข้าไป ก็จะได้ array ของ items ที่เราต้องการ เช่น &lt;code&gt;Resume::itemsAlias(&amp;#39;sex&amp;#39;)&lt;/code&gt; จะ return ค่า array sex ออกมา&lt;/p&gt;
+&lt;p&gt;หลังจากนั้นให้เราทำการสร้าง &lt;code&gt;static function itemsAlias()&lt;/code&gt; เพื่อเก็บค่า array ทั้งหมดไว้ที่นี่ โดย สามารถเรียกใช้งาน และระบุค่า key ที่ต้องการเข้าไป ก็จะได้ array ของ items ที่เราต้องการ เช่น &lt;code&gt;Resume::itemsAlias(&amp;#39;sex&amp;#39;)&lt;/code&gt; จะ return ค่า array sex ออกมา เขียนเป็นฟังก์ชันได้ดังนี้&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-PHP&quot; data-lang=&quot;PHP&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Resume&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\yii\db\ActiveRecord&lt;/span&gt;
@@ -193,7 +193,7 @@
   &lt;span class=&quot;c1&quot;&gt;//return array_key_exists($key, $items) ? $items[$key] : [];&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นสร้าง function เพื่อให้สามารถเรียกใช้งาน array ในฟอร์มได้ง่ายๆ เพื่อให้ฟอร์มนำไปแสดงผลเป็น DropdownList,RadioList,CheckBoxList&lt;/p&gt;
+&lt;p&gt;จากนั้นสร้าง function &lt;code&gt;getItem&lt;/code&gt; เพื่อให้สามารถเรียกใช้งาน array item แต่ละตัวในฟอร์มได้ง่ายๆ เพื่อให้ฟอร์มนำไปแสดงผลเป็น DropdownList,RadioList,CheckBoxList&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-PHP&quot; data-lang=&quot;PHP&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getItemSex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
@@ -221,7 +221,7 @@
   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;itemsAlias&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลายๆ คนอาจสงสัยเราสร้าง itemsAlias ไว้แล้วทำไมยังต้องสร้าง getItem ขึ้นมาอีก จริงๆ สามารถเรียกใช้ itemsAlias ตรงๆได้ ตามตัวอย่างด้านล่างได้ จะเห็นว่ามันต้อง &lt;code&gt;use app\models\Resume&lt;/code&gt; เพื่อให้สามารถเรียกใช้งาน function แบบ static แบบนี้ &lt;code&gt;Resume::itemsAlias(&amp;#39;title&amp;#39;)&lt;/code&gt; ได้&lt;/p&gt;
+&lt;p&gt;หลายๆ คนอาจสงสัยเราสร้าง itemsAlias ไว้แล้วทำไมยังต้องสร้าง getItem ขึ้นมาอีก จริงๆ สามารถเรียกใช้ itemsAlias ตรงๆ ได้ และหากดูตามตัวอย่างด้านล่างแล้ว จะเห็นว่ามันต้อง &lt;code&gt;use app\models\Resume&lt;/code&gt; เพื่อให้สามารถเรียกใช้งาน function แบบ static แบบนี้ &lt;code&gt;Resume::itemsAlias(&amp;#39;title&amp;#39;)&lt;/code&gt; ได้&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;เรื่องนี้มันเกี่ยวกับการประกาศ function ใน class เป็น public,static ลองไปหาข้อมูลเพิ่มเติมดูนะครับ&lt;/p&gt;
@@ -340,7 +340,7 @@
 
 &lt;p&gt;&lt;strong&gt;ก่อน Create &amp;amp; Update แปลงข้อมูลจาก array เป็น string&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;ก่อนที่จะนำข้อมูลไปบันทึกเราจะแปลข้อมูลจาก checkBoxList ที่เป็น array ให้เป็น string โดยใช้ฟังก์ชัน &lt;code&gt;implode()&lt;/code&gt; เพื่อให้เราไม่ต้องเขียนโค้ดวุ่นวายเราจะใช้ความสามารถของ  &lt;code&gt;behaviors()&lt;/code&gt;  ของ model เพื่อดักจับ event &lt;code&gt;before-insert&lt;/code&gt;,&lt;code&gt;before-update&lt;/code&gt; เพื่อให้มันทำงาน ณ ตอนนั้น เพิ่มฟังก์ชันนี้เข้าไปใน Model Resume.php&lt;/p&gt;
+&lt;p&gt;ก่อนที่จะนำข้อมูลไปบันทึกเราจะแปลงข้อมูลจาก checkBoxList ที่เป็น array ให้เป็น string โดยใช้ฟังก์ชัน &lt;code&gt;implode()&lt;/code&gt; เพื่อให้เราไม่ต้องเขียนโค้ดวุ่นวายเราจะใช้ความสามารถของ  &lt;code&gt;behaviors()&lt;/code&gt;  ของ model เพื่อดักจับ event &lt;code&gt;before-insert&lt;/code&gt;,&lt;code&gt;before-update&lt;/code&gt; เพื่อให้มันทำงาน ณ ตอนนั้น เพิ่มฟังก์ชันนี้เข้าไปใน Model Resume.php&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app\models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -461,7 +461,7 @@
 
 &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getFullName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lastname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;titleName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lastname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;การเรียกใช้งานผ่านตัวแปร $model&lt;/p&gt;
@@ -514,7 +514,7 @@
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getItemTitle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ตอนเรียกใช้งานก็ $model-&amp;gt;sexLebel,$model-&amp;gt;titleLebel,$model-&amp;gt;skillLebel ได้เลย ส่วนใน gridView,DetailView ก็เหมือนตัวอย่าง fullName ด้านบน&lt;/p&gt;
+&lt;p&gt;ตอนเรียกใช้งานก็ $model-&amp;gt;sexName,$model-&amp;gt;titleName,$model-&amp;gt;skillName ได้เลย ส่วนใน gridView,DetailView ก็เหมือนตัวอย่าง fullName ด้านบน&lt;/p&gt;
 
 &lt;p&gt;แต่ในส่วนของ skill เราต้องปรับแต่งเป็น พิเศษเพื่อให้แสดงข้อมูลได้หลายๆ รายการเพราะมันเลือกได้มากกว่า 1 รายการ เพิ่มฟังก์ชั่นนี้ใน Model Resume.php เพิ่มฟังก์ชัน &lt;code&gt;getSkillName()&lt;/code&gt; เข้าไป&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
