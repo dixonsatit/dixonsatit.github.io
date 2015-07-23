@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList | Yii 2 Learning</title>
+	<meta name="description" content="การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList |  Yii2, Yii Framework, Extension, Howto,tutorial">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/07/21/item-alias.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Yii 2 Learning</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Yii2 Learning
+				</a>
+			</li>
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-tip-tricks.html">
+					Yii2 Trip & Tricks
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/yii2Learning" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList</h1>
+    <p class="meta">
+    July 21, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p><img src="/img/thumbnail/item-alias.jpg" alt=""></p>
+
+<p>ในการใช้งานฟอร์มส่วนใหญ่ หากมีข้อมูลเพียงเล็กน้อยที่ต้องใช้งานในฟอร์มเพื่อแสดงผล DropdownList,RadioList,CheckBoxList  และข้อมูลส่วนนี้ ไม่ค่อยมีการเปลี่ยนแปลงอะไรมากมาย ผมจะสร้างเป็น function ที่เก็บค่า array  ไว้ เพื่อเรียกใช้งานในตัว Model เลย</p>
+
+<blockquote>
+<p>ตัวอย่างนี้เป็นการกำหนดค่า array เข้าไปใน model เลย ซึ่งมันจะเหมาะกับข้อมูลที่ไม่ได้มีการเปลี่ยลแปลงบ่อยๆ ข้อมูลไม่เยอะ ไม่จำเป็นต้องสร้าง table เพิ่มเติม</p>
+</blockquote>
+
+<p>ผมเองเชื่อว่าหลายๆ คนคงเจอปัญหาในการใช้งาน array เพราะเมื่อจะใช้ที ก็ไปเขียน array ไว้ที่ form หรือที่ Gridviw มันไม่สะดวก เวลาที่ต้องแก้ไข ก็ไปตามที่จุดนั้นๆ วุ่นวาย เห็นหลายๆ คนชอบเขียนแบบนี้จึงอยากจะแนะนำวิธีการสร้าง array เก็บเป็น <code>itemsAlias()</code> ฟังก์ชัน เพื่อให้สามารถใช้งานได้สะดวกๆ และเป็นรูปแบบที่มาตรฐาน ไม่ว่าจะเป็นการนำไปใช้งานกับ  DropdownList,RadioList,CheckBoxLis หรือนำเป็นแสดงผลในที่ต่างๆ GridView,DetailView,Listview</p>
+
+<p>รูปแบบที่แนะนำนี้จะดีทั้งกับตัวผู้พัฒนาเอง และยังดีกับผู้ร่วมพัฒนาด้วยเพราะสามารถอ่านโค้ดได้ง่ายและเข้าใจ ไม่ต้องถามกันให้วุ่นวาย ลองดูกันครับ</p>
+
+<h2 id="เตรียมโครงสร้างข้อมูลกันก่อน">เตรียมโครงสร้างข้อมูลกันก่อน</h2>
+
+<p>ในตัวอย่างนี้เราจะทำการสร้างฟอร์มกรอกข้อมูล Resume แบบง่ายๆ และใช้ DropdownList,RadioList,CheckBoxList เพื่อทำการเรียกข้อมูล array จาก function ใน Model ที่เราสร้างไว้</p>
+
+<p>สร้างตารางตามนี้</p>
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">resume</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">title</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;คำนำหน้า&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">fistname</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;ชื่อ&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">lastname</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;นามสกุล&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">education_level</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;การศึกษา&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">marital_status</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;สถานะสมรส&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">sex</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;เพศ&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">skill</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;ทักษะ&#39;</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span>
+</code></pre></div>
+<p>ซึ่งแต่ละฟิวด์มีข้อมูล items ที่ใช้เป็นตัวเลือกแตกต่างกันดังนี้</p>
+
+<p><strong>title</strong></p>
+
+<ul>
+<li>นาย</li>
+<li>นาง</li>
+<li>นางสาว</li>
+</ul>
+
+<p><strong>sex</strong></p>
+
+<ul>
+<li>ชาย</li>
+<li>หญิง</li>
+</ul>
+
+<p><strong>marital_status</strong></p>
+
+<ul>
+<li>โสด</li>
+<li>แต่งงานแล้ว</li>
+<li>เป็นหม้าย</li>
+<li>แต่งแล้วแต่ยังไม่มีบุตร</li>
+<li>หย่า</li>
+</ul>
+
+<p><strong>education_level</strong></p>
+
+<ul>
+<li>ต่ำกว่ามัธยมศึกษาตอนต้น</li>
+<li>มัธยมศึกษาตอนต้น</li>
+<li>ปวช</li>
+<li>มัธยมศึกษาตอนปลาย</li>
+<li>ปวส</li>
+<li>อนุปริญญา</li>
+<li>ปริญญาตรี</li>
+<li>ปริญญาโท</li>
+<li>ปริญญาเอก</li>
+</ul>
+
+<p><strong>skill</strong></p>
+
+<ul>
+<li>Git</li>
+<li>PHP</li>
+<li>JavaScript</li>
+<li>CSS</li>
+<li>HTML5</li>
+<li>AngularJs</li>
+<li>ReactJs</li>
+<li>Node.js</li>
+<li>Go</li>
+<li>Ruby on Rails</li>
+<li>Swift</li>
+<li>Android</li>
+<li>MySQL</li>
+<li>MongoDB</li>
+</ul>
+
+<h2 id="gii-model-resume-และ-gii-crud-resume">Gii Model Resume และ Gii CRUD Resume</h2>
+
+<p>ทำการ gii model และ gii crud ให้เรียบร้อยและทำการทดลองใช้งานว่าทำงานได้</p>
+
+<h2 id="สร้าง-function-ใน-model-เพื่อเตรียมไว้เรียกใช้งานใน-form">สร้าง function ใน model เพื่อเตรียมไว้เรียกใช้งานใน Form</h2>
+
+<p>เราจะทำการสร้าง function itemsAlias() เพื่อเก็บค่า array ทั้งหมดที่ต้องการใช้งานใน Model Resume ดังนี้</p>
+
+<p>ในส่วนของ sex จะทำการประกาศเป็น constant เพื่อให้สามารถเรียกใช้งานด้วยชื่อง่ายๆ ไม่ต้องจำว่า 1 คือ ชาย, 2 คือ หญิง เวลาจะเรียกใช้งานก็ <code>Resume::SEX_MEN</code> เลย เพิ่มการกำหนดค่าเข้าไปใน Resume ดังนี้</p>
+<div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="x">class Resume extends \yii\db\ActiveRecord</span>
+<span class="x">{</span>
+
+<span class="x">const SEX_MEN = 1;</span>
+<span class="x">const SEX_WOMEN = 2;</span>
+<span class="x">// ...</span>
+</code></pre></div>
+<p>ข้อดีของการประกาศค่า constant แบบนี้ สมมุติว่าจะมีการเรียกข้อมูลที่ค่า <code>sex = 1</code> นั่นก็คือชาย ปกติเราก็จะทำการเขียนแบบนี้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$model = Resume::find()-&gt;where(&#39;sex=:sex&#39;,[&#39;:sex&#39;=&gt;1])-&gt;all();
+</code></pre></div>
+<p>คำสั่งด้านบนคือ ค้นหาข้อมูลที่ sex =  1 หรือ ค้นหาข้อมูลผู้ชายนั้นเอง ซึ่งเมื่อเรามองดูโค้ดแล้ว เราก็คงเข้าใจเพราะเราเขียนเอง และเรารู้ว่าค่า 1 คือผู้ชาย แต่ถ้าหาเป็นคนอื่นละ เค้าก็ต้องค้นหาว่า ค่า 1 เนี้ย มันคือ ชาย หรือ หญิงกันแน่ ซึ่งมันก็จะเสียเวลาในการตรวจสอบโค้ด</p>
+
+<p>แต่ถ้าหาเราใช้ตัวแปร constant แล้วทุกอย่างมันจะดูง่ายขึ้นทันที ตัวอย่าง</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$model = Resume::find()-&gt;where(&#39;sex=:sex&#39;,[&#39;:sex&#39;=&gt;Resume::SEX_MEN])-&gt;all();
+</code></pre></div>
+<p>แค่เปลี่ยนจากที่เราระบุค่าเข้าไปตรงๆ ไปเรียก constant แทน มันมีข้อดียังไงมาดูกัน</p>
+
+<ul>
+<li>เวลาอ่านโค้ดดูง่ายเข้าใจ ไม่ต้องไปเดาว่า 1 มันคืออะไร เค้าไม่ต้องรู้ด้วยซ้ำก็ได้</li>
+<li>หากมีการเปลี่ยนค่าสามารถแก้ได้ที่จุดเดียว ตัวอย่างเช่น หากเรากำหนดค่า 1 เท่ากับ ชาย แล้ววันดีคืนดี เกิดอยากเปลี่ยนเป็น M = ชายแทน ยุ่งละทีนี้ ตรงใหนที่ where เท่ากับ 1 ไว้ต้องไล่ตามเปลี่ยนทุกจุด แต่หากเราใช้ constant แล้วก็สามารถเปลี่ยนได้แค่จุดเดียว</li>
+</ul>
+
+<blockquote>
+<p>หากค่าตัวใหนไม่จำเป็นต้องใช้ where หรือเรียกใช้งานอื่นๆ  ก็ไม่จำเป็นต้องประกาศเป็น constant เหมือน <code>sex</code> ก็ได้ ให้กำหนดค่าใน array itemsAlias ไปเลย</p>
+</blockquote>
+
+<p>หลังจากนั้นให้เราทำการสร้าง <code>static function itemsAlias()</code> เพื่อเก็บค่า array ทั้งหมดไว้ที่นี่ โดย สามารถเรียกใช้งาน และระบุค่า key ที่ต้องการเข้าไป ก็จะได้ array ของ items ที่เราต้องการ เช่น <code>Resume::itemsAlias(&#39;sex&#39;)</code> จะ return ค่า array sex ออกมา</p>
+<div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">Resume</span> <span class="k">extends</span> <span class="nx">\yii\db\ActiveRecord</span>
+<span class="p">{</span>
+
+<span class="k">const</span> <span class="no">SEX_MEN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">const</span> <span class="no">SEX_WOMEN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">itemsAlias</span><span class="p">(</span><span class="nv">$key</span><span class="p">){</span>
+
+  <span class="nv">$items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;sex&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+      <span class="nx">self</span><span class="o">::</span><span class="na">SEX_MEN</span> <span class="o">=&gt;</span> <span class="s1">&#39;ชาย&#39;</span><span class="p">,</span>
+      <span class="nx">self</span><span class="o">::</span><span class="na">SEX_WOMEN</span> <span class="o">=&gt;</span> <span class="s1">&#39;หญิง&#39;</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;title&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+      <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s1">&#39;นาย&#39;</span><span class="p">,</span>
+      <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s1">&#39;นางสาว&#39;</span><span class="p">,</span>
+      <span class="mi">3</span> <span class="o">=&gt;</span> <span class="s1">&#39;นาง&#39;</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;marital&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+      <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s1">&#39;โสด&#39;</span><span class="p">,</span>
+      <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s1">&#39;สมรส&#39;</span><span class="p">,</span>
+      <span class="mi">3</span> <span class="o">=&gt;</span> <span class="s1">&#39;เป็นหม้าย&#39;</span><span class="p">,</span>
+      <span class="mi">4</span> <span class="o">=&gt;</span> <span class="s1">&#39;หย่าร้าง&#39;</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;education&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+      <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s1">&#39;ต่ำกว่ามัธยมศึกษาตอนต้น&#39;</span><span class="p">,</span>
+      <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s1">&#39;มัธยมศึกษาตอนต้น&#39;</span><span class="p">,</span>
+      <span class="mi">3</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปวช&#39;</span><span class="p">,</span>
+      <span class="mi">4</span> <span class="o">=&gt;</span> <span class="s1">&#39;มัธยมศึกษาตอนปลาย&#39;</span><span class="p">,</span>
+      <span class="mi">5</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปวส&#39;</span><span class="p">,</span>
+      <span class="mi">6</span> <span class="o">=&gt;</span> <span class="s1">&#39;อนุปริญญา&#39;</span><span class="p">,</span>
+      <span class="mi">7</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปริญญาตรี&#39;</span><span class="p">,</span>
+      <span class="mi">8</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปริญญาโท&#39;</span><span class="p">,</span>
+      <span class="mi">9</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปริญญาเอก&#39;</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;skill&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+      <span class="s1">&#39;php&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PHP&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;js&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;JavaScript&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;css&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CSS&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;html5&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Html5&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;angularjs&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;AngularJs&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;node.js&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Node.Js&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;reactjs&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ReactJs&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;go&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Go&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;ruby&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;ruby on rails&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;swiff&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Swiff&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;android&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Android&#39;</span><span class="p">,</span>
+  <span class="p">]</span>
+<span class="p">];</span>
+  <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$items</span><span class="p">,</span><span class="nv">$key</span><span class="p">,[]);</span>
+  <span class="c1">//return array_key_exists($key, $items) ? $items[$key] : [];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>จากนั้นสร้าง function เพื่อให้สามารถเรียกใช้งาน array ในฟอร์มได้ง่ายๆ เพื่อให้ฟอร์มนำไปแสดงผลเป็น DropdownList,RadioList,CheckBoxList</p>
+<div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getItemSex</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getItemMarital</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;marital&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getItemEducation</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;education&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getItemTitle</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getItemSkill</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;skill&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>หลายๆ คนอาจสงสัยเราสร้าง itemsAlias ไว้แล้วทำไมยังต้องสร้าง getItem ขึ้นมาอีก จริงๆ สามารถเรียกใช้ itemsAlias ตรงๆได้ ตามตัวอย่างด้านล่างได้ จะเห็นว่ามันต้อง <code>use app\models\Resume</code> เพื่อให้สามารถเรียกใช้งาน function แบบ static แบบนี้ <code>Resume::itemsAlias(&#39;title&#39;)</code> ได้</p>
+
+<blockquote>
+<p>เรื่องนี้มันเกี่ยวกับการประกาศ function ใน class เป็น public,static ลองไปหาข้อมูลเพิ่มเติมดูนะครับ</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\widgets\ActiveForm</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">app\models\Resume</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;div class=&quot;resume-form&quot;&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nv">$form</span> <span class="o">=</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">begin</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nx">Resume</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">))</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>มันต้องเรียกผ่าน static ในไฟล์ view  <code>_form.php</code> อีกที ทั้งๆ ที่มี ตัวแปร $model อยู่แล้วผมจึงแนะนำให้สร้าง getItem ขึ้นมาให้เรียกใช้งานผ่าน $model ได้ เวลาดูโค้ดก็เข้าใจง่าย และเราไม่ต้อง  <code>use app\models\Resume</code>  เพิ่มเติม</p>
+<div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\widgets\ActiveForm</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;div class=&quot;resume-form&quot;&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nv">$form</span> <span class="o">=</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">begin</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemTitle</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>เวลาดูโค้ดก็เข้าใจเลย ไม่ต้องเดา ฟังก์ชั่นเหี้ยอะไรของมัน <code>บ่นๆ เวลาเจอโค้ดเน่าๆ</code></p>
+
+<p>รูปแบบนี้สามารถเรียกใช้งานได้หมดเลยทั้ง   DropdownList,RadioList,CheckBoxLis ลองดูตัวอย่างการเรียกใช้งาน จะเห็นว่าง่ายและสามารถดูแล้วเข้าใจ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemTitle</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemSex</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;education_level&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">dropdownList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemEducation</span><span class="p">(),[</span><span class="s1">&#39;prompt&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;เลือกการศึกษา..&#39;</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;marital_status&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemMarital</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;skill&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">checkBoxList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemSkill</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>จริงๆ เราสร้างเป็นแบบง่ายๆ <code>getItems()</code> ก็ได้ แต่ผมไม่ได้ใช้แบบนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> public function getItems($type)</span>
+<span class="x"> {</span>
+<span class="x">   return  self::itemsAlias($type);</span>
+<span class="x"> }</span>
+</code></pre></div>
+<p>เพราะผมคิดว่าทำแยกมันดูง่าย อ่านโค้ดเข้าใจง่ายกว่า เลยใช้วิธีนี้เพราะเวลาเขียนไปแล้วนานๆ กลับมาดูรู้สึกว่ามันเข้าใจง่ายดี</p>
+
+<p>จากนั้นปรับแต่ง layout นิดหน่อยพอเป็นพิธี ให้สวยงาม ก็จะได้ฟอร์มแบบนี้</p>
+
+<p><img src="/img/item-alias-form.png" alt=""></p>
+
+<p>โค้ดส่วน form ทั้งหมด</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\bootstrap\ActiveForm</span><span class="p">;</span>
+
+<span class="cm">/* @var $this yii\web\View */</span>
+<span class="cm">/* @var $model app\models\Resume */</span>
+<span class="cm">/* @var $form yii\widgets\ActiveForm */</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;div class=&quot;resume-form&quot;&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nv">$form</span> <span class="o">=</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">begin</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">inline</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemTitle</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;div class=&quot;row&quot;&gt;</span>
+
+<span class="x">      &lt;div class=&quot;col-md-6&quot;&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;firstname&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">      &lt;/div&gt;</span>
+<span class="x">      &lt;div class=&quot;col-md-6&quot;&gt;</span>
+<span class="x">          </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;lastname&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">textInput</span><span class="p">([</span><span class="s1">&#39;maxlength&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">      &lt;/div&gt;</span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="x">    </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;education_level&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">dropdownList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemEducation</span><span class="p">(),[</span><span class="s1">&#39;prompt&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;เลือกการศึกษา..&#39;</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;div class=&quot;row&quot;&gt;</span>
+<span class="x">      &lt;div class=&quot;col-md-4&quot;&gt;</span>
+<span class="x">          </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemSex</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">      &lt;/div&gt;</span>
+<span class="x">      &lt;div class=&quot;col-md-4&quot;&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;marital_status&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">radioList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemMarital</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">      &lt;/div&gt;</span>
+<span class="x">      &lt;div class=&quot;col-md-4&quot;&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">field</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span> <span class="s1">&#39;skill&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">checkBoxList</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">getItemSkill</span><span class="p">())</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">      &lt;/div&gt;</span>
+<span class="x">    &lt;/div&gt;</span>
+
+<span class="x">    &lt;div class=&quot;form-group&quot;&gt;</span>
+<span class="x">        </span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">Html</span><span class="o">::</span><span class="na">submitButton</span><span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">isNewRecord</span> <span class="o">?</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;Create&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;Update&#39;</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span>  <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">isNewRecord</span> <span class="o">?</span> <span class="s1">&#39;btn btn-success&#39;</span> <span class="o">:</span> <span class="s1">&#39;btn btn-primary&#39;</span><span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">    &lt;/div&gt;</span>
+
+<span class="x">    </span><span class="cp">&lt;?php</span> <span class="nx">ActiveForm</span><span class="o">::</span><span class="na">end</span><span class="p">();</span> <span class="cp">?&gt;</span><span class="x"></span>
+
+<span class="x">&lt;/div&gt;</span>
+</code></pre></div>
+<h2 id="จัดการข้อมูลที่ได้จาก-checkboxlist">จัดการข้อมูลที่ได้จาก checkBoxList</h2>
+
+<p>ในฟอร์มหากเราใช้ CheckBoxLis เราจะเก็บข้อมูลไม่เหมือนตัวอื่นๆ คือเราจะเก็บข้อมูลแล้วคั่นด้วยเครื่องหมาย <code>,</code> แบบนี้ครับ เพราะมันเลือกได้หลายอัน ซึ่งมันจะทำให้ลดคอลัมน์ในตารางไปเยอะมากๆ ในตัวอย่างนี้คือฟิวด์ <code>skill</code> ลองมาดูว่ามันทำงานยังไง</p>
+
+<p><img src="/img/item-alias-flow.png" alt=""></p>
+
+<ul>
+<li>ในขั้นตอนแรก CheckBoxLis จะ render checkbox ตาม array ที่เราได้มาจาก <code>$model-&gt;getItemSkill()</code>   และนำมาแสดงผลให้เราสามารถเลือก <code>skill</code> ได้</li>
+<li>เมือมีการ submit เพื่อบันทึกข้อมูล skill จะมีค่าเป็น array ดังนั้นเราจะต้องทำการแปลงจาก array เป็น string โดยใช้ฟังก์ชัน <code>implode</code>  ให้อยู่ในรูปแบบ <code>jquery,php,js,css</code> นี้ จากนั้นนำไปบันทึกข้อมูล</li>
+<li>เมื่อจะทำการแก้ไขข้อมูล เราก็จะต้องแปลงค่า  <code>jquery,php,js,css</code> ที่เก็บในฟิวด์ skill ให้กลับไปเป็น array เหมือนเดิมเพื่อให้ฟอร์มแสดงผลว่าเราได้เลือกอะไรไปบ้าง โดยใช้ <code>explode</code> เพื่อแปลง string กลับเป็น array จะเป็นแบบนี้</li>
+</ul>
+
+<p><img src="/img/item-alias-checkbox.png" alt=""></p>
+
+<p>มันก็จะวลลูปอยู่แบบนี้ เอาล่ะคงพอเข้าใจการทำงานแล้ว เราลองมาดูในส่วนของโค้ดกัน</p>
+
+<p><strong>ก่อน Create &amp; Update แปลงข้อมูลจาก array เป็น string</strong></p>
+
+<p>ก่อนที่จะนำข้อมูลไปบันทึกเราจะแปลข้อมูลจาก checkBoxList ที่เป็น array ให้เป็น string โดยใช้ฟังก์ชัน <code>implode()</code> เพื่อให้เราไม่ต้องเขียนโค้ดวุ่นวายเราจะใช้ความสามารถของ  <code>behaviors()</code>  ของ model เพื่อดักจับ event <code>before-insert</code>,<code>before-update</code> เพื่อให้มันทำงาน ณ ตอนนั้น เพิ่มฟังก์ชันนี้เข้าไปใน Model Resume.php</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">app\models</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\helpers\ArrayHelper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\behaviors\AttributeBehavior</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">\yii\db\ActiveRecord</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * This is the model class for table &quot;&quot;.</span>
+<span class="sd"> *</span>
+<span class="sd"> * @property integer $id</span>
+<span class="sd"> * @property string $title</span>
+<span class="sd"> * @property string $firstname</span>
+<span class="sd"> * @property string $lastname</span>
+<span class="sd"> * @property integer $education_level</span>
+<span class="sd"> * @property integer $marital_status</span>
+<span class="sd"> * @property integer $sex</span>
+<span class="sd"> * @property string $skill</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Resume</span> <span class="k">extends</span> <span class="nx">ActiveRecord</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="no">SEX_MEN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">const</span> <span class="no">SEX_WOMEN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">AttributeBehavior</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+                <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="nx">ActiveRecord</span><span class="o">::</span><span class="na">EVENT_BEFORE_INSERT</span> <span class="o">=&gt;</span> <span class="s1">&#39;skill&#39;</span><span class="p">,</span>
+                    <span class="nx">ActiveRecord</span><span class="o">::</span><span class="na">EVENT_BEFORE_UPDATE</span> <span class="o">=&gt;</span> <span class="s1">&#39;skill&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nb">implode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span><span class="p">);</span>
+                <span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+  <span class="p">}</span>
+</code></pre></div>
+<p>เมื่อเรา create &amp; update ข้อมูลก่อนบันทึกมันจะทำการแปลงข้อมูล array ให้เป็น string แล้วนำไปบันทึกที่ฐานข้อมูลอีกที</p>
+
+<p><strong>ตอน Update แปลงข้อมูลจาก String เป็น Array</strong></p>
+
+<p>เมื่อเราต้องทำการ update ข้อมูล ก่อนจะแสดงฟอร์ม update เราจะต้องแปลงข้อมูลที่เป็น string ให้กลับมาอยู่ในรูปแบบ array เสียก่อน เพื่อให้ฟอร์มนำไปแสดงผลได้</p>
+
+<p>เพิ่มฟังก์ชัน <code>skillToArray()</code> เข้าไปใน Model Resume.php</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">app\models</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\helpers\ArrayHelper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\behaviors\AttributeBehavior</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">\yii\db\ActiveRecord</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * This is the model class for table &quot;&quot;.</span>
+<span class="sd"> *</span>
+<span class="sd"> * @property integer $id</span>
+<span class="sd"> * @property string $title</span>
+<span class="sd"> * @property string $firstname</span>
+<span class="sd"> * @property string $lastname</span>
+<span class="sd"> * @property integer $education_level</span>
+<span class="sd"> * @property integer $marital_status</span>
+<span class="sd"> * @property integer $sex</span>
+<span class="sd"> * @property string $skill</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Resume</span> <span class="k">extends</span> <span class="nx">ActiveRecord</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="no">SEX_MEN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">const</span> <span class="no">SEX_WOMEN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="c1">// ....</span>
+
+  <span class="k">public</span> <span class="k">function</span> <span class="nf">skillToArray</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span><span class="p">);</span>
+  <span class="p">}</span>
+    <span class="c1">// ....</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>หลังจากนั้น เรียกใช้งานใน ResumeController.php</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">actionUpdate</span><span class="p">(</span><span class="nv">$id</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$model</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findModel</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+    <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">skillToArray</span><span class="p">();</span> <span class="c1">//&lt;&lt;------------------</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">())</span> <span class="o">&amp;&amp;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">&#39;view&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">]);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>ลองทดสอบดู เราก็จะสามารถบันทึกข้อมูล,แก้ไขข้อมูลได้ แต่ยังแสดงผลใน พวก gridView หรือ DetailView ได้ยังไม่สมบูรณ์ ต้องปรับแต่งเพิ่มเติมอีก ไปดูกัน</p>
+
+<h2 id="สร้าง-function-เพื่อเรียกแสดงผลโดยใช้-virtual-attribute">สร้าง Function เพื่อเรียกแสดงผลโดยใช้ Virtual Attribute</h2>
+
+<p>หลังจากที่เราบันทึกข้อมูลไปแล้ว จะต้องนำข้อมูลมาแสดงผลใน gridView,DetailView หรือที่อื่นๆ ยังไงเพราะในฐานข้อมูลมันเป็นแค่ ตัวเลข เดี่ยวเราจะสร้าง function เพื่อแปลงค่าจาก ตัวเลขต่างๆ ที่เราเก็บในฐานข้อมูลให้เป็นข้อความ โดยใช้ความสามารถของ model คือ virtualAttribute</p>
+
+<p><code>Virtual Attribute</code> คือฟิวด์ที่ไม่มีในฐานข้อมูลจริงๆ แต่เราสามารถสร้างมันและเรียกใช้งานได้ เหมือนมันมีอยู่จริงๆ เลย หลักการไม่มีอะไรมาก มายแค่ประกาศ function ใน model ขึ้นต้นด้วยคำว่า get ตัวอย่าง เช่น  <code>getFullName()</code>
+เวลาเรียกใช้งาน ก็ <code>$model-&gt;fullName</code>  แบบนี้ได้เลย โอ้วม่าย...แจ่มมาก <code>จะร้องทำไม!</code> จะสังเกตได้ว่าเวลาเรียกเราไม่ต้องมีเครื่องหมาย () ตามหลัง เพราะมันเป็นคุณสมบัติ Virtual Attribute</p>
+
+<p>OK ดูตัวอย่างใน Model กันก่อน</p>
+
+<p>เราจะสร้างฟังก์ชั่น getFullName เพื่อรวม คำนำหน้า,ชื่อ,นามสกุล ให้สามารถเรียกได้ใน ฟิวด์เดียว</p>
+<div class="highlight"><pre><code class="language-PHP" data-lang="PHP"><span class="cp">&lt;?php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getFullName</span><span class="p">()</span>
+<span class="p">{</span>
+   <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">firstname</span><span class="o">.</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">lastname</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>การเรียกใช้งานผ่านตัวแปร $model</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">$model-&gt;fullName;
+</code></pre></div>
+<p>เรียกใช้งานผ่าน gridView</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+    <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+    <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\grid\SerialColumn&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;fullName&#39;</span><span class="p">,</span> <span class="c1">// &lt;&lt;-----------</span>
+        <span class="s1">&#39;education_level&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;marital_status&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sex&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;skill&#39;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\grid\ActionColumn&#39;</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>เรียกใช้งานผ่าน DetailView</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">DetailView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+    <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;fullName&#39;</span><span class="p">,</span> <span class="c1">// &lt;&lt;-----------</span>
+        <span class="s1">&#39;education_level&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;marital_status&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sex&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;skill&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>จะเห็นว่ามันมองเป็นเหมือนเป็นฟิวด์จริงๆ ที่สามารถเรียกใช้งานได้เลย เอาล่ะคิดว่าน่าจะพอเข้าใจ concept ของการสร้าง Virtual Attribute ทีนี้เราลองมาสร้าง function สำหร้บที่เราจะใช้งานกัน</p>
+
+<p>เราจะสร้าง function เพื่อแสดงผลว่าเราได้กรอกข้อมูลอะไรเข้าไป โดย function จะทำการเรียก itemsAlias() ที่เป็น static function เพื่อให้ได้ค่า array ของประเภทนั้นๆ ออกมา จากนั้นใช้ <code>ArrayHelper::getValue</code> เพื่อดึงค่า label ออกมาแสดงเป็นข้อความให้เรา</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getSexName</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemSex</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sex</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getMaritalName</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemSex</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">marital_status</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getEducationName</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemEducation</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">education_level</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getTitleName</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemTitle</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>ตอนเรียกใช้งานก็ $model-&gt;sexLebel,$model-&gt;titleLebel,$model-&gt;skillLebel ได้เลย ส่วนใน gridView,DetailView ก็เหมือนตัวอย่าง fullName ด้านบน</p>
+
+<p>แต่ในส่วนของ skill เราต้องปรับแต่งเป็น พิเศษเพื่อให้แสดงข้อมูลได้หลายๆ รายการเพราะมันเลือกได้มากกว่า 1 รายการ เพิ่มฟังก์ชั่นนี้ใน Model Resume.php เพิ่มฟังก์ชัน <code>getSkillName()</code> เข้าไป</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">getSkillName</span><span class="p">(){</span>
+    <span class="nv">$skills</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemSkill</span><span class="p">();</span>
+    <span class="nv">$skillSelected</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span><span class="p">);</span>
+    <span class="nv">$skillSelectedName</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$skills</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$skillName</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">foreach</span> <span class="p">(</span><span class="nv">$skillSelected</span> <span class="k">as</span> <span class="nv">$skillKey</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$key</span> <span class="o">===</span> <span class="nv">$skillKey</span><span class="p">){</span>
+          <span class="nv">$skillSelectedName</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$skillName</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">implode</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="nv">$skillSelectedName</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>การเรียกใช้งานใน GridView</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+    <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+    <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\grid\SerialColumn&#39;</span><span class="p">],</span>
+        <span class="c1">// &#39;id&#39;,</span>
+        <span class="c1">// &#39;title&#39;,</span>
+        <span class="c1">// &#39;firstname&#39;,</span>
+        <span class="c1">// &#39;lastname&#39;,</span>
+        <span class="c1">// &#39;education_level&#39;,</span>
+        <span class="c1">// &#39;marital_status&#39;,</span>
+        <span class="c1">// &#39;sex&#39;,</span>
+        <span class="c1">// &#39;skill&#39;,</span>
+
+        <span class="c1">// virtual attribute</span>
+        <span class="s1">&#39;fullName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;educationName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;maritalName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sexName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;skillName&#39;</span><span class="p">,</span>
+
+        <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\grid\ActionColumn&#39;</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><img src="/img/item-alias-gridview-1.png" alt=""></p>
+
+<p>เรียกใช้งานใน DetailView</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">DetailView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
+    <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;firstname&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;lastname&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;education_level&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;marital_status&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sex&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;skill&#39;</span><span class="p">,</span>
+        <span class="c1">// virtual attribute</span>
+        <span class="s1">&#39;fullName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;educationName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;maritalName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sexName&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;skillName&#39;</span>
+    <span class="p">],</span>
+<span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><img src="/img/item-alias-detailview-1.png" alt=""></p>
+
+<p>เราจะสังเกตว่าตรง label คำอธิบายฟิวด์ต่างๆ ยังเป็นภาษาอังกฤษเราจะต้องปรับปรุง AttributeLabel() เพิ่มเติมใน Model Resume.php</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">attributeLabels</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;คำนำหน้า&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;firstname&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ชื่อ&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;lastname&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;นามสกุล&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;education_level&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;การศึกษา&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;marital_status&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;สถานะสมรส&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;sex&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;เพศ&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;skill&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ทักษะ&#39;</span><span class="p">),</span>
+        <span class="c1">// เพิ่มเติม</span>
+        <span class="s1">&#39;fullName&#39;</span><span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ชื่อ - นามสกุล&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;educationName&#39;</span><span class="o">=&gt;</span><span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;การศึกษา&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;maritalName&#39;</span><span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;สถานะสมรส&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;sexName&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;เพศ&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;skillName&#39;</span><span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ทักษะ&#39;</span><span class="p">)</span>
+    <span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>หัวคอลัมน์ก็จะเป็นภาษาไทยแล้ว</p>
+
+<p><img src="/img/item-alias-gridview-2.png" alt="">
+<img src="/img/item-alias-detailview-2.png" alt=""></p>
+
+<h2 id="สรุปโค้ดทั้งหมดที่เพิ่มใน-model">สรุปโค้ดทั้งหมดที่เพิ่มใน model</h2>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">app\models</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Yii</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\helpers\ArrayHelper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\behaviors\AttributeBehavior</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">\yii\db\ActiveRecord</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * This is the model class for table &quot;&quot;.</span>
+<span class="sd"> *</span>
+<span class="sd"> * @property integer $id</span>
+<span class="sd"> * @property string $title</span>
+<span class="sd"> * @property string $firstname</span>
+<span class="sd"> * @property string $lastname</span>
+<span class="sd"> * @property integer $education_level</span>
+<span class="sd"> * @property integer $marital_status</span>
+<span class="sd"> * @property integer $sex</span>
+<span class="sd"> * @property string $skill</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Resume</span> <span class="k">extends</span> <span class="nx">ActiveRecord</span>
+<span class="p">{</span>
+  <span class="k">const</span> <span class="no">SEX_MEN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">const</span> <span class="no">SEX_WOMEN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">behaviors</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="nx">AttributeBehavior</span><span class="o">::</span><span class="na">className</span><span class="p">(),</span>
+                <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="nx">ActiveRecord</span><span class="o">::</span><span class="na">EVENT_BEFORE_INSERT</span> <span class="o">=&gt;</span> <span class="s1">&#39;skill&#39;</span><span class="p">,</span>
+                    <span class="nx">ActiveRecord</span><span class="o">::</span><span class="na">EVENT_BEFORE_UPDATE</span> <span class="o">=&gt;</span> <span class="s1">&#39;skill&#39;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$event</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="nb">implode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span><span class="p">);</span>
+                <span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">tableName</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span><span class="s1">&#39;firstname&#39;</span><span class="p">,</span> <span class="s1">&#39;lastname&#39;</span><span class="p">,</span><span class="s1">&#39;education_level&#39;</span><span class="p">,</span> <span class="s1">&#39;marital_status&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">],</span> <span class="s1">&#39;required&#39;</span><span class="p">],</span>
+            <span class="p">[[</span><span class="s1">&#39;education_level&#39;</span><span class="p">,</span> <span class="s1">&#39;marital_status&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">],</span> <span class="s1">&#39;integer&#39;</span><span class="p">],</span>
+            <span class="p">[[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span> <span class="o">=&gt;</span> <span class="mi">150</span><span class="p">],</span>
+            <span class="p">[[</span><span class="s1">&#39;firstname&#39;</span><span class="p">,</span> <span class="s1">&#39;lastname&#39;</span><span class="p">],</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span> <span class="o">=&gt;</span> <span class="mi">255</span><span class="p">],</span>
+            <span class="p">[[</span><span class="s1">&#39;skill&#39;</span><span class="p">],</span> <span class="s1">&#39;safe&#39;</span><span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">attributeLabels</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;คำนำหน้า&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;firstname&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ชื่อ&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;lastname&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;นามสกุล&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;education_level&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;การศึกษา&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;marital_status&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;สถานะสมรส&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;sex&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;เพศ&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;skill&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ทักษะ&#39;</span><span class="p">),</span>
+
+            <span class="s1">&#39;fullName&#39;</span><span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ชื่อ - นามสกุล&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;educationName&#39;</span><span class="o">=&gt;</span><span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;การศึกษา&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;maritalName&#39;</span><span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;สถานะสมรส&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;sexName&#39;</span> <span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;เพศ&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;skillName&#39;</span><span class="o">=&gt;</span> <span class="nx">Yii</span><span class="o">::</span><span class="na">t</span><span class="p">(</span><span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;ทักษะ&#39;</span><span class="p">)</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     * @return ResumeQuery the active query used by this AR class.</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">find</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">ResumeQuery</span><span class="p">(</span><span class="nb">get_called_class</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">itemsAlias</span><span class="p">(</span><span class="nv">$key</span><span class="p">){</span>
+
+      <span class="nv">$items</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;sex&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+          <span class="nx">self</span><span class="o">::</span><span class="na">SEX_MEN</span> <span class="o">=&gt;</span> <span class="s1">&#39;ชาย&#39;</span><span class="p">,</span>
+          <span class="nx">self</span><span class="o">::</span><span class="na">SEX_WOMEN</span> <span class="o">=&gt;</span> <span class="s1">&#39;หญิง&#39;</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;title&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+          <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s1">&#39;นาย&#39;</span><span class="p">,</span>
+          <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s1">&#39;นางสาว&#39;</span><span class="p">,</span>
+          <span class="mi">3</span> <span class="o">=&gt;</span> <span class="s1">&#39;นาง&#39;</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;marital&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+          <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s1">&#39;โสด&#39;</span><span class="p">,</span>
+          <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s1">&#39;สมรส&#39;</span><span class="p">,</span>
+          <span class="mi">3</span> <span class="o">=&gt;</span> <span class="s1">&#39;เป็นหม้าย&#39;</span><span class="p">,</span>
+          <span class="mi">4</span> <span class="o">=&gt;</span> <span class="s1">&#39;หย่าร้าง&#39;</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;education&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+          <span class="mi">1</span> <span class="o">=&gt;</span> <span class="s1">&#39;ต่ำกว่ามัธยมศึกษาตอนต้น&#39;</span><span class="p">,</span>
+          <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s1">&#39;มัธยมศึกษาตอนต้น&#39;</span><span class="p">,</span>
+          <span class="mi">3</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปวช&#39;</span><span class="p">,</span>
+          <span class="mi">4</span> <span class="o">=&gt;</span> <span class="s1">&#39;มัธยมศึกษาตอนปลาย&#39;</span><span class="p">,</span>
+          <span class="mi">5</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปวส&#39;</span><span class="p">,</span>
+          <span class="mi">6</span> <span class="o">=&gt;</span> <span class="s1">&#39;อนุปริญญา&#39;</span><span class="p">,</span>
+          <span class="mi">7</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปริญญาตรี&#39;</span><span class="p">,</span>
+          <span class="mi">8</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปริญญาโท&#39;</span><span class="p">,</span>
+          <span class="mi">9</span> <span class="o">=&gt;</span> <span class="s1">&#39;ปริญญาเอก&#39;</span>
+        <span class="p">],</span>
+        <span class="s1">&#39;skill&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+          <span class="s1">&#39;php&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PHP&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;js&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;JavaScript&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;css&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CSS&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;html5&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Html5&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;angularjs&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;AngularJs&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;node.js&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Node.Js&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;reactjs&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;ReactJs&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;go&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Go&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;ruby&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;ruby on rails&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;swiff&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Swiff&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;android&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Android&#39;</span><span class="p">,</span>
+      <span class="p">]</span>
+    <span class="p">];</span>
+      <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$items</span><span class="p">,</span><span class="nv">$key</span><span class="p">,[]);</span>
+      <span class="c1">//return array_key_exists($key, $items) ? $items[$key] : [];</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getItemSex</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getItemMarital</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;marital&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getItemEducation</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;education&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getItemTitle</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getItemSkill</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">self</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;skill&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSexName</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemSex</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sex</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getMaritalName</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemMarital</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">marital_status</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getEducationName</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemEducation</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">education_level</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getTitleName</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="nx">ArrayHelper</span><span class="o">::</span><span class="na">getValue</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemTitle</span><span class="p">(),</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getSkillName</span><span class="p">(){</span>
+        <span class="nv">$skills</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getItemSkill</span><span class="p">();</span>
+        <span class="nv">$skillSelected</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span><span class="p">);</span>
+        <span class="nv">$skillSelectedName</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$skills</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$skillName</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">foreach</span> <span class="p">(</span><span class="nv">$skillSelected</span> <span class="k">as</span> <span class="nv">$skillKey</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nv">$key</span> <span class="o">===</span> <span class="nv">$skillKey</span><span class="p">){</span>
+              <span class="nv">$skillSelectedName</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$skillName</span><span class="p">;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nb">implode</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="nv">$skillSelectedName</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">getFullName</span><span class="p">()</span>
+    <span class="p">{</span>
+       <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">titleName</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">firstname</span><span class="o">.</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lastname</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">skillToArray</span><span class="p">()</span>
+    <span class="p">{</span>
+      <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="เพิ่มการ-filter-amp-sorting">เพิ่มการ Filter &amp; Sorting</h2>
+
+<p>ตอนนี้มันยังใช้งาน gridview ได้ยังไม่สมบูรณ์คือ ยังไม่สามารถกดตรงหัวคอลัมน์ให้มันจัดเรียงข้อมูลได้และยังไม่สามารถค้นหาได้ เราจะมาปรับแต่ง gridview กัน</p>
+
+<p>ตัวแรกจะเป็น fullName ตัวนี้มันไม่ใช่ฟิวด์ที่มีอยู่จริงๆ ใน table resume เพราะฉะนั้นเราจะต้องกำหนดค่าให้มันสามารถ Sorting และ Search ได้ โดยเข้าไปปรับแต่งที่ Model ResumeSearch.php</p>
+
+<p>ให้เราประกาศตัวแปร <code>$fullName</code> และแก้ไขฟังก์ชัน rules() เพิ่มฟิวด์ fullName เข้าไป ในตัว validator <code>safe</code> เพื่อให้ gridview รู้ว่ามันสามารถค้นได้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">//...</span>
+
+<span class="k">class</span> <span class="nc">ResumeSearch</span> <span class="k">extends</span> <span class="nx">Resume</span>
+<span class="p">{</span>
+  <span class="k">public</span> <span class="nv">$fullName</span><span class="p">;</span>
+    <span class="sd">/**</span>
+<span class="sd">     * @inheritdoc</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;education_level&#39;</span><span class="p">,</span> <span class="s1">&#39;marital_status&#39;</span><span class="p">,</span> <span class="s1">&#39;sex&#39;</span><span class="p">],</span> <span class="s1">&#39;integer&#39;</span><span class="p">],</span>
+            <span class="p">[[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;firstname&#39;</span><span class="p">,</span> <span class="s1">&#39;lastname&#39;</span><span class="p">,</span> <span class="s1">&#39;skill&#39;</span><span class="p">,</span><span class="s1">&#39;fullName&#39;</span><span class="p">],</span> <span class="s1">&#39;safe&#39;</span><span class="p">],</span>
+        <span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>จากนั้นให้ทำการแก้ไขฟังก์ชัน Search() เพื่อทำให้มัน Sorting และ นำตัวแปร $fullName ไปค้นหาจริงๆ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">//...</span>
+
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$query</span> <span class="o">=</span> <span class="nx">Resume</span><span class="o">::</span><span class="na">find</span><span class="p">();</span>
+
+    <span class="nv">$dataProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveDataProvider</span><span class="p">([</span>
+        <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="nv">$query</span><span class="p">,</span>
+    <span class="p">]);</span>
+
+    <span class="c1">// Sorting by fullName</span>
+    <span class="nv">$dataProvider</span><span class="o">-&gt;</span><span class="na">sort</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">[</span><span class="s1">&#39;fullName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="s1">&#39;asc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;firstname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">,</span> <span class="s1">&#39;lastname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span><span class="p">],</span>
+       <span class="s1">&#39;desc&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;firstname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">,</span> <span class="s1">&#39;lastname&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_DESC</span><span class="p">],</span>
+       <span class="s1">&#39;default&#39;</span> <span class="o">=&gt;</span> <span class="nx">SORT_ASC</span>
+    <span class="p">];</span>
+
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">())</span> <span class="p">{</span>
+        <span class="c1">// uncomment the following line if you do not want to return any records when validation fails</span>
+        <span class="c1">// $query-&gt;where(&#39;0=1&#39;);</span>
+        <span class="k">return</span> <span class="nv">$dataProvider</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">andFilterWhere</span><span class="p">([</span>
+        <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">,</span>
+        <span class="s1">&#39;education_level&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">education_level</span><span class="p">,</span>
+        <span class="s1">&#39;marital_status&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">marital_status</span><span class="p">,</span>
+        <span class="s1">&#39;sex&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">sex</span><span class="p">,</span>
+    <span class="p">]);</span>
+
+    <span class="c1">// filter by person full name</span>
+     <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">andWhere</span><span class="p">(</span><span class="s1">&#39;firstname LIKE &quot;%&#39;</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullName</span> <span class="o">.</span> <span class="s1">&#39;%&quot; &#39;</span> <span class="o">.</span>
+         <span class="s1">&#39;OR lastname LIKE &quot;%&#39;</span> <span class="o">.</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullName</span> <span class="o">.</span> <span class="s1">&#39;%&quot;&#39;</span>
+     <span class="p">);</span>
+
+    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">andFilterWhere</span><span class="p">([</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">])</span>
+        <span class="o">-&gt;</span><span class="na">andFilterWhere</span><span class="p">([</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;firstname&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">firstname</span><span class="p">])</span>
+        <span class="o">-&gt;</span><span class="na">andFilterWhere</span><span class="p">([</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;lastname&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lastname</span><span class="p">])</span>
+        <span class="o">-&gt;</span><span class="na">andFilterWhere</span><span class="p">([</span><span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;skill&#39;</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">skill</span><span class="p">]);</span>
+
+    <span class="k">return</span> <span class="nv">$dataProvider</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>จากนั้น fullname จะสามารถค้นหาข้อมูลได้</p>
+
+<p>ส่วน column อื่นๆ ปรับแต่งใน Gridviw โดยใช้การกำหนด property ของ Column และยังเพิ่ม filter ให้เป็น dropdownList โดยการระบบค่า array items ที่เราได้สร้างไว้เข้าไป จากนั้นก็เรียกใช้งาน virtualAttribute ที่เราได้สร้างไว้ return ออกไปแสดงผลได้เลยเพราะเราได้สร้างเตรียมไว้หมดแล้ว</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">app\models\Resume</span><span class="p">;</span>
+ <span class="cp">?&gt;</span><span class="x"></span>
+<span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+    <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+    <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+    <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\grid\SerialColumn&#39;</span><span class="p">],</span>
+        <span class="c1">// &#39;id&#39;,</span>
+        <span class="c1">// &#39;title&#39;,</span>
+        <span class="c1">// &#39;firstname&#39;,</span>
+        <span class="c1">// &#39;lastname&#39;,</span>
+        <span class="c1">// &#39;education_level&#39;,</span>
+        <span class="c1">// &#39;marital_status&#39;,</span>
+        <span class="c1">// &#39;sex&#39;,</span>
+        <span class="c1">// &#39;skill&#39;,</span>
+        <span class="s1">&#39;fullName&#39;</span><span class="p">,</span>
+        <span class="p">[</span>
+          <span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;education_level&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;filter&#39;</span><span class="o">=&gt;</span><span class="nx">Resume</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;education&#39;</span><span class="p">),</span>
+          <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">educationName</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="p">[</span>
+          <span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;marital_status&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;filter&#39;</span><span class="o">=&gt;</span><span class="nx">Resume</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;marital&#39;</span><span class="p">),</span>
+          <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">maritalName</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="p">[</span>
+          <span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;filter&#39;</span><span class="o">=&gt;</span><span class="nx">Resume</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">),</span>
+          <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">sexName</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="p">[</span>
+          <span class="s1">&#39;attribute&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;skill&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;filter&#39;</span><span class="o">=&gt;</span><span class="nx">Resume</span><span class="o">::</span><span class="na">itemsAlias</span><span class="p">(</span><span class="s1">&#39;sex&#39;</span><span class="p">),</span>
+          <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">skillName</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="c1">// &#39;educationName&#39;,</span>
+        <span class="c1">// &#39;maritalName&#39;,</span>
+        <span class="c1">// &#39;sexName&#39;,</span>
+        <span class="c1">// &#39;skillName&#39;,</span>
+
+        <span class="p">[</span><span class="s1">&#39;class&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yii\grid\ActionColumn&#39;</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p><img src="/img/item-alias-gridview-success.png" alt=""></p>
+
+<h2 id="สรุป">สรุป</h2>
+
+<p>คิดว่าคงพอเป็นตัวอย่างที่ดีในการพัฒนาได้ บางคร้ัง เราอาจเขียนโปรแกรมให้มันใช้ใช้งานได้ แต่อย่าลืมว่าเมื่อเราต้องมีการแก้ไปหรือปรับปรุงระบบ มันต้องง่ายและยืดหยุ่น และที่สำคัญต้องให้คนอื่นอ่านโค้ดเราเข้าใจได้ด้วย ไม่งั้นพอได้คนใหม่มาหรือต้องทำงานรว่มกันเป็นทีม  ก็ต้องมารือทำระบบใหม่อีกที เป็นวนเวียนอยู่แบบนี้ ถ้าเขียนแล้วมันใช้ได้นานๆ ยืดยุ่น มันก็น่าคิดนะครับ ว่าคุณแค่อยากเขียนโค้ดแค่ให้พอรันได้ ให้มันเสร็จๆไป หรือคุณอยากเขียนโค้ดให้อ่านได้ รันได้ และยืดยุ่นกว่า ส่วนใหญ่ bug มันก็เกิดตั้งแต่ส่วนเล็กๆ แบบนี้แหละครับ ทำจุดเล็กๆ แต่ละจุดให้มันดี พอรวมกันแล้วมันจะแข็งแกร่งอย่างไม่น่าเชื่อ..</p>
+
+<p>สำหรับผมแล้วสิ่งเหล่านี้คนอื่นอาจไม่เห็น คนใช้อาจไม่รู้ แต่มันเป็นความสุขที่สัมผัสได้ เป็นความภูมิใจเล็กๆ น้อยๆ ^ ^</p>
+
+<p>@DixonSatit</p>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dixonsatit';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
