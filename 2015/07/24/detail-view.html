@@ -181,7 +181,7 @@
     
     </p>
   </header>
-  <section class="post-content"><p><img src="/img/detail-view-icon.png" alt=""></p>
+  <section class="post-content"><p><img src="/img/detail-view.png" alt=""></p>
 
 <p>DetailView คือ Widget ที่เอาไว้แสดงผลข้อมูลได้ทีละแถว ดังนั้น ข้อมูลที่นำมาใช้งานกับ DetailView ต้องเป็น array 1 มิติ DetailView มี property ที่ต้องใช้บ่อยๆ คือ</p>
 
@@ -258,6 +258,8 @@
     <span class="p">],</span>
 <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
 </code></pre></div>
+<p><img src="/img/detail-view-icon.png" alt=""></p>
+
 <h2 id="shortcut-format">Shortcut Format</h2>
 
 <p>DetailView นั้นยังสามารถกำหนด format ได้เหมือนกับ gridview เลย</p>
@@ -292,9 +294,10 @@
         <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;fullname&#39;</span><span class="p">,</span>
         <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">title</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">firstname</span><span class="o">.</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">lastname</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="p">[</span>  
+    <span class="p">[</span>
+        <span class="s1">&#39;format&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;html&#39;</span><span class="p">,</span>
         <span class="s1">&#39;label&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;span color:green;&gt;&#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">education</span><span class="o">.</span><span class="s1">&#39;&lt;/span&gt;&#39;</span>
+        <span class="s1">&#39;value&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;span style=&quot;color:green;&quot;&gt;&#39;</span><span class="o">.</span><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">educationName</span><span class="o">.</span><span class="s1">&#39;&lt;/span&gt;&#39;</span>
     <span class="p">],</span>
      <span class="s1">&#39;fullname&#39;</span><span class="p">,</span>
      <span class="s1">&#39;education&#39;</span><span class="p">,</span>
