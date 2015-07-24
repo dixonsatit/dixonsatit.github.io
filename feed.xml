@@ -5,7 +5,137 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Fri, 24 Jul 2015 10:38:51 +0700</pubDate>
+    <pubDate>Sat, 25 Jul 2015 01:03:29 +0700</pubDate>
+    
+      <item>
+        <title>การใช้งาน DetailView</title>
+        <link>http://dixonsatit.github.io/2015/07/24/detail-view.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/24/detail-view.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/detail-view-icon.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;DetailView คือ Widget ที่เอาไว้แสดงผลข้อมูลได้ทีละแถว ดังนั้น ข้อมูลที่นำมาใช้งานกับ DetailView ต้องเป็น array 1 มิติ DetailView มี property ที่ต้องใช้บ่อยๆ คือ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;model&lt;/code&gt; ค่า array ที่จะนำไปแสดงผล รับค่าเป็น array 1 มิติ&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;attributes&lt;/code&gt; เป็นตัวกำหนดชื่อคอลัมน์หรือชื่อคีย์ array ที่จะแสดงผล&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;template&lt;/code&gt; เป็นตัวที่กำหนด html ในส่วนแสดงผลในแต่ละคอลัมน์ ซึ่งเราสามารถปรับแต่งหรือเพิ่มเติม html เข้าไปได้&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;options&lt;/code&gt; เป็นตัวกำหนดค่า attributes ของ DetailView เช่นแท็ก class&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;model-amp-attributes&quot;&gt;model &amp;amp; attributes&lt;/h2&gt;
+
+&lt;p&gt;ตัวอย่างเช่น เรียกข้อมูลขึ้นมา 1 แถว ซึงมันจะได้ array มา 1 มิติ เราถึงจะนำไปใช้งานกับ DetailView ได้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; $model = Resume::findOne($id);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ที่ view&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;use yii\widgets\DetailView;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DetailView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;education&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;marital&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;sex&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/img/detail-view-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;หรือเราจะกำหนด Array 1 มิติ เข้าไปตรงๆ เลยก็ได้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;นาย&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&amp;#39;firstname&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;สาธิต&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s1&quot;&gt;&amp;#39;lastname&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;สีถาพล&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DetailView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;firstname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;lastname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/img/detail-view-2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;หากเราไม่กำหนด property &lt;code&gt;attributes&lt;/code&gt; เข้าไปมันจะแสดงทุกคอลัมน์ที่มีใน array&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;template&quot;&gt;template&lt;/h2&gt;
+
+&lt;p&gt;เป็น property ที่เราสามารถปรับแต่งส่วนของการแสดงผลในแต่ละคอลัมน์ ซึ่งปกติค่า default ของ template จะเท่ากับ&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;{label}&amp;lt;/th&amp;gt;&amp;lt;td&amp;gt;{value}&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;สิ่งที่อยู่ในเครื่องหมายปีกกาคือค่าที่จะนำมาแสดงผล &lt;code&gt;{label}&lt;/code&gt; เป็นส่วนแสดงคำอธิบาย, &lt;code&gt;{value}&lt;/code&gt; เป็นส่วนที่แสดงค่าของข้อมูล ซึ่งเราสามารถปรับแต่ง html เองได้หมด&lt;/p&gt;
+
+&lt;p&gt;เราจะทำการปรับปรุง template ของเดิม ด้วยการเพิ่ม icon เข้าไป&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DetailView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;template&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;tr&amp;gt;&amp;lt;th&amp;gt;{label}&amp;lt;/th&amp;gt;&amp;lt;td&amp;gt;&amp;lt;i class=&amp;quot;glyphicon glyphicon-info-sign&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/i&amp;gt; {value}&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;education&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;marital&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;sex&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;shortcut-format&quot;&gt;Shortcut Format&lt;/h2&gt;
+
+&lt;p&gt;DetailView นั้นยังสามารถกำหนด format ได้เหมือนกับ gridview เลย&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DetailView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+   &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at:date:วันที่สร้าง&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงผลวันที่&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;updated_at:dateTime&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงผลวันที่และเวลา&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;email:email&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็น link MailTo&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;website:url&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// แสดงผล link url&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;is_admin:boolean&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงเป็น Yes,No&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;payroll:decimal&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นทศนิยม&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;content:html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็น Html&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;photo:image&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นรูปภาพ&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;age:integer&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นจำนวนเต็ม&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;vat:percent&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็น %&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;content:text&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลข้อความ text&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at:time&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นเวลา&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;file_size:size&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นหน่วยของขนาดเช่น 12 kilobytes ค่าข้อมูลต้องเป็น bytes&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;file_size:shortSize&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นหน่วยของขนาดเช่น 12 KB ค่าข้อมูลต้องเป็น bytes&lt;/span&gt;
+       &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at:relativeTime&amp;#39;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// แสดงผลเป็นเวลาที่ผ่านมาแล้ว&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;การปรับแต่งค่าที่จะแสดงผล&quot;&gt;การปรับแต่งค่าที่จะแสดงผล&lt;/h2&gt;
+
+&lt;p&gt;เราสามารถกำหนดค่าเข้าไปตรงๆ ได้ โดยไม่ต้องประกาศฟังก์ชัน Anonymous functions เหมือน gridview เพรามันเป็น array 1 มิติ สามารถกำหนดค่าเข้าไปตรงๆ ได้เลย&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DetailView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+   &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+   &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;  
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;firstname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lastname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;  
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;color&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;span color:green;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;education&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;/span&amp;gt;&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;education&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;marital&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;sex&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+     &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Fri, 24 Jul 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList</title>
@@ -3574,41 +3704,6 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ขอให้สนุกกับการส่งเมล์ครับผม.. &lt;sup&gt;^&lt;/sup&gt; กะไว้ว่าเรื่องนี้จะเขียนประมาณซัก 20 นาทีเอาเข้าจริงๆ ปาเข้าไป 2 ชั่วโมงแระ ไม่ไหวนอนก่อนครับ&lt;/p&gt;
-</description>
-        <pubDate>Mon, 22 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การเปิดใช้งาน Ajax Form Validation</title>
-        <link>http://dixonsatit.github.io/2015/06/22/ajax-form-validation.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/22/ajax-form-validation.html</guid>
-        <description>&lt;p&gt;ปกติ Yii 2 จะมี validation อยู่แล้วแต่มันจะเช็คก็ต่อเมื่อ มีการกดปุ่ม submit form ถึงจะแจ้ง error ออกมา ถ้าเทียบกับ ajax มันก็ถึอว่าช้าอยู่เหมือนกัน&lt;/p&gt;
-
-&lt;p&gt;แต่ช้าก่อนเรายังมี ajax validation มาช่วยได้!   ข้อดีของการใช้ ajax validation form คือ ไม่ต้องกดปุ่ม submit form หากมีการกรอกข้อมูล ก็จะทำการเช็คให้ทันที ทำให้ validation ได้เร็วขึ้น&lt;/p&gt;
-
-&lt;p&gt;เราสามารถเปิดใช้งาน Ajax Validation Form ได้ เพียงแค่ 2 ขั้นตอน&lt;/p&gt;
-
-&lt;p&gt;ทำการเปิดการใช้งาน Ajax Validation ก่อนที่ ActiveForm โดยเปิด &lt;code&gt;&amp;#39;enableAjaxValidation&amp;#39; =&amp;gt; true&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$form = ActiveForm::begin([&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;id&amp;#39; =&amp;gt; &amp;#39;contact-form&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;enableAjaxValidation&amp;#39; =&amp;gt; true,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ใน Action ที่เราจะทำการใช้งาน ให้เพิ่มโค้ดสวนนี้เข้าไปหลังบันทัดที่ new ObjectModel แล้ว จริงๆ ก็เหมือนกัน yii1 แหละ แต่ yii2 เค้าไม่ได้ใส่เป็นค่า default ไว้ให้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;if (Yii::$app-&amp;gt;request-&amp;gt;isAjax &amp;amp;&amp;amp; $model-&amp;gt;load(Yii::$app-&amp;gt;request-&amp;gt;post())) {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    Yii::$app-&amp;gt;response-&amp;gt;format = Response::FORMAT_JSON;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    return ActiveForm::validate($model);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;สามารถใช้งานได้ทุก action ทั้ง create,update&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;หลักงานทำงานของ ajax validation form มันจะทำการส่ง request มาที่ action  นี้ เป็น ajax แล้วทำการ validate ข้อมูลที่ส่งมา ถ้ามี error ก็ส่งกลับไปเป็น json เมื่อ front ได้ร้ับก็จะแสดงผลต่อเป็น error message ให้เราเห็นอีกที&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;หลังจากนั้นก็ลองเปิดใช้งานดู กด tabๆ ดูก็ได้ฟิวด์ใหน required ไว้มันจะขึ้นเป็น error สีแดงให้เลย&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-input-validation.html#ajax-validation&quot;&gt;อ่านเพิ่มเติมได้ที่นี่&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 22 Jun 2015 00:00:00 +0700</pubDate>
       </item>
