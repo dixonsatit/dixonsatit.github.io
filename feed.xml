@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Sat, 25 Jul 2015 01:12:09 +0700</pubDate>
+    <pubDate>Sat, 25 Jul 2015 09:37:13 +0700</pubDate>
     
       <item>
         <title>การใช้งาน DetailView</title>
@@ -92,7 +92,14 @@
 
 &lt;h2 id=&quot;shortcut-format&quot;&gt;Shortcut Format&lt;/h2&gt;
 
-&lt;p&gt;DetailView นั้นยังสามารถกำหนด format ได้เหมือนกับ gridview เลย&lt;/p&gt;
+&lt;p&gt;DetailView นั้นยังสามารถกำหนด format ได้เหมือนกับ gridview เลย
+&lt;code&gt;shortcut format&lt;/code&gt; รูปแบบจะเป็นดังนี้ &lt;code&gt;&amp;quot;attribute:format:label&amp;quot;&lt;/code&gt; ปกติเราจะใส่แต่ชื่อคอลัมน์เข้าไปแต่ &lt;code&gt;shortcut format&lt;/code&gt;เราสามารถกำหนดการแสดงผลได้ ว่าจะให้ออกมา format อะไร และยังกำหนด label ในตรงนี้ได้อีกด้วย แค่คั้นด้วยเครื่องหมาย &lt;code&gt;:&lt;/code&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;attribute&lt;/code&gt; คือชื่อคอลัมน์ที่ต้องการแสดงผล&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;format&lt;/code&gt; คือข้อมูลที่เราต้องการให้แสดงผลออกมาในรูปแบบที่ต้องการ เช่น เราเก็บข้อมูลเป็นวันที่ &lt;code&gt;2015-06-01&lt;/code&gt; เราสามารถกำหนด format เป็น &lt;code&gt;date&lt;/code&gt; ได้โดยผลลัพจะออกมาเป็น &lt;code&gt;Jun 24, 2015&lt;/code&gt; ได้ซึ่งมีหลาย format มาก เช่น &lt;code&gt;date&lt;/code&gt;,&lt;code&gt;dateTime&lt;/code&gt;,&lt;code&gt;email&lt;/code&gt;,&lt;code&gt;time&lt;/code&gt;,&lt;code&gt;text&lt;/code&gt;,&lt;code&gt;html&lt;/code&gt; ไปเลือกใช้งานกันเองได้&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/yii-i18n-formatter.html&quot;&gt;ที่นี่&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;label&lt;/code&gt; เป็นข้อความของคำอธิบายฟิวด์ที่เราต้องการแสดงผลให้เปลี่ยนจากของเดิมที่กำหนดไว้ใน &lt;code&gt;attributesLabel()&lt;/code&gt; ใน Model และตรงนี้เป็น option จะระบุหรือไม่ก็ได้&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DetailView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
    &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
    &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
@@ -136,7 +143,11 @@
      &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;
    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;DetailView เป็น widget ที่ง่ายๆ ไม่ซับซ้อนอะไร ลองใช้กันดูครับ&lt;/p&gt;
+
+&lt;p&gt;@dixonSatit&lt;/p&gt;
+</description>
         <pubDate>Fri, 24 Jul 2015 00:00:00 +0700</pubDate>
       </item>
     

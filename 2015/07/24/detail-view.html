@@ -262,7 +262,14 @@
 
 <h2 id="shortcut-format">Shortcut Format</h2>
 
-<p>DetailView นั้นยังสามารถกำหนด format ได้เหมือนกับ gridview เลย</p>
+<p>DetailView นั้นยังสามารถกำหนด format ได้เหมือนกับ gridview เลย
+<code>shortcut format</code> รูปแบบจะเป็นดังนี้ <code>&quot;attribute:format:label&quot;</code> ปกติเราจะใส่แต่ชื่อคอลัมน์เข้าไปแต่ <code>shortcut format</code>เราสามารถกำหนดการแสดงผลได้ ว่าจะให้ออกมา format อะไร และยังกำหนด label ในตรงนี้ได้อีกด้วย แค่คั้นด้วยเครื่องหมาย <code>:</code></p>
+
+<ul>
+<li><code>attribute</code> คือชื่อคอลัมน์ที่ต้องการแสดงผล</li>
+<li><code>format</code> คือข้อมูลที่เราต้องการให้แสดงผลออกมาในรูปแบบที่ต้องการ เช่น เราเก็บข้อมูลเป็นวันที่ <code>2015-06-01</code> เราสามารถกำหนด format เป็น <code>date</code> ได้โดยผลลัพจะออกมาเป็น <code>Jun 24, 2015</code> ได้ซึ่งมีหลาย format มาก เช่น <code>date</code>,<code>dateTime</code>,<code>email</code>,<code>time</code>,<code>text</code>,<code>html</code> ไปเลือกใช้งานกันเองได้<a href="http://www.yiiframework.com/doc-2.0/yii-i18n-formatter.html">ที่นี่</a></li>
+<li><code>label</code> เป็นข้อความของคำอธิบายฟิวด์ที่เราต้องการแสดงผลให้เปลี่ยนจากของเดิมที่กำหนดไว้ใน <code>attributesLabel()</code> ใน Model และตรงนี้เป็น option จะระบุหรือไม่ก็ได้</li>
+</ul>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?</span><span class="o">=</span> <span class="nx">DetailView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
    <span class="s1">&#39;model&#39;</span> <span class="o">=&gt;</span> <span class="nv">$model</span><span class="p">,</span>
    <span class="s1">&#39;attributes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
@@ -306,7 +313,11 @@
      <span class="s1">&#39;skill&#39;</span>
    <span class="p">],</span>
 <span class="p">])</span> <span class="cp">?&gt;</span><span class="x"></span>
-</code></pre></div></section>
+</code></pre></div>
+<p>DetailView เป็น widget ที่ง่ายๆ ไม่ซับซ้อนอะไร ลองใช้กันดูครับ</p>
+
+<p>@dixonSatit</p>
+</section>
 </article>
 
 <!-- Post navigation -->
