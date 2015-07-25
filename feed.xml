@@ -5,7 +5,276 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Sat, 25 Jul 2015 09:37:13 +0700</pubDate>
+    <pubDate>Sat, 25 Jul 2015 16:49:46 +0700</pubDate>
+    
+      <item>
+        <title>การใช้งาน CheckBoxList และการบันทึกข้อมูล</title>
+        <link>http://dixonsatit.github.io/2015/07/25/checkbox-list.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/25/checkbox-list.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/item-alias-flow.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;CheckBoxList เป็นตัวเลือกที่เลือกได้มากกว่า 1 รายการ การเก็บข้อมูลจะแตกต่างจากฟิวด์ปกติ ที่เก็บเป็นค่าๆ เดียว ดังนั้นการจะใช้ CheckBoxList จะต้องมีขั้นตอนในการบันทึกที่ไม่เหมือนตัวอื่น&lt;/p&gt;
+
+&lt;p&gt;มันจะมีลำดับดังนี้&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;บทความนี้ผมแยกมาจาก &lt;a href=&quot;/2015/07/21/item-alias.html&quot;&gt;การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList&lt;/a&gt; ตัดออกมาเพราะเนื้อหาค่อยข้างเยอะ&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ในขั้นตอนแรก CheckBoxLis จะ render checkbox ตาม array ที่เราได้มาจาก &lt;code&gt;$model-&amp;gt;getItemSkill()&lt;/code&gt;   และนำมาแสดงผลให้เราสามารถเลือก &lt;code&gt;skill&lt;/code&gt; ได้&lt;/li&gt;
+&lt;li&gt;เมือมีการ submit เพื่อบันทึกข้อมูล skill จะมีค่าเป็น array ดังนั้นเราจะต้องทำการแปลงจาก array เป็น string โดยใช้ฟังก์ชัน &lt;code&gt;implode&lt;/code&gt;  ให้อยู่ในรูปแบบ &lt;code&gt;jquery,php,js,css&lt;/code&gt; นี้ จากนั้นนำไปบันทึกข้อมูล&lt;/li&gt;
+&lt;li&gt;เมื่อจะทำการแก้ไขข้อมูล เราก็จะต้องแปลงค่า  &lt;code&gt;jquery,php,js,css&lt;/code&gt; ที่เก็บในฟิวด์ skill ให้กลับไปเป็น array เหมือนเดิมเพื่อให้ฟอร์มแสดงผลว่าเราได้เลือกอะไรไปบ้าง โดยใช้ &lt;code&gt;explode&lt;/code&gt; เพื่อแปลง string กลับเป็น array จะเป็นแบบนี้&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/item-alias-checkbox.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;มันก็จะวลลูปอยู่แบบนี้ เอาล่ะคงพอเข้าใจการทำงานแล้ว เราลองมาดูในส่วนของโค้ดกัน&lt;/p&gt;
+
+&lt;h2 id=&quot;form&quot;&gt;Form&lt;/h2&gt;
+
+&lt;p&gt;ในส่วนฟอร์ม ก็จะเรียกใช้งาน CheckBoxList&lt;/p&gt;
+
+&lt;p&gt;ถ้าหากเป็น array ที่กำหนดค่าเอง ก็ระบุเข้าไปตรงๆได้ แต่ไม่อยากแนะนำให้ใช้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;  &amp;lt;?= $form-&amp;gt;field($model, &amp;#39;skill&amp;#39;)-&amp;gt;checkBoxList([&amp;#39;php&amp;#39;=&amp;gt;&amp;#39;PHP&amp;#39;,&amp;#39;jquery&amp;#39;=&amp;gt;&amp;#39;JQuery&amp;#39;]) ?&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;อยากแนะนำให้สร้างเป็น itemAlias() ใน model ไว้แล้วค่อยเรียกใช้งานจะดีกว่า &lt;a href=&quot;/2015/07/21/item-alias.html&quot;&gt;ดูตัวอย่างการสร้าง itemAlias ได้ที่นี่&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;checkBoxList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getItemSkill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;แต่ถ้าหากเรียกจากข้อมูลจาก model ก็สามารถเรียกได้แบบนี้ ในกรณีที่เราเก็บข้อมูลไว้ที่ตาราง เราจะใช้ &lt;code&gt;ArrayHelper::map()&lt;/code&gt;  เพื่อทำการระบุฟิวด์ที่เป็นโค้ดและฟิวด์ที่ต้องการแสดงเป็นข้อความ ให้มันเลือกข้อมูลออกมาให้อยู่ในรูปแบบ  array 1 มิติ ที่มี key กับ value&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  &amp;#39;php&amp;#39;=&amp;gt;&amp;#39;PHP&amp;#39;,&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  &amp;#39;jquery&amp;#39;=&amp;gt;&amp;#39;JQuery&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เมือเรียกใช้งานร่วมกับ checkBoxList ก็จะได้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\ArrayHelper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app\models\Skill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;checkBoxList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Skill&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;จากนั้นเราก็จะสามารถแสดง ฟอร์มเป็น checkBoxList ได้แล้ว&lt;/p&gt;
+
+&lt;h2 id=&quot;model&quot;&gt;Model&lt;/h2&gt;
+
+&lt;p&gt;ส่วนนี้เป็นส่วนที่เราจะดักจับ event และทำการแปลงค่าให้ได้ตามที่เราต้องการ โดยเพิ่มเข้าไปที่ไฟล์ model ของเรา และทำการระบุ Validation ใน &lt;code&gt;roles()&lt;/code&gt; ให้กับฟิวด์ที่จะใช้งานเป็น &lt;code&gt;safe&lt;/code&gt; ด้วย&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// .....&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;safe&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AttributeBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;EVENT_BEFORE_INSERT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;EVENT_BEFORE_UPDATE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;implode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;skill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;AttributeBehavior&lt;/code&gt; คือการดักจับ event ต่างๆ ของ model เช่น EVENT_BEFORE_INSERT,EVENT_BEFORE_UPDATE เพื่อที่เราจะทำงานบางอย่าง กับฟิวด์ที่เราต้องการ ดูตัวอย่าง&lt;/p&gt;
+
+&lt;p&gt;ตัวอย่างนี้เราต้องการแปลงข้อมูล array ที่ได้จาก CheckBoxList ให้เป็น string ก่อนบันทึกและแก้ไขข้อมูล ซึงเราจะทำการเรียกใช้ฟังก์ชัน &lt;code&gt;behaviors()&lt;/code&gt;  ของ model ที่เราใช้งานและเพิ่มฟังกชันนี้เข้าไป&lt;/p&gt;
+
+&lt;p&gt;จากโค้ดจะเห็นว่าเราทำการเรียกใช้งาน &lt;code&gt;AttributeBehavior&lt;/code&gt; ในฟังก์ชัน &lt;code&gt;behaviors()&lt;/code&gt; และกำหนดคุณสมบัติเข้าไปดังนี้&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;class&lt;/code&gt; คือชื่อของ behavior ที่เราต้องการใช้ ในตัวอย่างนี้คือ AttributeBehavior&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;attributes&lt;/code&gt; เป็นการระบุว่าเราจะกระทำข้อมูลในเหตุการณ์อะไร และกับฟิวด์อะไร ซึ่งเราระบุเหตุการณ์ before-insert,before-update และระบุฟิวด์คือ skill&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;value&lt;/code&gt; คือส่วนที่เราจะทำงานบางอย่างเพื่อให้ค่ากับ skill ซึ่งในตัวอย่างเราจะทำการแปลงข้อมูลเดิมที่เป็น array ให้เป็น string โดยใช้ &lt;code&gt;implode()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;หลังจากนั้น เมื่อเราลองบันทึกข้อมูล ก็จะพบข้อมูลในลักษณะนี้ &lt;code&gt;php,jquery,&lt;/code&gt;  เก็บใน table&lt;/p&gt;
+
+&lt;h2 id=&quot;เพิ่มฟังก์ชันแปลง-string-ให้เป็น-array&quot;&gt;เพิ่มฟังก์ชันแปลง string ให้เป็น array&lt;/h2&gt;
+
+&lt;p&gt;ในตอนที่เราจะแก้ไขข้อมูล ข้อมูลที่มาจาก table จะเป็น string แบบนี้ &lt;code&gt;php,jquery,&lt;/code&gt; เมื่อนำมาใช้กับ checkBoxList มันจะไม่สามารถใช้งานได้ เราต้องทำการแปลงค่าจาก string เป็น array ซะก่อน&lt;/p&gt;
+
+&lt;p&gt;เราจะทำการสร้างฟังชันเพื่อแปลง string ในฟิวด์ skill เป็น array เพิ่มเข้าไปที่ model ที่เราใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function skillToArray()&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  return $this-&amp;gt;skill = explode(&amp;#39;,&amp;#39;, $this-&amp;gt;skill);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากนั้น เรียกใช้งานที่ฟังก์ชัน update() ใน ResumeController.php&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionUpdate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;skillToArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;&amp;lt;------------------&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;view&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;update&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;จากนั้นฟอร์มก็จะสามารถแสดงข้อมูลที่เราเคยบันทึกไปแล้วโดยจะทำการเลือกในส่วนที่เราเคยบันทึกไว้&lt;/p&gt;
+
+&lt;h2 id=&quot;การแสดงผลใน-griview-หรือ-detailview&quot;&gt;การแสดงผลใน Griview หรือ DetailView&lt;/h2&gt;
+
+&lt;p&gt;เพิ่มฟังก์ชั่นนี้เข้าไปใน model ของเรา ในกรณีที่สร้างเป็น itemAlias() เป็น array เก็บไว้เองใน model&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;public function getSkillName(){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    $skills = $this-&amp;gt;getItemSkill();&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    $skillSelected = explode(&amp;#39;,&amp;#39;, $this-&amp;gt;skill);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    $skillSelectedName = [];&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    foreach ($skills as $key =&amp;gt; $skillName) {&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;      foreach ($skillSelected as $skillKey) {&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        if($key === $skillKey){&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;          $skillSelectedName[] = $skillName;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        }&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;      }&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    }&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;    return implode(&amp;#39;, &amp;#39;, $skillSelectedName);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;กรณีถ้าใช้จาก Modlel ให้ใช้แบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\ArrayHelper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;app\models\Skill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getSkillName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$skills&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ArrayHelper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Skill&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$skillSelected&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;explode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;skill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$skillSelectedName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$skills&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$skillName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$skillSelected&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$skillKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$skillKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+          &lt;span class=&quot;nv&quot;&gt;$skillSelectedName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$skillName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;implode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$skillSelectedName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;การเรียกใช้งานใน GridView&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\SerialColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// &amp;#39;id&amp;#39;,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// &amp;#39;title&amp;#39;,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// &amp;#39;firstname&amp;#39;,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// &amp;#39;lastname&amp;#39;,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// &amp;#39;education_level&amp;#39;,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// &amp;#39;marital_status&amp;#39;,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// &amp;#39;sex&amp;#39;,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// &amp;#39;skill&amp;#39;,&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// virtual attribute&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;educationName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;maritalName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;sexName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;skillName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//&amp;lt;----&lt;/span&gt;
+
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\ActionColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/img/item-alias-gridview-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;เรียกใช้งานใน DetailView&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;DetailView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;firstname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;lastname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;education_level&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;marital_status&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;sex&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// virtual attribute&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;educationName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;maritalName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;sexName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;skillName&amp;#39;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;----&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/img/item-alias-detailview-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;จากนั้นเราก็จะสามารถ เพิ่มลบแก้ไขและแสดงผลข้อมูลจาก CheckBoxLis ได้ บทความนี้ผมแยกมาจาก &lt;a href=&quot;/2015/07/21/item-alias.html&quot;&gt;การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList&lt;/a&gt; เพื่อให้ดูง่ายขึ้น&lt;/p&gt;
+
+&lt;p&gt;@dixonSatit&lt;/p&gt;
+</description>
+        <pubDate>Sat, 25 Jul 2015 00:00:00 +0700</pubDate>
+      </item>
+    
+      <item>
+        <title>การใช้งาน AttributeBehavior</title>
+        <link>http://dixonsatit.github.io/2015/07/25/attributeBehavior.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/25/attributeBehavior.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/thumbnail/attribute-behavior.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;AttributeBehavior&lt;/code&gt; คือการดักจับ event ต่างๆ ของ model เช่น EVENT_BEFORE_INSERT,EVENT_BEFORE_UPDATE เพื่อที่เราจะทำงานบางอย่าง กับฟิวด์ที่เราต้องการ ดูตัวอย่าง&lt;/p&gt;
+
+&lt;p&gt;ตัวอย่างนี้เราต้องการแปลงข้อมูล array ที่ได้จาก CheckBoxList ให้เป็น string ก่อนบันทึกและแก้ไขข้อมูล ซึงเราจะทำการเรียกใช้ฟังก์ชัน &lt;code&gt;behaviors()&lt;/code&gt;  ของ model ที่เราใช้งานและเพิ่มฟังกชันนี้เข้าไป&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\AttributeBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\db\ActiveRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AttributeBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;EVENT_BEFORE_INSERT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;EVENT_BEFORE_UPDATE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;implode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;skill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;จากโค้ดจะเห็นว่าเราทำการเรียกใช้งาน &lt;code&gt;AttributeBehavior&lt;/code&gt; ในฟังก์ชัน &lt;code&gt;behaviors()&lt;/code&gt; และกำหนดคุณสมบัติเข้าไปดังนี้&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;class&lt;/code&gt; คือชื่อของ behavior ที่เราต้องการใช้ ในตัวอย่างนี้คือ AttributeBehavior&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;attributes&lt;/code&gt; เป็นการระบุว่าเราจะกระทำข้อมูลในเหตุการณ์อะไร และกับฟิวด์อะไร ซึ่งเราระบุเหตุการณ์ before-insert,before-update และระบุฟิวด์คือ skill&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;value&lt;/code&gt; คือส่วนที่เราจะทำงานบางอย่างเพื่อให้ค่ากับ skill ซึ่งในตัวอย่างเราจะทำการแปลงข้อมูลเดิมที่เป็น array ที่ได้จาก CheckBoxLis และแปลงให้เป็น string โดยใช้ &lt;code&gt;implode()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;น่าจะพอเข้าใจไม่มากก็น้อย ผมคิดว่ามันคงสามารถนำไปประยุกใช้งานกับงานลักษณะอื่นๆ ได้&lt;/p&gt;
+
+&lt;p&gt;@dixonSatit&lt;/p&gt;
+</description>
+        <pubDate>Sat, 25 Jul 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การใช้งาน DetailView</title>
@@ -3446,280 +3715,6 @@ echo Yii::$app-&amp;gt;formatter-&amp;gt;asEmail(&amp;#39;cebe@example.com&amp;#
 &lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-output-formatting.html&quot;&gt;อ่านเพิ่มเติมได้ที่นี&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 23 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การ Register css,js ด้วย Client Script</title>
-        <link>http://dixonsatit.github.io/2015/06/23/client-script.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/23/client-script.html</guid>
-        <description>&lt;p&gt;Yii 2 มีตัวช่วยในการจัดการพวก script file เช่น include ไฟล์พวก css,js หรือแทรกโค้ด css,js บางส่วนเข้าไปใช้เฉพาะ action ได้ ซึ่งโดยปกติ ถ้าเป็นไฟล์ที่ใช้ในทุกๆ หน้า เราจะใช้ Asset เป็นตัวจัดการให้อยู่แล้ว&lt;/p&gt;
-
-&lt;p&gt;แต่ถ้าหากเราต้องการแทรกไฟล์หรือโค้ดบางส่วนก็สามารถทำได้ ซึ่งคุณสมบัติเหล่านี้มีอยู่ใน &lt;code&gt;yii\web\View&lt;/code&gt; อยู่แล้ว นั่นแสดงว่าคุณสามารถเรียกใช้ที่ view ใหนๆ ก็ได้ ลองใช้งานกัน&lt;/p&gt;
-
-&lt;h2 id=&quot;register-javascript&quot;&gt;Register JavaScript&lt;/h2&gt;
-
-&lt;p&gt;เป็นการเขียนโค้ด javascript เข้าไปโดยตรงใน view ในนั้น หลักการก็เหมือนเราเขียน javascript ในแท็ก script เพียงแค่เราไม่ต้องประกาศเอง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]];&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerJs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;var options = &amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;json_encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;POS_END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-options&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerJs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; $(&amp;#39;body&amp;#39;).click(function(){&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;    alert(555);&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;}); &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;POS_END&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;my-options&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;$this-&amp;gt;registerJs($js, $position = self::POS_READY, $key = null)&lt;/code&gt; จะรับค่า parameter ดังนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$js&lt;/code&gt; คือคำสั่ง js ที่เราต้องการแทรกเข้าไปใน view&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$position&lt;/code&gt; คือตำแหน่งที่ใช้ให้แทรก javascript ไว้จุดใหนของ html&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$key&lt;/code&gt; ถ้าเรามี $this-&amp;gt;registerJs() หลายๆจุดใหน หน้าเดียวกันแต่ไม่อย่างให้มันอยู่ใน script เดียวกันก็ตั้งเป็นคนละชื่อได้ ค่า defaul  ของมันคือ null&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ตามตัวอย่างนี้ parameter แรกเป็นการประกาศตัวแปร​ javascript ชื่อ options เก็บข้อมูล json ที่แปลงจาก array php และตัวอย่างที่ 2 เป็นการเขียนดักจับ event ถ้ามีการคลิกภายใต้ tag &lt;code&gt;body&lt;/code&gt; ก็จะ alert &amp;quot;555&amp;quot; ออกมา&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;position&lt;/code&gt; ตัวที่กำหนดตำแหน่งว่าจะให้เอา script ที่ต้องการ register ไปไว้ส่วนใหนของ html มีตัวเลือกดังนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;View::POS_HEAD&lt;/code&gt; ในส่วน &lt;code&gt;&amp;lt;header&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;View::POS_BEGIN&lt;/code&gt; ใต้แท็ก  &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; ตัวแรก&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;View::POS_END&lt;/code&gt;  ก่อนแท็กปิด &lt;code&gt;&amp;lt;/body&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;View::POS_READY&lt;/code&gt; เป็นการประกาศเข้าไปในแท็ก ready ของ jquery เลย&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;View::POS_LOAD&lt;/code&gt; สำหรับเมื่อมีการรันโค้ดถึงจะทำการ register script ให้.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;เมื่อ view page source ดูก็จะเห็นโค้ด Javascript ถูกแทกเข้าไปใน view ให้เอง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;success&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]};&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;jQuery&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ready&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
- &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;click&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;register-javascript-file&quot;&gt;Register Javascript File&lt;/h2&gt;
-
-&lt;p&gt;เป็นการ include  ไฟล์เข้ามาใช้งานเลย และยังสามารถเรียกใช้งาน asset อื่นๆ ได้อีกด้วย ผ่าน &lt;code&gt;depends&lt;/code&gt; เราก็ระบุชื่อ asset ที่ต้องการเรียกใช้งานเข้าไป ซึ่งตามตัวอย่าง ก็จะทำการ include main.js และทำการเรียกใช้งาน &lt;code&gt;JqueryAsset&lt;/code&gt; เพื่อ include ไฟล์ jquery ด้วย&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerJsFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;http://example.com/js/main.js&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;depends&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;\yii\web\JqueryAsset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()]]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;registering-css&quot;&gt;Registering CSS&lt;/h2&gt;
-
-&lt;p&gt;เราสามารถที่จะแทรกสไตล์ใน view ได้เลยผ่าน &lt;code&gt;registerCss&lt;/code&gt; สามารถใส่คำสั่ง css เข้าไปได้เลยตามตัวอย่าง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$this-&amp;gt;registerCss(&amp;quot;body { background: #f00; }&amp;quot;);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เมื่อ view page source จะเห็นเป็นแบบนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#f00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;registering-css-file&quot;&gt;Registering CSS File&lt;/h2&gt;
-
-&lt;p&gt;เป็นการ register ไฟล์ css เข้ามาใช้งาน ใน view ของเราชื่อ black-and-white.css พร้อมทั้งเรียกใช้งาน BootstrapAsset ซึ่งเป็น css ของ bootstrap มาใช้งานด้วย และระบุ css media เท่ากับ print ด้วย&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;css media คือกำรหนดการแสดงผลหน้าตาเว็บเพจ บนสื่อประเภทต่างๆ เราสามารถกำหนด style ให้แตกต่างกันได้ เช่น ตอนที่เราเห็นบนหน้าจอ (screen) กับตอนที่สั่งพิมพ์ออกกระดาษ (print) ให้แสดงผลไม่เหมือนกัน  &lt;a href=&quot;http://www.enjoyday.net/webtutorial/css/css_chapter22.html&quot;&gt;อ่าน css media ได้ที่นี&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerCssFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;http://example.com/css/themes/black-and-white.css&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;depends&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;BootstrapAsset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()],&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;media&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;print&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;css-print-theme&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerCssFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;@web/css/style.css&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หาก view page source ก็จะพบการเรียกใช้งาน css&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/yii2/yii2-Leanning-Source/web/css/style.css&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;/yii2/yii2-Leanning-Source/web/assets/99615aa3/css/bootstrap.css&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://example.com/css/themes/black-and-white.css&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;media=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;print&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-output-client-scripts.html&quot;&gt;อ่านเพิ่มเติมได้ที่นี่&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 23 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การส่งเมล์ โดยใช้  yii2-swiftmailer  ด้วย smtp-google &amp; smtp-mandrill</title>
-        <link>http://dixonsatit.github.io/2015/06/22/mailer-smtp-google-smtp-mandrill.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/22/mailer-smtp-google-smtp-mandrill.html</guid>
-        <description>&lt;p&gt;ปกติเวลาส่งเมล์ เราจะใช้ mail() ของ php ที่มีให้ มันมักจะมีปัญหาเมื่อส่งไปแล้ว จะเข้าที่ junk หรือไม่ก็ spam วันนี้จึงขอแนะนำการส่งเมล์ด้วย smtp จะช่วยแก้ปัญหานี้ได้ และยังมีบริการให้ใช้ฟรี หลายๆ ราย เช่น google,mandrill อีกทั้งเรายังสามารถทดสอบส่งเมล์ได้ ถึงแม้ระบบของเรายังไม่ขึ้น Prodruction ก็ตาม หรือจะสร้าง layout เมล์แบบต่างๆ ก็สามารถทำได้&lt;/p&gt;
-
-&lt;p&gt;วันนี้ขอแนะนำการส่งเมล์ด้วย smtp-google และ smtp-mandrill เพราะฟรีและสามารถทำได้ง่ายๆ ซึ่ง Yii2 เตรียมพร้อมไว้ให้เราแล้ว คือ &lt;a href=&quot;https://github.com/yiisoft/yii2-swiftmailer&quot;&gt;yii2-swiftmailer&lt;/a&gt; มันติดตั้งมาพร้อมแล้ว รอแค่เราตั้งค่าเพื่อเปิดใช้งาน&lt;/p&gt;
-
-&lt;h2 id=&quot;เตรียมความพร้อมกันก่อน&quot;&gt;เตรียมความพร้อมกันก่อน&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ติดตั้ง yii2-swiftmailer อันนี้สบายเพราะ Yii 2 ติดตั้งมาให้แล้ว&lt;/li&gt;
-&lt;li&gt;smtp ที่ต้องการจะใช้ ซึ่งจะไม่เหมือนกัน เช่น smtp ของ google คือ &lt;code&gt;smpt.gmail.com&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;อีเมล์ account ที่ใช้งานได้จริง ตามตัวอย่างนี้ผมใช้ของ gmail&lt;/li&gt;
-&lt;li&gt;layout อีเมล์ เราสามารถสร้างรูปแบบอีเมล์หลายๆ แบบได้ เช่น layout สำหรับตอนสมัครสมาชิก, layout สำหรับตอนส่งข่าว&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;เปรียบเทียระหว่าง-gmail-และ-mandrill&quot;&gt;เปรียบเทียระหว่าง Gmail และ Mandrill&lt;/h2&gt;
-
-&lt;p&gt;Gmail คงไม่ต้องอธิบายคงทราบกันดี ส่วน &lt;a href=&quot;http://www.mandrill.com/&quot;&gt;Mandrill&lt;/a&gt; นั้นมันเป็นระบบ SMTP Mandrill สำหรับส่งเมล์ในระบบเว็บหรือ App ต่างๆ ฟรี 12000 เมล์/เดือน คือมันสร้างมาเพื่อส่งเมล์โดยเฉพาะครับ มีกราฟแสดงให้ดู ตรวจสอบสถิติต่างๆ ส่งไปกี่เมล์ได้รับกี่เมล์ สามารถส่งได้ทีละเยอะๆ แต่ถ้าส่งไม่เกิน 12000 เมล์/เดือน ก็ฟรีครับ ลองไปสมัครใช้ดูได้&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ปล. เท่าที่ผมลองใช้ Mandrill ถ้า server อยู่ในไทย ผมลองแล้วรู้สึกว่า delay นิดนึงครับ แต่ถ้า server อยูต่างประเทศเร็วมากส่งปั๊บเข้าเลย พอดีผมใช้ &lt;a href=&quot;https://www.digitalocean.com/?refcode=117ef266fe2c&quot;&gt;DigitalOcean&lt;/a&gt; ใครสนใจก็ลองได้ server ราคาถูกมากๆ ถูกกว่า &lt;a href=&quot;http://aws.amazon.com/ec2/&quot;&gt;Aws&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;จริงๆ สองตัวนี้มีคุณสมบัติคือสามารถส่งเมล์ผ่าน smtp ได้เหมือนกัน  แล้วแต่จะเลือกใช้ครับ &lt;sup&gt;^&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;เปิดใช้งาน mailer และตั้งค่าตามนี้ ใส่ email และ password ของเรา&lt;/p&gt;
-
-&lt;h2 id=&quot;ตั้งค่า-smtp-google&quot;&gt;ตั้งค่า SMTP Google&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;return [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    //....&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;components&amp;#39; =&amp;gt; [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        &amp;#39;mailer&amp;#39; =&amp;gt; [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;           &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\swiftmailer\Mailer&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                &amp;#39;viewPath&amp;#39; =&amp;gt; &amp;#39;@backend/mail&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                &amp;#39;useFileTransport&amp;#39; =&amp;gt; false,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                &amp;#39;transport&amp;#39; =&amp;gt; [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;Swift_SmtpTransport&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;host&amp;#39; =&amp;gt; &amp;#39;smtp.gmail.com&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;username&amp;#39; =&amp;gt; &amp;#39;username@gmail.com&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;password&amp;#39; =&amp;gt; &amp;#39;password&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;port&amp;#39; =&amp;gt; &amp;#39;587&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;encryption&amp;#39; =&amp;gt; &amp;#39;tls&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                ],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            ],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        ],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;ตั้งค่า-smtp-mandrill&quot;&gt;ตั้งค่า SMTP Mandrill&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;return [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    //....&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;components&amp;#39; =&amp;gt; [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        &amp;#39;mailer&amp;#39; =&amp;gt; [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;           &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\swiftmailer\Mailer&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                &amp;#39;viewPath&amp;#39; =&amp;gt; &amp;#39;@backend/mail&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                &amp;#39;useFileTransport&amp;#39; =&amp;gt; false,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                &amp;#39;transport&amp;#39; =&amp;gt; [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;Swift_SmtpTransport&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;host&amp;#39; =&amp;gt; &amp;#39;smtp.mandrillapp.com&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;username&amp;#39; =&amp;gt; &amp;#39;username@gmail.com&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;password&amp;#39; =&amp;gt; &amp;#39;password&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;port&amp;#39; =&amp;gt; &amp;#39;587&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;encryption&amp;#39; =&amp;gt; &amp;#39;tls&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                ],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        ],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;   ],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;viewPath&lt;/code&gt; ถ้าเป็นกรณี app basic ก็ตั้งค่าเป็น &lt;code&gt;@app/mail&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;สร้าง-layout-mail&quot;&gt;สร้าง layout Mail&lt;/h2&gt;
-
-&lt;p&gt;สร้าง folder ไว้เก็บ view สำหรับเวลาส่งอีเมล์ ชื่อ &lt;code&gt;/mail/layouts/&lt;/code&gt; ไว้ที่ application ของเรา
-จากนั้นสร้าง view ชื่อ &lt;code&gt;html.php&lt;/code&gt; ไว้ที่ &lt;code&gt;/mail/layouts/html.php&lt;/code&gt; เมื่อเรียกเป็น alias ก็คือ &lt;code&gt;@app/mail&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;ซึ่งตัว layout นีจะเป็น layout หลักหรือเป็นหน้าโครงสร้าง html ให้เมล์ของเราส่วนใน layout ข้างในเราค่อยไปใส่เนื้อหาอีกที&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;use yii\helpers\Html;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php $this-&amp;gt;beginPage() ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Content-Type&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/html; charset=&amp;lt;?= Yii::$app-&amp;gt;charset ?&amp;gt;&amp;quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?= Html::encode($this-&amp;gt;title) ?&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;cp&quot;&gt;&amp;lt;?php $this-&amp;gt;head() ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php $this-&amp;gt;beginBody() ?&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;border: solid 1px rgb(236, 236, 236);border-radius: 5px;padding: 20px;&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;cp&quot;&gt;&amp;lt;?= $content ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text-align:right;margin-top:5px;&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; โรงพยาบาลขอนแก่น &lt;span class=&quot;nt&quot;&gt;&amp;lt;small&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;i&amp;gt;&lt;/span&gt;โทร 043-336789&lt;span class=&quot;nt&quot;&gt;&amp;lt;/i&amp;gt;&amp;lt;/small&amp;gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php $this-&amp;gt;endBody() ?&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php $this-&amp;gt;endPage() ?&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ถ้าหาก preview จะได้แบบนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/mailer-main-layout.png&quot; alt=&quot;mailer-main-layout.png&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;จากนั้นเราจะทำการสร้าง view ที่ใช้เป็น template ในการส่ง ในตัวอย่างนี้ผมสร้างอีเมล์แจ้งเตือนการลงทะเบียนงานประชุมวิชาการโรงพยาบาลขอนแก่น&lt;/p&gt;
-
-&lt;p&gt;ไปที่โฟลเดอร์ &lt;code&gt;/mail/layouts/&lt;/code&gt; ใน application ของคุณ สร้าง view ชื่อ register.php โดยที่ view นี้จะรับค่าตัวแปรชื่อ &lt;code&gt;$fullname&lt;/code&gt; เพื่อแสดงชื่อของผู้ลงทะเบียน&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;งานประชุมวิชาการโรงพยาบาลขอนแก่น ครั้งที่ 7 ประจำปี 2558&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;Theme &amp;quot;คุณธรรม คู่คุณภาพ เพื่อประชาชน&amp;quot;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;เนื่องในโอกาสครบรอบ 20 ปี ศูนย์แพทยศาสตรศึกษาชั้นคลินิก โรงพยาบาลขอนแก่น&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;24 - 26 มิถุนายน 2558 ณ โรงพยาบาลขอนแก่น&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;เรียนคุณ &lt;span class=&quot;cp&quot;&gt;&amp;lt;?php echo $fullname; ?&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;ตอนนี้คุณได้ทำการลงทะเบียนเข้าร่วมงานประชุมวิชาการ รพ.ขอนแก่น 2558 เรียบร้อยแล้ว&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;คุณสามารถดูรายละเอียดกำหนดการต่างๆ  ตามไฟล์แนบได้ หรือดูรายละเอียด &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://seminar.kkh.go.th&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;ได้ที่นี่&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เมือทำการส่งจะได้ layout แบบนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/mailer-register-layout.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ส่งอีเมล์&quot;&gt;ส่งอีเมล์&lt;/h2&gt;
-
-&lt;p&gt;หลังจากที่เราตั้งค่าที่ component แล้วเราจะสามารถเรียกใช้งานด้วย &lt;code&gt;Yii::$app-&amp;gt;mailer&lt;/code&gt; ได้ ดูตัวอย่าง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::$&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;app-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;mailer-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;compose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@app/mail/layouts/register&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullname&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;สาธิต สีถาพล&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;setFrom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;seminar@kkh.go.th&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Khon Kaen Hospital&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;setTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;emailTo@gmail.com&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;setSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ยินดีต้อนรับสู่งานประชุมวิชาการโรงพยาบาลขอนแก่น 2558&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;compose&lt;/code&gt; คือการเรียกไปที่ view ที่เราสร้างเป็น template ไว้หากต้องการใช้หลายๆ แบบ ก็สร้างไว้หลายๆ อันแล้วก็เรียกใช้ที่ตรงนี้ หาก view มีการรับค่าตัวแปร ก็ให้ส่งค่าไปด้วย ตามตัวอย่าง register.php รับค่าตัวแปร $fullname&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;setFrom&lt;/code&gt; เป็นการระบุว่าส่งมาจากที่ใด และใส่เป็นชื่อได้ด้วย &lt;img src=&quot;/img/mailer-setfrom.png&quot; alt=&quot;&quot;&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;setTo&lt;/code&gt; คืออีเมล์ที่เราต้องการส่งไปหาใคร&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;setSubject&lt;/code&gt; ชื่อเรื่องอีเมล์ที่เราจะส่ง&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;จากนั้นทดลองเรียกใช้งาน ก็จะได้รับอีเมล์แบบนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/mailer-full.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;หากต้องการแนบไฟล์ให้เพิ่ม &lt;code&gt;attach&lt;/code&gt; เข้าไปดังนี้จะใส่กี่ไฟล์ก็ได้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::$&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;app-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;mailer-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;compose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@app/mail/layouts/register&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullname&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;สาธิต สีถาพล&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;setFrom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;seminar@kkh.go.th&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Khon Kaen Hospital&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;setTo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;emailTo@gmail.com&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;setSubject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ยินดีต้อนรับสู่งานประชุมวิชาการโรงพยาบาลขอนแก่น 2558&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;attach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:getAlias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@webroot&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/attach/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;brochure.pdf&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;attach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:getAlias&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@webroot&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/attach/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Poster.pdf&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;ไม่ควรแนบไฟล์เยอะเพราะจะทำให้ตอนส่งช้าไปด้วย ถ้าไฟล์เยอะจริงๆ แนะนำทำเป็น zip และแนบ link ดาวน์โหลดไปจะดีกว่า&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;เมื่อแนบไฟล์ เวลาส่งอีเมล์ผู้รับก็จะได้อีเมล์แบบนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/mailer-attach.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ในการใช้งานจริงแนะนำให้สร้างเป็น function ไว้ใน controller ก็ได้ แล้วค่อยรับค่า parameter ต่างๆ เข้ามา&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sendMail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$fullname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-         &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mailer&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;compose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@app/mail/layouts/register&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;fullname&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$fullname&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setFrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;seminar@kkh.go.th&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Khon Kaen Hospital&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setTo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setSubject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ยินดีต้อนรับสู่งานประชุมวิชาการโรงพยาบาลขอนแก่น 2558&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAlias&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@webroot&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/attach/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;brochure.pdf&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAlias&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@webroot&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/attach/&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Poster.pdf&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-         &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ขอให้สนุกกับการส่งเมล์ครับผม.. &lt;sup&gt;^&lt;/sup&gt; กะไว้ว่าเรื่องนี้จะเขียนประมาณซัก 20 นาทีเอาเข้าจริงๆ ปาเข้าไป 2 ชั่วโมงแระ ไม่ไหวนอนก่อนครับ&lt;/p&gt;
-</description>
-        <pubDate>Mon, 22 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
   </channel>
