@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การใช้งาน Request | Yii 2 Learning</title>
+	<meta name="description" content="การใช้งาน Request |  Yii2, Yii Framework, Extension, Howto,tutorial">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/07/25/request.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Yii 2 Learning</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Table Of Contents
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/yii2Learning" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การใช้งาน Request</h1>
+    <p class="meta">
+    July 25, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p><img src="/img/thumbnail/request.jpg" alt=""></p>
+
+<p>ปกติการรับค่าตัวแปรต่างๆ จากฟอร์มหรือจาก url เราก็จะใช้ <code>$_POST,$_GET</code> เพื่อเรียกใช้งาน แต่ใน yii 2 นั้นมี component ไว้ให้ใช้เหมือนกัน ซึ่งนั่นก็คือ Request</p>
+
+<p>ข้อดีก็คือมันสามารถกำหนดค่า default ให้เราได้เลยในกรณีที่เรารับค่าแล้วมันเป็นค่าว่าง เราสามารถระบุค่า default ให้มันเลยได้</p>
+
+<p>ลองดูโค้ดปกติ หากเราไม่ได้ใช้ Request</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$id</span> <span class="o">=</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">:</span> <span class="k">null</span><span class="p">;</span>
+</code></pre></div>
+<p>ถ้าดูตามโค้ดด้านบนคือ สร้างตัวแปรชื่อ $id ไว้รอเก็บค่า <code>$_GET[&#39;id&#39;]</code>
+ ถ้ามีค่าก็จะได้ค่า<code>$_GET[&#39;id&#39;]</code> กลับไปแต่ถ้าไม่มีจะได้ค่าป็น <code>null</code></p>
+
+<p>ถ้าเป็น Yii 2 ก็จะเรียกสั้นแบบนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;);</span>
+</code></pre></div>
+<p>ในกรณีที่ไม่มีค่าเราสามารถระบุค่า default ให้มันได้ ปกติจะเป็นค่า <code>null</code> ตัวอย่างระบุเป็นค่า <code>0</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> $id = Yii::$app-&gt;request-&gt;get(&#39;id&#39;,0);</span>
+</code></pre></div>
+<h2 id="ตัวอย่างการใช้งานแบบต่างๆ">ตัวอย่างการใช้งานแบบต่างๆ</h2>
+
+<p>request สามารถเรียกค่าได้ทั้ง POST,GET</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> </span><span class="cp">&lt;?php</span>
+
+ <span class="nv">$id</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+<span class="c1">// เขียน php ปกติ : $id = isset($_GET[&#39;id&#39;]) ? $_GET[&#39;id&#39;] : null;</span>
+
+<span class="nv">$id</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="c1">// เขียน php ปกติ : $id = isset($_GET[&#39;id&#39;]) ? $_GET[&#39;id&#39;] : 1;</span>
+
+<span class="nv">$post</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">();</span>
+<span class="c1">// เขียน php ปกติ : $post = $_POST;</span>
+
+<span class="nv">$name</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+<span class="c1">// เขียน php ปกติ : $name = isset($_POST[&#39;name&#39;]) ? $_POST[&#39;name&#39;] : null;</span>
+
+<span class="nv">$name</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="c1">// เขียน php ปกติ : $name = isset($_POST[&#39;name&#39;]) ? $_POST[&#39;name&#39;] : &#39;&#39;;</span>
+</code></pre></div>
+<h2 id="request-methods">Request Methods</h2>
+
+<p>เราสามารถเช็คได้ว่าค่าที่ส่งมา เป็น method อะไร</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isAjax</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ตรวจสอบว่าเป็น ajax */</span> <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isGet</span><span class="p">)</span>  <span class="p">{</span> <span class="cm">/*  ตรวจสอบว่าเป็น GET */</span> <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isPost</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ตรวจสอบว่าเป็น POST */</span> <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">isPut</span><span class="p">)</span>  <span class="p">{</span> <span class="cm">/* ตรวจสอบว่าเป็น PUT */</span> <span class="p">}</span>
+</code></pre></div>
+<h2 id="request-urls">Request URLs</h2>
+
+<p>เราสามารถตรวจสอบ url ปัจจุบันที่เราใช้งาน ตัวอย่างนี้สมมุติว่าเรากำลังอยู่ที่ url <code>http://example.com/admin/index.php/product?id=100</code></p>
+
+<p>เราสามารถใช้ <code>request</code> เพื่อเรียกใช้งาน method ต่างๆ ได้ดังนี้</p>
+
+<ul>
+<li><code>url</code>: returns /admin/index.php/product?id=100, ได้ค่า url แต่ไม่มี host info.</li>
+<li><code>absoluteUrl</code>: returns <a href="http://example.com/admin/index.php/product?id=100">http://example.com/admin/index.php/product?id=100</a>, ได้ค่า url และ host info.</li>
+<li><code>hostInfo</code>: returns <a href="http://example.com">http://example.com</a>, .</li>
+<li><code>pathInfo</code>: returns /product, which is the part after the entry script and before the question mark (query string).</li>
+<li><code>queryString</code>: returns id=100, ค่า parameter ต่างๆ ที่ส่งมากับ url</li>
+<li><code>baseUrl</code>: returns /admin, url ที่ไม่รวม host info และ ค่า parameter</li>
+<li><code>scriptUrl</code>: returns /admin/index.php, url ที่รันไฟล์ปัจจุบันและรวมชื่อไฟล์ด้วย</li>
+<li><code>serverName</code>: returns example.com, ชื้อของ host ที่ใช้อยู่ ณ ปัจจุบัน</li>
+<li><code>serverPort</code>: returns 80, port ที่ใช้อยู่ ณ ปัจจุบัน</li>
+</ul>
+
+<p>ตัวอย่างการเรียกใช้งาน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?PHP</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">absoluteUrl</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">hostInfo</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">pathInfo</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">queryString</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">baseUrl</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">scriptUrl</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">serverName</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="client-information">Client Information</h2>
+
+<p>คุณสามารถดูค่า Hostname และ ip เครื่องได้โดยใช้ <code>userHost</code>,<code>userIP</code></p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="nv">$userHost</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">userHost</span><span class="p">;</span>
+<span class="nv">$userIP</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">userIP</span><span class="p">;</span>
+</code></pre></div></section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dixonsatit';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://dixonsatit.github.io" rel="dct:source">http://dixonsatit.github.io</a><br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
