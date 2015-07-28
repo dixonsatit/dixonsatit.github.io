@@ -3,7 +3,7 @@
   <head>
 	<meta charset="utf-8">
 	<title>การใช้งาน GridView หลายๆ ตัวในหน้าเดียวกัน | Yii 2 Learning</title>
-	<meta name="description" content="การใช้งาน GridView หลายๆ ตัวในหน้าเดียวกัน | ปกติส่วนใหญ่เราก็จะใช้ GridView เพียงแค่ตัวเดียวต่อ 1 page แต่ถ้าเมื่อไหร่เราใช้ 2 GridView แล้วละก็ ปัญหามันจะเกิด ตอนทีเราคลิกเลือก page ในตอนแบ่งหน้า เราจ... Yii2, Yii Framework, Extension, Howto,tutorial">
+	<meta name="description" content="การใช้งาน GridView หลายๆ ตัวในหน้าเดียวกัน | ปกติส่วนใหญ่เราก็จะใช้ GridView เพียงแค่ตัวเดียวต่อ 1 page แต่ถ้าเมื่อไหร่เราใช้ 2 GridView แล้วละก็ ปัญหามันจะเกิด ตอนทีเราคลิกเลือก page ในตอนแบ่งหน้าหรือต... Yii2, Yii Framework, Extension, Howto,tutorial">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -183,7 +183,7 @@
     
     </p>
   </header>
-  <section class="post-content"><p>ปกติส่วนใหญ่เราก็จะใช้ GridView เพียงแค่ตัวเดียวต่อ 1 page แต่ถ้าเมื่อไหร่เราใช้ 2 GridView แล้วละก็ ปัญหามันจะเกิด ตอนทีเราคลิกเลือก page ในตอนแบ่งหน้า เราจะต้องตั่งค่าตัวแปรให้ <code>pagination</code>,<code>sort</code> ใน GridView ใหม่เพราะไม่งั้นค่ามันจะเป็นตัวเดียวกัน GridView อาจจะเอ๋อๆ ได้</p>
+  <section class="post-content"><p>ปกติส่วนใหญ่เราก็จะใช้ GridView เพียงแค่ตัวเดียวต่อ 1 page แต่ถ้าเมื่อไหร่เราใช้ 2 GridView แล้วละก็ ปัญหามันจะเกิด ตอนทีเราคลิกเลือก page ในตอนแบ่งหน้าหรือตอนคลิก sort บนหัวคอลัมน์ เราจะต้องตั้งค่าตัวแปรให้ <code>pagination</code>,<code>sort</code> ใน GridView ใหม่เพราะไม่งั้นค่ามันจะเป็นตัวเดียวกัน GridView อาจจะเอ๋อๆ ได้</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>  
 
 <span class="k">use</span> <span class="nx">yii\grid\GridView</span><span class="p">;</span>
