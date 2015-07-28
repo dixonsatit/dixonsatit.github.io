@@ -5,7 +5,39 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 28 Jul 2015 11:32:57 +0700</pubDate>
+    <pubDate>Tue, 28 Jul 2015 14:35:15 +0700</pubDate>
+    
+      <item>
+        <title>การใช้งาน GridView หลายๆ ตัวในหน้าเดียวกัน</title>
+        <link>http://dixonsatit.github.io/2015/07/28/multiple-gridview-one-page.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/28/multiple-gridview-one-page.html</guid>
+        <description>&lt;p&gt;ปกติส่วนใหญ่เราก็จะใช้ GridView เพียงแค่ตัวเดียวต่อ 1 page แต่ถ้าเมื่อไหร่เราใช้ 2 GridView แล้วละก็ ปัญหามันจะเกิด ตอนทีเราคลิกเลือก page ในตอนแบ่งหน้า เราจะต้องตั่งค่าตัวแปรให้ &lt;code&gt;pagination&lt;/code&gt;,&lt;code&gt;sort&lt;/code&gt; ใน GridView ใหม่เพราะไม่งั้นค่ามันจะเป็นตัวเดียวกัน GridView อาจจะเอ๋อๆ ได้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;  
+
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\grid\GridView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$userProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pagination&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pageParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;user-page&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$userProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sortParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;user-sort&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$postProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pagination&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pageParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;post-page&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$postProvider&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sortParam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;post-sort&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;h1&amp;gt;Grid Users&amp;lt;/h1&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;h1&amp;gt;Grid Posts&amp;lt;/h1&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+    &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$postProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;แค่นี้เราก็สามารถใช้งาน gridview หลายๆ ตัวใน page เดียวได้แล้วครับ&lt;/p&gt;
+
+&lt;p&gt;@dixonSatit&lt;/p&gt;
+</description>
+        <pubDate>Tue, 28 Jul 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การใช้งาน CheckBoxColumn สำหรับการลบทีละหลายๆ Record</title>
@@ -3667,56 +3699,6 @@ Migrated up successfully.
 &lt;p&gt;น่าจะพอช่วยให้การติดตั้ง yii-user ง่ายขึ้นนะครับ ^ ^&lt;/p&gt;
 </description>
         <pubDate>Thu, 25 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การติดตั้งและใช้งาน agency theme</title>
-        <link>http://dixonsatit.github.io/2015/06/23/install-agency-theme.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/23/install-agency-theme.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/agency-theme-top.png&quot; alt=&quot;agency theme&quot;&gt;
-ใหนๆ ก็สอน&lt;a href=&quot;/2015/06/20/create-theme-yii2.html&quot;&gt;วิธีการสร้าง theme&lt;/a&gt; แล้ว ก็เลยเอา theme ที่สร้างมาทำเป็น extension ให้ติดตั้งใช้งานกันได้ง่ายๆ ผ่าน composer ซักหน่อย&lt;/p&gt;
-
-&lt;p&gt;theme นี้ฟรี และสามารถเอามาทำเป็น portfolio ของเราได้ หน้าตาก็ ok&lt;/p&gt;
-
-&lt;h2 id=&quot;การติดตั้ง&quot;&gt;การติดตั้ง&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; composer require dixonsatit/yii2-agency-theme
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หรือ เพิ่มที่ composer.json ในส่วนของ require&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;dixonsatit/yii2-agency-theme&amp;quot;: &amp;quot;*&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นรันคำสั่ง &lt;code&gt;composer update&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;การใช้งาน&quot;&gt;การใช้งาน&lt;/h2&gt;
-
-&lt;p&gt;หลังจากติดตั้งเสร็จ ให้ทำการตั้งค่าที่ config/main.php&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;        &amp;#39;view&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            &amp;#39;theme&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                &amp;#39;pathMap&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;@app/views&amp;#39;=&amp;gt;&amp;#39;@dixonsatit/agencyTheme/views&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                ]&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            ]&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        ],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ในการใช้งานจริงเราไม่ควรแก้ไขไฟล์ที่ &lt;code&gt;vendor/dixonsatit/yii2-agency-theme/views&lt;/code&gt; เราควร copy ไฟล์ view มาไว้ที่ application ของเรา&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;สร้างโฟลเดอร์ /themes/agency ที่ application ของคุณ&lt;/li&gt;
-&lt;li&gt;copy ไฟล์ทั้งหมดที่อยู่ใน view จาก &lt;code&gt;vendor/dixonsatit/yii2-agency-theme/views&lt;/code&gt; ไปไว้ที่ &lt;code&gt;/themes/agency&lt;/code&gt; ใน application ของคุณ&lt;/li&gt;
-&lt;li&gt;ตั้งค่า view ใหม่ เป็น&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; &amp;#39;view&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            &amp;#39;theme&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                &amp;#39;pathMap&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                    &amp;#39;@app/views&amp;#39;=&amp;gt;&amp;#39;@app/themes/agency&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;                ]&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            ]&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        ],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นคุณสามารถปรับเปลี่ยน view ต่างๆ ได้ตามต้องการ &lt;sup&gt;^&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://github.com/dixonsatit/yii2-agency-theme/raw/master/dist/img/screencapture-yii2-agency-theme.png&quot; alt=&quot;Agency Theme&quot;&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 23 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
   </channel>
