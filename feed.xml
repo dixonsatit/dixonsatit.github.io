@@ -5,7 +5,167 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Sun, 26 Jul 2015 17:45:17 +0700</pubDate>
+    <pubDate>Tue, 28 Jul 2015 11:29:38 +0700</pubDate>
+    
+      <item>
+        <title>การใช้งาน CheckBoxColumn สำหรับการลบทีละหลายๆ Record</title>
+        <link>http://dixonsatit.github.io/2015/07/28/checkbox-coluumn.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/28/checkbox-coluumn.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/thumbnail/checkbox-column.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;CheckBoxColumn&lt;/code&gt; เป็นตัวเลือก checkbox ที่แสดงเป็นคอลัมน์ภายใน GridView เพื่อให้สามารถเลือกรายการได้ทีละหลายๆ แถว  ซึ่งก็แล้วแต่ว่าเราจะนำไปใช้ทำอะไร วันนี้เราจะลองใช้ &lt;code&gt;CheckBoxColumn&lt;/code&gt; เพื่อทำการลบแถวที่ต้องการทีละหลายๆ แถว ซึ่งทำได้ง่ายมากๆ  ไปดูตัวอย่างกัน&lt;/p&gt;
+
+&lt;h2 id=&quot;เรียกใช้งานใน-gridview&quot;&gt;เรียกใช้งานใน GridView&lt;/h2&gt;
+
+&lt;p&gt;เราจะต้องทำการเรียกใช้งานตัว &lt;code&gt;CheckBoxColumn&lt;/code&gt; ใน column ของ GridView เสียก่อน สามารถทำได้ง่ายมาก เพียงเรียก class &lt;code&gt;[&amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\CheckboxColumn&amp;#39;]&lt;/code&gt; ใน column&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\SerialColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\CheckboxColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;------&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;firstname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;lastname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\ActionColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ในกรณีที่เราอยากกำหนดค่าต่างๆ เพิ่มเติมก็สามารถทำได้ดังนี้&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;checkboxOptions&lt;/code&gt; กำหนด attributes ต่างๆ ของ html ได้เช่น class,style&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;multiple&lt;/code&gt; กำหนดให้สามารถเลือกได้ทีละหลายๆ ตัว ค่า default จะเท่ากับ &lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; ชื่อของตัว checkBox ค่า default จะเท่ากับ &lt;code&gt;selection&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\SerialColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\CheckboxColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;checkboxOptions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;multiple&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;selection&amp;#39;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;firstname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;lastname&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\ActionColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ดู properties ที่สามารถใช้งานได้&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/yii-grid-checkboxcolumn.html&quot;&gt;ที่นี่&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;เมื่อตั้งค่าเสร็จจะเห็น CheckboxColumn ขึ้นมาแบบนี้&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/check-box-column.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;การเรียกใช้งานค่าที่-selection&quot;&gt;การเรียกใช้งานค่าที่ Selection&lt;/h2&gt;
+
+&lt;p&gt;เมื่อเราทำการเลือกรายการที่ต้องการแล้ว การที่จะดึงรายการที่เราเลือกนั้น สามารถทำได้โดยผ่าน JQuery และระบุ id ของ GridView ของเราเข้าไป จะได้ค่ากลับมาเป็น array pk ที่เราเลือก เช่น &lt;code&gt;[2,3,1]&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;var keys = $(&amp;#39;#grid&amp;#39;).yiiGridView(&amp;#39;getSelectedRows&amp;#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ซึ่งก็แล้วแต่ว่าเราจะนำไปทำอะไรต่อ&lt;/p&gt;
+
+&lt;h2 id=&quot;ใช้-checkboxcolumn-เพื่อลบข้อมูลทีละหลายๆ-แถว&quot;&gt;ใช้ CheckBoxColumn เพื่อลบข้อมูลทีละหลายๆ แถว&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ขั้นตอนแรกทำการเรียกใช้งาน &lt;code&gt;CheckBoxColumn&lt;/code&gt; ใน GridView ที่เราต้องการ&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;&amp;#39;columns&amp;#39; =&amp;gt; [&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    //....&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    [&amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\CheckboxColumn&amp;#39;],&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  // ....&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;],&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;// ...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;เพิ่ม ปุ่มเพื่อทำการคลิกลบข้อมูล ด้านบน GridView ตั้งค่า id = &amp;#39;btn-delete&amp;#39;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Create Resume&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;create&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;btn btn-success&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Delete&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;btn btn-warning pull-right&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;btn-delete&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/img/check-box-column-delete.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;จากนั้นเราจะทำการใช้ jQuery &lt;code&gt;yiiGridView&lt;/code&gt; เพื่อดึงรายการที่เราเลือกไว้ส่งไปให้ action &lt;code&gt;delete-all&lt;/code&gt; ใน controller เพื่อทำการลบข้อมูล เพิ่มไว้ด้านล่าง GridView ที่เราใช้งาน&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// .....&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerJs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;  jQuery(&amp;quot;#btn-delete&amp;quot;).click(function(){&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;    var keys = $(&amp;quot;#w0&amp;quot;).yiiGridView(&amp;quot;getSelectedRows&amp;quot;);&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;    //console.log(keys);&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;    if(keys.length&amp;gt;0){&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;      jQuery.post(&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;delete-all&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;quot;,{ids:keys.join()},function(){&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;      });&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;    }&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;  });&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;การทำงาน&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;var keys = $(&amp;quot;#w0&amp;quot;).yiiGridView(&amp;quot;getSelectedRows&amp;quot;);&lt;/code&gt; เราจะเรียกค่าที่ selection มาเก็บไว้ที่ตัวแปร keys โดยเรียกไปที่ GridView ที่ id = &lt;code&gt;w0&lt;/code&gt; ซึ่งก็แล้วแต่เราจะตั้งอะไร&lt;/li&gt;
+&lt;li&gt;ทำการ if เพื่อตรวจสอบค่าว่า มีการเลือกรายการหรือไม่ ถ้ามีให้ส่งค่าไปลบ&lt;/li&gt;
+&lt;li&gt;เมื่อมีรายการที่เลือก ก็จะนำ array ที่ได้ ใช้ function &lt;code&gt;join()&lt;/code&gt; ของ javaScript เพื่อแปลง array ให้เป็น string ในรูปแบบ &lt;code&gt;1,4,3&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;จากนั้นใช้ JQuery.post() เพื่อทำการส่งค่า ids ที่เป็นค่า selection ที่แปลงเป็น string แล้ว ส่งค่าไปลบข้อมูล&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ในส่วนของ front ก็เพียงแค่ส่งค่าตัวแปรไปให้ จากนั้นเราจะทำการสร้าง action เพื่อรองรับการลบข้อมูลทีละหลายๆ แถว&lt;/p&gt;
+
+&lt;h2 id=&quot;สร้าง-actiondeleteall-เพื่อทำการลบข้อมูลทีละหลายๆ-แถว&quot;&gt;สร้าง ActionDeleteAll() เพื่อทำการลบข้อมูลทีละหลายๆ แถว&lt;/h2&gt;
+
+&lt;p&gt;ใน controller เราจะทำการเพิ่ม function ActionDeleteAll() เข้าไป ดังนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;verbs&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;VerbFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+            &lt;span class=&quot;s1&quot;&gt;&amp;#39;actions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;post&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;delete-all&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;post&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionDeleteAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$delete_ids&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;explode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ids&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Resume&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;deleteAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;in&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$delete_ids&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;redirect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ในส่วน behaviors() เราต้องควบคุม actionDeleteAll() ให้สามารถส่งข้อมูลมาลบด้วย method POST เท่านั้นเพื่อความปลอดภัย&lt;/p&gt;
+
+&lt;p&gt;ส่วน actionDeleteAll() เราจะทำการสร้างขึ้นมาใหม่เพราะของเดิมสามารถลบได้เพียงครั้งละ 1 Record&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;เราจะทำการรับค่าตัวแปรที่ส่งมาเป็น POST ชื่อว่า &lt;code&gt;ids&lt;/code&gt; ด้วย &lt;code&gt;Yii::$app-&amp;gt;request-&amp;gt;post(&amp;#39;ids&amp;#39;)&lt;/code&gt; - -&lt;/li&gt;
+&lt;li&gt;จากนั้นทำการแปลง string ให้เป็น array เก็บไว้ที่ตัวแปร &lt;code&gt;$delete_ids&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;และใช้ function deleteAll และใส่เงื่อนไขเป็น in ตัวนี้จะมีค่าเท่ากับ &lt;code&gt;DELETE FROM&lt;/code&gt;resume&lt;code&gt;WHERE&lt;/code&gt;id` IN (1, 2, 3) ที่ใช้ in เพราะจะได้ไม่ต้องไปวลลูปเพื่อลบ ใช้ in ทีเดียวจบเลย&lt;/li&gt;
+&lt;li&gt;จากนั้น redirect ไปที่ action index เหมือนเดิม&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;จากนั้นทดลองทำการลบข้อมูลดู  หวังว่าคงจะเป็นประโยชน์ไม่มากก็น้อยครับ ติดปัญหาอะไร comment ไว้ด้านล่างเลยครับ&lt;/p&gt;
+
+&lt;p&gt;@dixonSatit&lt;/p&gt;
+</description>
+        <pubDate>Tue, 28 Jul 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การใช้งาน Request</title>
@@ -3554,54 +3714,6 @@ Migrated up successfully.
 
 &lt;p&gt;&lt;img src=&quot;https://github.com/dixonsatit/yii2-agency-theme/raw/master/dist/img/screencapture-yii2-agency-theme.png&quot; alt=&quot;Agency Theme&quot;&gt;&lt;/p&gt;
 </description>
-        <pubDate>Tue, 23 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การติดตั้งและใช้งาน Highchart</title>
-        <link>http://dixonsatit.github.io/2015/06/23/highcharts.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/23/highcharts.html</guid>
-        <description>&lt;p&gt;heighchart เป็น chart ที่สามารถใช้งานได้ฟรีๆ ถ้าไม่ทำเป็นการค้านะครับ ซึ่งตัวมันเองมี chart มากมายหลายแบบ ใช้กันไม่หมดครับ เยอะจริงๆ&lt;/p&gt;
-
-&lt;h2 id=&quot;ติดตั้ง&quot;&gt;ติดตั้ง&lt;/h2&gt;
-
-&lt;p&gt;มีคนทำ extension ไว้ให้แระ &lt;a href=&quot;https://github.com/miloschuman/yii2-highcharts&quot;&gt;https://github.com/miloschuman/yii2-highcharts&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require --prefer-dist miloschuman/yii2-highcharts-widget &amp;quot;dev-master&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หรือเพิ่มใน composer.json ในส่วน require&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;miloschuman/yii2-highcharts-widget&amp;quot;: &amp;quot;dev-master&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;รันคำสั่ง composer update&lt;/p&gt;
-
-&lt;h2 id=&quot;การใช้งาน&quot;&gt;การใช้งาน&lt;/h2&gt;
-
-&lt;p&gt;เท่าที่ผมสังเกต มีคนถามผมบ่อยๆ ว่าจะสร้าง array ในรูปแบบนีได้ยังไง query ออกมา จาก mysql ไม่ได้ตามแบบนี้&lt;/p&gt;
-
-&lt;p&gt;ขอแนะนำง่ายๆ ครับ เราต้องมองข้อมูลออกเป็นส่วนๆ query ออกมาทีละอันแล้วค่อยจับมารวมกันอีกที&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;อีกปัญหานึงที่เจอบ่อยๆ คือ  เมือเราสร้าง array ตามรูปแบบนี้ได้แล้วแต่ข้อมูลไม่ออกซักที ปัญหาส่วนใหญ่คือ type ของค่าต่างๆ ไม่ตรงเช่น มันรับเป็น init แต่ค่าที่อยู่ใน array เป็น string มันก็จะไม่แสดงนะครับ เพราะฉะนั้น var_dump เพื่อดูค่าของ array ว่ามี type ตรงกันหรือปล่าวครับ&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;miloschuman\highcharts\Highcharts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Highcharts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
-   &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;text&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Fruit Consumption&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;&amp;#39;xAxis&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-         &lt;span class=&quot;s1&quot;&gt;&amp;#39;categories&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Apples&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Bananas&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Oranges&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;&amp;#39;yAxis&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-         &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;text&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Fruit eaten&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-      &lt;span class=&quot;s1&quot;&gt;&amp;#39;series&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Jane&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;data&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt;
-         &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;name&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;John&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;data&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-   &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         <pubDate>Tue, 23 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
