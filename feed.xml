@@ -5,13 +5,13 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 28 Jul 2015 14:50:53 +0700</pubDate>
+    <pubDate>Tue, 11 Aug 2015 10:14:02 +0700</pubDate>
     
       <item>
         <title>การใช้งาน GridView หลายๆ ตัวในหน้าเดียวกัน</title>
         <link>http://dixonsatit.github.io/2015/07/28/multiple-gridview-one-page.html</link>
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/28/multiple-gridview-one-page.html</guid>
-        <description>&lt;p&gt;ปกติส่วนใหญ่เราก็จะใช้ GridView เพียงแค่ตัวเดียวต่อ 1 page แต่ถ้าเมื่อไหร่เราใช้ 2 GridView แล้วละก็ ปัญหามันจะเกิด ตอนทีเราคลิกเลือก page ในตอนแบ่งหน้าหรือตอนคลิก sort บนหัวคอลัมน์ เราจะต้องตั้งค่าตัวแปรให้ &lt;code&gt;pagination&lt;/code&gt;,&lt;code&gt;sort&lt;/code&gt; ใน GridView ใหม่เพราะไม่งั้นค่ามันจะเป็นตัวเดียวกัน GridView อาจจะเอ๋อๆ ได้&lt;/p&gt;
+        <description>&lt;p&gt;ปกติส่วนใหญ่เราก็จะใช้ GridView เพียงแค่ตัวเดียวต่อ 1 page แต่ถ้าเมื่อไหร่เราใช้ 2 GridView แล้วละก็ ปัญหามันจะเกิด ตอนทีเราคลิกเลือก page ในตอนแบ่งหน้าหรือตอนคลิก sort บนหัวคอลัมน์ เราจะต้องตั้งค่าตัวแปรให้ &lt;code&gt;pagination&lt;/code&gt;,&lt;code&gt;sort&lt;/code&gt; ใน GridView ใหม่ เพราะไม่งั้นค่ามันจะเป็นตัวเดียวกัน GridView อาจจะเอ๋อๆ ได้&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;  
 
 &lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\grid\GridView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
