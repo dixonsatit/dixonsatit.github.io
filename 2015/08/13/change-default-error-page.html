@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+	<meta charset="utf-8">
+	<title>การเปลี่ยนหน้า Default Error ให้สวยงาม | Yii 2 Learning</title>
+	<meta name="description" content="การเปลี่ยนหน้า Default Error ให้สวยงาม |  Yii2, Yii Framework, Extension, Howto,tutorial">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/jekyll-github.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+	<!-- Canonical -->
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/08/13/change-default-error-page.html">
+
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+
+	<!-- KaTeX -->
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
+	
+
+	<!-- Google Analytics -->
+	
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-63817549-1', 'auto');
+	ga('send', 'pageview');
+	</script>
+	
+</head>
+
+  <body>
+    <header class="site-header">
+	<div class="branding">
+		
+		<a href="/">
+			<img class="avatar" src="https://secure.gravatar.com/avatar/7037e0cdf96cd3d4ad39b6c32ca29bd7?s=100" alt=""/>
+		</a>
+		
+		<h1 class="site-title">
+			<a href="/">Yii 2 Learning</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/about/">
+					About
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<li>
+				<a class="page-link" href="/yii2-learning/">
+					Table Of Contents
+				</a>
+			</li>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:dixonsatit@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.facebook.com/yii2Learning" title="Follow on Facebook">
+		<i class="fa fa-fw fa-facebook"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="https://github.com/dixonsatit" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/dixonsatit" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+		</ul>
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header style="background-image: url('/')">
+    <h1 class="title">การเปลี่ยนหน้า Default Error ให้สวยงาม</h1>
+    <p class="meta">
+    August 13, 2015
+    
+    </p>
+  </header>
+  <section class="post-content"><p><img src="/img/thumbnail/default-error.jpg" alt=""></p>
+
+<p>เวลาที่มี error ที่ไม่ใด้เกิดจาก syntax error มันจะ redirect ไปที่หน้า default error ปกติจะอยู่ที่ SiteController ใน action <code>error</code> ซึ่งมันเป็น class action ที่มีไว้ให้เรียกใช้งานอยู่แล้ว เมื่อเข้าไปดูใน controller จะเป็นดังนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">public function actions()</span>
+<span class="x">{</span>
+<span class="x">    return [</span>
+<span class="x">        &#39;error&#39; =&gt; [</span>
+<span class="x">            &#39;class&#39; =&gt; &#39;yii\web\ErrorAction&#39;,</span>
+<span class="x">        ],</span>
+<span class="x">    ];</span>
+<span class="x">}</span>
+</code></pre></div>
+<p>เราสามารถเปลี่ยน view ในส่วนที่แสดงข้อความ error ได้ โดยสามารถปรับเปลี่ยนเองได้หมดซึ่ง ErrorAction จะส่งตัวแปรมาให้ใช้ 2 ตัวคือ</p>
+
+<ul>
+<li><code>$name</code> ตัวแปรนี้จะแสดงชื่อ error ต่างๆ เช่น <code>Not Found (#404)</code>,<code>Forbidden (#403)</code></li>
+<li><code>$message</code> เป็นข้อความแสดง error ต่างๆ ให้ผู้ใช้งานได้ทราบ</li>
+</ul>
+
+<p>ซึ่งหากเราต้องการเปลี่ยนแปลงหน้าตาส่วน error ก็สามารถทำได้โดยแก้ไขที่ไฟล์ view ชื่อ error ใน views/site/error.php ก็ปรับแต่งตามความต้องการได้ ผมทำตัวอย่างง่ายๆ มาให้ดูกัน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="cm">/* @var $this yii\web\View */</span>
+<span class="cm">/* @var $name string */</span>
+<span class="cm">/* @var $message string */</span>
+<span class="cm">/* @var $exception Exception */</span>
+
+<span class="k">use</span> <span class="nx">yii\helpers\Html</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">yii\helpers\Url</span><span class="p">;</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+<span class="cp">?&gt;</span><span class="x"></span>
+<span class="x">&lt;div class=&quot;jumbotron&quot;&gt;</span>
+<span class="x">      &lt;h1&gt;</span><span class="cp">&lt;?</span><span class="o">=</span><span class="nx">Html</span><span class="o">::</span><span class="na">img</span><span class="p">(</span><span class="nx">Url</span><span class="o">::</span><span class="na">base</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/images/Minion_icon.png&#39;</span><span class="p">)</span><span class="cp">?&gt;&lt;?</span><span class="o">=</span> <span class="nx">Html</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">)</span> <span class="cp">?&gt;</span><span class="x">&lt;/h1&gt;</span>
+<span class="x">      &lt;p class=&quot;text-danger&quot;&gt;</span><span class="cp">&lt;?</span><span class="o">=</span> <span class="nb">nl2br</span><span class="p">(</span><span class="nx">Html</span><span class="o">::</span><span class="na">encode</span><span class="p">(</span><span class="nv">$message</span><span class="p">))</span> <span class="cp">?&gt;</span><span class="x">&lt;/p&gt;</span>
+<span class="x">      &lt;p&gt;&lt;a class=&quot;btn btn-default btn-lg&quot; href=&quot;http://dixonsatit.github.io/&quot; role=&quot;button&quot;&gt;Learn more&lt;/a&gt;&lt;/p&gt;</span>
+<span class="x">&lt;/div&gt;</span>
+</code></pre></div>
+<p><img src="/img/error.png" alt=""></p>
+
+<p>จะได้หน้าตาประมาณนี้ ก็ดูดีกว่าของเก่าเยอะ ^ ^ ทีนี้ความสวยงามก็ขึ้นอยู่กับการ design ของเราแล้วครับ</p>
+
+<blockquote>
+<p>ตัว Minion โหลดได้ที่นี่ครับ <a href="https://www.iconfinder.com/icons/174006/minion_icon#size=128">https://www.iconfinder.com/icons/174006/minion_icon#size=128</a></p>
+</blockquote>
+</section>
+</article>
+
+<!-- Post navigation -->
+
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dixonsatit';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+
+
+    </div>
+    <script src="/js/main.js"></script>
+
+
+<footer class="site-footer">
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/th/"><img alt="สัญญาอนุญาตของครีเอทีฟคอมมอนส์" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/3.0/th/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> โดย <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> ผลงานนี้ ใช้ <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/th/" > สัญญาอนุญาตของครีเอทีฟคอมมอนส์แบบ แสดงที่มา-ไม่ใช้เพื่อการค้า 3.0 ประเทศไทย</a>.<br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+</p>
+</footer>
+
+
+  </body>
+</html>
