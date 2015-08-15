@@ -2,8 +2,8 @@
 <html class="no-js">
   <head>
 	<meta charset="utf-8">
-	<title>สร้างระบบ Login ( Authentication) | Yii 2 Learning</title>
-	<meta name="description" content="สร้างระบบ Login ( Authentication) |  Yii2, Yii Framework, Extension, Howto,tutorial">
+	<title>Yii2 Tip And Trick | Yii 2 Learning</title>
+	<meta name="description" content="Yii2 Tip And Trick |  Yii2, Yii Framework, Extension, Howto,tutorial">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-Frame-Options" content="sameorigin">
 
@@ -15,7 +15,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
 	<!-- Canonical -->
-	<link rel="canonical" href="http://dixonsatit.github.io/2014/11/30/authentication.html">
+	<link rel="canonical" href="http://dixonsatit.github.io/2015/08/14/yii2-tip-and-trick.html">
 
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="Yii 2 Learning" href="http://dixonsatit.github.io/feed.xml" />
@@ -179,13 +179,37 @@
     <div class="content">
       <article >
   <header style="background-image: url('/')">
-    <h1 class="title">สร้างระบบ Login ( Authentication)</h1>
+    <h1 class="title">Yii2 Tip And Trick</h1>
     <p class="meta">
-    November 30, 2014
+    August 14, 2015
     
     </p>
   </header>
-  <section class="post-content"></section>
+  <section class="post-content"><p><img src="/img/thumbnail/tip-and-trick.jpg" alt=""></p>
+
+<p>ผมจะรวบรวม tip &amp; trick ในการใช้งาน Yii Framework 2.0 ง่ายๆ รวมไว้ที่นี่ หรือใครมี tip &amp; trick ก็แนะนำมาผ่าน comment มาได้นะครับเดี่ยวผมจะนำมาเขียนไว้ให้ได้อ่านกัน</p>
+
+<h2 id="การเพิ่ม-link-ใน-gridview-ที่ใช้-pjax">การเพิ่ม link ใน GridView ที่ใช้ Pjax</h2>
+
+<p>ปกติเราสามารถเพิ่ม link ใน columns ได้อยู่แล้ว แต่ถ้าหากเราใช้งาน pjax แล้วละก็ link อะไรก็ตามที่อยู่ภายใต้ pjax จะถูกเรียกแบบ ajax ทั้งหมดอย่างเช่น เราอยากให้คลิก ที่แถวใน GridView แล้วให้เปิด link อีกแทบนึงไปเลยก็จะไม่สามารถทำได้จนกว่าเราจะสั่งให้ pjax รู้ว่า link นี้ไม่ต้องทำแบบ pjax นะ โดยกำหนดค่า properties <code>data-pjax = &quot;0&quot;</code> ใน tag a</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nx">GridView</span><span class="o">::</span><span class="na">widget</span><span class="p">([</span>
+      <span class="s1">&#39;dataProvider&#39;</span> <span class="o">=&gt;</span> <span class="nv">$dataProvider</span><span class="p">,</span>
+      <span class="s1">&#39;filterModel&#39;</span> <span class="o">=&gt;</span> <span class="nv">$searchModel</span><span class="p">,</span>
+      <span class="s1">&#39;columns&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="c1">//....</span>
+            <span class="p">[</span>
+              <span class="s1">&#39;label&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;เปิดแท็บใหม่&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;format&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;value&#39;</span><span class="o">=&gt;</span><span class="k">function</span><span class="p">(</span><span class="nv">$model</span><span class="p">){</span>
+                <span class="k">return</span> <span class="nx">Html</span><span class="o">::</span><span class="na">a</span><span class="p">(</span><span class="s1">&#39;DEMO&#39;</span><span class="p">,[</span><span class="s1">&#39;/site/index&#39;</span><span class="p">],[</span><span class="s1">&#39;target&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;_blank&#39;</span><span class="p">,</span><span class="s2">&quot;data-pjax&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;0&quot;</span><span class="p">]);</span>
+              <span class="p">}</span>
+            <span class="p">],</span>
+        <span class="c1">//....</span>
+      <span class="p">]</span>
+<span class="p">]);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</code></pre></div>
+<p>แค่นี้เราก็จะสามารถเปิด link ได้ตามปกติแล้วครับ</p>
+</section>
 </article>
 
 <!-- Post navigation -->

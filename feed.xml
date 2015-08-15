@@ -5,7 +5,346 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Wed, 12 Aug 2015 16:42:43 +0700</pubDate>
+    <pubDate>Sat, 15 Aug 2015 21:34:58 +0700</pubDate>
+    
+      <item>
+        <title>Yii2 Tip And Trick</title>
+        <link>http://dixonsatit.github.io/2015/08/14/yii2-tip-and-trick.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/08/14/yii2-tip-and-trick.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/thumbnail/tip-and-trick.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ผมจะรวบรวม tip &amp;amp; trick ในการใช้งาน Yii Framework 2.0 ง่ายๆ รวมไว้ที่นี่ หรือใครมี tip &amp;amp; trick ก็แนะนำมาผ่าน comment มาได้นะครับเดี่ยวผมจะนำมาเขียนไว้ให้ได้อ่านกัน&lt;/p&gt;
+
+&lt;h2 id=&quot;การเพิ่ม-link-ใน-gridview-ที่ใช้-pjax&quot;&gt;การเพิ่ม link ใน GridView ที่ใช้ Pjax&lt;/h2&gt;
+
+&lt;p&gt;ปกติเราสามารถเพิ่ม link ใน columns ได้อยู่แล้ว แต่ถ้าหากเราใช้งาน pjax แล้วละก็ link อะไรก็ตามที่อยู่ภายใต้ pjax จะถูกเรียกแบบ ajax ทั้งหมดอย่างเช่น เราอยากให้คลิก ที่แถวใน GridView แล้วให้เปิด link อีกแทบนึงไปเลยก็จะไม่สามารถทำได้จนกว่าเราจะสั่งให้ pjax รู้ว่า link นี้ไม่ต้องทำแบบ pjax นะ โดยกำหนดค่า properties &lt;code&gt;data-pjax = &amp;quot;0&amp;quot;&lt;/code&gt; ใน tag a&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//....&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;เปิดแท็บใหม่&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;raw&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;DEMO&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/site/index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;target&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;_blank&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;data-pjax&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;0&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+              &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//....&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;แค่นี้เราก็จะสามารถเปิด link ได้ตามปกติแล้วครับ&lt;/p&gt;
+</description>
+        <pubDate>Fri, 14 Aug 2015 00:00:00 +0700</pubDate>
+      </item>
+    
+      <item>
+        <title>การสร้างฟอร์มค้นหาแบบ ajax ด้วย pjax</title>
+        <link>http://dixonsatit.github.io/2015/08/14/ajax-form-search-wiht-pjax.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/08/14/ajax-form-search-wiht-pjax.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/thumbnail/pjax-gridview.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;วันนี้เราจะลองเปลี่ยนฟอร์มค้นหาแบบเดิมที่เรา Gii CRUD มาแล้วให้เป็น ajax โดยใช้ pjax ซึ่งเป็น widget ที่มีมาพร้อมกับ Yii 2 อยู่แล้วสามารถเรียกใช้ได้ทันที&lt;/p&gt;
+
+&lt;h2 id=&quot;pjax-คืออะไร&quot;&gt;Pjax คืออะไร&lt;/h2&gt;
+
+&lt;p&gt;Pjax คือการนำเอาความสามารถของ pushState (Html5 History Api) มารวมกับ Ajax ซึ่งมันทำให้ ajax ธรรมดาๆ มันน่าใช้ยิ่งขึ้นลองไปดูรายละเอียดกัน&lt;/p&gt;
+
+&lt;h3 id=&quot;ajax&quot;&gt;Ajax&lt;/h3&gt;
+
+&lt;p&gt;จริงๆ ต้องเกริ่นก่อนว่า ajax ธรรมดานั้น มันมีข้อดีข้อเสียยังไง ข้อดีคิดว่าทุกคนคงรู้กันอยู่ ส่วนข้อเสียหลักๆ คือ ในการใช้ ajax เมื่อมีการเรียกใช้งาน ajax แล้วเราไม่สามารถที่จะกดปุ่ม back หรือ forward ใน History ของ Browser ได้ หากกด back กลับไปแล้ว กด forward กลับมาข้อมูลจะไม่เหมือนเดิม จะต้องทำการเรียก request ใหม่ถึงได้จะได้ข้อมูล เหมือนเดิม เพราะฉะนั้นพวก search engine ก็จะไม่สามารถเก็บข้อมูลตาม Url ได้&lt;/p&gt;
+
+&lt;h3 id=&quot;pushstate-html5-history-api&quot;&gt;pushState (Html5 History Api)&lt;/h3&gt;
+
+&lt;p&gt;Html5 History Api คือการที่เราสามารถเก็บหน้าเว็บไซต์ต่างๆ ที่รันแล้ว เก็บไว้ที่ History Api ของ Browser ทำให้สามารถกดปุ่ม back หรือ forward ได้ โดยที่ไม่ต้องไปเรียกข้อมูลอีกครั้ง โดยใช้คำสั่ง history.pushState() ของ html5&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ที่ผมเข้าใจน่าจะประมาณนี้ แต่ถ้าหากไม่ถูกต้องหรือใครต้องการเพิ่มเติมก็แนะนำมาได้ครับ&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;pjax-pushstate-ajax&quot;&gt;Pjax = pushState + Ajax&lt;/h3&gt;
+
+&lt;p&gt;เมื่อนำ 2 สิ่งนี้มารวมกันมันก็เกิดระเบิดตู้มเป็นโกโก้ครั้น (55 ล้อเล่น) มันก็ทำให้เราสามารถใช้ ajax ได้และยังสามารถกดปุ่ม back หรือ forward ได้เพราะมันเอาข้อมูลที่เรารันโดยใช้ ajax ไว้ไปเก็บไว้ที่ history api เรียบร้อย ซึ่งตรงนี้ทำให้ search engine สามามารถ index url ของเราได้แล้วเป็นผลดีกับ SEO ด้วย&lt;/p&gt;
+
+&lt;p&gt;ต้องขอบคุณ คุณ &lt;a href=&quot;https://github.com/defunkt/jquery-pjax&quot;&gt;Chris Wanstrath&lt;/a&gt; ที่ได้สร้าง pjax ให้เราได้ใช้งานกัน&lt;/p&gt;
+
+&lt;p&gt;ในส่วนของ Yii 2 นั้นได้นำมารวมไว้เป็น widget หลักเลยทีเดียวไม่ต้องติดตั้งเพิ่ม สามารถเรียกใช้งานได้ทันที แจ่มมากๆ แสดงว่าดีจริง หากเราจะใช้งานให้ได้ดีๆ จริงๆแนะนำให้ศึกษา pjax ให้เข้าใจก่อนถึงจะสามารถนำมาใช้ กับ yii2 ได้อย่างมีประสิทธิภาพ&lt;/p&gt;
+
+&lt;p&gt;จริงๆ หลักการหลักๆ ไม่มีอะไรมากแค่เอา widget pjax มาครอบส่วนที่เราต้องการทำ pjax  เอาล่ะมาลองสร้างกัน&lt;/p&gt;
+
+&lt;h2 id=&quot;ลองใช้-pjax-แบบ-basic&quot;&gt;ลองใช้ pjax แบบ Basic&lt;/h2&gt;
+
+&lt;p&gt;อย่างที่ผมบอกมันง่ายมากๆ แค่นำ widget pjax มาครอบส่วนที่ต้องการ มันก็กลายเป็น ajax ทันที โอ้ว!&lt;/p&gt;
+
+&lt;p&gt;เช่น ในตัวอย่างนี้เราจะให้การค้นหาใน gridView ในส่วนของ filter แบบปกติ ให้มันค้นเป็น ajax ได้ เราก็แค่เรียกใช้งาน pjax และนำมันมาครอบ gridView ของเราไว้ ตั้งชื่อและกำหนด timeout ไว้ซัก 5 วิ เพราะหากมัน request เกิน 5 วิมันจะ refresh เหมือนเดิม&lt;/p&gt;
+
+&lt;p&gt;รูปแบบก็จะประมาณนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\grid\GridView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;grid-user-pjax&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;timeout&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;   // ......&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;จากนั้นนำ GridView มาใส่&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\grid\GridView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;grid-user-pjax&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;timeout&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;grid-user&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;filterModel&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;tableOptions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                  &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;table table-bordered  table-striped table-hover&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\SerialColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;email:email&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Active&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-remove&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;span class=&amp;quot;text-danger&amp;quot;&amp;gt;Not Active&amp;lt;/span&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-ok&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;span class=&amp;quot;text-success&amp;quot;&amp;gt;Active&amp;lt;/span&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;levelName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;levelName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\ActionColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;style&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;width:120px;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;buttonOptions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;btn btn-default&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;template&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;div class=&amp;quot;btn-group btn-group-sm text-center&amp;quot; role=&amp;quot;group&amp;quot;&amp;gt; {view} {update} {delete} &amp;lt;/div&amp;gt;&amp;#39;&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ก็จะได้หน้าตาแบบนี้&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/pjax-basic.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;เมื่อมีการค้นหาในช่อง filter ใน gridView ก็จะเห็น url ยาวๆ แบบนี้ ชื่อ url นี้แหละมันจะนำไปเป็น key ในการเรียกใช้งาน pushState ของ html5 history api&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/pjax-addressbar.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ก็จะเห็นหน้าตาค้นหาแบบนี้ สังเกตว่าหน้าเว็บไซต์จะไม่มีการ refresh&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/pjax-search.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ให้เราลองเปิด debug ของ Browser ดูโดยคลิกขวาแล้วเลือก Inspect Element แล้วเลือก tab network แล้วลองค้นหาดูจะพบว่ามี request ajax จากนั้นลองค้นหลายๆ ค่าดูแล้วกด back หรือ forward ใน Browser ดูจะพบว่ายังมีค่าเหมือนเดิม ซึ่งมันจะไม่ได้โหลดค่าใหม่แต่เอามาจาก Htm5 History Api&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/pjax-inspact.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;คงจะพอเข้าใจหลักในการสร้างฟอร์มค้นหาด้วย pjax อย่างง่ายๆ ทีนี้เราจะลองปรับแต่งโดยเพิ่มฟอร์มค้นหาที่เราสร้างขึ้นมาเอง ลองไปดูกัน&lt;/p&gt;
+
+&lt;h2 id=&quot;สร้างฟอร์มค้นหาแบบ-ajax&quot;&gt;สร้างฟอร์มค้นหาแบบ ajax&lt;/h2&gt;
+
+&lt;p&gt;เราจะเพิ่มเติมฟอร์มค้นหาเข้าไป โดยออกแบบฟอร์มค้นหาใหม่และไม่ค้นที่ filter ของ gridView ผมเองมองว่ามันไม่ค่อยสะดวก ถ้าทำเองจะได้ปรับแต่งง่ายๆ และยังสามารถใข้ pjax ได้เหมือนเดิมอีกด้วย&lt;/p&gt;
+
+&lt;p&gt;โดยเราจะสร้างฟอร์มหน้าตาแบบนี้&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/pjax-form-search.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;จะสังเกตุว่าเราจะใช้ช่องค้นหาเพียงช่องเดียว เพราะฉะนั้นเราจะต้องทำการปรับปรุง modeSearch (ของผมต้อนนี้คือ UserSearch) เพื่อให้สามารถค้นหาด้วยช่องเดียวได้ ก่อนจะสร้างฟอร์มให้เราไปทำการแก้ไข modeSearch ให้เสร็จเรียบร้อยก่อน&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ปกติในตอน Gii CRUD เราจะได้ Model ที่มีชื่อตามท้ายว่า Search เช่น model User ก็จะได้เป็นชื่อไฟล์ UserSearch.php&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ปรับปรุง-modelsearch&quot;&gt;ปรับปรุง ModelSearch&lt;/h2&gt;
+
+&lt;p&gt;เราจะทำการสร้างฟิวด์ขึ้นมาใหม่ชื่อ q เพื่อเอาไว้รับค่าในช่องที่เรากรอกข้อความเพื่อค้นหา&lt;/p&gt;
+
+&lt;p&gt;ไปที่ UserSearch หรือ ModelSearch ของคุณแล้วทำการประกาศตัวแปรชื่อ $q ดังนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserSearch&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ....&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;และทำการเพิ่ม validation ให้กับตัวแปร &lt;code&gt;$q&lt;/code&gt; เพื่อให้มันสามารถรับค่าได้โดยกำหนด validation type เป็น &lt;code&gt;safe&lt;/code&gt; ใน &lt;code&gt;function rules()&lt;/code&gt; ดังนี้ หากไม่กำหนด model จะไม่สามารถรับค่าได้เพราะมันจะไม่รู้จัก&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//....&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rules&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;status&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;created_at&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;updated_at&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;integer&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;auth_key&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;password_hash&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;password_reset_token&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;email&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;safe&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;จากนั้นทำการปรับปรุง &lt;code&gt;function Search()&lt;/code&gt; เพื่อให้มันสามารถค้นหาข้อความจาก ฟิวด์ เดียวได้ เพราะปกติตัว search ที่ gii มามันจะใช้เงื่อนไข and แล้วก็ like ด้วย เราจะเปลี่ยนมาใช้ or และ like แทน สังเกตจะเรียกใช้งาน &lt;code&gt;andFilterWhere()&lt;/code&gt; อยู่ด้านล่าง ให้ทำการลบฟิลด์ที่ไม่ได้ค้นออกไปทั้งหมดเหลือไว้เฉพาะที่ต้องการ ส่วนของผมเลือกแค่ 2 ฟิวด์คือ username,email จะสังเกตว่าตรงค่าที่มันนำมาใช้เรียก andFilterWhere() ก็จะเป็นชื่อฟิวด์นั้นๆ แยกกันไป ของเดิมจะเป็นแบบนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+      &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveDataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;query&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+      &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;validate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;// uncomment the following line if you do not want to return any records when validation fails&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;// $query-&amp;gt;where(&amp;#39;0=1&amp;#39;);&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+
+      &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;andFilterWhere&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;like&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;andFilterWhere&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;like&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;email&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เราจะต้องทำการปรับปรุงส่วนรับค่า ให้รับค่ามาจากฟิวด์ที่ชื่อ $q ที่เราตั้งขึ้นมาใหม่เพื่อไว้รับค่าค้นหาโดยเฉพาะ และทำการเปลี่ยนชื่อฟิวด์อื่นๆ เป็น $q ทั้งหมด และเปลี่ยนจาก &lt;code&gt;andFilterWhere&lt;/code&gt;  เป็น &lt;code&gt;orFilterWhere&lt;/code&gt; ซึ่งก็จะเหมือนเราใช้คำสั่ง  sql ประมาณนี้ &lt;code&gt;(username like &amp;quot;%%&amp;quot;) or (email like &amp;quot;%%&amp;quot;)&lt;/code&gt; ทำการแก้ไขโค้ดให้เป็นดังนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+      &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveDataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+          &lt;span class=&quot;s1&quot;&gt;&amp;#39;query&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+      &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;validate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;// uncomment the following line if you do not want to return any records when validation fails&lt;/span&gt;
+          &lt;span class=&quot;c1&quot;&gt;// $query-&amp;gt;where(&amp;#39;0=1&amp;#39;);&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+      &lt;span class=&quot;nv&quot;&gt;$query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orFilterWhere&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;like&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orFilterWhere&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;like&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;email&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;q&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากแก้ modeSearch ของเราเสร็จเรียบร้อย ModelSearch ของเราก็สามารถรองรับการค้นหาได้แล้ว&lt;/p&gt;
+
+&lt;h3 id=&quot;สร้างฟอร์มค้นหา&quot;&gt;สร้างฟอร์มค้นหา&lt;/h3&gt;
+
+&lt;p&gt;เราจะทำการสร้างฟอร์มค้นหาขึ้นมาใหม่ โดยให้ทำการสร้าง view ชื่อ _search.php และใส่โค้ดเข้าไปดังนี้&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ฟอร์มที่เราจะนำมาใช้กับ pjax ต้องเพิ่ม properties &lt;code&gt;&amp;#39;data-pjax&amp;#39; =&amp;gt; true&lt;/code&gt; ในส่วนของ options ด้วย ไม่งั้นมันจะ submit form ปกติแบบ refresh&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\ActiveForm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/* @var $this yii\web\View */&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* @var $model backend\models\UserSearch */&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* @var $form yii\widgets\ActiveForm */&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;&amp;lt;div class=&amp;quot;user-search&amp;quot;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;action&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;method&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;get&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;data-pjax&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    &amp;lt;div class=&amp;quot;input-group&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;activeTextInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;form-control&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;placeholder&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ค้นหาข้อมูล...&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;      &amp;lt;span class=&amp;quot;input-group-btn&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        &amp;lt;button class=&amp;quot;btn btn-default&amp;quot; type=&amp;quot;submit&amp;quot;&amp;gt;&amp;lt;i class=&amp;quot;glyphicon glyphicon-search&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; ค้นหา&amp;lt;/button&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-plus&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Create User&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;create&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;btn btn-default&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;      &amp;lt;/span&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    &amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;เปิดใช้งาน-pjax&quot;&gt;เปิดใช้งาน pjax&lt;/h2&gt;
+
+&lt;p&gt;เราจะนำ widgets pjax มาครอบ gridView ไว้และทำการเรียก ฟอร์มค้นหาไว้ใน pjax ด้วยดังนี้&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;เราจะทำการปิด filter ของ gridView ออกไป โดยลบบรรทัดนี้ออกไปหรือคอมเม้นไว้   &lt;code&gt;&amp;#39;filterModel&amp;#39; =&amp;gt; $searchModel&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\grid\GridView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;grid-user-pjax&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;timeout&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;&amp;lt;!-- เรียก view _search.php --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;_search&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;model&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$searchModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GridView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;widget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;grid-user&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;dataProvider&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$dataProvider&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;//&amp;#39;filterModel&amp;#39; =&amp;gt; $searchModel,&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;tableOptions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                  &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;table table-bordered  table-striped table-hover&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                &lt;span class=&quot;s1&quot;&gt;&amp;#39;columns&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\SerialColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;email:email&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Active&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-remove&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;span class=&amp;quot;text-danger&amp;quot;&amp;gt;Not Active&amp;lt;/span&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-ok&amp;quot;&amp;gt;&amp;lt;/i&amp;gt; &amp;lt;span class=&amp;quot;text-success&amp;quot;&amp;gt;Active&amp;lt;/span&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;attribute&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;levelName&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;html&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;levelName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\grid\ActionColumn&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;options&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;style&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;width:120px;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;buttonOptions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;btn btn-default&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                      &lt;span class=&quot;s1&quot;&gt;&amp;#39;template&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;div class=&amp;quot;btn-group btn-group-sm text-center&amp;quot; role=&amp;quot;group&amp;quot;&amp;gt; {view} {update} {delete} &amp;lt;/div&amp;gt;&amp;#39;&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\Pjax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เมื่อลองรันก็จะได้หน้าตาแบบนี้&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/pjax-gridview.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ให้ทดลองค้นหาดูก็จะพบว่ามันเป็น ajax แล้ว ซึ่ง url ก็จะเปลี่ยนไปตามค่า parameter ที่เราค้นหา ลองทดสอบค้นหลายๆ คำ แล้วลองกด back หรือ forward ใน Browser ดูจะพบว่าข้อมูลไม่หายไปสามารถกดดูได้อย่างรวดเร็วเลย เพราะมันก็ข้อมูลไว้ที่ History Api นั้นเอง&lt;/p&gt;
+
+&lt;p&gt;หวังว่าคงทำให้เข้าใจเรื่อง pjax มากขึ้นนะครับ&lt;/p&gt;
+
+&lt;p&gt;บทความนี้เป็นส่วนหนึี่งของ Workshop@Co-Space &lt;a href=&quot;https://github.com/dixonsatit/yii2-workshop-co-sapce/blob/master/backend/views/user-manage/index.php&quot;&gt; ดูหน้าตัวอย่าง&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;@dixonsatit&lt;/p&gt;
+</description>
+        <pubDate>Fri, 14 Aug 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การเปลี่ยนหน้า Default Error ให้สวยงาม</title>
@@ -2423,240 +2762,6 @@ intl.default_locale =th_TH.UTF-8
 Yii::$app-&amp;gt;db2-&amp;gt;createCommand((new \yii\db\Query)-&amp;gt;select(&amp;#39;*&amp;#39;)-&amp;gt;from(&amp;#39;tbl_name&amp;#39;))-&amp;gt;queryAll()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         <pubDate>Fri, 03 Jul 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>รวม extension ต่างๆ และ tutorial ที่น่าสนใจ</title>
-        <link>http://dixonsatit.github.io/2015/06/30/extension.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/30/extension.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/extension.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;รวม extension ต่างๆ ที่ไปเจอมาครับ&lt;/p&gt;
-
-&lt;h2 id=&quot;chart&quot;&gt;Chart&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/miloschuman/yii2-highcharts&quot;&gt;yii2-highcharts&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/2amigos/yii2-chartjs-widget&quot;&gt;yii2-chartjs-widget&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;authentication&quot;&gt;Authentication&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dektrium/yii2-user&quot;&gt;dektrium/yii2-user&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/amnah/yii2-user&quot;&gt;amnah/yii2-user&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;i18n&quot;&gt;i18n&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/OmgDef/yii2-multilingual-behavior&quot;&gt;yii2-multilingual-behavior(สร้าง content หลายๆ ภาษา)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;rbac&quot;&gt;RBAC&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/mdmsoft/yii2-admin&quot;&gt;yii2-admin&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;application-template&quot;&gt;Application Template&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://easyiicms.com&quot;&gt;easyiicms&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://yii2-starter-kit.terentev.net/&quot;&gt;yii2-starter-kit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/phundament/app&quot;&gt;phundament/app&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/vova07/yii2-start&quot;&gt;yii2-start&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/DevGroup-ru/dotplant2&quot;&gt;dotplant2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;collection-of-extensions&quot;&gt;Collection of Extensions&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://2amigos.us/&quot;&gt;2amigos&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://demos.krajee.com/&quot;&gt;krajee&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;restful-web-service&quot;&gt;RESTful Web Service&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.yiiframework.com/wiki/748/building-a-rest-api-in-yii2-0/&quot;&gt;building-a-rest-api-in-yii2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;themes&quot;&gt;Themes&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/dmstr/yii2-adminlte-asset&quot;&gt;AdminLte&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;tutorial&quot;&gt;Tutorial&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.neattutorials.com/&quot;&gt;neattutorials&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/channel/UCaDQTcZrzZqym56ikdOlJow&quot;&gt;DoingITeasyChannel&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/samdark/yii2-cookbook/blob/master/book/README.md&quot;&gt;yii2-cookbook&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://code.tutsplus.com/series/programming-with-yii2--cms-725&quot;&gt;programming-with-yii2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;project-example&quot;&gt;Project Example&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/samdark/yii2-shop&quot;&gt;yii2-shop&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;yii2-angularjs-tutorial&quot;&gt;Yii2 + AngularJs Tutorial&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/githubjeka/angular-yii2&quot;&gt;angular-yii2&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.neattutorials.com/angularjs-yii2-part-1-routing/&quot;&gt;angularjs-yii2-part-1&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://blog.neattutorials.com/angularjs-and-yii2-part-2-authentication/&quot;&gt;angularjs-and-yii2-part-2&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ใครมี extension อื่นๆ ก็แนะนำมาได้นะครับ จะได้รวบรวมไว้ให้อ่านกัน&lt;/p&gt;
-</description>
-        <pubDate>Tue, 30 Jun 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การติดตั้ง และการใช้งาน composer กับ Yii 2</title>
-        <link>http://dixonsatit.github.io/2015/06/29/using-extensions.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/06/29/using-extensions.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/composer.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ในการพัฒนาระบบโดยใช้ php นั้น แต่ก่อนจะไม่มีระบบจัดการแพ็จเกจมาให้ เราจะต้องเข้าไปดาวน์โหลดที่เว็บไซต์ของ library เองจากนั้นทำการแตกซิบไฟล์แล้ว include เข้ามาใช้งาน วันดีคืนดี หาก library มีการอัพเดท ก็ต้องตามไปโหลด library มาแล้วนำไฟล์มาทับของเก่า ซึ่งก็เป็นเรื่องที่น่าเบื่อมากๆ  ยิ่งถ้าเราใช้ library เยอะๆ นี่ตามไปโหลดแทบไม่ไหว&lt;/p&gt;
-
-&lt;p&gt;php จึงมองเห็นความลำบากนี้ (จริงๆ ภาษาอื่นๆ เค้ามีกันไปนานแล้วววว เอาเถอะยังไงมาช้าก็ดีกว่าไม่มา  )
-จึงมีระบบจัดการแพ็ตเกจของ php ขึ้นชื่อว่า &lt;code&gt;composer&lt;/code&gt; ซึ่งเป็นมาตรฐานกลาง ทำให้เราสามารถจัดการแพ็คเกจต่างๆ ได้ที่เดียว ไม่ต้องตามไปดาวน์โหลดจากเว็บไซต์ของ library ต่างๆ&lt;/p&gt;
-
-&lt;h2 id=&quot;การติดตั้ง-composer&quot;&gt;การติดตั้ง Composer&lt;/h2&gt;
-
-&lt;p&gt;สามารถทำได้ง่ายๆ ติดตั้งได้ทั้ง Windows,Linux,Mac ตัว composer เป็นแค่ไฟล์ php เล็กๆ ไฟล์นึงเท่านั้น เอาไว้จัดการ เพ็คเกจต่างๆ&lt;/p&gt;
-
-&lt;h3 id=&quot;windows&quot;&gt;Windows&lt;/h3&gt;
-
-&lt;p&gt;สามารถโหลดตัว exe มาติดตั้งได้เลย &lt;a href=&quot;https://getcomposer.org/doc/00-intro.md#installation-windows&quot;&gt;ดาวน์โหลดตัวติดตั้ง&lt;/a&gt; จากนั้นจะได้ &lt;code&gt;Composer-Setup.exe&lt;/code&gt; ทำการคลิกและติดตั้งเองได้เลย&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;หากมี error เกี่ยวกับ &lt;code&gt;http&lt;/code&gt; ให้ทำการเปิด extension &lt;code&gt;php_openssl.dll&lt;/code&gt; ใน php.ini และหากติดตั้งแล้วยังไม่ได้ ให้ลองติดตั้งซ้ำใหม่อีกรอบ ส่วนใหญ่จะเจอแค่ xp&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;linux-amp-mac&quot;&gt;Linux &amp;amp; Mac&lt;/h3&gt;
-
-&lt;p&gt;ติดตั้งผ่านคำ curl จากนั้นรันคำสั่ง mv เพื่อเปลี่ยนชื่อไฟล์ เป็น composer และย้ายไปไว้ที่ bin&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;เรียกใช้งาน&quot;&gt;เรียกใช้งาน&lt;/h2&gt;
-
-&lt;p&gt;เปิด command หรือ terminal  ขึ้นมาแล้ว รันคำสั่ง &lt;code&gt;composer&lt;/code&gt; จะพบกับหน้าจอ composer แบบนี้ แสดงว่าพร้อมใช้งานแล้ว&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;______
-/ ____/___  ____ ___  ____  ____  ________  _____
-/ /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
-/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
-\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
-                  /_/
-Composer version 1.0-dev (4f80e7ff68466cab970c22b425725b8058c32970) 2015-06-09 00:03:48
-
-Usage:
-command [options] [arguments]
-
-Options:
---help (-h)           Display this help message
---quiet (-q)          Do not output any message
---verbose (-v|vv|vvv) Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
---version (-V)        Display this application version
---ansi                Force ANSI output
---no-ansi             Disable ANSI output
---no-interaction (-n) Do not ask any interactive question
---profile             Display timing and memory usage information
---working-dir (-d)    If specified, use the given directory as working directory.
-
-Available commands:
-about            Short information about Composer
-archive          Create an archive of this composer package
-browse           Opens the package&amp;#39;s repository URL or homepage in your browser.
-clear-cache      Clears composer&amp;#39;s internal package cache.
-clearcache       Clears composer&amp;#39;s internal package cache.
-config           Set config options
-create-project   Create new project from a package into given directory.
-depends          Shows which packages depend on the given package
-diagnose         Diagnoses the system to identify common errors.
-dump-autoload    Dumps the autoloader
-dumpautoload     Dumps the autoloader
-global           Allows running commands in the global composer dir ($COMPOSER_HOME).
-help             Displays help for a command
-home             Opens the package&amp;#39;s repository URL or homepage in your browser.
-info             Show information about packages
-init             Creates a basic composer.json file in current directory.
-install          Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json.
-licenses         Show information about licenses of dependencies
-list             Lists commands
-remove           Removes a package from the require or require-dev
-require          Adds required packages to your composer.json and installs them
-run-script       Run the scripts defined in composer.json.
-search           Search for packages
-self-update      Updates composer.phar to the latest version.
-selfupdate       Updates composer.phar to the latest version.
-show             Show information about packages
-status           Show a list of locally modified packages
-update           Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file.
-validate         Validates a composer.json
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;เราสามารถสั่งให้มันอัพเดทตัวเองได้  โดยใช้คำสั่ง &lt;code&gt;composer self-update&lt;/code&gt; และคำสังอื่นๆ สามารถดูได้ที่เวลาเราพิมพ์คำสั่ง composer เข้าไปเฉยๆ แล้วดูตรง &lt;code&gt;Available commands&lt;/code&gt; เหมือนด้านบน&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;ใน project Yii ที่เราได้สร้างขึ้น จะมีไฟล์ชื่อว่า composer.json เป็นตัวจัดการ packages ทั้งหมดและสามารถบอกได้ว่า Applicaion  ของเราได้ติดตั้ง extension อะไรไปบ้าง หากมีการติดตั้ง extension เพิ่มเติมมันจะทำการแก้ไขไฟล์นี้ให้อัตโนมัติ ยกเว้นว่าเราเพิ่ม extension เองในไฟล์นี้&lt;/p&gt;
-
-&lt;h3 id=&quot;การติดตั้ง-extension&quot;&gt;การติดตั้ง extension&lt;/h3&gt;
-
-&lt;p&gt;การติดตั้ง extension ผ่าน composer นั้นทำได้ 2 วิธีคือ&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ติดตั้งผ่านคำสั่ง &lt;code&gt;composer require&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;วิธีนี้สามารถติดตั้งได้ทีละ 1 extension ตัวอย่างการติดตั้ง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require --prefer-dist yiisoft/yii2-imagine
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากติดตั้งเสร็จ composer จะแก้ไขไฟล์ composer.json ให้เราเอง โดยเพิ่ม ชื่อ extension ที่ tag require ที่เราได้ติดตั้งเข้าไป&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ติดตั้งโดยเข้าไปแก้ไขไฟล์ composer.json&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;สามารถเข้าไปแก้ไขไฟล์โดยตรงในส่วนของ &lt;code&gt;require&lt;/code&gt; สามารถติดตั้งได้ทีละหลายๆ ตัว ตัวอย่างนี้เพิ่มเข้าไป 2 extension คือ &lt;code&gt;yii2-chartjs-widget&lt;/code&gt;,&lt;code&gt;yii2-imagine&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;require&amp;quot;: {
-      &amp;quot;php&amp;quot;: &amp;quot;&amp;gt;=5.4.0&amp;quot;,
-      &amp;quot;yiisoft/yii2&amp;quot;: &amp;quot;&amp;gt;=2.0.4&amp;quot;,
-      &amp;quot;yiisoft/yii2-bootstrap&amp;quot;: &amp;quot;*&amp;quot;,
-      &amp;quot;yiisoft/yii2-swiftmailer&amp;quot;: &amp;quot;*&amp;quot;,
-      &amp;quot;2amigos/yii2-chartjs-widget&amp;quot;: &amp;quot;~2.0&amp;quot;,
-      &amp;quot;yiisoft/yii2-imagine&amp;quot;: &amp;quot;*&amp;quot;
-  },
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากเพิ่ม extension ที่ต้องการจะติดตั้งเสร็จ ให้ทำการรันคำสั่ง &lt;code&gt;composer update&lt;/code&gt; composer จะทำการตรวจสอบและ install extension ให้เรา&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer update
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากนั้น extension ที่เราติดตั้งจะถูกโหลดไปเก็บไว้ที่ &lt;code&gt;vendor&lt;/code&gt; เพื่อรอให้เราเรียกใช้งานผ่าน namespace ได้&lt;/p&gt;
-
-&lt;h2 id=&quot;ปัญหาที่เจอในการติดตั้ง&quot;&gt;ปัญหาที่เจอในการติดตั้ง&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;ปัญหาถาม username  &amp;amp; password account Github&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;ให้ทำการสมัครสมาชิกที่ &lt;a href=&quot;https://github.com/&quot;&gt;Github.com&lt;/a&gt; และยืนยันอีเมล์ให้เรียบร้อย และนำ username &amp;amp; password มากรอกเวลาที่ composer  ถาม&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ปัญหา access tokens&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;ปัญหานี้เกิดจากการที่ composer ต้องเข้าไปโหลดข้อมูลจากเว็บไซต์ github มันจึงต้องการระบุตัวตนผู้ใช้งานโดยการถามหา access tokens  ซึ่งเราสามารถสร้าง access tokens นี้ได้ง่ายๆ เพียงทำขั้นตอนดังต่อไปนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/access-token.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;เข้า Github แล้วเข้าไปที่ account แล้วไปที่ settings&lt;/li&gt;
-&lt;li&gt;คลิกเข้าไปที่ Personal access tokens เมนูด้านขวา&lt;/li&gt;
-&lt;li&gt;คลิกที่ปุ่ม Generate new token&lt;/li&gt;
-&lt;li&gt;ระบบจะถามรหัสผ่าน ให้เรากรอกรหัสผ่านเข้าไป&lt;/li&gt;
-&lt;li&gt;จะพบกับหน้าจอ New Personal access token ให้ใส่คำอธิบายลงไปเล็กน้อย จากนั้นกดปุ่ม Generate token&lt;/li&gt;
-&lt;li&gt;จะพบกับเลข token ยาว copy และนำมาใส่ที่ composer เวลาที่มันถาม หลังจากนั้นก็จะสามารถใช้งานได้ต่อไป&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 29 Jun 2015 00:00:00 +0700</pubDate>
       </item>
     
   </channel>
