@@ -5,7 +5,113 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Sat, 15 Aug 2015 21:37:53 +0700</pubDate>
+    <pubDate>Mon, 17 Aug 2015 00:29:05 +0700</pubDate>
+    
+      <item>
+        <title>เปิดอบรมการพัฒนา Web Applicaion ด้วย Yii Framework 2.0</title>
+        <link>http://dixonsatit.github.io/2015/08/16/yii2-course-advance.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/08/16/yii2-course-advance.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/co-space/yii-2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ในวันที่ 11-13 กันยายน 2558&lt;/p&gt;
+
+&lt;p&gt;คอร์สนี้เหมาะสำหรับผู้ที่เคยใช้งาน Yii Framework 2.0 มาบ้างแล้ว เน้นสอนการใช้งานจริง พร้อมตัวอย่าง เพื่อให้สามารถนำไปต่อยอดพัฒนาระบบได้&lt;/p&gt;
+
+&lt;p&gt;Yii Framework เป็น framework ที่ถือได้ว่ามีพร้อมแล้วทุกอย่างที่เราจะพัฒนา Web Applicaion ทำให้สามารถพัฒนระบบได้เร็วยิ่งขึ้น ลดขั้นตอนที่ต้องทำงานซ้ำซ้อนออกไป คุณสมบัติเด่นๆ เลยคือ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fast, Secure, Professional&lt;/li&gt;
+&lt;li&gt;Gii Extension สำหรับการสร้างฟอร์ม เพิ่ม,ลบ,แก้ไข ได้เลยเพียงแค่สร้างตารางไว้&lt;/li&gt;
+&lt;li&gt;รองรับเว็บไซต์ขนาดใหญ่ๆ ได้ รองรับระบบ Caching&lt;/li&gt;
+&lt;li&gt;มี RESTful Web Service พร้อมใช้&lt;/li&gt;
+&lt;li&gt;พัฒนาด้วยรูปแบบ OOP &amp;amp; MVC ที่เป็นมาตฐาน&lt;/li&gt;
+&lt;li&gt;RBAC ตัวจัดการสิทธิ์ที่ยืดยุ่นมากๆ&lt;/li&gt;
+&lt;li&gt;Extension,Widget มีเยอะพร้อมใช้งาน&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;course-outline&quot;&gt;Course Outline&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;DevOps Tools&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;git &amp;amp; GitHub&lt;/li&gt;
+&lt;li&gt;Vagrant &amp;amp; docker&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Authentication&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;การสร้างระบบจัดการผู้ใช้งาน&lt;/li&gt;
+&lt;li&gt;การสร้างโปรไฟล์สำหรับ User&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Authorization(RBAC)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ออกแบบการจัดการสิทธิ์ด้วย RBAC DB&lt;/li&gt;
+&lt;li&gt;สร้างระบบจัดการสิทธิ์ผู้เข้าใช้งาน&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;CRUD&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Model Validation&lt;/li&gt;
+&lt;li&gt;Upload File&lt;/li&gt;
+&lt;li&gt;Tabular Input&lt;/li&gt;
+&lt;li&gt;Multiple Models&lt;/li&gt;
+&lt;li&gt;Theming&lt;/li&gt;
+&lt;li&gt;DataProvider ActiveDataProvider, SqlDataProvider, ArrayDataProvider&lt;/li&gt;
+&lt;li&gt;สร้างฟอร์มแบบ ajax ด้วย pjax search, create, update, delete&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Workshop&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;สร้างระบบแบบสอบถาม&lt;/li&gt;
+&lt;li&gt;ระบบลงทะเบียนประชุม&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;พิเศษ แถม Gii Template ที่ gii แล้วออกมาเป็น ajax ฟอร์มพร้อมใช้งาน&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;สิ่งที่ต้องเตรียมมาในวันอบรม&quot;&gt;สิ่งที่ต้องเตรียมมาในวันอบรม&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;โน้ตบุ๊ค จะเป็น mac, window, linux ก็ได้&lt;/li&gt;
+&lt;li&gt;ติดตั้งตัวจำลอง server ให้เรียบร้อยแนะนำ &lt;a href=&quot;https://www.apachefriends.org/index.html&quot;&gt;XAMPP&lt;/a&gt; หรือ Vagrant,Docker ก็ได้แต่ต้องติดตั้ง LAMP มาให้พร้อมใช้งาน&lt;/li&gt;
+&lt;li&gt;ติดตั้ง composer ให้เรียบร้อย &lt;a href=&quot;http://dixonsatit.github.io/2015/06/29/using-extensions.html&quot;&gt;ดูวิธีการติดตั้งที่นี่&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;สมัคร account &lt;a href=&quot;https://github.com/&quot;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;สิ่งที่จะได้รับ&quot;&gt;สิ่งที่จะได้รับ&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;เอกสารคู่มือการอบรม 1 ชุด&lt;/li&gt;
+&lt;li&gt;Source Code ในการอบรม&lt;/li&gt;
+&lt;li&gt;สติกเกอร์ Yii Framework 1 แผ่น&lt;/li&gt;
+&lt;li&gt;อาหารเบรค เช้า, บ่าย, อาหารเที่ยง&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;สถานที่อบรม&quot;&gt;สถานที่อบรม&lt;/h2&gt;
+
+&lt;p&gt;Co-Space Khon Kaen หน้าโรงแรมแรมมันตราวารี ถ.ชวนชื่น จังหวัดขอนแก่น&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.google.co.th/maps/place/Co-Space/@16.4233082,102.8401701,17z/data=!3m1!4b1!4m2!3m1!1s0x31228a288107ac63:0x7043dd2bd3b3fa16&quot;&gt;แผนที่&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.facebook.com/cospacekk&quot;&gt;fanpage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/co-space/all.jpg&quot; alt=&quot;co-space&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ลงทะเบียน&quot;&gt;ลงทะเบียน&lt;/h2&gt;
+
+&lt;p&gt;ค่าลงทะเบียน 4900 บาท&lt;/p&gt;
+
+&lt;p&gt;รับเพียง 7 คนเท่านั้น&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://form.jotform.me/form/52251004665447?&quot;&gt;ลงทะเบียน&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://form.jotform.me/form/52275022466452?&quot;&gt;แจ้งการชำระเงิน&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 16 Aug 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>Yii2 Tip And Trick</title>
@@ -2617,151 +2723,6 @@ intl.default_locale =th_TH.UTF-8
 2015-06-24 05:32:54
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         <pubDate>Sat, 04 Jul 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การเปิดใช้งาน Multiple Database Connection</title>
-        <link>http://dixonsatit.github.io/2015/07/03/multiple-db-connection.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/03/multiple-db-connection.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/multiple-db.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;Yii 2 สามารถตั้งค่า connection db ได้หลายๆ ฐานข้อมูลหรือ หลายๆ server แม้จะไม่ได้อยู่ใน ip เดียวกัน เช่น เรามีฐานข้อมูล อยู่ 2 ที่คนละ ip กัน ตัวอย่าง&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt; MySql 192.168.0.101&lt;/li&gt;
-&lt;li&gt; MySql 192.168.0.102&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Tip&lt;/strong&gt; : ในกรณีที่ฐานข้อมูลอยู่ที่ ip เดียว เราไม่จำเป็นต้องตั้งค่าแยก สามารถระบุชื่อ ฐานข้อมูลแล้วตามด้วยชื่อ table ในส่วน model ใน function tableName()ได้ เช่น &lt;code&gt;intranet.employee&lt;/code&gt;  &lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;สำหรับ-basic&quot;&gt;สำหรับ Basic&lt;/h2&gt;
-
-&lt;p&gt;เราสามารถตั้งค่า db ได้ที่ &lt;code&gt;config/web.php&lt;/code&gt; มองหา &lt;code&gt;db&lt;/code&gt; จะอยู่ด้านล่าง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;  &amp;#39;db&amp;#39; =&amp;gt; require(__DIR__ . &amp;#39;/db.php&amp;#39;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ทำการ copy บรรทัดนี้แล้ววางตั้งชื่อใหม่เป็นฐานที่เราต้องการ และตั้งชื่อไฟล์ config db ใหมเป็น db2&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;  &amp;#39;db&amp;#39; =&amp;gt; require(__DIR__ . &amp;#39;/db.php&amp;#39;),
-  &amp;#39;db2&amp;#39; =&amp;gt; require(__DIR__ . &amp;#39;/db2.php&amp;#39;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&amp;#39;db&amp;#39; =&amp;gt; require(&lt;strong&gt;DIR&lt;/strong&gt; . &amp;#39;/db.php&amp;#39;) ตัว default Connection ห้ามเปลี่ยนะครับ ต้องมีอย่างน้อย 1 ตัวที่ชื่อ ว่า db แนะนำเป็นฐานข้อมูลหลักที่เราใช้งาน&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;และถ้าหาเราเปิดไฟล์ db.php จะพบการตั่งค่า db ดังนี้ ให้เราตั้งค่าตามต้องการ และ copy ไฟล์นี้ตั้งชื่อใหม่เป็น db2.php&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;db.php&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\db\Connection&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;dsn&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysql:host=192.168.0.101;dbname=yii2-workshop1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;1234&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;charset&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;db2.php&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\db\Connection&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;dsn&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysql:host=192.168.0.102;dbname=yii2-workshop2&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;user&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;54321&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;charset&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นเราสามารถเรียกใช้งานโดยใช้ชื่อ connection ใหม่ ได้ คือ db2&lt;/p&gt;
-
-&lt;p&gt;หรือเพิ่มง่ายๆ ในไฟล์ &lt;code&gt;config/web.php&lt;/code&gt; แบบนี้ก็ได้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;&amp;#39;db&amp;#39; =&amp;gt; require(__DIR__ . &amp;#39;/db.php&amp;#39;),&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;&amp;#39;db2&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\db\Connection&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            &amp;#39;dsn&amp;#39; =&amp;gt; &amp;#39;mysql:host=192.168.0.102;dbname=yii2-workshop2&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            &amp;#39;username&amp;#39; =&amp;gt; &amp;#39;root&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            &amp;#39;password&amp;#39; =&amp;gt; &amp;#39;root&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            &amp;#39;charset&amp;#39; =&amp;gt; &amp;#39;utf8&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        ]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;สำหรับ-advance&quot;&gt;สำหรับ Advance&lt;/h2&gt;
-
-&lt;p&gt;สำหรับ advance จะอยู่ที่ common/config/main-local.php&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;components&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;db&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\db\Connection&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;dsn&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysql:host=127.0.0.1;dbname=yii2-workshop-day4&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;charset&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;mailer&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\swiftmailer\Mailer&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;viewPath&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@common/mail&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// send all mails to a file by default. You have to set&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// &amp;#39;useFileTransport&amp;#39; to false and configure a transport&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// for the mailer to send real emails.&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;useFileTransport&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เราสามารถเพิ่ม connection ได้ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s1&quot;&gt;&amp;#39;components&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;db&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\db\Connection&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;dsn&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysql:host=192.168.0.101;dbname=yii2-workshop1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;charset&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;db2&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\db\Connection&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;dsn&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysql:host=192.168.0.102;dbname=yii2-workshop2&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;username&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;password&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;charset&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;s1&quot;&gt;&amp;#39;mailer&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yii\swiftmailer\Mailer&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;viewPath&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;@common/mail&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// send all mails to a file by default. You have to set&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// &amp;#39;useFileTransport&amp;#39; to false and configure a transport&lt;/span&gt;
-            &lt;span class=&quot;c1&quot;&gt;// for the mailer to send real emails.&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;useFileTransport&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;การ-gii-model-โดยใช้-connection-ใหม่ที่เราสร้าง&quot;&gt;การ Gii Model โดยใช้ connection ใหม่ที่เราสร้าง&lt;/h2&gt;
-
-&lt;p&gt;เมื่อเราทำการ Gii Model จะมีส่วนของการตั้งค่า &lt;code&gt;Database Connection ID&lt;/code&gt;  อยู่ซึ่งปกติค่า default จะชื่อ  &lt;code&gt;db&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/connection-db.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;เราสามารถตั้งค่าเป็น db2 ดังนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/connection-db2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;การ-เรียกใช้ใน-model&quot;&gt;การ เรียกใช้ใน Model&lt;/h2&gt;
-
-&lt;p&gt;หาก Gii ตามด้านบนเมื่อดูในไฟล์ model ที่เราสร้างขึ้นมาจะพบว่ามันเพิ่ม &lt;code&gt;function  getDb()&lt;/code&gt; ขึ้นมา เพื่อให้ไปเรียกใช้ db2 ซึ่งปกติดหากไม่ได้ตั้งค่าใหม่ มันจะใช้ค่า default คือ &lt;code&gt;db&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;ถ้าหาไม่ได้ gii ก็สามารถเพิ่ม function นี้เข้าไปเองได้ แล้วทำการเปลี่ยนเป็นชื่อ connection ที่ต้องการเรียกใช้งาน&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;  public static function getDb()&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  {&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;      return Yii::$app-&amp;gt;get(&amp;#39;db2&amp;#39;);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  }&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;การ-เรียกใช้ใน-sql-queries&quot;&gt;การ เรียกใช้ใน SQL Queries&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$posts = Yii::$app-&amp;gt;db2-&amp;gt;createCommand(&amp;#39;SELECT * FROM post&amp;#39;)-&amp;gt;queryAll();
-
-Yii::$app-&amp;gt;db2-&amp;gt;createCommand((new \yii\db\Query)-&amp;gt;select(&amp;#39;*&amp;#39;)-&amp;gt;from(&amp;#39;tbl_name&amp;#39;))-&amp;gt;queryAll()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-        <pubDate>Fri, 03 Jul 2015 00:00:00 +0700</pubDate>
       </item>
     
   </channel>
