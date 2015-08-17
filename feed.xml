@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 17 Aug 2015 00:29:05 +0700</pubDate>
+    <pubDate>Mon, 17 Aug 2015 09:26:16 +0700</pubDate>
     
       <item>
         <title>เปิดอบรมการพัฒนา Web Applicaion ด้วย Yii Framework 2.0</title>
@@ -171,7 +171,7 @@
 
 &lt;h3 id=&quot;pjax-pushstate-ajax&quot;&gt;Pjax = pushState + Ajax&lt;/h3&gt;
 
-&lt;p&gt;เมื่อนำ 2 สิ่งนี้มารวมกันมันก็เกิดระเบิดตู้มเป็นโกโก้ครั้น (55 ล้อเล่น) มันก็ทำให้เราสามารถใช้ ajax ได้และยังสามารถกดปุ่ม back หรือ forward ได้เพราะมันเอาข้อมูลที่เรารันโดยใช้ ajax ไว้ไปเก็บไว้ที่ history api เรียบร้อย ซึ่งตรงนี้ทำให้ search engine สามามารถ index url ของเราได้แล้วเป็นผลดีกับ SEO ด้วย&lt;/p&gt;
+&lt;p&gt;เมื่อนำ 2 สิ่งนี้มารวมกันมันก็เกิดระเบิดตู้มเป็นโกโก้ครั้น (55 ล้อเล่น) มันก็ทำให้เราสามารถใช้ ajax ได้และยังสามารถกดปุ่ม back หรือ forward ได้เพราะมันเอาข้อมูลที่เรารันโดยใช้ ajax ไว้ไปเก็บไว้ที่ history api เรียบร้อย ซึ่งตรงนี้ทำให้ search engine สามารถ index url ของเราได้แล้วเป็นผลดีกับ SEO ด้วย&lt;/p&gt;
 
 &lt;p&gt;ต้องขอบคุณ คุณ &lt;a href=&quot;https://github.com/defunkt/jquery-pjax&quot;&gt;Chris Wanstrath&lt;/a&gt; ที่ได้สร้าง pjax ให้เราได้ใช้งานกัน&lt;/p&gt;
 
