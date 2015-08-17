@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 17 Aug 2015 09:54:40 +0700</pubDate>
+    <pubDate>Mon, 17 Aug 2015 16:58:19 +0700</pubDate>
     
       <item>
         <title>เปิดอบรมการพัฒนา Web Applicaion ด้วย Yii Framework 2.0</title>
@@ -108,6 +108,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://form.jotform.me/form/52251004665447?&quot;&gt;ลงทะเบียน&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://form.jotform.me/form/52275022466452?&quot;&gt;แจ้งการชำระเงิน&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/downloads/yii-course.pdf&quot;&gt;หนังสือเชิญประชุม&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 16 Aug 2015 00:00:00 +0700</pubDate>
