@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 17 Aug 2015 16:58:19 +0700</pubDate>
+    <pubDate>Tue, 18 Aug 2015 09:19:12 +0700</pubDate>
     
       <item>
         <title>เปิดอบรมการพัฒนา Web Applicaion ด้วย Yii Framework 2.0</title>
@@ -2407,7 +2407,7 @@ Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quo
 
 &lt;h3 id=&quot;โค้ดการเพิ่ม-style-button-groups-ให้กับปุ่มเดิมๆ-ของเรา&quot;&gt;โค้ดการเพิ่ม style Button Groups ให้กับปุ่มเดิมๆ ของเรา&lt;/h3&gt;
 
-&lt;p&gt;เราสามารถเพิ่ม Button Groups เข้าไปได้ และจะทำให้ปุ่มของเราดูชัดเจนขึ้น, มองง่ายขึ้น, ดูสวยขึ้น &lt;/p&gt;
+&lt;p&gt;เราสามารถเพิ่ม Button Groups เข้าไปได้ และจะทำให้ปุ่มของเราดูชัดเจนขึ้น, มองง่ายขึ้น, ดูสวยขึ้น&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;[
   &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,
   &amp;#39;buttonOptions&amp;#39;=&amp;gt;[&amp;#39;class&amp;#39;=&amp;gt;&amp;#39;btn btn-default&amp;#39;],
@@ -2422,6 +2422,11 @@ Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quo
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img src=&quot;/img/button-groups-copy.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
+&lt;h2 id=&quot;หากใช้-pjax&quot;&gt;หากใช้ Pjax&lt;/h2&gt;
+
+&lt;p&gt;ถ้าหากใช้ pjax ด้วยตรง link ต้องใส่ options  &lt;code&gt;&amp;#39;data-pjax&amp;#39; =&amp;gt; &amp;#39;0&amp;#39;&lt;/code&gt; ด้วยเพื่อให้ pjax ไม่ทำงานกับ link นี้ให้เป็น link url ปกติ&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;   Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;#39;,[&amp;#39;/search/index&amp;#39;],[&amp;#39;data-pjax&amp;#39; =&amp;gt; &amp;#39;0&amp;#39;]);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&quot;สรุป-actioncolumn&quot;&gt;สรุป ActionColumn&lt;/h2&gt;
 
 &lt;p&gt;Yii 2 ค่อนข้างเปิดกว้างให้เราได้ปรับแต่งส่วนต่างๆ ได้เองทังหมด ในส่วน ActionColumn ก็เหมือนกัน ลองใช้งานและปรับแต่งดูครับ หากติดปัญหาก็คอมเม้นด้านล่างได้เลยครับ ^ ^&lt;/p&gt;

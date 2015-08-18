@@ -348,7 +348,7 @@ Html::a(&#39;&lt;i class=&quot;glyphicon glyphicon-duplicate&quot;&gt;&lt;/i&gt;
 
 <h3 id="โค้ดการเพิ่ม-style-button-groups-ให้กับปุ่มเดิมๆ-ของเรา">โค้ดการเพิ่ม style Button Groups ให้กับปุ่มเดิมๆ ของเรา</h3>
 
-<p>เราสามารถเพิ่ม Button Groups เข้าไปได้ และจะทำให้ปุ่มของเราดูชัดเจนขึ้น, มองง่ายขึ้น, ดูสวยขึ้น </p>
+<p>เราสามารถเพิ่ม Button Groups เข้าไปได้ และจะทำให้ปุ่มของเราดูชัดเจนขึ้น, มองง่ายขึ้น, ดูสวยขึ้น</p>
 <div class="highlight"><pre><code class="language-html" data-lang="html">[
   &#39;class&#39; =&gt; &#39;yii\grid\ActionColumn&#39;,
   &#39;buttonOptions&#39;=&gt;[&#39;class&#39;=&gt;&#39;btn btn-default&#39;],
@@ -363,6 +363,11 @@ Html::a(&#39;&lt;i class=&quot;glyphicon glyphicon-duplicate&quot;&gt;&lt;/i&gt;
 </code></pre></div>
 <p><img src="/img/button-groups-copy.png" alt=""></p>
 
+<h2 id="หากใช้-pjax">หากใช้ Pjax</h2>
+
+<p>ถ้าหากใช้ pjax ด้วยตรง link ต้องใส่ options  <code>&#39;data-pjax&#39; =&gt; &#39;0&#39;</code> ด้วยเพื่อให้ pjax ไม่ทำงานกับ link นี้ให้เป็น link url ปกติ</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">   Html::a(&#39;&lt;i class=&quot;glyphicon glyphicon-duplicate&quot;&gt;&lt;/i&gt;&#39;,[&#39;/search/index&#39;],[&#39;data-pjax&#39; =&gt; &#39;0&#39;]);</span>
+</code></pre></div>
 <h2 id="สรุป-actioncolumn">สรุป ActionColumn</h2>
 
 <p>Yii 2 ค่อนข้างเปิดกว้างให้เราได้ปรับแต่งส่วนต่างๆ ได้เองทังหมด ในส่วน ActionColumn ก็เหมือนกัน ลองใช้งานและปรับแต่งดูครับ หากติดปัญหาก็คอมเม้นด้านล่างได้เลยครับ ^ ^</p>
