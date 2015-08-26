@@ -5,863 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 24 Aug 2015 00:06:05 +0700</pubDate>
-    
-      <item>
-        <title>RBAC คืออะไร? พร้อมสอนวิธีใช้ RBAC DB</title>
-        <link>http://dixonsatit.github.io/2015/08/20/how-to-use-rbac-db.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/08/20/how-to-use-rbac-db.html</guid>
-        <description>&lt;p&gt;ในการพัฒนาระบบ เราจำต้องมีการควบคุมการเข้าใช้งานในส่วนต่างๆ ถ้าหากระบบของเรามีเพียงแค่ login,logout นั้นคงไม่พอครับ เพราะในการใช้งานปกติ ผู้ใช้งานแต่ละคนอาจจะมีสิทธิ์ในการเข้าใช้งานที่แตกต่างกัน อย่างน้อยก็เพื่อเป็นการปกป้องข้อมูลหรือการใช้งานในแต่ละส่วนให้ถูกต้องเหมาะสม  ถ้าหากระบบที่เราได้พัฒนาขึ้นแล้ว แต่ยังไม่มีการจัดการ RBAC ผมคิดว่าคุณควรต้องคิดใหม่..เพราะตรงนี้  Yii2 ได้เตรียมไว้ให้เราครบ พร้อมเสริฟ รอเพียงแค่กดน้ำร้อน ปรุงรสตามใจชอบ เท่านั้นเอง ดี้ดี ^ ^&lt;/p&gt;
-
-&lt;p&gt;เนื้อหาในเรื่องนี้ผมจะอธิบายตั้งแต่การออกแบบ RBAC ไปจนถึงตัวอย่างการใช้งานกับโปรเจ็คง่ายๆ เพื่อให้เราสามารถออกแบบและใช้งาน RBAC กับ Application ที่เราพัฒนาได้อย่างเหมาะสม&lt;/p&gt;
-
-&lt;h1 id=&quot;เนื้อหามีอะไรบ้าง&quot;&gt;เนื้อหามีอะไรบ้าง&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;#rbac-%E0%B8%84%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3&quot;&gt;RBAC คืออะไร?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;ลองออกแบบ RBAC&lt;/li&gt;
-&lt;li&gt;สร้างโปรเจ็คเพื่อใช้งาน RBAC&lt;/li&gt;
-&lt;li&gt;การติดตั้งและสร้าง RBAC&lt;/li&gt;
-&lt;li&gt;รู้จักกับ Access Control Filter&lt;/li&gt;
-&lt;li&gt;การกำหนดค่าและเรียกใช้งาน RBAC ใน Controller&lt;/li&gt;
-&lt;li&gt;สร้าง Rule เพื่อตรวจสอบผู้ใช้งาน&lt;/li&gt;
-&lt;li&gt;ปรับปรุงระบบ Registration เพื่อใส่ค่า default Role&lt;/li&gt;
-&lt;li&gt;การสร้างระบบจัดการผู้ใช้งานเพื่อมอบสิทธิ์ให้กับผู้ใช้งาน&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;rbac-คืออะไร&quot;&gt;RBAC คืออะไร?&lt;/h1&gt;
-
-&lt;p&gt;RBAC คือ การจัดการสิทธิ์การเข้าใช้งานหรือที่เรียกว่า Role Based Access Control (RBAC) ซึ่งเป็นการควบคุมการเข้าใช้งานในส่วนต่างๆ ของ application ที่เราได้สร้างขึ้น โดยเมื่อมีการเรียกใช้งานในแต่ละส่วน RBAC จะคอยเช็คผู้ใช้งานแต่ละคนว่า มีสิทธิ์ที่จะเข้าใช้งานในส่วนนี้หรือไม่ หากมีก็จะยอมให้เข้าใช้งาน แต่ถ้าหากไม่มีก็จะทำการแสดง error forbidden ออกไป เพื่อให้ผู้ใช้งานทราบว่าไม่สามารถเข้าใช้งานในส่วนนี้ได้&lt;/p&gt;
-
-&lt;p&gt;โดยปกติแล้ว ผู้ใช้งานแต่ละคนจะมีสิทธ์ในการเข้าใช้งานแตกต่างกัน เพราะฉะนั้นเราจึงจำเป็นต้องแยก role ออกเป็นกลุ่มๆ โดยให้แต่ละกลุ่มมีสิทธิ์ในการเข้าใช้งานที่ไม่เหมือนกัน เมื่อผู้ใช้งานได้รับ role ใหนก็จะสามารถเข้าใช้งานได้ตามสิทธิ์ที่ role นั้นมี ทำให้เราสามารถควบคุมการเข้าใช้งานในส่วนต่างๆ ได้อย่างเหมาะสมและยืดยุ่น&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-flow.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ส่วนประกอบหลักๆ ของ rbac ใน yii ที่เราสามารถสร้างได้จะประกอบไปด้วย 3 ส่วนคือ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Permission ก็เปรียบเสมือนใบอนุญาติที่บอกว่าเราสามารถทำอะไรได้บ้าง&lt;/li&gt;
-&lt;li&gt;Role เป็นกลุ่มของ Permission หลายๆ ตัว ที่เกี่ยวข้องกัน รวมตัวกัน เพื่อให้สามารถเรียกใช้งานได้สะดวก ไม่ต้องเรียกใช้งานที่ Permission ทีละอัน&lt;/li&gt;
-&lt;li&gt;Rule จะคล้ายๆ กับ Role แต่เป็น Role ที่เราสร้างขึ้นเป็นไฟล์ class เพื่อใช้ในการตรวจสอบค่าบางอย่าง&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ถ้าดูจากภาพด้านบนจะเห็นว่ามี Role ทั้งหมด 5 ตัว ซึ่งแต่ละตัวมีความสามารถที่แตกต่างกัน ภายใน Role แต่ละตัวอาจมี Role หรือ Permission อยู่ภายใต้สังกัดได้ ส่วน Permission จะไม่อยู่ภายใต้ Role ก็ได้ แต่ในความเป็นจริง เมื่อใช้งานมันอาจจะไม่สะดวก เพราะหากมี Permission ทั้งหมด 10 ตัวแล้วเราต้องการใช้ User ใช้งานได้เราต้อง add Permission ทั้งหมด 10 ตัวให้ user คนนั้น แต่ถ้าหากเราย้ายให้มันสังกัดที่ Role แล้วเวลาให้สิทธิ์เราก็ให้ Role แค่ตัวเดียว ผู้ใช้งานก็จะได้สิทธิ์การเข้าใช้งานทั้ง 10 ตัว ซึ่งจะสะดวกและยืดยุ่นกว่ามากๆ&lt;/p&gt;
-
-&lt;p&gt;เพื่อให้สามารถเข้าใจได้ง่ายๆ ผมจะยกตัวอย่าง โดยใช้ Role ที่กำหนดขึ้นมาใหม่ 3 ตัว คือ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Blog การใช้งาน blog ทั้งหมดเช่น create,update,delete&lt;/li&gt;
-&lt;li&gt;Report การดูรายงานต่างๆ&lt;/li&gt;
-&lt;li&gt;Export การ export ข้อมูลในรูปแบบต่างๆ&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 1&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;เมื่อเราดูตามภาพแล้วจะเห็นว่า มีการมอบ role &lt;code&gt;Blog&lt;/code&gt; ให้กับ User เมื่อ User ได้รับก็จะสามารถเข้าใช้งานในส่วนของ blog ได้แต่ในส่วนของ role &lt;code&gt;Report&lt;/code&gt; และ &lt;code&gt;Export&lt;/code&gt; จะไม่สามารถเข้าใช้งานได้เพราะ user ไม่ได้รับ role นั้น&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 2&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;User ได้รับมอบ Role &lt;code&gt;Report&lt;/code&gt; และ &lt;code&gt;Export&lt;/code&gt; เพราะฉะนั้นก็จะเข้าใช้งาน report,export ได้ ยกเว้น blog เพราไม่ได้รับ role &lt;code&gt;Blog&lt;/code&gt; มา&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 3&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-3.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;สังเกตว่า User จะได้รับมอบในส่วนของ Role &lt;code&gt;Blog&lt;/code&gt; เพียงอย่างเดียว แต่ User สามารถเข้าใช้งานทั้ง &lt;code&gt;Blog&lt;/code&gt; และ &lt;code&gt;report&lt;/code&gt; ได้ เพราะว่า report ในอยู่ภายใต้ Role &lt;code&gt;Blog&lt;/code&gt; เพราะฉะนั้นใครก็ตามที่ได้รับ role &lt;code&gt;Blog&lt;/code&gt; ก็จะสามารถใช้งาน reprot ได้ด้วย&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 4&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-4.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;User ได้รับมอบ role &lt;code&gt;Report&lt;/code&gt; ก็จะสามารถเข้าใช้งาน report ได้เพียงอย่างเดียวแม้ว่า role &lt;code&gt;Report&lt;/code&gt; จะอยู่ภายใต้ &lt;code&gt;Blog&lt;/code&gt; ก็ตาม แต่ถ้าหามี role อะไรก็ตามอยู่ภายใต้ role &lt;code&gt;Report&lt;/code&gt; มันก็จะสามารถเข้าใช้งานได้ตามไปด้วย&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 5&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-5.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ในตัวอย่างนี้เราแก้ปัญหาในเรื่องที่ต้องมอบ role ให้กับผู้ใช้งาน โดยปกติถ้าหากแต่ละ role ไม่ได้ขึ้นต่อกันแล้ว เราจะต้องทำการ assignment role ทั้ง 3 ตัวให้กับ user แต่ละคน คนละ 3 role มีกี่คนก็คูน 3 เข้าไปซึ่งมันจะเยอะมาก&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Report&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Export&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Report&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Export&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Report&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Export&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;แต่ถ้าเราปรับใหม่โดยให้ role ที่เกี่ยวข้องกันจัดเป็นลำดับชั้นไว้ตามภาพด้านบน เช่น ตัวอย่างจะเรียงลำดับตามนี้ Blog-&amp;gt;Report-&amp;gt;Export โดยให้ &lt;code&gt;Blog&lt;/code&gt; เป็น Role สูงสุด ถ้าหากอยากให้ผู้ใช้งานสามารถเข้าใช้งานได้ทั้งหมด 3 role ก็แค่มอบ role Blog ให้กับผู้ใช้งานหรือ User นั้นๆ เมื่อดูข้อมูล&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Blog&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ผู้ใช้งานหรือ User ก็จะสามารถเข้าใช้งานได้ทั้ง 3 ส่วนคือ Blog,Report,Export&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ตารางผมแค่ทำให้มองเห็นภาพว่าเวลาที่มันเก็บข้อมูลมันเก็บยังไง&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 6&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-6.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ตัวอย่างนี้ได้เพิ่ม role &lt;code&gt;Admin&lt;/code&gt; ขึ้นมาเพื่อเป็นตัวควบคุมสูงสุด เพื่อที่จะทำให้เราสามารถมอบ role ต่างๆ ได้อิสระมากขึ้น สังเกตุว่า &lt;code&gt;Admin&lt;/code&gt; จะมี role ที่เอาไว้จัดการข้อมูลผู้ใช้งานคือ role &lt;code&gt;ManageUser&lt;/code&gt; เพื่อให้ &lt;code&gt;Admin&lt;/code&gt; สามารถจัดการข้อมูลผู้ใช้ได้ จึงให้ role &lt;code&gt;ManageUser&lt;/code&gt; ไปอยู่ภายใต้ role &lt;code&gt;Admin&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 7&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-7.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ถ้าเรามอบ role &lt;code&gt;Blog&lt;/code&gt; ให้กับ user แล้ว user ก็ใช้งานได้แค่ role &lt;code&gt;Blog,Report,Export&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 8&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-8.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ถ้าหาก user ได้รับมอบ role &lt;code&gt;ManageUser&lt;/code&gt; แล้วก็จะสามารถใช้งานได้แค่ส่วนจัดการข้อมูลผู้ใช้งานเท่านั้น&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 9&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-9.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ถ้าหากต่อไปมีการเพิ่ม role ใหม่เข้ามาชื่อ &lt;code&gt;Export-csv&lt;/code&gt; ใครก็ตามที่อยู่บน role Export-csv  ก็จะสามารถใช้งานได้ทันทีโดยไม่ต้องแก้ไขข้อมูลการ assignment ใหม่เลย อย่างเช่น ถ้าได้รับ role &lt;code&gt;Blog&lt;/code&gt; ก็จะสามารถใช้งาน Blog-&amp;gt;Report-&amp;gt;Export-&amp;gt;Export-csv ได้เลย เพราะ Export-csv อยู่ภายใต้ Blog อยู่แล้ว&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ตัวอย่างที่ 10&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-03-10.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ถ้า User ได้รับ role &lt;code&gt;Blog&lt;/code&gt; ก็จะสามารถใช้งาน Blog-&amp;gt;Report-&amp;gt;Export-&amp;gt;Export-csv ได้เลย เพราะ Export-csv อยู่ภายใต้ Blog อยู่แล้ว&lt;/p&gt;
-
-&lt;p&gt;ตัวอย่างทั้งหมดคิดว่าคงพอทำให้เราเข้าใจและสามารถออกแบบ rbac ที่เหมาะสมกับงานของตัวเองได้ ต่อไปเราจะทำการลงมือสร้าง rbac จริงๆ เพื่อใช้งานกับ application ของเรา&lt;/p&gt;
-
-&lt;h1 id=&quot;ลงมือสร้าง-rbac&quot;&gt;ลงมือสร้าง RBAC&lt;/h1&gt;
-
-&lt;p&gt;หลักๆ ในการสร้าง RBAC นั้น เราจะต้องทำการวิเคราะห์ว่า application ของเรา มีการทำงานหลักๆ อะไรบ้าง ในแต่ละส่วนต้องทำอะไรบ้าง เพื่อให้สามารถสร้าง rbac ได้อย่างง่ายๆ ผมจะยกตัวอย่างการสร้างระบบ Blog ตามตัวอย่าง &lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-security-authorization.html&quot;&gt;doc-2.0&lt;/a&gt; ได้เขียนอธิบายไว้ เพราะเข้าใจง่าย&lt;/p&gt;
-
-&lt;p&gt;การออกแบบจะใช้ตัวอย่างการสร้าง Blog แบบง่ายๆ ไม่ซับซ้อนเพื่อให้เราสามารถทำความเข้าใจได้อย่างรวดเร็ว ก่อนอื่นเราจะต้องแบ่งกลุ่มผู้ใช้งานว่ามีอะไรบ้างหลักๆ แยกออกมา หลังจากนั้นให้เราเขียนความสามารถของระบบว่าทำอะไรได้บ้างหลักๆ ออกเป็นข้อๆ ดังนี้&lt;/p&gt;
-
-&lt;h2 id=&quot;กลุ่มผู้ใช้งาน&quot;&gt;กลุ่มผู้ใช้งาน&lt;/h2&gt;
-
-&lt;p&gt;ระบบแบ่งผู้ใช้งานเป็น 4 กลุ่มใหญ่ๆ คือ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Author ผู้ใช้งานที่เขียนบทความ&lt;/li&gt;
-&lt;li&gt;Editor ผู้ตรวจสอบ&lt;/li&gt;
-&lt;li&gt;ManageUser จัดการข้อมูลผู้ใช้งาน&lt;/li&gt;
-&lt;li&gt;Admin ผู้ดูแลระบบ&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ซึ่งในส่วนนี้เราจะเรียกมันว่า Role&lt;/p&gt;
-
-&lt;h2 id=&quot;สิทธิ์การเข้าใช้งาน&quot;&gt;สิทธิ์การเข้าใช้งาน&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;สามารถ create บทความได้&lt;/li&gt;
-&lt;li&gt;สามารถ update บทความได้&lt;/li&gt;
-&lt;li&gt;สามารถ update บทความคนอื่นได้&lt;/li&gt;
-&lt;li&gt;สามารถ delete บทความคนอื่นได้&lt;/li&gt;
-&lt;li&gt;สามารถ จัดการข้อมูลผู้ใช้งาน&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;เมื่อเราทำการวิเคราะห์และออกแบบระบบหลักๆ ได้แล้วเราจะต้องทำการให้สิทธิ์ แก่ Role หรือกลุ่มผู้ใช้งานที่เราได้ทำการออกแบบไว้ว่า กลุ่มใหนสามารถทำอะไรได้บ้างดังนี้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-role.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Author&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;create บทความ&lt;/li&gt;
-&lt;li&gt;update บทความ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Editor&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;update บทความของ Author ได้&lt;/li&gt;
-&lt;li&gt;delete บทความของ Author ได้&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;ManageUser&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;สามารถจัดการข้อมูลผู้ใช้งานได้&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Admin&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;เป็นผู้ดูแลระบบ&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;เมื่อเราออกแบบและเข้าใจโครงสร้างระบบโดยรวมแล้ว จะทำให้เราสามารถสร้าง RBAC ได้ง่าย และไม่สับสน&lt;/p&gt;
-
-&lt;h2 id=&quot;เตรียม-project-ให้พร้อม&quot;&gt;เตรียม project ให้พร้อม&lt;/h2&gt;
-
-&lt;p&gt;ก่อนอื่นเราจะต้องเตรียม project ให้พร้อม โดยตัวอย่างนี้เราจะใช้ Advanced Project Template เพราะมีระบบ login มาให้อยู่แล้ว ให้ทำการสร้าง Advanced Project Template ดูวิธีการสร้าง&lt;a href=&quot;https://github.com/yiisoft/yii2-app-advanced/blob/master/docs/guide/README.md&quot;&gt;ได้ที่นี่ &lt;/a&gt; หลังจากติดตั้งเสร็จแล้วให้ทำตามขั้นตอนต่อไปนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;php yii/init&lt;/li&gt;
-&lt;li&gt;สร้างฐานข้อมูลไว้ ชื่อ yii2-workshop-rbac-db&lt;/li&gt;
-&lt;li&gt;ทำการ config ฐานข้อมูลที่ common/config/main-local.php ใส่ชื่อฐานข้อมูลและ username &amp;amp; password เปลี่ยน localhost เป็น 127.0.0.1 ให้ถูกต้อง&lt;/li&gt;
-&lt;li&gt;ทำการนำเข้าฐานข้อมูล user โดยใช้คำสั่ง &lt;code&gt;php yii migrate&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;ลงทะเบียนผู้ใช้งาน โดยกำหนด user,password,email เพื่อใช้สำหรับเข้าทดสอบการใช้งาน rbac ที่เราจะสร้างขึ้น มีข้อมูลดังนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;user-a, &lt;a href=&quot;mailto:user-a@gmail.com&quot;&gt;user-a@gmail.com&lt;/a&gt;, 123456&lt;/li&gt;
-&lt;li&gt;user-b, &lt;a href=&quot;mailto:user-b@gmail.com&quot;&gt;user-b@gmail.com&lt;/a&gt;, 123456&lt;/li&gt;
-&lt;li&gt;user-c, &lt;a href=&quot;mailto:user-c@gmail.com&quot;&gt;user-c@gmail.com&lt;/a&gt;, 123456&lt;/li&gt;
-&lt;li&gt;user-d, &lt;a href=&quot;mailto:user-d@gmail.com&quot;&gt;user-d@gmail.com&lt;/a&gt;, 123456&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ไปที่ frontend และทำการสมัครสมาชิกที่หน้า &lt;code&gt;site/signup&lt;/code&gt; ด้วย username,email, password ที่กำหนดให้ในด้านบน&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-register.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;หลังจากลงทะเบียนเสร็จเรียบร้อยให้ทำการทดสอบ login ว่าสามารถใช้งานได้จริงหรือไม่ เมื่อสมัครสมาชิกเสร็จ ให้เราทำการตรวจสอบข้อมูลที่ตาราง user จะพบรายการดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;----------+------------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;----------+------------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;c&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gmail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;----------+------------------+&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;00&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;เปิดการใช้งาน-rbac&quot;&gt;เปิดการใช้งาน RBAC&lt;/h2&gt;
-
-&lt;p&gt;Yii 2 มี RBAC ให้เลือกใช้งาน 2 แบบ คือ &lt;code&gt;yii\rbac\PhpManager&lt;/code&gt; and &lt;code&gt;yii\rbac\DbManager&lt;/code&gt; ทั้ง 2 ตัวนี้การทำงานหลักๆ ไม่ต่างกัน ต่างกันที่การเก็บข้อมูลเท่านั้นแล้วแต่จะเลือกใช้งาน ตามตัวอย่างวันนี้จะเลือกใช้งาน &lt;code&gt;yii\rbac\DbManager&lt;/code&gt; เพราะสามารถจัดการได้ง่าย สามารถดูข้อมูลได้ที่ database ของเรา&lt;/p&gt;
-
-&lt;h3 id=&quot;เปิดใช้งาน-yii-rbac-dbmanager&quot;&gt;เปิดใช้งาน yii\rbac\DbManager&lt;/h3&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;return [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    // ...&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;components&amp;#39; =&amp;gt; [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        &amp;#39;authManager&amp;#39; =&amp;gt; [&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;            &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\rbac\DbManager&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        ],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        // ...&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    ],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เนื่องจาก  &lt;code&gt;DbManager&lt;/code&gt; เก็บข้อมูลที่ db ดังนั้นเราจะต้องนำเข้าโครงสร้างตารางที่ yii เตรียมไว้ให้แล้วโดยใช้ migration ให้เปิด command line แล้วเข้าไปที่  root โปรเจ็คของเราจากนั้นทำการรันคำสั่ง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;php yii migrate --migrationPath=@yii/rbac/migrations
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ก็จะพบข้อความ&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Yii Migration Tool (based on Yii v2.0.6)
-
-Total 1 new migration to be applied:
-m140506_102106_rbac_init
-
-Apply the above migration? (yes|no) [no]:yes
-*** applying m140506_102106_rbac_init
-  &amp;gt; create table  ... done (time: 0.050s)
-  &amp;gt; create table  ... done (time: 0.019s)
-  &amp;gt; create index idx-auth_item-type on  (type) ... done (time: 0.025s)
-  &amp;gt; create table  ... done (time: 0.027s)
-  &amp;gt; create table  ... done (time: 0.024s)
-*** applied m140506_102106_rbac_init (time: 0.174s)
-
-
-Migrated up successfully.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;และทำการเช็คดูใน​ฐานข้อมูลของเราจะพบว่ามีตารางใหม่ขึ้นมา 4 ตาราง ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;show&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tables&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Tables_in_yii2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;workshop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rbac&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth_assignment&lt;/span&gt;                 &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth_item&lt;/span&gt;                       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth_item_child&lt;/span&gt;                 &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth_rule&lt;/span&gt;                       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;migration&lt;/span&gt;                       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;user&lt;/span&gt;                            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------------------+&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;01&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ตารางของ RBAC จะมี prefix นำหน้าว่า &lt;code&gt;auth_&lt;/code&gt; เสมอ&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ถ้าหากพบ error อาจต้องตรวจสอบคอนฟิกในส่วนฐานข้อมูล ว่าถูกต้องหรือไม่ หากยังไม่ได้ให้ลองเปลี่ยน localhost เป็น 127.0.0.1 ดู&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;เมื่อ migration เสร็จเรียบร้อย ให้เราตรวจสอบฐานข้อมูลจะพบว่ามีตารางใหม่ขึ้นมา 4 ตารางคือ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;itemTable&lt;/em&gt; คือข้อมูลรายการ role และ permission ทั้งหมดซึ่งจะเก็บไว้ที่ตาราง &lt;code&gt;auth_item&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;itemChildTable&lt;/em&gt; เป็นข้อมูลที่บอกว่า role ตัวใหนอยู่ภายใต้ role อะไรบ้างซึ่งเก็บไว้ที่ตาราง  &lt;code&gt;auth_item_child&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;assignmentTable&lt;/em&gt; เป็นตารางที่ระบุว่า user แต่ละคนมี role เป็นอะไรหรือมีสิทธิ์ทำอะไรบ้าง ตรงนี้จะเป็นตัวระบุ เก็บไว้ที่ตาราง &lt;code&gt;auth_assignment&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;ruleTable&lt;/em&gt; : เป็นตารางที่เก็บข้อมูลให้กับ Rule เก็บไว้ที่ตาราง &lt;code&gt;auth_rule&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;เมื่อตั้งค่าเปิดการใช้งาน authManager และเตรียมฐานข้อมูลเสร็จเรียบร้อย เราก็จะสามารถเรียกใช้งาน &lt;code&gt;authManager&lt;/code&gt; ผ่าน Yii::$app ได้ ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; $auth = Yii::$app-&amp;gt;authManager;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;สามารถดูรายละเอียดเพิ่มเติมว่า DbManager ทำอะไรได้บ้าง &lt;a href=&quot;http://www.yiiframework.com/doc-2.0/yii-rbac-dbmanager.html&quot;&gt;ได้ที่นี่&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;สร้าง-rbac&quot;&gt;สร้าง RBAC&lt;/h2&gt;
-
-&lt;p&gt;หลังจากที่เราออกแบบและเปิดการใช้งาน authManager ไว้แล้ว ขั้นตอนต่อไปคือเราจะทำการสร้าง RbacController ซึ่งเป็น Controller แบบ console คือต้องใช้ผ่าน command line เท่านั้น ที่ต้องทำผ่าน command line เพราะปกติการสร้าง rbac เราก็จะทำแค่ครั้งเดียว ยกเว้นว่ามีการแก้ไข role ต่างๆ&lt;/p&gt;
-
-&lt;p&gt;เราจะทำการสร้างไฟล์ RbacController ไว้ที่ console/controllers/RbacController.php แล้วสร้างโค้ดตามนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console\controllers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RbacController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\yii\console\Controller&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionInit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-     &lt;span class=&quot;nx&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Yii 2 Learning.&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เราสร้าง &lt;code&gt;RbacController&lt;/code&gt; ขึ้นมาเพื่อใช้ในการสร้าง Rbac หากสังเกตจะพบว่า controller extends ด้วย yii\console\Controller  ซึ่งจะไม่ใช่ controller ปกติที่เราใช้งานกัน ตอนนี้ RbacController มี 1 action คือ Init โดยให้ echo ข้อความออกมาเป็น &amp;quot;Yii 2 Learning&amp;quot;&lt;/p&gt;
-
-&lt;p&gt;ทดลองเรียกใช้งาน โดยเปิด command แล้ว cd เข้าไปที่โปรเจคของเรา จากนั้นรันคำสั่ง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;php yii
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จะพบกับข้อความประมาณนี้ ให้สังเกตุด้านล่างจะมี rbac/init ที่เราได้สร้างไว้ขึ้นมาแล้ว&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;This is Yii version 2.0.6.
-
-The following commands are available:
-
-- asset                        Allows you to combine and compress your
-                               JavaScript and CSS files.
-    asset/compress (default)   Combines and compresses the asset files according
-                               to the given configuration.
-    asset/template             Creates template of configuration file for
-                               [[actionCompress]].
-// ......
-
-- rbac
-    rbac/init
-
-
-To see the help of each command, enter:
-
-  yii help &amp;lt;command-name&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;เราสามารถเรียกใช้งานได้เลย&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt; php yii rbac/init
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จะพบข้อความดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Yii 2 Learning
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากทดแล้วแล้วว่าใช้งานได้ ถึงเวลาที่เราจะสร้าง rbac จริงๆ ซึ่งเราได้ออกแบบไว้แล้ว ดูตามภาพ&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ตามที่ออกแบบไว้เราจะแบ่ง role เป็น 4 ประเภท คือ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Author สำหรับผู้ที่เขียนบทความ&lt;/li&gt;
-&lt;li&gt;Editor สำหรับผู้ที่ตรวจสอบบทความ&lt;/li&gt;
-&lt;li&gt;managerUser สำหรับจัดการข้อมูลผู้ใช้งาน&lt;/li&gt;
-&lt;li&gt;Admin สำหรับผู้ดูแลระบบ&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ซึ่งหากดูตามภาพแล้ว admin จะอยู่สูงสุดและให้ role ต่างๆ ไปอยู่ภายใต้ admin เพื่อทีจะให้ admin สามารถทำทุกอย่างได้ ตามที่ role ที่อยู่ภายใต้มีสิทธิ์ทำ&lt;/p&gt;
-
-&lt;p&gt;หลังจากนั้นเราจะทำการ assignment ค่า role ให้กับ user ต่างๆ ดังนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;user-a : admin&lt;/li&gt;
-&lt;li&gt;user-b : editor&lt;/li&gt;
-&lt;li&gt;user-c : author&lt;/li&gt;
-&lt;li&gt;user-d : ไม่ต้องให้สิทธิ์ เอาไว้ทดสอบ&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ในการสร้าง role เราจะเรียกใช้งานผ่าน &lt;code&gt;Yii::$app-&amp;gt;authManager&lt;/code&gt; เพื่อทำการสร้าง rbac โดยมีฟังก์ชันหลักๆ ที่ใช้งานดังนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;removeAll()&lt;/code&gt; เป็นฟังก์ชัน clear ข้อมูล rbac ทั้งหมด โปรดระวังการใช้งานด้วยครับ&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;createRole()&lt;/code&gt; เป็นคำสั่งที่เอาไว้สร้าง role&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;add()&lt;/code&gt; เป็นคำสั่งบันทึก role,rule,permission ตามที่กำหนด&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;addChild()&lt;/code&gt; สามารถกำหนดให้ role,permission ที่ต้องการอยู่ภายใต้ role ใหนก็ได้&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;assign()&lt;/code&gt; เป็นคำสั่งที่เอาไว้มอบ role ให้กับ user ที่ต้องการ&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ให้ทำการสร้าง rbac ตามโค้ดด้านล่างนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionInit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Removing All! RBAC.....&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$manageUser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ManageUser&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$manageUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สำหรับจัดการข้อมูลผู้ใช้งาน&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$manageUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Author&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สำหรับการเขียนบทความ&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Editor&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สำหรับการตรวจสอบบทความ&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Admin&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สำหรับการดูแลระบบ&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$manageUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;nx&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Success! RBAC roles has been added.&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นทำการรันคำสั่งเพื่อสร้าง rbac ตาที่ได้ออกแบบไว้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;php yii rbac/init
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จะได้ผลลัพธ์ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Removing All! RBAC.....
-Success! RBAC roles has been added.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;หลังจากนั้น ให้เราทำการตรวจสอบข้อมูลตารางที่ &lt;code&gt;auth_item&lt;/code&gt; จะพบว่ามีข้อมูลขึ้นมาแล้ว 4 แถวซึ่งก็คือ Role ที่เราได้สร้างไว้นั่นเอง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth_item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;------------+------+-----------------------------------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;description&lt;/span&gt;                             &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;------------+------+-----------------------------------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Admin&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;สำหรับการดูแลระบบ&lt;/span&gt;                         &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Author&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;สำหรับการเขียนบทความ&lt;/span&gt;                      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Editor&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;สำหรับการตรวจสอบบทความ&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ManageUser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;    &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;สำหรับจัดการข้อมูลผู้ใช้งาน&lt;/span&gt;                    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;------------+------+-----------------------------------------+&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ในส่วนของ auth_item_child ที่เป็นตารางที่บอกว่า role ใหนอยู่ภายใต้ role อะไร&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth_item_child&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;--------+------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;child&lt;/span&gt;      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;--------+------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Editor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Author&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Admin&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Editor&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Admin&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ManageUser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;--------+------------+&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;00&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;และสุดท้าย &lt;code&gt;auth_assignment&lt;/code&gt; จะเป็นตารางที่บอกว่า user คนใหนมีสิทธิ์อะไรหรือได้รับ role  อะไร&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth_assignment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;item_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;created_at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Admin&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1440296691&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Editor&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1440296691&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Author&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1440296691&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+---------+------------+&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;00&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;สังเกตุ เราไมได้ให้สิทธิ์ user-d เพราะจะเอาไว้ทดสอบเข้าใช้งานในกรณีคนที่ไม่มีสิทธิ์&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;เสร็จเรียบร้อย การสร้าง RBAC มันง่ายๆ แค่นี้เอง (แต่กว่าจะเข้าใจก็เล่นเอาเหนื่อยเหมือนกัน อาจจะด้วยภาษาอังกฤษอันอ่อนด้อยของผม)  หลังจากนี้ก็เป็นการตั้งค่าให้ controller ต่างๆ และการสร้างฟอร์ม assignment role ให้กับ user เพื่อให้เราจัดการสิทธิ์ได้ง่ายๆ&lt;/p&gt;
-
-&lt;h1 id=&quot;รู้จักกับ-access-control-filter&quot;&gt;รู้จักกับ Access Control Filter&lt;/h1&gt;
-
-&lt;p&gt;ก่อนที่เราจะทำการเรียกใช้งาน rbac ที่เราได้สร้างขึ้น เราต้องทำความเข้าใจกับ  Access Control Filter ใน Controller ก่อน ซึ่งปกติค่า role default อยู่ 2 ตัว ที่เราสามารถเรียกใช้ได้เลยคือ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ผู้ใช้งานที่ล็อกอิน (@)&lt;/li&gt;
-&lt;li&gt;ผู้ใช้งานที่ไม่ได้ล็อกอิน (?)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;โดยทั้ง 2 ตัวนี้เราสามารถกำหนดค่าในส่วน Access Control ของ Controller ได้ลองดูตัวอย่าง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\web\Controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\filters\AccessControl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SiteController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Controller&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;access&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AccessControl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;only&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;login&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;logout&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;signup&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;rules&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;allow&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;actions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;login&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;signup&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;roles&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;?&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;allow&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;actions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;logout&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                        &lt;span class=&quot;s1&quot;&gt;&amp;#39;roles&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;@&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Access Control Filter เป็นส่วนของการกำหนดค่าให้แต่ละ action ว่า Role ใหนสามารถเข้าใช้งาน action อะไรได้บ้าง เราสามารถกำหนดค่าเพื่อเปิดใช้งานผ่าน &lt;code&gt;function behaviors()&lt;/code&gt; ของ Controller ได้เลยโดยกำหนดภายใน property &lt;code&gt;access&lt;/code&gt; หลังจากนั้นก็สามารถระบุได้เลยว่า action ใหนให้เข้าใช้งานยังไง ตัวอย่างเช่น action  &lt;code&gt;logout&lt;/code&gt; ต้อง login ก่อนถึงจะทำการเรียกใช้งาน logout ได้ จะสังเกตว่าเราจะใช้ roles เป็นเครื่องหมาย &lt;code&gt;@&lt;/code&gt; แปลว่าต้องเป็นคนที่ login มาแล้วเท่านั้น ซึ่งในส่วนของ &lt;code&gt;actions&lt;/code&gt; เราจะระบุกี่ action ก็ได้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;allow&amp;#39; =&amp;gt; true,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;actions&amp;#39; =&amp;gt; [&amp;#39;logout&amp;#39;],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;roles&amp;#39; =&amp;gt; [&amp;#39;@&amp;#39;],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ส่วนถ้ายังไม่ login ก็ใช้งานได้ 2 action คือ &amp;#39;login&amp;#39;, &amp;#39;signup&amp;#39; และตรง roles ก็กำหนดค่าเป็น &lt;code&gt;?&lt;/code&gt; เพื่อระบุว่าเป็นใครก็ได้ที่ยังไม่ได้ login&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;allow&amp;#39; =&amp;gt; true,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;actions&amp;#39; =&amp;gt; [&amp;#39;login&amp;#39;, &amp;#39;signup&amp;#39;],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;roles&amp;#39; =&amp;gt; [&amp;#39;?&amp;#39;],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;นี่เป็นการใช้งาน Access Control Filter แบบปกติทั่วไป เราจะสามารถควบคุมการเข้าใช้งานได้แค่ ล็อกอิน,ไม่ล็อกอิน  แต่ถ้าหากเราจะควบคุมการเข้าใช้งานหลังจากล็อกอินแล้ว เช่น ผู้ใช้งานบางคนอาจมีสิทธิ์การเข้าใช้งานที่แตกต่างกัน จะไม่สามารถทำได้ ซึ่ง RBAC จะมาช่วยตรงนี้&lt;/p&gt;
-
-&lt;p&gt;RBAC ที่เราจะใช้งานก็แค่เปลี่ยน role default &lt;code&gt;@&lt;/code&gt;,&lt;code&gt;?&lt;/code&gt; ให้เป็นชื่อ Role ตามที่เราได้ตั้งขึ้น&lt;/p&gt;
-
-&lt;h1 id=&quot;สร้าง-blog-และเรียกใช้งาน-rbac&quot;&gt;สร้าง Blog และเรียกใช้งาน RBAC&lt;/h1&gt;
-
-&lt;p&gt;เราจะสร้าง Controller เพื่อใช้ในการทดสอบ RBAC ที่เราสร้างขึ้นโดยจะทำระบบ blog ง่ายๆ ให้ทำการสร้างตาราง blog ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;ชื่อเรื่อง&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;เนื้อหา&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;หมวดหมู่&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;คำค้น&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;created_at&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สร้างวันที่&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;created_by&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สร้างโดย&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;updated_at&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;แก้ไขวันที่&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;updated_by&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;COMMENT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;แก้ไขโดย&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;FULLTEXT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ENGINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InnoDB&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CHARSET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utf8&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นทำการ Gii model ไว้ที่ common/models เพื่อให้สามารถใช้งานได้ทั้ง backend,frontend&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-gii-model.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;เมื่อ Gii model Blog เสร็จเรียบร้อยให้เราทำการ Gii CRUD Blog โดยให้ gii ไว้ที่ frontend&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-gii-crud.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;สังเกตผมจะไม่เอา BlogSearch ไว้ที่ common นะครับ เพราะในการใช้งาน search มันอาจมีการตั้งค่าหรือมีการเรียกใช้ที่แตกต่างกัน เงื่อนไขในการค้นหาต่างๆ ไม่เหมือนกัน  ถ้าใช้ที่ frontend ก็ gii ไว้ที่ frontend เลย ถ้า backend ก็ gii ไว้ที่ backend เลยจะให้เราทำงานง่ายกว่า เพราะไม่ต้องใช้ไฟล์เดียวกัน&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;ปรับแต่ง model ที่ common/models/Blog.php เพื่อให้บันทึกรหัส created_by,updated_by โดยจะใช้ BlameableBehavior&lt;a href=&quot;https://dixonsatit.github.io/2015/06/17/blameable-behavior.html&quot;&gt; ดูรายละเดียดเพิ่มเติมที่นี่&lt;/a&gt; ส่วน created_at,updated_at ใช้ TimestampBehavior &lt;a href=&quot;https://dixonsatit.github.io/2015/06/14/model-behaviors.html&quot;&gt;ดูรายละเอียดได้ที่นี่&lt;/a&gt; ทั้ง 2 ตัวนี้ระบบจะทำให้อัตโนมัติเราไม่ต้องทำอะไรเลยแค่ตั้งค่าเรียกใช้งานที่ model เลย&lt;/p&gt;
-
-&lt;p&gt;เปิดไฟล์ Blog.php ขึ้นมา แล้วทำการเรียกใช้งาน BlameableBehavior,TimestampBehavior จากนั้นตั้งค่าเปิดใช้งานที่ฟังก์ชัน &lt;code&gt;behaviors()&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\BlameableBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\TimestampBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// .....&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Blog&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\yii\db\ActiveRecord&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;BlameableBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;TimestampBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นไปที่ /frontend/views/blog/_blog.php ลบฟิวด์ที่ไม่ได้ใช้ออกไปคือ created_at,created_by,updated_at,updated_by เพราะเราใช้ behaviors เป็นตัวกรอกข้อมูลให้เราเอง ฟอร์มก็จะเหลือ 4 ฟิวด์ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\widgets\ActiveForm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/* @var $this yii\web\View */&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;/* @var $model common\models\Blog */&lt;/span&gt;
-&lt;span class=&quot;cm&quot;&gt;/* @var $form yii\widgets\ActiveForm */&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;&amp;lt;div class=&amp;quot;blog-form&amp;quot;&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;textInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;maxlength&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;textarea&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;rows&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;category&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;textInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tag&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;textInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;maxlength&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    &amp;lt;div class=&amp;quot;form-group&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Html&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;submitButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isNewRecord&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Create&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;app&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Update&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isNewRecord&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;btn btn-success&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;btn btn-primary&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;lt;/div&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ActiveForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-
-&lt;span class=&quot;x&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ให้ทดลอง login แล้วเข้าใช้งานที่ blog ว่าเข้าใช้งานได้หรือไม่ ทดลอง เพิ่ม,ลบ,แก้ไขข้อมูลดู หากสังเกตุจะมีข้อมูล created_at,created_by ขึ้นมาแล้ว&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;----+-------+---------+----------+------+------------+------------+------------+------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;category&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tag&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;created_at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;created_by&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updated_at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updated_by&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;----+-------+---------+----------+------+------------+------------+------------+------------+&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdf&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;        &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1440302545&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1440302545&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;----+-------+---------+----------+------+------------+------------+------------+------------+&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;00&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ให้ไปที่ไฟล์ BlogCongroller.php เราจะตั้งค่า rbac โดยใช้ข้อมูลจากที่เราได้ออกแบบไว้ข้างต้นคือ&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;เปิดไฟล์ BlogCongroller.php ซึ่งของเดิมจะยังไม่มีการเรียกใช้งาน Access Control Filter&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BlogController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Controller&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;verbs&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;VerbFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;actions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                    &lt;span class=&quot;s1&quot;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;post&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ให้ทำการ use yii\filters\AccessControl;  เพิ่มใช้กำหนดค่าในการเข้าใช้งาน action ต่างๆ ว่า role ใหนให้เค้า action อะไรบ้าง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;frontend\controllers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;common\models\Blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;frontend\models\BlogSearch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\web\Controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\web\NotFoundHttpException&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\filters\VerbFilter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\filters\AccessControl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//&amp;lt;&amp;lt;------ Use&lt;/span&gt;
-
-&lt;span class=&quot;sd&quot;&gt;/**&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt; * BlogController implements the CRUD actions for Blog model.&lt;/span&gt;
-&lt;span class=&quot;sd&quot;&gt; */&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BlogController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Controller&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-          &lt;span class=&quot;s1&quot;&gt;&amp;#39;verbs&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-              &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;VerbFilter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-              &lt;span class=&quot;s1&quot;&gt;&amp;#39;actions&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                  &lt;span class=&quot;s1&quot;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;post&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-              &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-          &lt;span class=&quot;s1&quot;&gt;&amp;#39;access&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AccessControl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;rules&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;allow&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;actions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;index&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;create&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;update&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;roles&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Author&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-              &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-              &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;allow&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;actions&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;delete&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                &lt;span class=&quot;s1&quot;&gt;&amp;#39;roles&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Editor&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-              &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-          &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;//...&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ถ้าดูตามโค้ดจะเห็นว่า เรากำหนดให้ index,create,update ให้เฉพาะ &lt;code&gt;Author&lt;/code&gt; ส่วน action delete ให้เฉพาะ role &lt;code&gt;Editor&lt;/code&gt; ขึ้นไป ซึ่งก็จะเป็นลำดับตามภาพที่เราได้กำหนดค่าไว้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;user-a : admin&lt;/li&gt;
-&lt;li&gt;user-b : editor&lt;/li&gt;
-&lt;li&gt;user-c : author&lt;/li&gt;
-&lt;li&gt;user-d : ไม่ได้กำหนด&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;ลองใช้งาน-user-d&quot;&gt;ลองใช้งาน user-d&lt;/h2&gt;
-
-&lt;p&gt;ลอง login ด้วย user-d และลองเข้า blog/index ดูจะพบว่าเข้าไม่ได้ เพราะว่าไม่ได้รับสิทธิ์ในการใช้งาน ไม่ว่าจะเข้า action อะไรก็ไม่สามารถเข้าได้ แต่อย่าลืม rbac จะรู้จักแค่ action ที่เรากำหนดไว้ใน actions=&amp;gt;[&amp;#39;xxx&amp;#39;,&amp;#39;xxx&amp;#39;] เท่านั้นนะครับ&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;อย่าลืมกำหนด property &lt;code&gt;&amp;#39;action&amp;#39;=&amp;gt;[....]&lt;/code&gt; ใน rules ให้ครบทุกตัวด้วยนะครับ มี action กี่ตัวก็ระบุให้ครบ&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-forbidden.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ลองใช้งาน-user-c&quot;&gt;ลองใช้งาน user-c&lt;/h2&gt;
-
-&lt;p&gt;ต่อไปให้ลอง login ด้วย user-c จะเข้าได้ปกติ action index,create,view,update  ตามที่เรากำหนดไว้ใน rules ของ controller&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-blog.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;แต่เราจะไม่สามารถเข้าใช้งาน action Delete ได้ เพราะเรากำหนดว่าต้องเป็น role Editor ขึ้นไปถึงจะสามารถลบได้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-forbidden.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ลองใช้งาน-user-b-user-a&quot;&gt;ลองใช้งาน user-b,user-a&lt;/h2&gt;
-
-&lt;p&gt;ส่วน user-a,user-b ก็จะสามารถเข้าได้เช่นกันและยังสามารถลบได้อีกด้วย เพราะเราระบุว่า user ที่จะลบได้ต้องเป็น สิทธิ์ editor ขึ้นไป ถึงแม้ว่าในส่วน access ของ Controller จะไม่ได้ระบุ role admin,editor ไว้ เพราะ author นั้นอยู่ภายใต้ editor และ admin อีกทีตามลำดับมันจึงสามารถเข้าใช้งานได้นั่นเอง&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-blog.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;สามารถลบข้อมูลได้&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-confirm-delete.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/rbac-db-delete.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ในการตั้งค่า Access Control Filter และ RBAC กับ Controller ก็จะมีประมาณนี้&lt;/p&gt;
-
-&lt;h1 id=&quot;สร้าง-rule-เพื่อเช็คว่าเป็นเจ้าของบทความหรือไม่&quot;&gt;สร้าง Rule เพื่อเช็คว่าเป็นเจ้าของบทความหรือไม่&lt;/h1&gt;
-
-&lt;p&gt;ในการใช้งานจริงๆ ถ้าหากเราไม่ใช่คนสร้างบทความ ก็ไม่ควรจะไปแก้ไขบทความหรือลบบทความคนอื่นๆ ได้ ควรจะทำได้เฉพาะของตนเอง  ดังนั้นเราจะสร้าง Rule ขึ้นมา 1 ตัวเพื่อเอาไว้เช็คว่าเป็นเจ้าของบทความจริงหรือไม่ โดยตรวจสอบ user_id ที่ login เข้ามากับ created_by ที่อยู่ในตาราง blog หากเป็นคนๆ เดียวกันก็อนุญาติให้แก้ไขได้&lt;/p&gt;
-
-&lt;p&gt;Rule นั้นจะทำงานร่วมกัน Role ถ้าจะให้เข้าใจง่ายๆ Rule เป็นตัวช่วยที่ทำให้ Role ปกติสามารถเขียนฟังก์ชันและรับค่าเพื่อนำไปตรวจสอบตามเงื่อนไขของเราได้&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ไม่รู้ว่าผมเข้าใจถูกหรือปล่าวนะ แต่เท่าที่ทำมามันประมาณนี้ ผิดถูกยังไงแนะนำด้วยนะครับ&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;เราจะทำการสร้าง Rule ชื่อ AuthorRule.php เพื่อทำการเช็คว่าผู้ใช้งานเป็นเจ้าของบทความหรือไม่ ให้ทำการสร้างไฟล์ไว้ที่  common/rbac/AuthorRule.php&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;หากไม่มีโฟลเดอร์ rbac ให้สร้างได้เลย&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;จากนั้นทำการสร้าง Rule ตามโค้ดด้านล่าง&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;common\rbac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\rbac\Rule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthorRule&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Rule&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;isAuthor&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;isset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;blog&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;blog&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;created_by&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$userId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
- &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Rule นี้มีหน้าที่รับค่าเข้า model Blog เข้ามาเพื่อตรวจสอบกับฟิวด์ created_by ตรงกับ $userId ที่ login ในตอนนี้หรือไม่ ถ้าใช้ก็ return เป็น true ซึ่งเท่ากับยอมให้เข้าใช้งาน แต่ถ้าหากเป็น false ก็จะ แสดง error forbidden ออกไป ส่วนค่า $userId นั้นมันส่งเข้ามาให้อัตโนมัติเราแค่ตั้งชื่อแล้วก็เรียกใช้งานได้เลย&lt;/p&gt;
-
-&lt;p&gt;ในการเรียกใช้งานง่ายมากๆ  แค่ใช้ Yii::$app-&amp;gt;user-&amp;gt;can() เป็นตัวตรวจสอบให้ว่ามีสิทธ์หรือไม่&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ถ้าใช่ จะ return เป็น true&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;ถ้าไม่จะ  return เป็น false&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;และตัวฟังชันจะทำการรับค่า params 2 ตัวคือ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ลำดับแรก เป็นชื่อ Rule&lt;/li&gt;
-&lt;li&gt;ลำดับที่สอง เป็นค่า parameter ที่เราจะส่งเข้าไปเพื่อตรวจสอบ&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;ต่อไปทำการแก้ไข RbacController ใหม่ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;console\controllers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\helpers\Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RbacController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\yii\console\Controller&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;actionInit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;removeAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Removing All! RBAC.....&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$updateBlog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createPermission&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;UpdateBlog&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$updateBlog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;แก้ไขบทความ&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$updateBlog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$authorRole&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;\common\rbac\AuthorRule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$authorRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$updateOwnBlog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createPermission&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;UpdateOwnBlog&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$updateOwnBlog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;แก้ไขเฉพาะบทความของตัวเอง&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$updateOwnBlog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ruleName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$authorRole&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$updateOwnBlog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$updateOwnBlog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$updateBlog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$manageUser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ManageUser&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$manageUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สำหรับจัดการข้อมูลผู้ใช้งาน&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$manageUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Author&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สำหรับการเขียนบทความ&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$updateOwnBlog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Editor&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สำหรับการตรวจสอบบทความ&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createRole&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Admin&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;สำหรับการดูแลระบบ&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addChild&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$manageUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$admin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$editor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;nv&quot;&gt;$auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$author&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-      &lt;span class=&quot;nx&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Success! RBAC roles has been added.&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;\Yii&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;can&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;updatePost&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;post&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;// update post&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
-        <pubDate>Thu, 20 Aug 2015 00:00:00 +0700</pubDate>
-      </item>
+    <pubDate>Wed, 26 Aug 2015 09:15:03 +0700</pubDate>
     
       <item>
         <title>เปิดอบรมการพัฒนา Web Applicaion ด้วย Yii Framework 2.0</title>
@@ -3499,6 +2643,92 @@ Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quo
 &lt;p&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/yii-grid-datacolumn.html#$value-detail&quot;&gt;รายละเอียดเพิ่มเติม&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 06 Jul 2015 00:00:00 +0700</pubDate>
+      </item>
+    
+      <item>
+        <title>ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย</title>
+        <link>http://dixonsatit.github.io/2015/07/04/thai-year-formatter.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/04/thai-year-formatter.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/thai-year-formatter.jpg&quot; alt=&quot;ใช้งาน extension ThaiYearFormatter เพื่อแปลงวันที่เป็นภาษาไทย&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ปกติกเมื่อเราใช้งาน formatter เพื่อแปลงวันที่เป็นภาษาไทย ซึ่งมันจะแปลงให้เฉพาะ วันและเดือน เท่านั้น ส่วนปี ยังเป็น ค.ศ เหมือนเดิม หากใครไม่ทราบ formatter คืออะไร อ่านเรื่องการใช้งาน formatter  &lt;a href=&quot;/2015/06/23/date-formatter.html&quot;&gt;ที่นี่&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;ผมจึงสร้าง extension ThaiYearFormatter  ขึ้นมาเพื่อแก้ปัญหานี้ ลองใช้กันดูนะครับ หากติดปัญหาอะไรแจ้งมาได้ครับ&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ThaiYearFormatter จำเป็นต้องเปิดการใช้งาน  php extension intl  ใน php.ini&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;เปิดไฟล์ php.ini แล้วเปิดใช้งาน ดังนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;extension=php_intl.dll
+
+[intl]
+intl.default_locale =th_TH.UTF-8
+; This directive allows you to produce PHP errors when some error
+; happens within intl functions. The value is the level of the error produced.
+; Default is 0, which does not produce any errors.
+;intl.error_level = E_WARNING
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หากยังไม่มีให้ติดตั้งที่ server &lt;a href=&quot;http://php.net/manual/en/intl.installation.php&quot;&gt;ดูที่นี่&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/3191664/list-of-all-locales-and-their-short-codes&quot;&gt;ที่มา  http://stackoverflow.com/questions/3191664/list-of-all-locales-and-their-short-codes&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;การติดตั้ง&quot;&gt;การติดตั้ง&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;composer require --prefer-dist dixonsatit/yii2-thai-year-formatter &amp;quot;0.9.6&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หรือเพิ่มที่ ไฟล์ composer.json ในส่วน require&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;quot;dixonsatit/yii2-thai-year-formatter&amp;quot;: &amp;quot;0.9.6&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;หลังจากนั้น รันคำสั่ง &lt;code&gt;composer update&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;การตั้งค่า&quot;&gt;การตั้งค่า&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;language&amp;#39;=&amp;gt;&amp;#39;th_TH&amp;#39;, // เปิดใช้งานภาษาไทย
+&amp;#39;components&amp;#39; =&amp;gt; [
+    //...
+    &amp;#39;thaiFormatter&amp;#39;=&amp;gt;[
+        &amp;#39;class&amp;#39;=&amp;gt;&amp;#39;dixonsatit\thaiYearFormatter\ThaiYearFormatter&amp;#39;,
+    ],
+]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;การเรียกใช้งาน&quot;&gt;การเรียกใช้งาน&lt;/h2&gt;
+
+&lt;p&gt;เรียกใช้งานผ่าน component &lt;code&gt;thaiFormatter&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$time = time();&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;//$time = &amp;#39;2015-06-03 13:25:17&amp;#39;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;short&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;medium&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;long&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;full&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;short&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;medium&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;long&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;full&amp;#39;).&amp;quot;&amp;lt;br&amp;gt;&amp;quot;;&lt;/span&gt;
+
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDate($time, &amp;#39;php:Y-m-d&amp;#39;);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;echo Yii::$app-&amp;gt;thaiFormatter-&amp;gt;asDateTime($time, &amp;#39;php:Y-m-d H:i:s&amp;#39;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ดู php date format ได้ที่นี่ &lt;a href=&quot;http://php.net/manual/en/function.date.php&quot;&gt;php date format&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;แสดงผล&quot;&gt;แสดงผล&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;25/6/2558
+25 มิ.ย. 2558
+25 มิถุนายน 2558
+วันอาทิตย์ที่ 25 มิถุนายน พ.ศ. 2558
+
+25/6/2558, 9:57
+25 มิ.ย. 2558, 9:57:18
+25 มิถุนายน 2558, 9 นาฬิกา 57 นาที 18 วินาที GMT+07:00
+วันอาทิตย์ที่ 25 มิถุนายน พ.ศ. 2558, 9 นาฬิกา 57 นาที 18 วินาที GMT+07:00
+
+2015-06-24
+2015-06-24 05:32:54
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        <pubDate>Sat, 04 Jul 2015 00:00:00 +0700</pubDate>
       </item>
     
   </channel>
