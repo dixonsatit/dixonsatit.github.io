@@ -233,6 +233,16 @@
   <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">),</span>
   <span class="k">UNIQUE</span> <span class="k">KEY</span> <span class="o">`</span><span class="k">ref</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="k">ref</span><span class="o">`</span><span class="p">)</span>
 <span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">1</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">uploads</span><span class="o">`</span> <span class="p">(</span>
+  <span class="o">`</span><span class="n">upload_id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="o">`</span><span class="k">ref</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">file_name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;ชื่อไฟล์&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">real_filename</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;ชื่อไฟล์จริง&#39;</span><span class="p">,</span>
+  <span class="o">`</span><span class="n">create_date</span><span class="o">`</span> <span class="k">timestamp</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+  <span class="o">`</span><span class="k">type</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span> <span class="k">COMMENT</span> <span class="s1">&#39;ประเภท&#39;</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">upload_id</span><span class="o">`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">1</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span>
 </code></pre></div>
 <p>หลังจากสร้างตารางเรียบร้อย ให้ทำการ gii Model PhotoLibrary และ crud PhotoLibrary</p>
 
@@ -1058,7 +1068,7 @@ public function actionUploadAjax(){
 
 
 <footer class="site-footer">
-	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/th/"><img alt="สัญญาอนุญาตของครีเอทีฟคอมมอนส์" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/3.0/th/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> โดย <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Satit Seethaphon</a> ผลงานนี้ ใช้ <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/th/" > สัญญาอนุญาตของครีเอทีฟคอมมอนส์แบบ แสดงที่มา-ไม่ใช้เพื่อการค้า 3.0 ประเทศไทย</a>.<br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
+	<p class="text"><a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/th/"><img alt="สัญญาอนุญาตของครีเอทีฟคอมมอนส์" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/3.0/th/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Yii2 Learning</span> โดย <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.dimpled.me" property="cc:attributionName" rel="cc:attributionURL">Sathit Seethaphon</a> บทความต่างๆ ในเว็บไซต์ อนุญาตให้นำไปเผยแพร่ได้ โดยต้องอ้างอิงที่มาและไม่ใช้เพื่อการค้า <br>ตาม<a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/th/" > สัญญาอนุญาตของครีเอทีฟคอมมอนส์แบบ แสดงที่มา-ไม่ใช้เพื่อการค้า 3.0 ประเทศไทย</a>.<br> Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type/">Type Theme</a>
 </p>
 </footer>
 
