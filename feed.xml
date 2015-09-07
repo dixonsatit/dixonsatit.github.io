@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 07 Sep 2015 12:51:28 +0700</pubDate>
+    <pubDate>Mon, 07 Sep 2015 14:49:32 +0700</pubDate>
     
       <item>
         <title>รวมคำสั่งที่ใช้งานบ่อยๆ</title>
@@ -2182,6 +2182,13 @@ Success! RBAC roles has been added.
 &lt;/ul&gt;
 
 &lt;p&gt;แนะนำให้สร้างโปรเจคใหม่และค่อยทำตามที่ละ step จะเข้าใจและมองภาพออก หากติดปัญหาก็ฝากคำถามไว้ที่ comment ได้ครับ หรือจะไปที่ fanpage Yii2learning ก็ได้ครับ&lt;/p&gt;
+
+&lt;p&gt;ที่มา
+- &lt;a href=&quot;https://www.youtube.com/watch?v=7-jo8LKCnUk&quot;&gt;https://www.youtube.com/watch?v=7-jo8LKCnUk&lt;/a&gt;
+- &lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-security-authorization.html&quot;&gt;http://www.yiiframework.com/doc-2.0/guide-security-authorization.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Thanks
+- อ. &lt;a href=&quot;https://www.facebook.com/prawee/about&quot;&gt;Prawee Wongsa&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/dixonsatit/yii2-workshop-rbac-db&quot;&gt;Download SourceCode&lt;/a&gt;
 @dixonsatit&lt;/p&gt;
