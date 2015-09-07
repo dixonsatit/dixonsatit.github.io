@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 07 Sep 2015 14:51:45 +0700</pubDate>
+    <pubDate>Mon, 07 Sep 2015 16:03:48 +0700</pubDate>
     
       <item>
         <title>รวมคำสั่งที่ใช้งานบ่อยๆ</title>
@@ -2188,6 +2188,7 @@ Success! RBAC roles has been added.
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=7-jo8LKCnUk&quot;&gt;https://www.youtube.com/watch?v=7-jo8LKCnUk&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.yiiframework.com/doc-2.0/guide-security-authorization.html&quot;&gt;http://www.yiiframework.com/doc-2.0/guide-security-authorization.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.satusoftware.com/frontend/web/site/post/7/Yii2-RBAC-Examples-Simple-Tutorial-with-User-Admin&quot;&gt;http://www.satusoftware.com/frontend/web/site/post/7/Yii2-RBAC-Examples-Simple-Tutorial-with-User-Admin&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Thanks&lt;/p&gt;
