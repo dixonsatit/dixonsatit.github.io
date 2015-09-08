@@ -1463,6 +1463,36 @@ Success! RBAC roles has been added.
 </code></pre></div>
 <p>หลังจากที่ปรับปรุง model User เสร็จเรียบร้อยให้ทำการ Gii CRUD model <code>User</code> และปรับปรุงโค้ดในแต่ละส่วนดังต่อไปนี้</p>
 
+<blockquote>
+<p>เนื่องจากเราทำการเพิ่ม scenarios() เข้าไปจำเป็นต้องระบุ scenario = registration ในตอน signup ด้วย</p>
+</blockquote>
+
+<p>ให้เราเปิดไปที่ไฟล์ frontend/models/SignupForm.php ไปที่ <code>actionSignup()</code> เพิ่มโค้ดตามนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="c1">//...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">signup</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">())</span> <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">User</span><span class="p">([</span><span class="s1">&#39;scenario&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;registration&#39;</span><span class="p">]);</span> <span class="c1">// &lt;&lt;&lt;&lt;------</span>
+        <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">username</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">;</span>
+        <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">email</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">email</span><span class="p">;</span>
+        <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">setPassword</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">);</span>
+        <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">generateAuthKey</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">())</span> <span class="p">{</span>
+
+            <span class="nv">$auth</span> <span class="o">=</span> <span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">authManager</span><span class="p">;</span>
+            <span class="nv">$authorRole</span> <span class="o">=</span> <span class="nv">$auth</span><span class="o">-&gt;</span><span class="na">getRole</span><span class="p">(</span><span class="s1">&#39;Author&#39;</span><span class="p">);</span>
+            <span class="nv">$auth</span><span class="o">-&gt;</span><span class="na">assign</span><span class="p">(</span><span class="nv">$authorRole</span><span class="p">,</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">());</span>
+
+            <span class="k">return</span> <span class="nv">$user</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">null</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>Gii CRUD User</strong></p>
 
 <p>ไปที่ backend แล้ว gii CRUD</p>
