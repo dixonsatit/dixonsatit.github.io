@@ -5,7 +5,106 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 08 Sep 2015 20:57:21 +0700</pubDate>
+    <pubDate>Wed, 09 Sep 2015 15:28:11 +0700</pubDate>
+    
+      <item>
+        <title>การซ่อนแสดง Input ตามเงื่อนไข</title>
+        <link>http://dixonsatit.github.io/2015/09/09/hide-show-input.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/09/09/hide-show-input.html</guid>
+        <description>&lt;p&gt;ในกรณีที่เราสร้างฟอร์มแล้วมีตัวเลือกบางตัวที่เราต้องการให้แสดงก็ต่อเมื่อมีการเลือกตัวเลือกนั้นเช่น เรามีฟอร์มกรอกอาชีพ แพทย์, พยาบาล, อื่นๆ ถ้าหากเลือก อื่นๆ เราจะให้แสดงช่องกรอกข้อมูลเพิ่มเติม&lt;/p&gt;
+
+&lt;p&gt;ในกรณียังไม่ได้เลือก หรือเปิดขึ้นมาครั้งแรก&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/input-hide.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;ในกรณีที่เลือกจะแสดงช่องกรอกข้อมูล&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/input-show.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;หลักการนั้นง่ายมากๆ ครับ ถ้าใครเคยเขียน JQuery มาบ้างน่าจะเข้าใจง่าย เราจะใช้ฟังก์ชัน JQuery hide(),show() เพื่อซ่อนและแสดง input ตามเงื่อนไขของเรา&lt;/p&gt;
+
+&lt;p&gt;ให้เราสร้างโค้ดนี้ที่ view ที่ต้องการเช่น _form.php&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;registerJs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;  var input1 = &amp;#39;input[name=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Blog[category]&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;]&amp;#39;;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;  setHideInput(3,$(input1).val(),&amp;#39;.field-blog-tag&amp;#39;);&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;  $(input1).click(function(val){&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;    setHideInput(3,$(this).val(),&amp;#39;.field-blog-tag&amp;#39;);&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;  });&lt;/span&gt;
+
+
+&lt;span class=&quot;s2&quot;&gt;  function setHideInput(set,value,objTarget)&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;  {&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;    console.log(set+&amp;#39;=&amp;#39;+value);&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;      if(set==value)&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;      {&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;        $(objTarget).show(500);&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;      }&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;      else&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;      {&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;        $(objTarget).hide(500);&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;      }&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;  }&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;&lt;span class=&quot;x&quot;&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ฟังก์ชัน setHideInput() นี้สร้างขึ้นมาเพื่อรับค่าตามเงื่อนไขแล้วทำการซ่อนหรือแสดง input ที่เราต้องการจะมี 3 parameter ตามลำดับ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;set คือค่าที่เรากำหนดเพื่อนำไปเปรียบเทียบตามเงื่อนไข&lt;/li&gt;
+&lt;li&gt;value ค่าที่ได้จาก input  นั้นๆ ที่เราต้องการตรวจสอบ&lt;/li&gt;
+&lt;li&gt;objTarget คือ  tag ที่เราต้องการจะซ่อนหรือแสดง&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;ส่วนแรกเราจะประกาศค่า input เพื่อนำไปใช้ในการตรวจสอบโดยเรียกใช้งานแบบ selector ระบุ input ที่มี attribute &lt;code&gt;name&lt;/code&gt; = &lt;code&gt;Blog[category]&lt;/code&gt; ซึ่ง &lt;code&gt;Blog&lt;/code&gt; คือชื่อ model, &lt;code&gt;category&lt;/code&gt; คือชื่อฟิวด์ ง่ายๆ คลิกขวา inspect element ใน browser ดูได้ครับ&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;input1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;input[name=\&amp;quot;Blog[category]\&amp;quot;]&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;การดึงค่าใช้คำสั่ง val() ของ JQuery&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;input1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เราจะต้องทำการกำหนดค่าก่อนว่าเราจะดักจับเมื่อค่าเท่ากับอะไร ในตัวอย่างนี้ ค่าอาชีพ = 3 จะให้แสดงช่องกรอกข้อมูลเพิ่มเติม ซึ่งการเรียกใช้งานมันจะมี 2 เหตการณ์&lt;/p&gt;
+
+&lt;p&gt;เหตุการณ์แรกคือ เมื่อเปิดฟอร์มขึ้นมาไม่ว่าจะเป็น create,update&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;  setHideInput(3,$(input1).val(),&amp;#39;.field-blog-tag&amp;#39;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เหตุการณ์ที่สองเมื่อมีการคลิกจะใช้ส่วนนี้ดังจับ event click ของ input นั้นๆ&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;$(input1).click(function(val){
+  setHideInput(3,$(this).val(),&amp;#39;.field-blog-tag&amp;#39;);
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ในส่วน element หรือ tag ที่เราต้องการจะซ่อนนั้นสามารถดูได้ง่ายๆ เพียงคลิก inspect element นั้นที่ต้องการจะซ่อน&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/input-inspect.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;จากนั้นเลื่อนขึ้นนิดนึงมันจะมี tag ครอบ input อยู่และจะมีชื่อ class ของ css กำกับตามชื่อฟิวด์นั้นๆ เราสามารถนำชื่อนี้มาเป็นตัวอ้างอิงในการซ่อนแสดงได้ ในตัวอย่างนี้คือ &lt;code&gt;field-blog-tag&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/input-inspect-tag.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;เมื่อลองคลิกค่าเมื่อเลือก อื่นๆ จะแสดงช่องกรอกข้อมูลให้ แต่ถ้าหารเลือกอาชีพอื่นๆ จะซ่อนไว้&lt;/p&gt;
+
+&lt;p&gt;ในกรณีที่ต้องการใช้หลายๆ ฟิวด์ก็แค่สร้างชึ้นมาอีกชุด แต่ใช้ฟังก์ชันเดียวกัน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;var input1 = &amp;#39;input[name=\&amp;quot;Blog[category1]\&amp;quot;]&amp;#39;;
+  setHideInput(3,$(input1).val(),&amp;#39;.field-blog-tag&amp;#39;);
+  $(input1).click(function(val){
+    setHideInput(3,$(this).val(),&amp;#39;.field-blog-tag&amp;#39;);
+  });
+
+var input2 = &amp;#39;input[name=\&amp;quot;Blog[category2]\&amp;quot;]&amp;#39;;
+  setHideInput(1,$(input2).val(),&amp;#39;.field-blog-other&amp;#39;);
+  $(input2).click(function(val){
+    setHideInput(1,$(this).val(),&amp;#39;.field-blog-other&amp;#39;);
+  });
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เป็นตัวอย่างง่ายๆ นะครับ ลองใช้กันดู&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ชื่อฟิวด์ในตัวอย่างอาจจะไม่ตรงกับความเป็นจริงซักเท่าไหร่ผมทำตัวอย่างจากฟอร์มเดิมๆ ครับไม่ต้องสนใจนะ&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;@dixonsatit&lt;/p&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>รวมคำสั่งที่ใช้งานบ่อยๆ</title>
@@ -13,13 +112,26 @@
         <guid isPermaLink="true">http://dixonsatit.github.io/2015/08/27/list-often-command.html</guid>
         <description>&lt;p&gt;รวบรวมคำสั่งที่จำเป็นและใช้งานบ่อยๆ&lt;/p&gt;
 
-&lt;h1 id=&quot;application&quot;&gt;Application&lt;/h1&gt;
-
-&lt;h2 id=&quot;yii-app-gt-controller-gt-getroute&quot;&gt;Yii::$app-&amp;gt;controller-&amp;gt;getRoute()&lt;/h2&gt;
-
+&lt;h1 id=&quot;getroute&quot;&gt;getRoute()&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Yii::$app-&amp;gt;controller-&amp;gt;getRoute();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ดึงค่าข้อมูล route ปัจจุบันที่ใช้งานอยู่ อย่างเช่น ตอนนี้ใช้งานอยู่ที่ BlogController action index ก็จะได้ค่าออกมา &lt;code&gt;blog/index&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;yii-app-gt-controller-gt-getroute&quot;&gt;Yii::$app-&amp;gt;controller-&amp;gt;getRoute()&lt;/h2&gt;
+&lt;h1 id=&quot;การรับค่า-get-post&quot;&gt;การรับค่า GET,POST&lt;/h1&gt;
+
+&lt;p&gt;การเรียกค่า parameter จาก $_GET, $_POST ปกติ php จะใช้ $_GET[&amp;#39;parameterName&amp;#39;], $_POST[&amp;#39;parameterName&amp;#39;] ใน yii2 นั้นมีวิธีเรียกใช้งานดังนี้&lt;/p&gt;
+
+&lt;p&gt;การเรียกใช้งาน&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;Yii::$app-&amp;gt;request-&amp;gt;get(&amp;#39;id&amp;#39;);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;Yii::$app-&amp;gt;request-&amp;gt;post(&amp;#39;id&amp;#39;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;สามารถกำหนดค่า default ได้ด้วยในกรณีที่รับแล้วไม่มีค่า&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;Yii::$app-&amp;gt;request-&amp;gt;get(&amp;#39;id&amp;#39;,0);&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;Yii::$app-&amp;gt;request-&amp;gt;post(&amp;#39;id&amp;#39;,9);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;หากไม่ได้หนดค่า default แล้วค่าที่ได้ในกรณีที่รับแล้วไม่มีค่า จะเป็น null&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         <pubDate>Thu, 27 Aug 2015 00:00:00 +0700</pubDate>
       </item>
@@ -4464,200 +4576,6 @@ Success! RBAC roles has been added.
 &lt;p&gt;@DixonSatit&lt;/p&gt;
 </description>
         <pubDate>Tue, 21 Jul 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การปรับแต่ง Action Column ใน GridView</title>
-        <link>http://dixonsatit.github.io/2015/07/11/action-column.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/11/action-column.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/thumbnail/action-column.jpg&quot; alt=&quot;Action Column&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ActionColumn เป็น column ที่ใช้ใน &lt;code&gt;yii\grid\GridView&lt;/code&gt; เพื่อแสดงปุ่มสำหรับควบคุมการทำงานใน column โดยจะแสดงผลในทุกๆ แถวของข้อมูล โดยมีปุ่ม default อยู่ 3 ปุ่มคือ &lt;code&gt;view&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;เราสามารถจัดการ เพิ่มปุ่มเอง,ซ่อน,แสดงปุ่มที่มีอยู่ได้  หรือปรับแต่งตามที่เราต้องการได้&lt;/p&gt;
-
-&lt;h2 id=&quot;properties-พื้นฐานที่ควรรู้&quot;&gt;Properties พื้นฐานที่ควรรู้&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Options&lt;/code&gt; เป็นการกำหนดคำสั่ง html attribute เข้าไปใน column เฉพาะส่วน &lt;code&gt;colgroup&lt;/code&gt; ของ table เช่น class,style หรือ attribute อื่นๆ ของ html ได้ &lt;code&gt;!ส่วนนี้ไม่เกี่ยวกับ content ที่แสดงผล&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;contentOptions&lt;/code&gt; เป็นการกำหนดคำสั่ง html attribute เข้าไปใน column ที่แสดงผล เช่น class,style หรือ attribute อื่นๆ ของ html ได้&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;template&lt;/code&gt; กำหนด template การแสดงผลของค่าปุ่ม default หรือปุ่มที่สร้างขึ้นเอง ปกติ default จะเท่ากับ &lt;code&gt;&amp;#39;{view} {update} {delete}&amp;#39;&lt;/code&gt; จะสลับตำแหน่ง เรียงใหม่,ลบ หรือเลือกแสดงเฉพาะปุ่มที่ต้องการได้ เช่นให้แสดงเฉพาะ &lt;code&gt;view&lt;/code&gt; ก็ลบอันที่เหลือออก ให้เหลือ &lt;code&gt;&amp;#39;{view}&amp;#39;&lt;/code&gt; แบบนี้&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;buttons&lt;/code&gt; เป็นส่วนที่กำหนดการแสดงผลของปุ่ม &lt;code&gt;view&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt; หรือปุ่มอื่นๆ ที่เราสร้างขึ้น&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;buttonOptions&lt;/code&gt; เป็นส่วนกำหนด class,css หรือ attribute ของ html ของ &lt;code&gt;buttons&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;header&lt;/code&gt; เป็นส่วนกำหนดข้อความ header ของ column&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;headerOptions&lt;/code&gt; เป็นส่วนกำหนด class,css หรือ attribute ของ html ของ &lt;code&gt;header&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ดูรายละเอียดเพิ่มเติมได้ที่นี่ &lt;a href=&quot;http://www.yiiframework.com/doc-2.0/yii-grid-actioncolumn.html&quot;&gt;http://www.yiiframework.com/doc-2.0/yii-grid-actioncolumn.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;หลักๆ ในการจัดการ ActionColumn จะมีแค่ 2 Properties ที่จำเป็นต้องใช้งานคือ &lt;code&gt;template&lt;/code&gt;,&lt;code&gt;buttons&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;1-template&quot;&gt;1.template&lt;/h3&gt;
-
-&lt;p&gt;เป็น Properties ที่กำหนดว่าใน column นี้เราจะให้ปุ่มอะไรแสดงบ้าง ซึ่งปกติมันจะมี &lt;code&gt;view&lt;/code&gt;,&lt;code&gt;update&lt;/code&gt;,&lt;code&gt;delete&lt;/code&gt; หากเราไม่ต้องการแสงดปุ่มใหนก็สามารถลบ ปุ่มที่ไม่ต้องการออกไปได้เลย เช่น หากคุณต้องการแสดงเฉพาะ &lt;code&gt;view&lt;/code&gt; ก็สามารถตั้งค่าได้แบบนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;header&amp;#39;=&amp;gt;&amp;#39;Action&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;template&amp;#39;=&amp;gt;&amp;#39;{view}&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ก่อน&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/all-button-action-column.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;หลัง&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/view-action-column.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;หากใช้ทั้ง 3 ปุ่มอยู่แล้ว ไม่ต้องกำหนดอะไรเพิ่ม ยกเว้นเราต้องการเพิ่มอะไรบางอย่างเข้าไป&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;เราสามารถเพิ่ม tag html เข้าไปใน template ได้ ยกตัวอย่างการเพิ่ม style Button groups เข้าไป
-ดูรายละเอียด Button Groups ได้&lt;a href=&quot;http://getbootstrap.com/components/#btn-groups&quot;&gt;ที่นี่&lt;/a&gt; ซึ่งโครงสร้าง html จะเป็นแบบนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn-group&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;group&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;aria-label=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;...&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;button&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn btn-default&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Left&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;button&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn btn-default&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Middle&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;button&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn btn-default&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Right&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/img/button-groups.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;จะสังเกตได้ว่า Button Groups จะมี div ครอบอยู่ และใช้งาน class &lt;code&gt;btn-group&lt;/code&gt; และในแต่ละปุ่มจะมี class = &lt;code&gt;btn btn-default&lt;/code&gt; เราจึงสามารถปรับแต่งให้ ActionColumn ให้แสดงผลปุ่มแบบ Button Groups ได้แบบนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;buttonOptions&amp;#39;=&amp;gt;[&amp;#39;class&amp;#39;=&amp;gt;&amp;#39;btn btn-default&amp;#39;],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;template&amp;#39;=&amp;gt;&amp;#39;&amp;lt;div class=&amp;quot;btn-group btn-group-sm text-center&amp;quot; role=&amp;quot;group&amp;quot;&amp;gt; {view} {update} {delete} &amp;lt;/div&amp;gt;&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ก่อน&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/all-button-action-column.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;หลัง&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/button-groups-action-column.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;2-buttons&quot;&gt;2. buttons&lt;/h2&gt;
-
-&lt;p&gt;เป็น Properties ที่เอาไว้กำหนดค่าต่างๆ ให้ปุ่มที่เรากำหนด อาจจะใส่เงื่อนไขต่างๆ ซ่อนแสดงปุ่ม,แสดงข้อความ เป็นต้น&lt;/p&gt;
-
-&lt;h3 id=&quot;การเพิ่มปุ่ม&quot;&gt;การเพิ่มปุ่ม&lt;/h3&gt;
-
-&lt;p&gt;ตัวอย่างนี้ เป็นการสร้างปุ่ม copy เพิ่มเข้าไปใน ActionColumn โดยเราจะต้องประกาศค่าปุ่มที่ template โดยเพิ่ม &lt;code&gt;{copy}&lt;/code&gt;  เข้าไปเพื่อให้มันรู้ว่ามีปุ่มนี้อยู่&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;#39;template&amp;#39;=&amp;gt;&amp;#39;{copy} {view} {update} {delete}&amp;#39;,
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากนั้นไปกำหนดค่าต่างๆ ของปุ่มที่ Properties &lt;code&gt;buttons&lt;/code&gt; โดยใช้ค่าที่เราตั้งไว้ใน template คือ &lt;code&gt;copy&lt;/code&gt; และกำหนดค่าต่างๆ ได้เองเลย โดย buttons จะมีค่า params มาให้ใช้ 3 ตัวคือ&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;$url&lt;/code&gt; ระบบมันจะสร้างให้ตามชื่อปุ่มที่เราตั้งไว้ หาไม่ใช้ก็สามารถกำหนดเองได้&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$model&lt;/code&gt; ข้อมูลทั้งหมดของแถวนั้นๆ สามารถเรียกใช้งานได้ทุกฟิวด์ ที่มีในตาราง &lt;code&gt;$model-&amp;gt;fieldName&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;$key&lt;/code&gt; คือค่า pk ของตารางสามารถนำไปใช้ได้เลย&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;template&amp;#39;=&amp;gt;&amp;#39;{copy} {view} {update} {delete}&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;buttons&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;copy&amp;#39; =&amp;gt; function($url,$model,$key){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        return Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;#39;,$url);&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;      }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    ]&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/img/action-column-copy.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ในส่วนของ url ระบบจะสร้างมาให้เองอัตโนมัติ โดยยึดจากชื่อ button ที่เราสร้าง เช่น ชื่อ button คือ copy ดังนั้นใน url จะเท่ากับ &lt;code&gt;r=employee/copy&amp;amp;id=1&lt;/code&gt; โดยจะมองชือ button เป็นชื่อ action ให้เลยและแนบค่า pk ของตารางที่ใช้ไปให้เลย ในกรณีที่เราไม่ต้องการใช้งาน default Url ก็ใส่เป็นค่า array เข้าไปได้เลย  เช่น &lt;code&gt;
-Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;#39;,[&amp;#39;controller/action&amp;#39;,&amp;#39;id&amp;#39;=&amp;gt;$model-&amp;gt;id])
-&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;คอลัมน์แคบ&quot;&gt;คอลัมน์แคบ&lt;/h2&gt;
-
-&lt;p&gt;เมื่อดูตามรูปภาพด้านบนจะเห็นว่า ปุ่มยังไม่เรียงเป็นแนวนอนยังตกบรรทัดอยู่ สามารถเพิ่ม &lt;code&gt;contentOptions&lt;/code&gt; และใส่ค่า &lt;code&gt;&amp;#39;noWrap&amp;#39; =&amp;gt; true&lt;/code&gt; ได้ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;[
-  &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,
-  &amp;#39;template&amp;#39;=&amp;gt;&amp;#39;{copy} {view} {update} {delete}&amp;#39;,
-  &amp;#39;contentOptions&amp;#39;=&amp;gt;[
-    &amp;#39;noWrap&amp;#39; =&amp;gt; true
-  ],
-  &amp;#39;buttons&amp;#39;=&amp;gt;[
-    &amp;#39;copy&amp;#39; =&amp;gt; function($url,$model,$key){
-        return Html::a(&amp;#39;&lt;span class=&quot;nt&quot;&gt;&amp;lt;i&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;glyphicon glyphicon-duplicate&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&lt;/span&gt;&amp;#39;,$url);
-      }
-    ]
-],
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/img/action-column-nowarp.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;หากลองใช้วิธีนี้แล้วยังไม่ได้อีกให้ลอง เพิ่มความกว้างให้ column เข้าไป ดังนี้ &lt;code&gt;&amp;#39;options&amp;#39;=&amp;gt; [ &amp;#39;style&amp;#39;=&amp;gt;&amp;#39;width:100px;&amp;#39;]&lt;/code&gt; ตัวนี้ได้ชัวๆ&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;[
-  &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,
-  &amp;#39;template&amp;#39;=&amp;gt;&amp;#39;{copy} {view} {update} {delete}&amp;#39;,
-  &amp;#39;options&amp;#39;=&amp;gt; [&amp;#39;style&amp;#39;=&amp;gt;&amp;#39;width:100px;&amp;#39;],
-  &amp;#39;contentOptions&amp;#39;=&amp;gt;[
-    &amp;#39;noWrap&amp;#39; =&amp;gt; true
-  ],
-  &amp;#39;buttons&amp;#39;=&amp;gt;[
-    &amp;#39;copy&amp;#39; =&amp;gt; function($url,$model,$key){
-        return Html::a(&amp;#39;&lt;span class=&quot;nt&quot;&gt;&amp;lt;i&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;glyphicon glyphicon-duplicate&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&lt;/span&gt;&amp;#39;,$url);
-      }
-    ]
-],
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h3 id=&quot;การเพิ่มเงื่อนไขเพื่อซ่อนแสดงปุ่ม&quot;&gt;การเพิ่มเงื่อนไขเพื่อซ่อนแสดงปุ่ม&lt;/h3&gt;
-
-&lt;p&gt;เราสามารถเพิ่มเงื่อนไขเพื่อตรวจสอบค่าบางอย่าง แล้วซ่อนหรือแสดงได้ หรืออาจจะเป็นเงื่อนไขอื่นๆ ก็ได้
-เช่นตัวอย่าง จะเช็คจากค่า status = 1 ให้แสดง, ถ้าไม่ใช้ให้ซ่อน&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;template&amp;#39;=&amp;gt;&amp;#39;{copy} {view} {update} {delete}&amp;#39;,&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;buttons&amp;#39;=&amp;gt;[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    &amp;#39;copy&amp;#39; =&amp;gt; function($url,$model,$key){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;        return $model-&amp;gt;status == 1 ? Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;#39;,$url) : null;&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;      }&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    ]&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;],&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ถ้า status = 1 คือแสดงปุ่ม&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/action-column-nowarp.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;ถ้า status ไม่เท่ากับ (!=) 1 คือซ่อนปุ่ม&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/all-button-action-column.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;โค้ดการเพิ่ม-style-button-groups-ให้กับปุ่มเดิมๆ-ของเรา&quot;&gt;โค้ดการเพิ่ม style Button Groups ให้กับปุ่มเดิมๆ ของเรา&lt;/h3&gt;
-
-&lt;p&gt;เราสามารถเพิ่ม Button Groups เข้าไปได้ และจะทำให้ปุ่มของเราดูชัดเจนขึ้น, มองง่ายขึ้น, ดูสวยขึ้น&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;[
-  &amp;#39;class&amp;#39; =&amp;gt; &amp;#39;yii\grid\ActionColumn&amp;#39;,
-  &amp;#39;buttonOptions&amp;#39;=&amp;gt;[&amp;#39;class&amp;#39;=&amp;gt;&amp;#39;btn btn-default&amp;#39;],
-  &amp;#39;template&amp;#39;=&amp;gt;&amp;#39;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;btn-group btn-group-sm text-center&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;group&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;{copy} {view} {update} {delete} &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&amp;#39;,
-  &amp;#39;options&amp;#39;=&amp;gt; [&amp;#39;style&amp;#39;=&amp;gt;&amp;#39;width:150px;&amp;#39;],
-  &amp;#39;buttons&amp;#39;=&amp;gt;[
-    &amp;#39;copy&amp;#39; =&amp;gt; function($url,$model,$key){
-        return Html::a(&amp;#39;&lt;span class=&quot;nt&quot;&gt;&amp;lt;i&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;glyphicon glyphicon-duplicate&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/i&amp;gt;&lt;/span&gt;&amp;#39;,$url,[&amp;#39;class&amp;#39;=&amp;gt;&amp;#39;btn btn-default&amp;#39;]);
-      }
-    ]
-],
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/img/button-groups-copy.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;หากใช้-pjax&quot;&gt;หากใช้ Pjax&lt;/h2&gt;
-
-&lt;p&gt;ถ้าหากใช้ pjax ด้วยตรง link ต้องใส่ options  &lt;code&gt;&amp;#39;data-pjax&amp;#39; =&amp;gt; &amp;#39;0&amp;#39;&lt;/code&gt; ด้วยเพื่อให้ pjax ไม่ทำงานกับ link นี้ให้เป็น link url ปกติ&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;   Html::a(&amp;#39;&amp;lt;i class=&amp;quot;glyphicon glyphicon-duplicate&amp;quot;&amp;gt;&amp;lt;/i&amp;gt;&amp;#39;,[&amp;#39;/search/index&amp;#39;],[&amp;#39;data-pjax&amp;#39; =&amp;gt; &amp;#39;0&amp;#39;]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;สรุป-actioncolumn&quot;&gt;สรุป ActionColumn&lt;/h2&gt;
-
-&lt;p&gt;Yii 2 ค่อนข้างเปิดกว้างให้เราได้ปรับแต่งส่วนต่างๆ ได้เองทังหมด ในส่วน ActionColumn ก็เหมือนกัน ลองใช้งานและปรับแต่งดูครับ หากติดปัญหาก็คอมเม้นด้านล่างได้เลยครับ ^ ^&lt;/p&gt;
-</description>
-        <pubDate>Sat, 11 Jul 2015 00:00:00 +0700</pubDate>
       </item>
     
   </channel>

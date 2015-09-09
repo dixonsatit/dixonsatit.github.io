@@ -187,13 +187,26 @@
   </header>
   <section class="post-content"><p>รวบรวมคำสั่งที่จำเป็นและใช้งานบ่อยๆ</p>
 
-<h1 id="application">Application</h1>
-
-<h2 id="yii-app-gt-controller-gt-getroute">Yii::$app-&gt;controller-&gt;getRoute()</h2>
-
+<h1 id="getroute">getRoute()</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Yii::$app-&gt;controller-&gt;getRoute();
+</code></pre></div>
 <p>ดึงค่าข้อมูล route ปัจจุบันที่ใช้งานอยู่ อย่างเช่น ตอนนี้ใช้งานอยู่ที่ BlogController action index ก็จะได้ค่าออกมา <code>blog/index</code></p>
 
-<h2 id="yii-app-gt-controller-gt-getroute">Yii::$app-&gt;controller-&gt;getRoute()</h2>
+<h1 id="การรับค่า-get-post">การรับค่า GET,POST</h1>
+
+<p>การเรียกค่า parameter จาก $_GET, $_POST ปกติ php จะใช้ $_GET[&#39;parameterName&#39;], $_POST[&#39;parameterName&#39;] ใน yii2 นั้นมีวิธีเรียกใช้งานดังนี้</p>
+
+<p>การเรียกใช้งาน</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">Yii::$app-&gt;request-&gt;get(&#39;id&#39;);</span>
+<span class="x">Yii::$app-&gt;request-&gt;post(&#39;id&#39;);</span>
+</code></pre></div>
+<p>สามารถกำหนดค่า default ได้ด้วยในกรณีที่รับแล้วไม่มีค่า</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">Yii::$app-&gt;request-&gt;get(&#39;id&#39;,0);</span>
+<span class="x">Yii::$app-&gt;request-&gt;post(&#39;id&#39;,9);</span>
+</code></pre></div>
+<blockquote>
+<p>หากไม่ได้หนดค่า default แล้วค่าที่ได้ในกรณีที่รับแล้วไม่มีค่า จะเป็น null</p>
+</blockquote>
 </section>
 </article>
 
