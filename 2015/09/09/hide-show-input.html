@@ -239,12 +239,12 @@
 <p>เราจะต้องทำการกำหนดค่าก่อนว่าเราจะดักจับเมื่อค่าเท่ากับอะไร ในตัวอย่างนี้ ค่าอาชีพ = 3 จะให้แสดงช่องกรอกข้อมูลเพิ่มเติม ซึ่งการเรียกใช้งานมันจะมี 2 เหตการณ์</p>
 
 <p>เหตุการณ์แรกคือ เมื่อเปิดฟอร์มขึ้นมาไม่ว่าจะเป็น create,update</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">  setHideInput(3,$(input1).val(),&#39;.field-blog-tag&#39;);
+<div class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">setHideInput</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nx">$</span><span class="p">(</span><span class="nx">input1</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span><span class="s1">&#39;.field-blog-tag&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>เหตุการณ์ที่สองเมื่อมีการคลิกจะใช้ส่วนนี้ดังจับ event click ของ input นั้นๆ</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">$(input1).click(function(val){
-  setHideInput(3,$(this).val(),&#39;.field-blog-tag&#39;);
-});
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">(</span><span class="nx">input1</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+  <span class="nx">setHideInput</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span><span class="s1">&#39;.field-blog-tag&#39;</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre></div>
 <p>ในส่วน element หรือ tag ที่เราต้องการจะซ่อนนั้นสามารถดูได้ง่ายๆ เพียงคลิก inspect element นั้นที่ต้องการจะซ่อน</p>
 
@@ -257,17 +257,17 @@
 <p>เมื่อลองคลิกค่าเมื่อเลือก อื่นๆ จะแสดงช่องกรอกข้อมูลให้ แต่ถ้าหารเลือกอาชีพอื่นๆ จะซ่อนไว้</p>
 
 <p>ในกรณีที่ต้องการใช้หลายๆ ฟิวด์ก็แค่สร้างชึ้นมาอีกชุด แต่ใช้ฟังก์ชันเดียวกัน</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">var input1 = &#39;input[name=\&quot;Blog[category1]\&quot;]&#39;;
-  setHideInput(3,$(input1).val(),&#39;.field-blog-tag&#39;);
-  $(input1).click(function(val){
-    setHideInput(3,$(this).val(),&#39;.field-blog-tag&#39;);
-  });
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">input1</span> <span class="o">=</span> <span class="s1">&#39;input[name=\&quot;Blog[category1]\&quot;]&#39;</span><span class="p">;</span>
+  <span class="nx">setHideInput</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nx">$</span><span class="p">(</span><span class="nx">input1</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span><span class="s1">&#39;.field-blog-tag&#39;</span><span class="p">);</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nx">input1</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+    <span class="nx">setHideInput</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span><span class="s1">&#39;.field-blog-tag&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
 
-var input2 = &#39;input[name=\&quot;Blog[category2]\&quot;]&#39;;
-  setHideInput(1,$(input2).val(),&#39;.field-blog-other&#39;);
-  $(input2).click(function(val){
-    setHideInput(1,$(this).val(),&#39;.field-blog-other&#39;);
-  });
+<span class="kd">var</span> <span class="nx">input2</span> <span class="o">=</span> <span class="s1">&#39;input[name=\&quot;Blog[category2]\&quot;]&#39;</span><span class="p">;</span>
+  <span class="nx">setHideInput</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nx">$</span><span class="p">(</span><span class="nx">input2</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span><span class="s1">&#39;.field-blog-other&#39;</span><span class="p">);</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nx">input2</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">){</span>
+    <span class="nx">setHideInput</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">(),</span><span class="s1">&#39;.field-blog-other&#39;</span><span class="p">);</span>
+  <span class="p">});</span>
 </code></pre></div>
 <p>เป็นตัวอย่างง่ายๆ นะครับ ลองใช้กันดู</p>
 
