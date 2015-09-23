@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Wed, 23 Sep 2015 18:52:26 +0700</pubDate>
+    <pubDate>Wed, 23 Sep 2015 23:03:55 +0700</pubDate>
     
       <item>
         <title>การสร้างฟอร์มอัพโหลดแบบง่ายๆ</title>
@@ -125,6 +125,10 @@
 
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;สร้างโฟลเดอร์ uploads ที่ &lt;code&gt;web/uploads&lt;/code&gt; เพื่อเอาไว้เก็บไฟล์ที่อัพโหลดขึ้นไป&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;h3 id=&quot;ลำดับการทำงานของฟังก์ชัน-upload&quot;&gt;ลำดับการทำงานของฟังก์ชัน upload()&lt;/h3&gt;
 
 &lt;ul&gt;
