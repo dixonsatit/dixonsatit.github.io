@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 29 Sep 2015 11:04:09 +0700</pubDate>
+    <pubDate>Tue, 29 Sep 2015 11:21:52 +0700</pubDate>
     
       <item>
         <title>การสร้างฟอร์มที่สามารถบันทึกพร้อมกันได้ทีละหลายๆ Model</title>
@@ -15,7 +15,7 @@
 
 &lt;h1 id=&quot;โครงสร้างและหลักการทำงาน&quot;&gt;โครงสร้างและหลักการทำงาน&lt;/h1&gt;
 
-&lt;p&gt;การทำงานจะเหมือนกันทั้งสองแบบต่างกันแค่เรื่องของการ validate ข้อมูลเท่านั้น ซึ่งปกติจะใช้ validate() แต่ถ้าหากเป็นทีละหลายๆ model จะต้องใช้ validateMultiple() แทน ลองดูความแตกต่างตามภาพ&lt;/p&gt;
+&lt;p&gt;การทำงานจะเหมือนกันทั้งสองแบบ ต่างกันแค่เรื่องของการ validate ข้อมูลเท่านั้น ซึ่งปกติจะใช้ฟังก์ชัน validate() ผ่าน model แต่ถ้าหากต้องบันทึกพร้อมกันทีละหลายๆ model จะต้องใช้ validateMultiple() แทน ลองดูความแตกต่างตามภาพ&lt;/p&gt;
 
 &lt;h2 id=&quot;single-model&quot;&gt;Single model&lt;/h2&gt;
 
@@ -34,7 +34,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/img/mulipleModel.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;เมือลองเปรียบเทียบกันดูจะเห็นความแตกต่าง 2 จุดคือ ตอน validate เพราะหากเป็นทีละหลายๆ model จะใช้ Model::validateMultiple()   แทน validate() แบบเดิมซึ่งจะไม่สามารถ validate ทีละหลายๆ model ได้
+&lt;p&gt;เมื่อลองเปรียบเทียบกันดูจะเห็นความแตกต่าง 2 จุดคือ ปกติจะใช้ฟังก์ชัน validat() ใน model แต่ถ้าหากเป็นทีละหลายๆ model จะใช้ Model::validateMultiple()   แทน ซึ่ง validate() แบบเดิมจะไม่สามารถ validate ได้ทีละหลายๆ model
 ในการบันทึกข้อมูลจะมีอยู่ 4 ขั้นตอนคือ&lt;/p&gt;
 
 &lt;ul&gt;
