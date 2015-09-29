@@ -494,6 +494,19 @@
 <p>ส่วนการค้นหาเพิ่ม fullname</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> $query-&gt;andWhere(&#39;name like &quot;%&#39;.$this-&gt;fullname.&#39;%&quot; or surname like &quot;%&#39;.$this-&gt;fullname.&#39;%&quot; &#39;);</span>
 </code></pre></div>
+<p>ประกาศตัวแปรเพิ่มเติม เพื่อให้สามารถเรียกใช้งานใน model ได้เพราะ 2 ฟิวด์นี้ไม่มีอยู่จริงใน table m_emp</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">    public $fullname;
+    public $username;
+</code></pre></div>
+<p>และอย่าลืมกำหนด validate ใน rule เพื่อให้ model สามารถใช้งาน 2 ฟิวด์นี้ได้</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">public function rules()
+{
+    return [
+        [[&#39;id&#39;, &#39;user_id&#39;], &#39;integer&#39;],
+        [[&#39;title&#39;, &#39;name&#39;, &#39;surname&#39;,&#39;fullname&#39;,&#39;username&#39;], &#39;safe&#39;],
+    ];
+}
+</code></pre></div>
 <p>โค้ดทั้งหมด</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
 
