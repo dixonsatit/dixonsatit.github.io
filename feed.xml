@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 29 Sep 2015 13:29:35 +0700</pubDate>
+    <pubDate>Tue, 29 Sep 2015 13:32:12 +0700</pubDate>
     
       <item>
         <title>การสร้างฟอร์มที่สามารถบันทึกพร้อมกันได้ทีละหลายๆ Model</title>
@@ -305,19 +305,6 @@
 
 &lt;h2 id=&quot;แก้ไข-models-mempsearch-php&quot;&gt;แก้ไข models/MEmpSearch.php&lt;/h2&gt;
 
-&lt;p&gt;เราจะเพิ่มส่วนการจัดเรียงข้อมูลเข้าไป มี fullname,username ดังนี้&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$dataProvider-&amp;gt;sort-&amp;gt;attributes[&amp;#39;fullname&amp;#39;]=[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;asc&amp;#39;=&amp;gt;[&amp;#39;name&amp;#39;=&amp;gt;SORT_ASC,&amp;#39;surname&amp;#39;=&amp;gt;SORT_DESC],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;desc&amp;#39;=&amp;gt;[&amp;#39;name&amp;#39;=&amp;gt;SORT_DESC,&amp;#39;surname&amp;#39;=&amp;gt;SORT_DESC],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;$dataProvider-&amp;gt;sort-&amp;gt;attributes[&amp;#39;username&amp;#39;]=[&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;asc&amp;#39;=&amp;gt;[&amp;#39;m_user.username&amp;#39;=&amp;gt;SORT_ASC],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;  &amp;#39;desc&amp;#39;=&amp;gt;[&amp;#39;m_user.username&amp;#39;=&amp;gt;SORT_DESC],&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;];&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ส่วนการค้นหาเพิ่ม fullname&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; $query-&amp;gt;andWhere(&amp;#39;name like &amp;quot;%&amp;#39;.$this-&amp;gt;fullname.&amp;#39;%&amp;quot; or surname like &amp;quot;%&amp;#39;.$this-&amp;gt;fullname.&amp;#39;%&amp;quot; &amp;#39;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;ประกาศตัวแปรเพิ่มเติม เพื่อให้สามารถเรียกใช้งานใน model ได้เพราะ 2 ฟิวด์นี้ไม่มีอยู่จริงใน table m_emp&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    public $fullname;
     public $username;
@@ -330,6 +317,19 @@
         [[&amp;#39;title&amp;#39;, &amp;#39;name&amp;#39;, &amp;#39;surname&amp;#39;,&amp;#39;fullname&amp;#39;,&amp;#39;username&amp;#39;], &amp;#39;safe&amp;#39;],
     ];
 }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;เราจะเพิ่มส่วนการจัดเรียงข้อมูลเข้าไป มี fullname,username ดังนี้&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;$dataProvider-&amp;gt;sort-&amp;gt;attributes[&amp;#39;fullname&amp;#39;]=[&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  &amp;#39;asc&amp;#39;=&amp;gt;[&amp;#39;name&amp;#39;=&amp;gt;SORT_ASC,&amp;#39;surname&amp;#39;=&amp;gt;SORT_DESC],&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  &amp;#39;desc&amp;#39;=&amp;gt;[&amp;#39;name&amp;#39;=&amp;gt;SORT_DESC,&amp;#39;surname&amp;#39;=&amp;gt;SORT_DESC],&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;$dataProvider-&amp;gt;sort-&amp;gt;attributes[&amp;#39;username&amp;#39;]=[&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  &amp;#39;asc&amp;#39;=&amp;gt;[&amp;#39;m_user.username&amp;#39;=&amp;gt;SORT_ASC],&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;  &amp;#39;desc&amp;#39;=&amp;gt;[&amp;#39;m_user.username&amp;#39;=&amp;gt;SORT_DESC],&lt;/span&gt;
+&lt;span class=&quot;x&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;ส่วนการค้นหาเพิ่ม fullname&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt; $query-&amp;gt;andWhere(&amp;#39;name like &amp;quot;%&amp;#39;.$this-&amp;gt;fullname.&amp;#39;%&amp;quot; or surname like &amp;quot;%&amp;#39;.$this-&amp;gt;fullname.&amp;#39;%&amp;quot; &amp;#39;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;โค้ดทั้งหมด&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;

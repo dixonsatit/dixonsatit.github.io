@@ -481,19 +481,6 @@
 
 <h2 id="แก้ไข-models-mempsearch-php">แก้ไข models/MEmpSearch.php</h2>
 
-<p>เราจะเพิ่มส่วนการจัดเรียงข้อมูลเข้าไป มี fullname,username ดังนี้</p>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$dataProvider-&gt;sort-&gt;attributes[&#39;fullname&#39;]=[</span>
-<span class="x">  &#39;asc&#39;=&gt;[&#39;name&#39;=&gt;SORT_ASC,&#39;surname&#39;=&gt;SORT_DESC],</span>
-<span class="x">  &#39;desc&#39;=&gt;[&#39;name&#39;=&gt;SORT_DESC,&#39;surname&#39;=&gt;SORT_DESC],</span>
-<span class="x">];</span>
-<span class="x">$dataProvider-&gt;sort-&gt;attributes[&#39;username&#39;]=[</span>
-<span class="x">  &#39;asc&#39;=&gt;[&#39;m_user.username&#39;=&gt;SORT_ASC],</span>
-<span class="x">  &#39;desc&#39;=&gt;[&#39;m_user.username&#39;=&gt;SORT_DESC],</span>
-<span class="x">];</span>
-</code></pre></div>
-<p>ส่วนการค้นหาเพิ่ม fullname</p>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> $query-&gt;andWhere(&#39;name like &quot;%&#39;.$this-&gt;fullname.&#39;%&quot; or surname like &quot;%&#39;.$this-&gt;fullname.&#39;%&quot; &#39;);</span>
-</code></pre></div>
 <p>ประกาศตัวแปรเพิ่มเติม เพื่อให้สามารถเรียกใช้งานใน model ได้เพราะ 2 ฟิวด์นี้ไม่มีอยู่จริงใน table m_emp</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">    public $fullname;
     public $username;
@@ -506,6 +493,19 @@
         [[&#39;title&#39;, &#39;name&#39;, &#39;surname&#39;,&#39;fullname&#39;,&#39;username&#39;], &#39;safe&#39;],
     ];
 }
+</code></pre></div>
+<p>เราจะเพิ่มส่วนการจัดเรียงข้อมูลเข้าไป มี fullname,username ดังนี้</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">$dataProvider-&gt;sort-&gt;attributes[&#39;fullname&#39;]=[</span>
+<span class="x">  &#39;asc&#39;=&gt;[&#39;name&#39;=&gt;SORT_ASC,&#39;surname&#39;=&gt;SORT_DESC],</span>
+<span class="x">  &#39;desc&#39;=&gt;[&#39;name&#39;=&gt;SORT_DESC,&#39;surname&#39;=&gt;SORT_DESC],</span>
+<span class="x">];</span>
+<span class="x">$dataProvider-&gt;sort-&gt;attributes[&#39;username&#39;]=[</span>
+<span class="x">  &#39;asc&#39;=&gt;[&#39;m_user.username&#39;=&gt;SORT_ASC],</span>
+<span class="x">  &#39;desc&#39;=&gt;[&#39;m_user.username&#39;=&gt;SORT_DESC],</span>
+<span class="x">];</span>
+</code></pre></div>
+<p>ส่วนการค้นหาเพิ่ม fullname</p>
+<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x"> $query-&gt;andWhere(&#39;name like &quot;%&#39;.$this-&gt;fullname.&#39;%&quot; or surname like &quot;%&#39;.$this-&gt;fullname.&#39;%&quot; &#39;);</span>
 </code></pre></div>
 <p>โค้ดทั้งหมด</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
