@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 29 Sep 2015 10:30:56 +0700</pubDate>
+    <pubDate>Tue, 29 Sep 2015 11:04:09 +0700</pubDate>
     
       <item>
         <title>การสร้างฟอร์มที่สามารถบันทึกพร้อมกันได้ทีละหลายๆ Model</title>
@@ -15,7 +15,7 @@
 
 &lt;h1 id=&quot;โครงสร้างและหลักการทำงาน&quot;&gt;โครงสร้างและหลักการทำงาน&lt;/h1&gt;
 
-&lt;p&gt;การทำงานจะเหมือนกันทั้งสองแบบต่างกันแค่เรื่องของการ validate ข้อมูลเท่านั้น ซึ่งปกติจะใช้ validate() แต่ถ้าหากเป็น Multiple จะต้องใช้ validateMultiple() แทน ลองดูความแตกต่างตามภาพ&lt;/p&gt;
+&lt;p&gt;การทำงานจะเหมือนกันทั้งสองแบบต่างกันแค่เรื่องของการ validate ข้อมูลเท่านั้น ซึ่งปกติจะใช้ validate() แต่ถ้าหากเป็นทีละหลายๆ model จะต้องใช้ validateMultiple() แทน ลองดูความแตกต่างตามภาพ&lt;/p&gt;
 
 &lt;h2 id=&quot;single-model&quot;&gt;Single model&lt;/h2&gt;
 
@@ -35,12 +35,12 @@
 &lt;p&gt;&lt;img src=&quot;/img/mulipleModel.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;เมือลองเปรียบเทียบกันดูจะเห็นความแตกต่าง 2 จุดคือ ตอน validate เพราะหากเป็นทีละหลายๆ model จะใช้ Model::validateMultiple()   แทน validate() แบบเดิมซึ่งจะไม่สามารถ validate ทีละหลายๆ model ได้
-ในการบันทึกข้อมูลปกติจะมีอยู่ 4 ขั้นตอนคือ&lt;/p&gt;
+ในการบันทึกข้อมูลจะมีอยู่ 4 ขั้นตอนคือ&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;$model = new ModelA(), $model = new ModelB()&lt;/code&gt; แล้วนำไปแสดงผลเป็นฟอร์มเพื่อรับข้อมูล&lt;/li&gt;
-&lt;li&gt;เมื่อมีการ submit จะรับข้อมูลจากฟอร์มโดยใช้ฟังก์ชัน &lt;code&gt;$modelA-&amp;gt;load(),$modelB-&amp;gt;load()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;ตรวจสอบข้อมูลที่โหลดเข้ามาโดยใช้ &lt;code&gt;Model::validateMultiple()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;เมื่อมีการ submit จะรับข้อมูลจากฟอร์มโดยใช้ฟังก์ชัน &lt;code&gt;$modelA-&amp;gt;load(),$modelB-&amp;gt;load()&lt;/code&gt; แยกกัน&lt;/li&gt;
+&lt;li&gt;ตรวจสอบข้อมูลที่โหลดเข้ามาโดยใช้ &lt;code&gt;Model::validateMultiple()&lt;/code&gt; ร่วมกันทั้ง 2 model&lt;/li&gt;
 &lt;li&gt;นำข้อมูลที่ได้ไปบันทึก&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -509,6 +509,8 @@ try {
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&quot;เพิ่ม-relation-เองโดยให้-model-จัดการ&quot;&gt;เพิ่ม relation เองโดยให้ model จัดการ&lt;/h1&gt;
 
+&lt;p&gt;เป็นการใช้ความสามารถของ model คือ link() โดยที่เราไม่ต้องตั้งค่า id เพื่อให้มัน relation กัน เราสามารถเรียกใช้ link() แทนเดียวมันทำให้เอง&lt;/p&gt;
+
 &lt;p&gt;ปกติ&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;// ...&lt;/span&gt;
 
@@ -534,12 +536,12 @@ try {
 &lt;p&gt;หลักการของการบันทึกทีละหลายๆ model ในฟอร์มเดียว มีแค่ 3 จุดคือ&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;ต้องสร้าง object model ที่เราต้องการใช้แล้วส่งไปแสดงที่ฟอร์ม&lt;/li&gt;
+&lt;li&gt;ต้องสร้าง object model ที่เราต้องการใช้แล้วส่งไปแสดงผลที่ฟอร์ม&lt;/li&gt;
 &lt;li&gt;ในตอนรับข้อมูลจาการ submit ต้องใช้ load() แยกกัน ส่วน validate ใช้ Model::multipleValidate() ร่วมกัน&lt;/li&gt;
 &lt;li&gt;บันทึกตารางหลักก่อนแล้วค่อยบันทึกตารางรองอื่นๆ ตามลำดับ&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;คิดว่าคงทำให้เราพอเข้าใจหลักการทำงานเบื้องต้นและสามารถนำไปประยุกต์ใช้ในงานแบบต่างๆ ได้&lt;/p&gt;
+&lt;p&gt;คิดว่าคงทำให้เราพอเข้าใจหลักการทำงานเบื้องต้นและสามารถนำไปประยุกต์ใช้ในงานแบบต่างๆ ได้ นะครับ ^ ^&lt;/p&gt;
 
 &lt;p&gt;ตัวอย่าง SourceCode&lt;/p&gt;
 
@@ -549,6 +551,8 @@ try {
 &lt;li&gt;&lt;a href=&quot;https://github.com/dixonsatit/yii2-workshop-rbac-db-02/blob/master/backend/models/MEmpSearch.php&quot;&gt;modelSearch&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/dixonsatit/yii2-workshop-rbac-db-02/tree/master/backend/views/m-emp&quot;&gt;view&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;@dixonsatit&lt;/p&gt;
 </description>
         <pubDate>Sat, 26 Sep 2015 00:00:00 +0700</pubDate>
       </item>

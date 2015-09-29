@@ -191,7 +191,7 @@
 
 <h1 id="โครงสร้างและหลักการทำงาน">โครงสร้างและหลักการทำงาน</h1>
 
-<p>การทำงานจะเหมือนกันทั้งสองแบบต่างกันแค่เรื่องของการ validate ข้อมูลเท่านั้น ซึ่งปกติจะใช้ validate() แต่ถ้าหากเป็น Multiple จะต้องใช้ validateMultiple() แทน ลองดูความแตกต่างตามภาพ</p>
+<p>การทำงานจะเหมือนกันทั้งสองแบบต่างกันแค่เรื่องของการ validate ข้อมูลเท่านั้น ซึ่งปกติจะใช้ validate() แต่ถ้าหากเป็นทีละหลายๆ model จะต้องใช้ validateMultiple() แทน ลองดูความแตกต่างตามภาพ</p>
 
 <h2 id="single-model">Single model</h2>
 
@@ -211,12 +211,12 @@
 <p><img src="/img/mulipleModel.jpg" alt=""></p>
 
 <p>เมือลองเปรียบเทียบกันดูจะเห็นความแตกต่าง 2 จุดคือ ตอน validate เพราะหากเป็นทีละหลายๆ model จะใช้ Model::validateMultiple()   แทน validate() แบบเดิมซึ่งจะไม่สามารถ validate ทีละหลายๆ model ได้
-ในการบันทึกข้อมูลปกติจะมีอยู่ 4 ขั้นตอนคือ</p>
+ในการบันทึกข้อมูลจะมีอยู่ 4 ขั้นตอนคือ</p>
 
 <ul>
 <li><code>$model = new ModelA(), $model = new ModelB()</code> แล้วนำไปแสดงผลเป็นฟอร์มเพื่อรับข้อมูล</li>
-<li>เมื่อมีการ submit จะรับข้อมูลจากฟอร์มโดยใช้ฟังก์ชัน <code>$modelA-&gt;load(),$modelB-&gt;load()</code></li>
-<li>ตรวจสอบข้อมูลที่โหลดเข้ามาโดยใช้ <code>Model::validateMultiple()</code></li>
+<li>เมื่อมีการ submit จะรับข้อมูลจากฟอร์มโดยใช้ฟังก์ชัน <code>$modelA-&gt;load(),$modelB-&gt;load()</code> แยกกัน</li>
+<li>ตรวจสอบข้อมูลที่โหลดเข้ามาโดยใช้ <code>Model::validateMultiple()</code> ร่วมกันทั้ง 2 model</li>
 <li>นำข้อมูลที่ได้ไปบันทึก</li>
 </ul>
 
@@ -685,6 +685,8 @@ try {
 </code></pre></div>
 <h1 id="เพิ่ม-relation-เองโดยให้-model-จัดการ">เพิ่ม relation เองโดยให้ model จัดการ</h1>
 
+<p>เป็นการใช้ความสามารถของ model คือ link() โดยที่เราไม่ต้องตั้งค่า id เพื่อให้มัน relation กัน เราสามารถเรียกใช้ link() แทนเดียวมันทำให้เอง</p>
+
 <p>ปกติ</p>
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">// ...</span>
 
@@ -710,12 +712,12 @@ try {
 <p>หลักการของการบันทึกทีละหลายๆ model ในฟอร์มเดียว มีแค่ 3 จุดคือ</p>
 
 <ol>
-<li>ต้องสร้าง object model ที่เราต้องการใช้แล้วส่งไปแสดงที่ฟอร์ม</li>
+<li>ต้องสร้าง object model ที่เราต้องการใช้แล้วส่งไปแสดงผลที่ฟอร์ม</li>
 <li>ในตอนรับข้อมูลจาการ submit ต้องใช้ load() แยกกัน ส่วน validate ใช้ Model::multipleValidate() ร่วมกัน</li>
 <li>บันทึกตารางหลักก่อนแล้วค่อยบันทึกตารางรองอื่นๆ ตามลำดับ</li>
 </ol>
 
-<p>คิดว่าคงทำให้เราพอเข้าใจหลักการทำงานเบื้องต้นและสามารถนำไปประยุกต์ใช้ในงานแบบต่างๆ ได้</p>
+<p>คิดว่าคงทำให้เราพอเข้าใจหลักการทำงานเบื้องต้นและสามารถนำไปประยุกต์ใช้ในงานแบบต่างๆ ได้ นะครับ ^ ^</p>
 
 <p>ตัวอย่าง SourceCode</p>
 
@@ -725,6 +727,8 @@ try {
 <li><a href="https://github.com/dixonsatit/yii2-workshop-rbac-db-02/blob/master/backend/models/MEmpSearch.php">modelSearch</a></li>
 <li><a href="https://github.com/dixonsatit/yii2-workshop-rbac-db-02/tree/master/backend/views/m-emp">view</a></li>
 </ul>
+
+<p>@dixonsatit</p>
 </section>
 </article>
 
