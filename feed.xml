@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 29 Sep 2015 11:21:52 +0700</pubDate>
+    <pubDate>Tue, 29 Sep 2015 13:20:27 +0700</pubDate>
     
       <item>
         <title>การสร้างฟอร์มที่สามารถบันทึกพร้อมกันได้ทีละหลายๆ Model</title>
@@ -525,7 +525,6 @@ try {
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;x&quot;&gt;// ...&lt;/span&gt;
 
 &lt;span class=&quot;x&quot;&gt;  if($modelUser-&amp;gt;save()){&lt;/span&gt;
-&lt;span class=&quot;x&quot;&gt;    $modelEmp-&amp;gt;user_id = $modelUser-&amp;gt;id;&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;    $modelEmp-&amp;gt;link(&amp;#39;user&amp;#39;,$modelUser); // easy way saving relations&lt;/span&gt;
 &lt;span class=&quot;x&quot;&gt;  }&lt;/span&gt;
 

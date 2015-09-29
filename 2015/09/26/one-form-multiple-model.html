@@ -701,7 +701,6 @@ try {
 <div class="highlight"><pre><code class="language-php" data-lang="php"><span class="x">// ...</span>
 
 <span class="x">  if($modelUser-&gt;save()){</span>
-<span class="x">    $modelEmp-&gt;user_id = $modelUser-&gt;id;</span>
 <span class="x">    $modelEmp-&gt;link(&#39;user&#39;,$modelUser); // easy way saving relations</span>
 <span class="x">  }</span>
 
