@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 05 Oct 2015 20:21:03 +0700</pubDate>
+    <pubDate>Mon, 05 Oct 2015 20:22:50 +0700</pubDate>
     
       <item>
         <title>เปิดอบรมการพัฒนา Web Applicaion ด้วย Yii Framework 2.0</title>
@@ -53,7 +53,7 @@
 &lt;ul&gt;
 &lt;li&gt;ออกแบบการจัดการสิทธิ์ด้วย RBAC DB&lt;/li&gt;
 &lt;li&gt;สร้างระบบจัดการสิทธิ์ผู้เข้าใช้งาน&lt;/li&gt;
-&lt;li&gt;สร้าง Global Access ควบคุม Controller&lt;/li&gt;
+&lt;li&gt;สร้าง Global Access ควบคุมสิทธิ์ Controller&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Routing&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Working With Database&lt;/p&gt;
