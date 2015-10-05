@@ -5,7 +5,131 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Tue, 29 Sep 2015 13:32:12 +0700</pubDate>
+    <pubDate>Mon, 05 Oct 2015 19:28:56 +0700</pubDate>
+    
+      <item>
+        <title>เปิดอบรมการพัฒนา Web Applicaion ด้วย Yii Framework 2.0</title>
+        <link>http://dixonsatit.github.io/2015/10/05/yii2-course-basic.html</link>
+        <guid isPermaLink="true">http://dixonsatit.github.io/2015/10/05/yii2-course-basic.html</guid>
+        <description>&lt;p&gt;&lt;img src=&quot;/img/co-space/yii2learning2.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;วันที่-30-ตุลาคม-1-พฤศจิกายน-2558-co-space-khon-kaen&quot;&gt;วันที่ 30 ตุลาคม - 1 พฤศจิกายน 2558 , Co-Space Khon Kaen&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;จากประสบการณ์สอนครั้งที่แล้ว จึงได้ปรับปรุงเนื้อหาในครั้งนี้ ให้สั้น กระชับ เข้าใจง่าย พร้อมตัวอย่าง&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;คอร์สนี้เหมาะสำหรับผู้ที่เคยใช้งาน Yii Framework 2.0 มาบ้างแล้ว เน้นสอนการใช้งานจริง พร้อมตัวอย่าง เพื่อให้สามารถนำไปต่อยอดพัฒนาระบบได้&lt;/p&gt;
+
+&lt;p&gt;Yii Framework เป็น framework ที่ถือได้ว่ามีพร้อมแล้วทุกอย่างที่เราจะพัฒนา Web Applicaion ทำให้สามารถพัฒนระบบได้เร็วยิ่งขึ้น ลดขั้นตอนที่ต้องทำงานซ้ำซ้อนออกไป คุณสมบัติเด่นๆ เลยคือ&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Fast, Secure, Professional&lt;/li&gt;
+&lt;li&gt;Gii Extension สำหรับการสร้างฟอร์ม เพิ่ม,ลบ,แก้ไข ได้เลยเพียงแค่สร้างตารางไว้&lt;/li&gt;
+&lt;li&gt;รองรับเว็บไซต์ขนาดใหญ่ๆ ได้ รองรับระบบ Caching&lt;/li&gt;
+&lt;li&gt;มี RESTful Web Service พร้อมใช้&lt;/li&gt;
+&lt;li&gt;พัฒนาด้วยรูปแบบ OOP &amp;amp; MVC ที่เป็นมาตฐาน&lt;/li&gt;
+&lt;li&gt;RBAC ตัวจัดการสิทธิ์ที่ยืดยุ่นมากๆ&lt;/li&gt;
+&lt;li&gt;Extension,Widget มีเยอะพร้อมใช้งาน&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;course-outline&quot;&gt;Course Outline&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;DevOps Tools&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;git &amp;amp; GitHub&lt;/li&gt;
+&lt;li&gt;Vagrant &amp;amp; docker&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Authentication&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;การสร้างระบบจัดการผู้ใช้งาน&lt;/li&gt;
+&lt;li&gt;การสร้างโปรไฟล์สำหรับ User&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Authorization(RBAC)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ออกแบบการจัดการสิทธิ์ด้วย RBAC DB&lt;/li&gt;
+&lt;li&gt;สร้างระบบจัดการสิทธิ์ผู้เข้าใช้งาน&lt;/li&gt;
+&lt;li&gt;สร้าง Global Access ควบคุม Controller&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Routing&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Working With Database&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Active Record&lt;/li&gt;
+&lt;li&gt;Data Access Object (Dao)&lt;/li&gt;
+&lt;li&gt;Query Builder&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MVC&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Model&lt;/li&gt;
+&lt;li&gt;View&lt;/li&gt;
+&lt;li&gt;Controller&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Virtual Attribute&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Core Validation&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Relations&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Filter &amp;amp; Sort in GirdView&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;DataProvider ActiveDataProvider, SqlDataProvider, ArrayDataProvider&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;i18n เว็บไซต์ 2 ภาษาทั้งข้อความและส่วนของเนื้อหา&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Upload File Single &amp;amp; Multiple&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Tabular Input (Multiple Rows)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Multiple Models (1 ฟอร์มบันทึกได้หลายๆ ตาราง)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;pjax&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Workshop&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;สร้างระบบ CMS&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;สิ่งที่ต้องเตรียมมาในวันอบรม&quot;&gt;สิ่งที่ต้องเตรียมมาในวันอบรม&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;โน้ตบุ๊ค จะเป็น mac, window, linux ก็ได้&lt;/li&gt;
+&lt;li&gt;ติดตั้งตัวจำลอง server ให้เรียบร้อยแนะนำ &lt;a href=&quot;https://www.apachefriends.org/index.html&quot;&gt;XAMPP&lt;/a&gt; หรือ Vagrant,Docker ก็ได้แต่ต้องติดตั้ง LAMP มาให้พร้อมใช้งาน&lt;/li&gt;
+&lt;li&gt;ติดตั้ง composer ให้เรียบร้อย &lt;a href=&quot;http://dixonsatit.github.io/2015/06/29/using-extensions.html&quot;&gt;ดูวิธีการติดตั้งที่นี่&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;สมัคร account &lt;a href=&quot;https://github.com/&quot;&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;สิ่งที่จะได้รับ&quot;&gt;สิ่งที่จะได้รับ&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;เอกสารคู่มือการอบรม 1 ชุด&lt;/li&gt;
+&lt;li&gt;Source Code ในการอบรม&lt;/li&gt;
+&lt;li&gt;สติกเกอร์ Yii Framework,docker,github,yii 2 learning อย่างละ 1 แผ่น&lt;/li&gt;
+&lt;li&gt;อาหารเบรค กาแฟสด,ขนม เช้า, บ่าย, อาหารเที่ยง&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;สถานที่อบรม&quot;&gt;สถานที่อบรม&lt;/h2&gt;
+
+&lt;p&gt;Co-Space Khon Kaen หน้าโรงแรมแรมมันตราวารี ถ.ชวนชื่น จังหวัดขอนแก่น&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.google.co.th/maps/place/Co-Space/@16.4233082,102.8401701,17z/data=!3m1!4b1!4m2!3m1!1s0x31228a288107ac63:0x7043dd2bd3b3fa16&quot;&gt;แผนที่&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.facebook.com/cospacekk&quot;&gt;fanpage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/co-space/all.jpg&quot; alt=&quot;co-space&quot;&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ลงทะเบียน&quot;&gt;ลงทะเบียน&lt;/h2&gt;
+
+&lt;p&gt;ค่าลงทะเบียน 4900 บาท&lt;/p&gt;
+
+&lt;p&gt;รับเพียง 6 คนเท่านั้น&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://form.jotform.me/form/52731591256457?&quot;&gt;ลงทะเบียน&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://form.jotform.me/form/52772853132456?&quot;&gt;แจ้งการชำระเงิน&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/downloads/yii-course.pdf&quot;&gt;หนังสือเชิญประชุม&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 05 Oct 2015 00:00:00 +0700</pubDate>
+      </item>
     
       <item>
         <title>การสร้างฟอร์มที่สามารถบันทึกพร้อมกันได้ทีละหลายๆ Model</title>
@@ -4414,51 +4538,6 @@ Success! RBAC roles has been added.
 &lt;p&gt;&lt;img src=&quot;/img/item-alias-detailview-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;จากนั้นเราก็จะสามารถ เพิ่มลบแก้ไขและแสดงผลข้อมูลจาก CheckBoxLis ได้ บทความนี้ผมแยกมาจาก &lt;a href=&quot;/2015/07/21/item-alias.html&quot;&gt;การเตรียมข้อมูล Array เพื่อใช้กับ DropdownList,RadioList,CheckBoxList&lt;/a&gt; เพื่อให้ดูง่ายขึ้น&lt;/p&gt;
-
-&lt;p&gt;@dixonSatit&lt;/p&gt;
-</description>
-        <pubDate>Sat, 25 Jul 2015 00:00:00 +0700</pubDate>
-      </item>
-    
-      <item>
-        <title>การใช้งาน AttributeBehavior</title>
-        <link>http://dixonsatit.github.io/2015/07/25/attributeBehavior.html</link>
-        <guid isPermaLink="true">http://dixonsatit.github.io/2015/07/25/attributeBehavior.html</guid>
-        <description>&lt;p&gt;&lt;img src=&quot;/img/thumbnail/attribute-behavior.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;AttributeBehavior&lt;/code&gt; คือการดักจับ event ต่างๆ ของ model เช่น EVENT_BEFORE_INSERT,EVENT_BEFORE_UPDATE เพื่อที่เราจะทำงานบางอย่าง กับฟิวด์ที่เราต้องการ ดูตัวอย่าง&lt;/p&gt;
-
-&lt;p&gt;ตัวอย่างนี้เราต้องการแปลงข้อมูล array ที่ได้จาก CheckBoxList ให้เป็น string ก่อนบันทึกและแก้ไขข้อมูล ซึงเราจะทำการเรียกใช้ฟังก์ชัน &lt;code&gt;behaviors()&lt;/code&gt;  ของ model ที่เราใช้งานและเพิ่มฟังกชันนี้เข้าไป&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\behaviors\AttributeBehavior&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;yii\db\ActiveRecord&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;behaviors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;class&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AttributeBehavior&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;className&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;attributes&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-                &lt;span class=&quot;nx&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;EVENT_BEFORE_INSERT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                &lt;span class=&quot;nx&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;EVENT_BEFORE_UPDATE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-            &lt;span class=&quot;s1&quot;&gt;&amp;#39;value&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;implode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;skill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;จากโค้ดจะเห็นว่าเราทำการเรียกใช้งาน &lt;code&gt;AttributeBehavior&lt;/code&gt; ในฟังก์ชัน &lt;code&gt;behaviors()&lt;/code&gt; และกำหนดคุณสมบัติเข้าไปดังนี้&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;class&lt;/code&gt; คือชื่อของ behavior ที่เราต้องการใช้ ในตัวอย่างนี้คือ AttributeBehavior&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;attributes&lt;/code&gt; เป็นการระบุว่าเราจะกระทำข้อมูลในเหตุการณ์อะไร และกับฟิวด์อะไร ซึ่งเราระบุเหตุการณ์ before-insert,before-update และระบุฟิวด์คือ skill&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;value&lt;/code&gt; คือส่วนที่เราจะทำงานบางอย่างเพื่อให้ค่ากับ skill ซึ่งในตัวอย่างเราจะทำการแปลงข้อมูลเดิมที่เป็น array ที่ได้จาก CheckBoxLis และแปลงให้เป็น string โดยใช้ &lt;code&gt;implode()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;น่าจะพอเข้าใจไม่มากก็น้อย ผมคิดว่ามันคงสามารถนำไปประยุกใช้งานกับงานลักษณะอื่นๆ ได้&lt;/p&gt;
 
 &lt;p&gt;@dixonSatit&lt;/p&gt;
 </description>
