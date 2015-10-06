@@ -5,7 +5,7 @@
     <atom:link href="http://dixonsatit.github.io/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://dixonsatit.github.io/</link>
     <description>Yii 2 Learning, Yii 2, Yii Framework, Tutorial, extensions,</description>
-    <pubDate>Mon, 05 Oct 2015 20:22:50 +0700</pubDate>
+    <pubDate>Tue, 06 Oct 2015 11:10:10 +0700</pubDate>
     
       <item>
         <title>เปิดอบรมการพัฒนา Web Applicaion ด้วย Yii Framework 2.0</title>
@@ -21,7 +21,7 @@
 
 &lt;p&gt;คอร์สนี้เหมาะสำหรับผู้ที่เคยใช้งาน Yii Framework 2.0 มาบ้างแล้ว เน้นสอนการใช้งานจริง พร้อมตัวอย่าง เพื่อให้สามารถนำไปต่อยอดพัฒนาระบบได้&lt;/p&gt;
 
-&lt;p&gt;Yii Framework เป็น framework ที่ถือได้ว่ามีพร้อมแล้วทุกอย่างที่เราจะพัฒนา Web Applicaion ทำให้สามารถพัฒนระบบได้เร็วยิ่งขึ้น ลดขั้นตอนที่ต้องทำงานซ้ำซ้อนออกไป คุณสมบัติเด่นๆ เลยคือ&lt;/p&gt;
+&lt;p&gt;Yii Framework เป็น framework ที่มีเครื่องมือพร้อมทุกอย่าง ที่เราต้องใช้ในการพัฒนา Web Applicaion ทำให้สามารถพัฒนระบบได้เร็วยิ่งขึ้น ลดขั้นตอนที่ต้องทำงานซ้ำซ้อนออกไป คุณสมบัติเด่นๆ เลยคือ&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Fast, Secure, Professional&lt;/li&gt;
@@ -36,51 +36,63 @@
 &lt;h1 id=&quot;course-outline&quot;&gt;Course Outline&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;DevOps Tools&lt;/p&gt;
+&lt;li&gt;แนะนำ Yii framework MVC &amp;amp; OOP&lt;/li&gt;
+&lt;li&gt;แนะนำ Tools ที่ควรใช้
 
 &lt;ul&gt;
-&lt;li&gt;git &amp;amp; GitHub&lt;/li&gt;
-&lt;li&gt;Vagrant &amp;amp; docker&lt;/li&gt;
+&lt;li&gt;Git &amp;amp; GitHub&lt;/li&gt;
+&lt;li&gt;Virtual Box&lt;/li&gt;
+&lt;li&gt;Vagrant&lt;/li&gt;
+&lt;li&gt;Docker&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Authentication&lt;/p&gt;
+&lt;li&gt;Routing&lt;/li&gt;
+&lt;li&gt;MVC
 
 &lt;ul&gt;
-&lt;li&gt;การสร้างระบบจัดการผู้ใช้งาน&lt;/li&gt;
-&lt;li&gt;การสร้างโปรไฟล์สำหรับ User&lt;/li&gt;
+&lt;li&gt;Model&lt;/li&gt;
+&lt;li&gt;ModelSearch&lt;/li&gt;
+&lt;li&gt;ModelQuery&lt;/li&gt;
+&lt;li&gt;View&lt;/li&gt;
+&lt;li&gt;Controller&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Authorization(RBAC)&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ออกแบบการจัดการสิทธิ์ด้วย RBAC DB&lt;/li&gt;
-&lt;li&gt;สร้างระบบจัดการสิทธิ์ผู้เข้าใช้งาน&lt;/li&gt;
-&lt;li&gt;สร้าง Global Access ควบคุมสิทธิ์ Controller&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Routing&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Working With Database&lt;/p&gt;
+&lt;li&gt;Working With Database
 
 &lt;ul&gt;
 &lt;li&gt;Active Record&lt;/li&gt;
 &lt;li&gt;Data Access Object (Dao)&lt;/li&gt;
 &lt;li&gt;Query Builder&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;MVC&lt;/p&gt;
+&lt;li&gt;Virtual Attribute&lt;/li&gt;
+&lt;li&gt;Core Validation&lt;/li&gt;
+&lt;li&gt;Relations&lt;/li&gt;
+&lt;li&gt;Filter &amp;amp; Sort in GirdView&lt;/li&gt;
+&lt;li&gt;pjax&lt;/li&gt;
+&lt;li&gt;Authentication
 
 &lt;ul&gt;
-&lt;li&gt;Model&lt;/li&gt;
-&lt;li&gt;View&lt;/li&gt;
-&lt;li&gt;Controller&lt;/li&gt;
+&lt;li&gt;การสร้างระบบจัดการผู้ใช้งาน&lt;/li&gt;
+&lt;li&gt;การสร้างโปรไฟล์สำหรับ User&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Virtual Attribute&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Core Validation&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Relations&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Filter &amp;amp; Sort in GirdView&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;DataProvider ActiveDataProvider, SqlDataProvider, ArrayDataProvider&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;i18n เว็บไซต์ 2 ภาษาทั้งข้อความและส่วนของเนื้อหา&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Upload File Single &amp;amp; Multiple&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Tabular Input (Multiple Rows)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Multiple Models (1 ฟอร์มบันทึกได้หลายๆ ตาราง)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;pjax&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Workshop&lt;/p&gt;
+&lt;li&gt;Authorization(RBAC)
+
+&lt;ul&gt;
+&lt;li&gt;ออกแบบการจัดการสิทธิ์ด้วย RBAC DB&lt;/li&gt;
+&lt;li&gt;สร้างระบบจัดการสิทธิ์ผู้เข้าใช้งาน&lt;/li&gt;
+&lt;li&gt;สร้าง Global Access ควบคุมสิทธิ์ Controller&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;DataProvider ActiveDataProvider, SqlDataProvider, ArrayDataProvider&lt;/li&gt;
+&lt;li&gt;Upload File
+
+&lt;ul&gt;
+&lt;li&gt;Single File&lt;/li&gt;
+&lt;li&gt;Multiple Files&lt;/li&gt;
+&lt;li&gt;Delete File&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Dependent Dropdown&lt;/li&gt;
+&lt;li&gt;Collecting tabular input (Multiple Rows)&lt;/li&gt;
+&lt;li&gt;Multiple Models (1 ฟอร์มบันทึกได้หลายๆ ตาราง)&lt;/li&gt;
+&lt;li&gt;i18n เว็บไซต์ 2 ภาษาทั้งข้อความและส่วนของเนื้อหา&lt;/li&gt;
+&lt;li&gt;Workshop
 
 &lt;ul&gt;
 &lt;li&gt;สร้างระบบ CMS&lt;/li&gt;
@@ -120,11 +132,12 @@
 
 &lt;p&gt;ค่าลงทะเบียน 4900 บาท&lt;/p&gt;
 
-&lt;p&gt;รับเพียง 6 คนเท่านั้น&lt;/p&gt;
+&lt;p&gt;รับจำนวน 6 ท่าน&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://form.jotform.me/form/52731591256457?&quot;&gt;ลงทะเบียน&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://form.jotform.me/form/52772853132456?&quot;&gt;แจ้งการชำระเงิน&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/downloads/yii-course2.pdf&quot;&gt;หนังสือเชิญประชุม&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 05 Oct 2015 00:00:00 +0700</pubDate>
